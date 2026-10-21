@@ -9,8 +9,10 @@ from eduagent.agent.settings import AgentSettings
 
 
 class ModelError(RuntimeError):
-    def __init__(self, code: str):
+    def __init__(self, code: str, *, finish_reason=None, prompt_tokens=0, completion_tokens=0):
         self.code = code
+        self.finish_reason = finish_reason if finish_reason in ('length', 'content_filter', 'insufficient_system_resource', 'aborted') else None
+        self.prompt_tokens, self.completion_tokens = prompt_tokens, completion_tokens
         super().__init__(code)
 
 
@@ -24,9 +26,10 @@ class ModelReply:
 class DeepSeekClient:
     ENDPOINT = "https://api.deepseek.com/chat/completions"
 
-    def __init__(self, settings: AgentSettings, transport=None):
+    def __init__(self, settings: AgentSettings, transport=None, *, json_output=False):
         self.settings = settings
         self.transport = transport
+        self.json_output = json_output
 
     def complete(self, messages: list[dict], tools: list[dict], required: bool = False) -> ModelReply:
         payload = {
@@ -36,6 +39,8 @@ class DeepSeekClient:
         }
         if tools or required:
             payload.update(tools=tools, tool_choice="required" if required else "auto")
+        if self.json_output:
+            payload['response_format'] = {'type': 'json_object'}
         try:
             # Never follow redirects with credentials or inherit an arbitrary HTTP proxy.
             with httpx2.Client(timeout=self.settings.timeout, follow_redirects=False,
@@ -57,8 +62,15 @@ class DeepSeekClient:
             raise ModelError("invalid_model_response") from None
         try:
             choice = body["choices"][0]
+            usage = body.get('usage') or {}
+            prompt_tokens, completion_tokens = usage.get('prompt_tokens', 0), usage.get('completion_tokens', 0)
+            if any(type(n) is not int or n < 0 for n in (prompt_tokens, completion_tokens)):
+                raise ModelError('invalid_model_response')
             if choice["finish_reason"] not in ("stop", "tool_calls"):
-                raise ModelError("incomplete_model_response")
+                reason = choice['finish_reason']
+                code = {'length': 'model_output_truncated', 'content_filter': 'model_content_filtered',
+                        'insufficient_system_resource': 'model_resource_exhausted', 'aborted': 'model_aborted'}.get(reason, 'incomplete_model_response')
+                raise ModelError(code, finish_reason=reason, prompt_tokens=prompt_tokens, completion_tokens=completion_tokens)
             message = choice["message"]
             content = message.get("content")
             if content is not None and (not isinstance(content, str) or len(content) > 12000):
@@ -82,11 +94,6 @@ class DeepSeekClient:
                 cleaned["tool_calls"] = [{"id": c["id"], "type": "function", "function": {
                     "name": c["function"]["name"], "arguments": c["function"]["arguments"],
                 }} for c in calls]
-            usage = body.get("usage") or {}
-            prompt_tokens = usage.get("prompt_tokens", 0)
-            completion_tokens = usage.get("completion_tokens", 0)
-            if any(type(n) is not int or n < 0 for n in (prompt_tokens, completion_tokens)):
-                raise ModelError("invalid_model_response")
             return ModelReply(cleaned, prompt_tokens, completion_tokens)
         except (KeyError, IndexError, TypeError, AttributeError):
             raise ModelError("invalid_model_response") from None

@@ -43,6 +43,12 @@ class Usage(BaseModel):
     completion_tokens: int
 
 
+class ValidationSummary(BaseModel):
+    root_type: Literal['object', 'array', 'other']
+    recognized_fields: list[str]
+    unknown_field_count: Annotated[int, Field(ge=0)]
+
+
 class WorkbenchRun(BaseModel):
     request_id: str
     course_id: Course
@@ -51,7 +57,10 @@ class WorkbenchRun(BaseModel):
     answer: str
     answer_basis: Literal['selected_sources', 'mixed', 'model_knowledge', 'local_excerpts', 'none'] = 'none'
     validation_error: str | None = None
+    validation_summary: ValidationSummary | None = None
     supplement_md: str = ''
+    finish_reason: Literal['length', 'content_filter', 'insufficient_system_resource', 'aborted'] | None = None
+    max_output_tokens: int | None = None
     citations: list[KnowledgeCitation]
     selected_sources: list[CapturedSource]
     source_statuses: list[SourceStatus]
@@ -86,3 +95,5 @@ class WorkbenchCapabilities(BaseModel):
     model: str
     model_enabled: bool
     retrieval_enabled: bool
+    max_output_tokens: int = 1500
+    max_model_calls: int = 3

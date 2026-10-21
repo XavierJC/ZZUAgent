@@ -215,6 +215,50 @@ def test_format_failure_diagnostic_survives_history_without_raw_model_text(bench
     assert 'private upstream text' not in bench.db.execute('SELECT result_json FROM workbench_runs').fetchone()[0]
 
 
+def test_incomplete_second_call_counts_all_reported_usage_and_never_retries(bench):
+    class TruncatedAfterTools:
+        calls = 0
+        def complete(self, messages, tools):
+            self.calls += 1
+            if self.calls == 1:
+                return ModelReply({'role': 'assistant', 'content': None, 'tool_calls': [
+                    {'id': 'tool-1', 'type': 'function', 'function': {'name': 'get_learning_state', 'arguments': '{}'}}]}, 20, 10)
+            raise ModelError('model_output_truncated', finish_reason='length', prompt_tokens=50, completion_tokens=700)
+    model = TruncatedAfterTools()
+    bench.client_factory = lambda: model
+    before = migrations.fact_snapshot(bench.db)
+    request = body([ref(bench, 'gradient')])
+    result = bench.ask('student-a', request)
+    assert result['status'] == 'local' and result['reason'] == 'model_output_truncated'
+    assert result['finish_reason'] == 'length' and result['model_calls'] == 2
+    assert result['usage'] == {'prompt_tokens': 70, 'completion_tokens': 710}
+    assert result['max_output_tokens'] == 700
+    assert bench.ask('student-a', request)['finish_reason'] == 'length'
+    assert bench.get('student-a', request['request_id'])['usage'] == result['usage'] and model.calls == 2
+    assert migrations.fact_snapshot(bench.db) == before
+
+
+def test_workbench_route_uses_json_mode_and_chat_budget_without_changing_tutor_settings(tmp_path, data_dir, monkeypatch):
+    seen = []
+    def complete(self, messages, tools, required=False):
+        seen.append((self.json_output, self.settings.max_tokens))
+        matches = json.loads(messages[1]['content'])['untrusted_evidence']
+        key = matches[0]['citation_id']
+        return ModelReply({'role': 'assistant', 'content': json.dumps({'answer': '解释 ['+key+']', 'citation_ids': [key]})})
+    monkeypatch.setattr('eduagent.agent.deepseek.DeepSeekClient.complete', complete)
+    agent = AgentSettings(enabled=True, api_key='test-only', max_tokens=700, workbench_max_tokens=1500)
+    with TestClient(create_app(APISettings(data_dir=data_dir, db_path=tmp_path/'chat.sqlite3', agent=agent))) as client:
+        client.post('/api/v1/students', json={'student_id': 'a'})
+        cap = client.get('/api/v1/students/a/workbench/capabilities').json()
+        assert cap['max_output_tokens'] == 1500 and cap['max_model_calls'] == 3
+        source = next(s for s in client.get('/api/v1/students/a/knowledge/sources').json()['items'] if s['source_id'] == 'gradient')
+        selected = {k: source[k] for k in ('source_type', 'source_id', 'source_version')}
+        result = client.post('/api/v1/students/a/workbench/questions', json=body([selected]))
+        assert result.status_code == 200 and result.json()['status'] == 'complete'
+        assert result.json()['max_output_tokens'] == 1500 and seen == [(True, 1500)]
+        assert agent.max_tokens == 700
+
+
 def test_old_receipt_is_read_without_reinterpretation_or_model_call(bench):
     run = bench.ask('student-a', body([ref(bench, 'gradient')]))
     raw = json.loads(bench.db.execute('SELECT result_json FROM workbench_runs').fetchone()[0])

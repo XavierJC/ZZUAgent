@@ -17,10 +17,18 @@ const reasons = { local_requested: '本轮仅本地检索，未调用模型。',
   tool_scope_rejected: '模型工具请求超出本轮范围，已拒绝并返回本地片段。', unverified_model_answer: '模型回答格式或引用未通过校验，已返回可用的本地结果。',
   model_call_limit: '已达到模型调用预算，返回本地片段。', model_timeout: '模型超时，可能已执行；不会自动重发。', network_error: '模型网络异常，执行情况待确认；不会自动重发。',
   authentication_failed: '模型认证失败，返回本地片段。', insufficient_balance: '模型服务余额不足，返回本地片段。',
+  incomplete_model_response: '模型未返回完整内容，具体终止原因不可用；不会自动重发。',
+  model_output_truncated: '模型输出达到长度或上下文上限，回答被截断；已保留本轮结果，不会自动重发。',
+  model_content_filtered: '模型服务过滤了本轮输出，未取得完整回答；不会自动重发。',
+  model_resource_exhausted: '模型服务因资源不足中断输出；不会自动重发。', model_aborted: '模型服务中断了本轮生成；不会自动重发。',
+  rate_limited: '模型服务请求受限，请稍后明确发起新请求；不会自动重发。', upstream_error: '模型上游服务返回异常，执行情况待确认；不会自动重发。',
+  invalid_model_response: '模型服务返回了无法识别的响应，执行情况待确认；不会自动重发。',
   execution_unconfirmed: '原请求执行情况待确认；当前仅查询已保存记录。', context_changed: '生成期间资料或学习状态已变化；本结果属于当时版本。' }
 const date = value => new Date(value).toLocaleString('zh-CN')
 const validationErrors = { invalid_json: '返回内容不是可解析的JSON。', duplicate_json_fields: '返回JSON含重复字段，无法明确解释。',
-  invalid_fields: '回答字段缺失或包含未约定字段。', invalid_answer: '回答为空、类型错误或超出长度限制。',
+  invalid_fields: '返回结构不符合该回答接口的约定。', invalid_answer: '回答为空、类型错误或超出长度限制。',
+  missing_answer: '未找到可识别的回答正文字段。', ambiguous_fields: '返回了相互冲突的回答字段，无法安全确定正文。',
+  forbidden_output_fields: '返回包含身份、权限或评分等控制字段，未采用这些字段。',
   invalid_citation_list: '引用列表类型、数量或编号格式不正确。', unknown_citation: '引用了本轮未取得的资料片段。',
   missing_citations: '使用资料回答时未提供引用。', unexpected_citations: '本轮没有资料片段，却返回了引用标记。',
   citation_mismatch: '正文引用标记与引用列表不一致。', disallowed_links: '回答包含不允许的链接。',
@@ -62,12 +70,14 @@ onMounted(() => { props.selfWorkspace?.load(); props.guideWorkspace?.load() })
           </div>
           <p v-else-if="workspace.mode === 'model'" class="small muted">本轮问题和选中课程资料的相关片段将发送至 {{ workspace.capabilities?.provider }} / {{ workspace.capabilities?.model }}。</p>
           <p v-if="workspace.mode === 'model'" class="small muted">先检索所选资料，再由大模型结合资料和自身知识综合生成回答；未找到片段或资料只覆盖部分问题时，也可继续解释。资料引用与模型补充会明确区分。</p>
+          <p v-if="workspace.mode === 'model' && workspace.capabilities?.max_output_tokens" class="small muted">每次模型输出上限 {{ workspace.capabilities.max_output_tokens }} token，本轮最多 {{ workspace.capabilities.max_model_calls }} 次模型调用；失败不会自动重发。</p>
           <button class="button primary" :disabled="Boolean(workspace.busy || workspace.pendingId || !workspace.chosen.length || !workspace.query.trim())">{{ workspace.busy === 'ask' ? '正在处理本轮请求…' : workspace.mode === 'local' || (workspace.personal.length && !workspace.consent) ? '本地检索' : '发送本轮问题' }}</button>
         </form>
         <div v-if="workspace.pendingId" class="wb-pending" role="status"><p>原请求 {{ workspace.pendingId }} 仍需核对，刷新仅查询记录。</p><button class="button secondary" :disabled="Boolean(workspace.busy)" @click="workspace.load()">查询原请求状态</button><button class="wb-text-button" :disabled="Boolean(workspace.busy)" @click="workspace.releaseUncertain()">结束本轮等待（新请求可能另计费）</button></div>
         <article v-if="workspace.current" class="wb-answer" aria-label="已保存的本轮回答">
           <h3>{{ workspace.current.question }}</h3><p class="small muted">{{ date(workspace.current.created_at) }} · {{ workspace.current.status === 'complete' ? '模型回答' : workspace.current.status === 'stale' ? '来源或学情已变化' : workspace.current.status === 'uncertain' ? '执行待确认' : '本地资料反馈' }} · 模型调用 {{ workspace.current.model_calls }} 次</p>
           <p v-if="workspace.current.reason" class="wb-run-notice" role="status">{{ reasons[workspace.current.reason] || '模型服务异常，已保留本轮状态和可用的本地片段。' }}</p>
+          <p v-if="workspace.current.reason === 'model_output_truncated' && workspace.current.max_output_tokens" class="small muted">本轮每次输出上限：{{ workspace.current.max_output_tokens }} token。截断内容未作为完整回答展示，新的请求可能另计费。</p>
           <p v-if="workspace.current.validation_error" class="wb-run-notice" role="status">具体原因：{{ validationErrors[workspace.current.validation_error] || '返回格式不符合约定。' }}</p>
           <p v-if="workspace.current.answer_basis === 'model_knowledge'" class="wb-run-notice" role="status">以下回答来自模型自身知识，可能有误，没有本地资料引用。</p>
           <p v-if="workspace.current.answer_basis === 'mixed'" class="wb-run-notice" role="status">本轮结合了所选资料与模型知识；带引用内容可回溯原文，“模型知识补充”不代表资料原文。</p>

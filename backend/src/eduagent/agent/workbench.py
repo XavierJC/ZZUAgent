@@ -17,6 +17,7 @@ class State(TypedDict, total=False):
     passages: dict
     failure: str | None
     usage: dict
+    finish_reason: str | None
 
 
 class WorkbenchAgent:
@@ -54,9 +55,11 @@ class WorkbenchAgent:
                 '严格输出JSON：{"answer":"有资料依据的Markdown正文，内联引用[citation_id]",'
                 '"citation_ids":["citation_id"],"supplement_md":"模型自身知识补充及无本地依据的其他子问题回答"}。'
                 'answer仅写有本地片段支持的内容；没有可用依据时answer为空、citation_ids为空数组。'
+                '顶层仅使用answer、citation_ids、supplement_md三个字段；不要把每个子问题另写成顶层字段。'
                 'supplement_md可介绍资料未提到的应用、举例、拓展知识，不得借用本地引用或把补充说成资料原文；没有补充时留空。'
                 'citation_ids必须原样来自untrusted_evidence中的citation_id，不能使用source_id、chunk_id或简写成[1]。'
                 '每个有依据的段落使用对应引用，不得编造引用、外部图片或链接。'
+                '回答简洁，优先覆盖全部子问题，默认约350字；引用只放在关键资料结论后，同一片段避免重复标记，优先选择最多3个相关片段。'
                 '资料未覆盖不等于你没有相关知识，允许用自身知识推理、讲解与举例；涉及无法确认的事实或实时信息时如实说明，不得猜测。')
             if without_evidence:
                 system += '本轮已检索所选资料但没有匹配片段，没有任何工具可调用；可使用自身知识回答，引用列表必须为空。'
@@ -72,7 +75,7 @@ class WorkbenchAgent:
         initial = State(messages=[{'role': 'system', 'content': system},
             {'role': 'user', 'content': json.dumps(user_input, ensure_ascii=False)}],
             calls=0, trace=[], passages=allowed.copy(), failure=None,
-            usage={'prompt_tokens': 0, 'completion_tokens': 0})
+            usage={'prompt_tokens': 0, 'completion_tokens': 0}, finish_reason=None)
 
         def model(state):
             self.service.before_model(self.context)
@@ -81,7 +84,8 @@ class WorkbenchAgent:
                 return {'messages': [*state['messages'], reply.message], 'calls': state['calls'] + 1,
                         'usage': {k: state['usage'][k] + getattr(reply, k) for k in state['usage']}}
             except ModelError as error:
-                return {'failure': error.code, 'calls': state['calls'] + 1}
+                return {'failure': error.code, 'calls': state['calls'] + 1, 'finish_reason': error.finish_reason,
+                        'usage': {k: state['usage'][k] + getattr(error, k) for k in state['usage']}}
 
         def route(state):
             if state['failure']:
@@ -137,7 +141,7 @@ class WorkbenchAgent:
         with tracing_context(enabled=False):
             result = graph.compile().invoke(initial, {'recursion_limit': 16})
         output = {'reason': result['failure'], 'model': self.settings.model,
-                  'usage': result['usage'], 'tools_used': result['trace']}
+                  'usage': result['usage'], 'tools_used': result['trace'], 'finish_reason': result.get('finish_reason')}
         if not output['reason']:
             try:
                 output.update(parse_answer(result['messages'][-1].get('content'), result['passages'],
@@ -145,4 +149,5 @@ class WorkbenchAgent:
             except AnswerValidationError as error:
                 output['reason'] = 'unverified_model_answer'
                 output['validation_error'] = error.code
+                output['validation_summary'] = error.summary
         return output

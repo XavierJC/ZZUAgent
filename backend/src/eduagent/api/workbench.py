@@ -1,6 +1,7 @@
 """Workbench routes: history reads never instantiate a provider client."""
 
 from typing import Annotated
+from dataclasses import replace
 from fastapi import APIRouter, Query
 from eduagent.api.schemas import Identifier
 from eduagent.api.knowledge_schemas import SourceRef
@@ -10,18 +11,22 @@ from eduagent.services.workbench import WorkbenchService
 
 def workbench_router(learning_service, courses, enabled, settings):
     router = APIRouter(prefix='/api/v1/students/{student_id}/workbench', tags=['资料学习工作台'])
+    # Keep the legacy tutor/guide budget unchanged. The chat limit is explicit
+    # and exposed before submission; failed requests are never auto-retried.
+    chat_settings = replace(settings, max_tokens=settings.workbench_max_tokens)
 
     def service(learning):
         def client():
             from eduagent.agent.deepseek import DeepSeekClient
-            return DeepSeekClient(settings)
-        return WorkbenchService(learning, courses(), enabled, settings, client)
+            return DeepSeekClient(chat_settings, json_output=True)
+        return WorkbenchService(learning, courses(), enabled, chat_settings, client)
 
     @router.get('/capabilities', response_model=WorkbenchCapabilities)
     def capabilities(student_id: Identifier):
         with learning_service() as learning:
             learning.snapshot(student_id)
-            return dict(provider='DeepSeek', model=settings.model, model_enabled=settings.enabled, retrieval_enabled=enabled)
+            return dict(provider='DeepSeek', model=settings.model, model_enabled=settings.enabled, retrieval_enabled=enabled,
+                        max_output_tokens=chat_settings.max_tokens, max_model_calls=chat_settings.max_calls)
 
     @router.post('/questions', response_model=WorkbenchRun)
     def ask(student_id: Identifier, body: WorkbenchQuestion):

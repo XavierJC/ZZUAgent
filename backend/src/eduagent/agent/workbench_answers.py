@@ -7,8 +7,9 @@ import re
 class AnswerValidationError(ValueError):
     """Only a fixed diagnostic code is persisted, never rejected private text."""
 
-    def __init__(self, code):
+    def __init__(self, code, summary=None):
         self.code = code
+        self.summary = summary
         super().__init__(code)
 
 
@@ -19,6 +20,67 @@ def _unique_object(pairs):
             raise AnswerValidationError('duplicate_json_fields')
         result[key] = value
     return result
+
+
+# Model text is display data, never a capability or database write. Discard
+# unrelated presentation metadata, but reject explicit control-plane fields.
+CONTROL_FIELDS = frozenset({'student_id', 'course_id', 'request_id', 'source_ids', 'source_versions',
+    'context', 'request_context', 'tool_calls', 'tools', 'actions', 'action', 'sql', 'execute_sql',
+    'update_bkt', 'update_mastery', 'score', 'scores', 'mastery', 'bkt', 'recommendations', 'decision_id'})
+ALIASES = {
+    'answer': ('answer', 'answer_md', 'answer_markdown', 'response', 'response_md', 'content', 'explanation'),
+    'citation_ids': ('citation_ids', 'citations', 'references'),
+    'supplement_md': ('supplement_md', 'supplement', 'supplemental_md', 'model_knowledge',
+                      'additional_knowledge', 'general_knowledge', 'general_answer', 'extension_md'),
+}
+
+
+def _reject_controls(value):
+    if any(key.lower().replace('-', '_') in CONTROL_FIELDS for key in value):
+        raise AnswerValidationError('forbidden_output_fields')
+
+
+def _chat_fields(value):
+    """Normalize only known answer aliases; never consume model source metadata."""
+    if isinstance(value, list) and len(value) == 1:
+        value = value[0]
+    if not isinstance(value, dict):
+        raise AnswerValidationError('invalid_fields')
+    _reject_controls(value)
+    # One explicit envelope is unambiguous; multiple alternatives are not.
+    envelopes = [value[key] for key in ('data', 'result', 'response') if isinstance(value.get(key), dict)]
+    if envelopes:
+        if len(envelopes) != 1 or any(key in value for key in ('answer', 'answer_md', 'content', 'explanation')):
+            raise AnswerValidationError('ambiguous_fields')
+        value = envelopes[0]
+        _reject_controls(value)
+    normalized = {}
+    for target, aliases in ALIASES.items():
+        found = [value[key] for key in aliases if key in value]
+        if found:
+            if any(item != found[0] for item in found[1:]):
+                raise AnswerValidationError('ambiguous_fields')
+            normalized[target] = found[0]
+    if 'answer' not in normalized:
+        if isinstance(normalized.get('supplement_md'), str) and normalized['supplement_md'].strip():
+            normalized['answer'] = ''
+        else:
+            raise AnswerValidationError('missing_answer')
+    if 'citation_ids' not in normalized:
+        text = normalized['answer']
+        normalized['citation_ids'] = list(dict.fromkeys(re.findall(r'\[([a-zA-Z0-9_-]+:\d+)\]', text))) if isinstance(text, str) else []
+    elif isinstance(normalized['citation_ids'], list):
+        # A citation object can carry invented titles/content. Extract only its
+        # identifier; the validator below resolves everything from the server.
+        ids = []
+        for item in normalized['citation_ids']:
+            if isinstance(item, dict):
+                if 'citation_id' in item and 'id' in item and item['citation_id'] != item['id']:
+                    raise AnswerValidationError('ambiguous_fields')
+                item = item.get('citation_id', item.get('id'))
+            ids.append(item)
+        normalized['citation_ids'] = ids
+    return normalized
 
 
 def parse_answer(content, passages, *, guide=False):
@@ -39,9 +101,21 @@ def parse_answer(content, passages, *, guide=False):
     except json.JSONDecodeError:
         raise AnswerValidationError('invalid_json') from None
     required = {'answer', 'citation_ids'}
-    if (not isinstance(answer, dict) or not required <= set(answer)
-            or set(answer) - (required if guide else required | {'supplement_md'})):
-        raise AnswerValidationError('invalid_fields')
+    # Keep only known schema names and counts for diagnosis, never values or
+    # arbitrary model-generated property names that might include private text.
+    known = {key for aliases in ALIASES.values() for key in aliases}
+    summary = {'root_type': 'object' if isinstance(answer, dict) else 'array' if isinstance(answer, list) else 'other',
+               'recognized_fields': sorted(set(answer) & known) if isinstance(answer, dict) else [],
+               'unknown_field_count': len(set(answer) - known) if isinstance(answer, dict) else 0}
+    try:
+        if guide:
+            if not isinstance(answer, dict) or set(answer) != required:
+                raise AnswerValidationError('invalid_fields')
+        else:
+            answer = _chat_fields(answer)
+    except AnswerValidationError as error:
+        error.summary = summary
+        raise
     text, ids = answer['answer'], answer['citation_ids']
     supplement = answer.get('supplement_md', '')
     if (not isinstance(text, str) or not isinstance(supplement, str)

@@ -1,0 +1,56 @@
+{
+  "verified_at": "2026-10-21T12:22:52.665026+00:00",
+  "authorization": "User allowed a small number of live debugging calls; this run hard-capped at two, 1500 output tokens each, synthetic notes only.",
+  "success": true,
+  "status": "complete",
+  "reason": null,
+  "validation_error": null,
+  "validation_summary": null,
+  "answer_basis": "mixed",
+  "answer_characters": 718,
+  "supplement_characters": 547,
+  "citation_count": 2,
+  "citation_source_types": [
+    "personal_note"
+  ],
+  "selected_course_sources": 5,
+  "selected_synthetic_notes": 2,
+  "real_personal_notes_sent": 0,
+  "real_model_calls": 1,
+  "maximum_calls_in_this_run": 2,
+  "max_output_tokens": 1500,
+  "usage_reported": {
+    "prompt_tokens": 2009,
+    "completion_tokens": 521
+  },
+  "calls": [
+    {
+      "ordinal": 1,
+      "status": "returned",
+      "model": "deepseek-flash",
+      "max_output_tokens": 1500,
+      "sent_source_types": [
+        "course_material",
+        "personal_note"
+      ],
+      "prompt_tokens": 2009,
+      "completion_tokens": 521,
+      "returned_tool_calls": 0,
+      "json_root_type": "dict",
+      "json_fields": {
+        "answer": "str",
+        "citation_ids": "list",
+        "supplement_md": "str"
+      },
+      "other_field_count": 0
+    }
+  ],
+  "history_and_replay_extra_calls": 0,
+  "mastery_unchanged": true,
+  "production_database_writes": 0,
+  "test_directory": "D:\\ZZUAgent\\data\\local\\deepseek-schema-smoke-dedcad8a",
+  "browser_manual_validation": "not_performed",
+  "full_generated_text_saved_in_report": false,
+  "supplement_contains_application_examples": true,
+  "model_supplement_is_not_local_note_text": true
+}

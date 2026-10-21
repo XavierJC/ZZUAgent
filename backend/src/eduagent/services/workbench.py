@@ -77,7 +77,10 @@ class WorkbenchService:
         result.setdefault('answer_basis', 'selected_sources' if row['status'] == 'complete' and result.get('citations')
                           else 'local_excerpts' if result.get('citations') else 'none')
         result.setdefault('validation_error', None)
+        result.setdefault('validation_summary', None)
         result.setdefault('supplement_md', '')
+        result.setdefault('finish_reason', None)
+        result.setdefault('max_output_tokens', None)
         result.update(request_id=row['request_id'], course_id=row['course_id'], status=row['status'],
                       model_calls=row['model_calls'], created_at=row['created_at'], updated_at=row['updated_at'])
         context = json.loads(row['context_json'])
@@ -167,6 +170,7 @@ class WorkbenchService:
             titles.update({('course_material', key): self.knowledge.courses.documents[key]['title'] for key in selected_courses})
             initial = {'question': body['question'], 'answer': '', 'citations': [], 'reason': None,
                        'model': None, 'provider': 'DeepSeek' if body['mode'] == 'model' else None,
+                       'finish_reason': None, 'max_output_tokens': self.settings.max_tokens if self.settings else None,
                        'tools_used': [], 'usage': {'prompt_tokens': 0, 'completion_tokens': 0},
                        'selected_sources': [{**s, 'title': titles[(s['source_type'], s['source_id'])]} for s in context.refs()]}
             timestamp = now()

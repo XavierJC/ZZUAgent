@@ -136,6 +136,34 @@ describe('workbench interface', () => {
     expect(wrapper.text()).toContain('模型回答格式或引用未通过校验')
     expect(api.workbenchAsk).not.toHaveBeenCalled()
   })
+  it('distinguishes missing body, conflicting aliases and forbidden control fields', async () => {
+    const { w } = await setup()
+    for (const [code, message] of [['missing_answer', '未找到可识别的回答正文字段'], ['ambiguous_fields', '相互冲突的回答字段'], ['forbidden_output_fields', '控制字段']]) {
+      w.view({ ...run(), reason: 'unverified_model_answer', validation_error: code }); await nextTick()
+      expect(wrapper.text()).toContain(message)
+    }
+  })
+  it('explains truncated output and budget without retrying or showing a generic provider error', async () => {
+    const api = client()
+    api.workbenchCapabilities.mockResolvedValue({ model_enabled: true, provider: 'DeepSeek', model: 'test', max_output_tokens: 1500, max_model_calls: 3 })
+    api.workbenchRuns.mockResolvedValue([{ ...run(), model_calls: 2, reason: 'model_output_truncated', finish_reason: 'length', max_output_tokens: 1500 }])
+    const { w } = await setup(api)
+    expect(wrapper.text()).toContain('回答被截断')
+    expect(wrapper.text()).toContain('本轮每次输出上限：1500 token')
+    expect(wrapper.text()).not.toContain('模型服务异常')
+    w.mode = 'model'; await nextTick()
+    expect(wrapper.text()).toContain('每次模型输出上限 1500 token')
+    await wrapper.get('.wb-history-item').trigger('click')
+    expect(api.workbenchAsk).not.toHaveBeenCalled()
+  })
+  it('explains the legacy incomplete-response receipt without guessing a truncation cause', async () => {
+    const api = client()
+    api.workbenchRuns.mockResolvedValue([{ ...run(), reason: 'incomplete_model_response', model_calls: 2 }])
+    await setup(api)
+    expect(wrapper.text()).toContain('模型未返回完整内容，具体终止原因不可用')
+    expect(wrapper.text()).not.toContain('回答被截断')
+    expect(api.workbenchAsk).not.toHaveBeenCalled()
+  })
   it('combines source-based explanation and model supplement without a dedicated clock feature', async () => {
     const api = client()
     api.workbenchRuns.mockResolvedValue([{ ...run(), status: 'complete', reason: null, model_calls: 1,

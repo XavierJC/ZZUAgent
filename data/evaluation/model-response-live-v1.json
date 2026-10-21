@@ -1,0 +1,43 @@
+{
+  "verified_at": "2026-10-21T12:03:31.917935+00:00",
+  "authorization": "User explicitly allowed at most two real requests; 1500 output tokens per call; no personal notes.",
+  "success": true,
+  "status": "complete",
+  "reason": null,
+  "finish_reason": null,
+  "validation_error": null,
+  "answer_basis": "mixed",
+  "answer_characters": 1093,
+  "supplement_characters": 543,
+  "citation_count": 3,
+  "citation_source_types": [
+    "course_material"
+  ],
+  "real_model_calls": 1,
+  "maximum_authorized_calls": 2,
+  "max_output_tokens": 1500,
+  "usage_reported": {
+    "prompt_tokens": 1970,
+    "completion_tokens": 652
+  },
+  "calls": [
+    {
+      "ordinal": 1,
+      "max_output_tokens": 1500,
+      "json_mode": true,
+      "source_types": [
+        "course_material"
+      ],
+      "status": "returned",
+      "prompt_tokens": 1970,
+      "completion_tokens": 652,
+      "returned_tool_calls": 0
+    }
+  ],
+  "history_and_replay_extra_calls": 0,
+  "mastery_unchanged": true,
+  "personal_notes_sent": 0,
+  "production_database_writes": 0,
+  "test_directory": "D:\\ZZUAgent\\data\\local\\deepseek-response-smoke-cafe0195",
+  "browser_manual_validation": "not_performed"
+}

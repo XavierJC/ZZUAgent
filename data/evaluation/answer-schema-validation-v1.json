@@ -1,0 +1,225 @@
+{
+  "verified_at": "2026-10-21T12:31:15.553444+00:00",
+  "status": "deployed",
+  "backend_tests": {
+    "passed": 428,
+    "elapsed_seconds": 21.22
+  },
+  "frontend_tests": {
+    "passed": 107,
+    "test_files": 8,
+    "elapsed_seconds": 5.95
+  },
+  "build": {
+    "success": true,
+    "modules": 67,
+    "main_js_kb": 601.76,
+    "main_js_gzip_kb": 207.67,
+    "warning": "Default 500 kB JavaScript chunk warning retained."
+  },
+  "http_fix_groups": 14,
+  "http_phase4a_regression_groups": 18,
+  "simulated_model_calls": 24,
+  "real_model_calls_in_simulated_http_tests": 0,
+  "real_model_calls_in_authorized_smoke": 1,
+  "real_model_calls_by_readonly_deployment_audit": 0,
+  "live_smoke_report": "data/evaluation/answer-schema-live-v1.json",
+  "historical_chat_requests_replayed": false,
+  "deployment": {
+    "url": "http://127.0.0.1:8000",
+    "schema": 6,
+    "openapi_paths": 29,
+    "validation_summary_exposed": true,
+    "old_history_readable_without_model_call": true,
+    "assets": [
+      "/assets/index-cOtRAfsg.js",
+      "/assets/index-CaOrV89j.css"
+    ],
+    "static_assets_http_ok": true,
+    "index_cache_control": "no-store",
+    "max_output_tokens": 1500,
+    "max_model_calls": 3
+  },
+  "integrity": {
+    "migration_needed": false,
+    "all_fifteen_tables_unchanged": true,
+    "concurrent_table_changes": {},
+    "unchanged_table_count": 15,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 5,
+        "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 17,
+        "sha256": "913079e91b125042052f0eac06822b6c6aa6c78725a4742717ae87b32474f5a4"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 1,
+        "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+      }
+    },
+    "integrity_check": "ok",
+    "foreign_key_check": [],
+    "original_data_files_unchanged": true,
+    "original_data_file_count": 30,
+    "protected_code_unchanged": [
+      "backend/src/eduagent/domain/bkt.py",
+      "backend/src/eduagent/agent/policy.py",
+      "backend/src/eduagent/services/learning.py",
+      "backend/src/eduagent/agent/tutor.py",
+      "backend/src/eduagent/services/study_guides.py",
+      "backend/src/eduagent/storage/migrations.py"
+    ],
+    "production_database_writes_by_verification": 0
+  },
+  "code_backup": "D:\\ZZUAgent\\data\\local\\answer-schema-fix-7f1054d2\\before-code.zip",
+  "code_backup_sha256": "f6bbef79d72036af506768b7b6694be66f50e4a159833bcbf2417dc07dea149b",
+  "changed_files": [
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "sha256": "09478f9a89856c344e4f5017399a82e15e78774aa349c910738d5c53fabc2ea0"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "55a2b7a509cb7b4f49c3067ef4e9e2c6a6fbb67bd75aa9c8ebe4391914891dc9"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "change": "modified",
+      "sha256": "ccc8ec4615dd30d1a8f0fd33d4999e341f19e8b11e88e201d9432f25f3505257"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench_answers.py",
+      "change": "modified",
+      "sha256": "a9381c87058af182031f473c2de7763ce1d5a7f96e9bf89bf2bcd351d2ecf2d9"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench_schemas.py",
+      "change": "modified",
+      "sha256": "cc0945147e4540b181d7bf8f4d78b1e18006eddf8694765aea6c4e635337b62a"
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "change": "modified",
+      "sha256": "e66a8b634d1196887f7a7353b0e2910c460b9d3bf1974de4be510bdf76edcd07"
+    },
+    {
+      "path": "backend/tests/test_answer_schema_compat.py",
+      "change": "added",
+      "sha256": "5a6b5b13d52171017508bae737b9bc8d78fffe7e4e3f277f8af5da945ff72738"
+    },
+    {
+      "path": "backend/tests/test_workbench_answers.py",
+      "change": "modified",
+      "sha256": "e964f3a66495121da496e42e53ca0658ec22de40017d1fa3af264101a81eb6b5"
+    },
+    {
+      "path": "docs/ANSWER_SCHEMA_GUIDE.md",
+      "change": "added",
+      "sha256": "1feaee7cd7f1859c6858c7332d208ef480aeca244956f3e725b47e4a7a68591c"
+    },
+    {
+      "path": "docs/API_GUIDE.md",
+      "change": "modified",
+      "sha256": "944842bb815686c26c9fd969dc470d901330e1b2f5537c50f7fa9e3b116b370e"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "sha256": "b4c247ff26a39ee13b79fa56975759bfe34f95d116e3fdc110f1d654cf3a63d4"
+    },
+    {
+      "path": "docs/MODEL_RESPONSE_GUIDE.md",
+      "change": "modified",
+      "sha256": "d688e830e5a777a32e671ddf983e2721ffe68068077c785df2b47bfa0bc7758f"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "sha256": "1c7ab06d26072ee598d7c5e0785aba0703132bae49df4adc4e48407e74cae53e"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "change": "modified",
+      "sha256": "03676e1d5f3ab984030dfa4775097d924842e2813d025ff043eeeb07302497ed"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "sha256": "fbf53dc8cc4e27f108caaa25d5598a6fc829e17c1ddcd1a69efb536946322411"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "change": "modified",
+      "sha256": "1824cf107ae7a83b84fc6a50caa45610c8f04677be8d331cfd73970a4c776601"
+    }
+  ],
+  "new_reports": [
+    "data/evaluation/answer-schema-http-v1.json",
+    "data/evaluation/answer-schema-phase4a-regression-v1.json",
+    "data/evaluation/answer-schema-live-v1.json",
+    "data/evaluation/answer-schema-validation-v1.json"
+  ],
+  "scope": "Chat display-schema compatibility only; sources, consent, citations and guide rules retained.",
+  "not_performed": [
+    "Real-browser visual/keyboard manual acceptance.",
+    "Teaching effectiveness evaluation."
+  ],
+  "limitations": [
+    "Old invalid_fields response values and exact JSON shape were not retained and cannot be reconstructed.",
+    "The new live smoke returned the canonical schema; aliases and extra metadata were verified using simulated outputs.",
+    "Citation checks do not prove factual or teaching accuracy.",
+    "General knowledge is not independently web-verified; no example-specific clock capability was added."
+  ]
+}

@@ -9,6 +9,7 @@ class AgentSettings:
     timeout: float = 25
     max_calls: int = 3
     max_tokens: int = 700
+    workbench_max_tokens: int = 1500
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "api_key", self.api_key.strip())
@@ -18,6 +19,8 @@ class AgentSettings:
             raise ValueError("模型超时需在 1～60 秒内")
         if not 1 <= self.max_calls <= 4 or not 100 <= self.max_tokens <= 1500:
             raise ValueError("模型调用轮数或输出上限超出允许范围")
+        if type(self.workbench_max_tokens) is not int or not 100 <= self.workbench_max_tokens <= 1500:
+            raise ValueError('工作台输出上限需在100～1500之间')
         if self.enabled and not self.api_key.strip():
             raise ValueError("启用 Agent 前需在本机配置 DEEPSEEK_API_KEY")
         if self.enabled and (len(self.api_key) > 256 or any(ord(c) < 33 or ord(c) > 126 for c in self.api_key)):
@@ -35,6 +38,7 @@ class AgentSettings:
                 timeout=float(values.get("EDUAGENT_MODEL_TIMEOUT", "25")),
                 max_calls=int(values.get("EDUAGENT_MODEL_MAX_CALLS", "3")),
                 max_tokens=int(values.get("EDUAGENT_MODEL_MAX_TOKENS", "700")),
+                workbench_max_tokens=int(values.get('EDUAGENT_WORKBENCH_MAX_TOKENS', '1500')),
             )
         except (TypeError, ValueError):
             # Do not embed configuration values, which can contain credentials.

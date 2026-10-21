@@ -28,7 +28,7 @@ def test_verified_list_can_supply_a_missing_reference_footer():
     ('说明\n```json\n{}\n```', PASSAGES, 'invalid_json'),
     ('{"answer":"a","answer":"b","citation_ids":[]}', {}, 'duplicate_json_fields'),
     ('[]', PASSAGES, 'invalid_fields'),
-    ('{"answer":"x","citation_ids":[],"update_bkt":1}', {}, 'invalid_fields'),
+    ('{"answer":"x","citation_ids":[],"update_bkt":1}', {}, 'forbidden_output_fields'),
     ('{"answer":"","citation_ids":[]}', {}, 'invalid_answer'),
     ('{"answer":"x","citation_ids":"gradient:1"}', PASSAGES, 'invalid_citation_list'),
     ('{"answer":"x","citation_ids":["unselected:1"]}', PASSAGES, 'unknown_citation'),

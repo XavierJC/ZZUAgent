@@ -1,0 +1,230 @@
+{
+  "verified_at": "2026-10-21T12:09:08.205825+00:00",
+  "status": "deployed",
+  "backend_tests": {
+    "passed": 403,
+    "elapsed_seconds": 19.1
+  },
+  "frontend_tests": {
+    "passed": 106,
+    "test_files": 8,
+    "elapsed_seconds": 4.8
+  },
+  "build": {
+    "success": true,
+    "modules": 67,
+    "main_js_kb": 601.51,
+    "main_js_gzip_kb": 207.55,
+    "warning": "default 500 kB JavaScript chunk warning retained"
+  },
+  "http_fix_groups": 12,
+  "http_phase4a_regression_groups": 18,
+  "simulated_model_calls": 20,
+  "real_model_calls_in_simulated_http_tests": 0,
+  "real_model_calls_in_authorized_smoke": 1,
+  "real_model_calls_by_readonly_deployment_audit": 0,
+  "live_smoke_report": "data/evaluation/model-response-live-v1.json",
+  "workbench_max_output_tokens": 1500,
+  "historical_chat_requests_replayed": false,
+  "deployment": {
+    "url": "http://127.0.0.1:8000",
+    "schema": 6,
+    "openapi_paths": 29,
+    "new_response_fields_present": true,
+    "old_history_readable_without_model_call": true,
+    "assets": [
+      "/assets/index-DdLOmBil.js",
+      "/assets/index-CaOrV89j.css"
+    ],
+    "static_assets_http_ok": true
+  },
+  "integrity": {
+    "migration_needed": false,
+    "all_fifteen_tables_unchanged": false,
+    "concurrent_table_changes": {
+      "study_guide_runs": {
+        "before_rows": 0,
+        "after_rows": 1
+      }
+    },
+    "unchanged_table_count": 14,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 5,
+        "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 15,
+        "sha256": "5c599aab6b5eaf50433edb30c6a31f23c7fddd1e8a9b33640f10f0773f0af842"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 1,
+        "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+      }
+    },
+    "integrity_check": "ok",
+    "foreign_key_check": [],
+    "original_data_files_unchanged": true,
+    "production_database_writes_by_verification": 0
+  },
+  "code_backup": "D:\\ZZUAgent\\data\\local\\model-response-fix-e7449827\\before-code.zip",
+  "code_backup_sha256": "0d3e03735d85af7dfa2c6d2af721ad5ee857eed35d107f1ef0bbe204ef5ce97d",
+  "changed_files": [
+    {
+      "path": ".env.example",
+      "change": "modified",
+      "sha256": "6343ccea956524518c03eac4913b2f6b77d39c645890bfcfc395165d12a68f59"
+    },
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "sha256": "8b11c35bad56bf1b35abd2c280a576142675a41765cb604908940f7de03c9176"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "70ba2ea40844ab07a463ef531d55c5b9bbba7ab89a4ae3e6b26e3be7c8c3bff4"
+    },
+    {
+      "path": "backend/src/eduagent/agent/deepseek.py",
+      "change": "modified",
+      "sha256": "70f0e862f7a3ce505b56edba617d33e40a632d55d783a34f7e73304ea2398241"
+    },
+    {
+      "path": "backend/src/eduagent/agent/settings.py",
+      "change": "modified",
+      "sha256": "3f90274da0fe94ff7eae2358e5e4e03ff8abfec7b6e2cd54cf149702564df849"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "change": "modified",
+      "sha256": "f10c1486399b00d2929744fea3d3635e53fec02c518cc02bd3cf98e508fa5f00"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench.py",
+      "change": "modified",
+      "sha256": "15b00a589ad6522b8f05e0453c7478c371d211ecef037e06ce83fd973f88148d"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench_schemas.py",
+      "change": "modified",
+      "sha256": "78e742e4c087ee23ecda2b541135bb0deddbfec38387f9f963af2a06000dadb8"
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "change": "modified",
+      "sha256": "cc5cc1b2f3b6e974d67cedf7f3676fd0834a66dd8fd096401b02c3b4bbcfa292"
+    },
+    {
+      "path": "backend/tests/test_model_client.py",
+      "change": "modified",
+      "sha256": "2ef2e1e4fbb319f262416770e7eda3eb974ced51526062aa147b54ea9130a296"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "change": "modified",
+      "sha256": "12539f8c785bd28203449a257031c29f251e62cf92354d3e22a3c3f0b8b16c75"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "sha256": "515e4b7404025e78354b1de410aec5ee958c0cead2f32904288443ba5c20ed7f"
+    },
+    {
+      "path": "docs/MODEL_RESPONSE_GUIDE.md",
+      "change": "added",
+      "sha256": "885787bb5f86058ae68ae4c1585d944b247a8028d4493be327be4df28cec965e"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "sha256": "a481c05d2871600957aee6738febbff8d38006fb3748c15dada10fd088aa3b62"
+    },
+    {
+      "path": "docs/WORKBENCH_HYBRID_GUIDE.md",
+      "change": "modified",
+      "sha256": "bca04d06de00020c27950786e4e48c1dc82ebb0f16f919af31cb4212e8679697"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "change": "modified",
+      "sha256": "c84c4c0a73e3169b3a514dd7477211231a51117e634f8e493d7cfffa894d1326"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "sha256": "e7283386abfbf99bf3f2d4fa0b190e802663085ccc5e58377ccc55ddb14dfcea"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "change": "modified",
+      "sha256": "c1a536339e428629ba5037341a693ae4df0c13168cbfd5374b9d32d3a71e40c9"
+    }
+  ],
+  "new_reports": [
+    "data/evaluation/model-response-http-v1.json",
+    "data/evaluation/model-response-phase4a-regression-v1.json",
+    "data/evaluation/model-response-validation-v1.json"
+  ],
+  "initial_failure": "Live smoke registration assertion initially required 201 but actual was 200; failed before provider calls. Read-only deployment audit detected one concurrent guide insertion; preserved it and verified the other fourteen tables.",
+  "scope_correction": "Independent chat output limit and JSON mode; explicit model finish causes and usage accounting; no automatic paid retry.",
+  "not_performed": [
+    "Real-browser visual/keyboard manual acceptance.",
+    "Teaching effectiveness evaluation."
+  ],
+  "limitations": [
+    "Old failed PCA outputs and specific errors were not stored and cannot be reconstructed.",
+    "Unknown citations or references in model supplements still reject; supplementation and reference labels do not prove factual accuracy.",
+    "The old incomplete responses did not retain finish_reason, so their exact stop cause cannot be reconstructed.",
+    "Empty selected-source lists still reject; empty retrieval results do not expand retrieval scope.",
+    "General model knowledge is not independently fact-checked or web-retrieved; no example-specific clock capability is included."
+  ]
+}

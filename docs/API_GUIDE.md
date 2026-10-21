@@ -1,5 +1,7 @@
 # 第二阶段 HTTP 接口说明
 
+聊天字段兼容后续修复：`WorkbenchRun.validation_summary`记录已知字段名、根类型和未知字段数量，不保存字段值；428项后端通过，路径/schema6不变，见[字段兼容记录](ANSWER_SCHEMA_GUIDE.md)。
+
 混合问答后续修复：`WorkbenchRun`增加`answer_basis=mixed`、`supplement_md`，误加的`time_snapshot`接口字段已撤回，旧原始历史不重写。现有路径/schema6不变，391项后端通过，见[混合问答指南](WORKBENCH_HYBRID_GUIDE.md)。
 
 工作台问答后续修复：`WorkbenchRun`增加默认字段`answer_basis`、`validation_error`，空检索可继续模型解释但无本地引用。382项后端通过，schema6和29路径不变，实际行为见[修复记录](WORKBENCH_ANSWER_FIX.md)。

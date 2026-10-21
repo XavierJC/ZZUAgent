@@ -18,7 +18,7 @@ from uuid import uuid4
 def serve(directory, port):
     import uvicorn
     import eduagent.agent.deepseek as adapter
-    from eduagent.agent.deepseek import ModelReply
+    from eduagent.agent.deepseek import ModelReply, ModelError
     from eduagent.agent.settings import AgentSettings
     from eduagent.api.app import create_app
     from eduagent.api.settings import APISettings
@@ -30,10 +30,13 @@ def serve(directory, port):
         if not evidence:
             assert tools == []
         event = {'evidence_count': len(evidence), 'source_types': sorted({p['source_type'] for p in evidence}),
-                 'tools_count': len(tools)}
+                 'tools_count': len(tools), 'max_output_tokens': self.settings.max_tokens, 'json_output': self.json_output}
         with (directory / 'calls.jsonl').open('a', encoding='utf8') as stream:
             stream.write(json.dumps(event) + '\n')
         mode = (directory / 'mode').read_text()
+        if mode in ('length', 'content_filter'):
+            raise ModelError('model_output_truncated' if mode == 'length' else 'model_content_filtered',
+                             finish_reason=mode, prompt_tokens=37, completion_tokens=1500 if mode == 'length' else 12)
         ids = [p['citation_id'] for p in evidence[:1]]
         text = '模型模拟解释 $w$。' if evidence else '你好，本轮没有本地资料依据。'
         if mode == 'invented':
@@ -41,6 +44,15 @@ def serve(directory, port):
         if mode != 'footer':
             text += ' '.join(f'[{key}]' for key in ids)
         raw = json.dumps({'answer': text, 'citation_ids': ids})
+        if mode == 'schema_metadata':
+            raw = json.dumps({'answer': text, 'citation_ids': ids, 'title': '多余标题', 'sources': [{'raw_md': '不可信来源说明'}]})
+        if mode == 'schema_aliases':
+            raw = json.dumps({'response': text, 'citations': [{'citation_id': key, 'raw_md': '不可信原文'} for key in ids],
+                              'supplement': '资料外的应用补充。', 'status': 'success'})
+        if mode == 'schema_envelope':
+            raw = json.dumps({'result': {'answer': text, 'citation_ids': ids}, 'status': 'ok'})
+        if mode == 'missing_answer':
+            raw = json.dumps({'untrusted private key name': 'untrusted private body'})
         if mode in ('hybrid', 'unused_sources'):
             raw = json.dumps({'answer': text if mode == 'hybrid' else '', 'citation_ids': ids if mode == 'hybrid' else [],
                               'supplement_md': '模型知识补充：PCA还可用于可视化与去噪。注意力机制通过加权组合信息。'})
@@ -129,6 +141,9 @@ def verify(output):
         start()
         for owner in ('a', 'b'):
             http('/api/v1/students', {'student_id': owner})
+        capabilities = http(prefix + '/workbench/capabilities')
+        assert capabilities['max_output_tokens'] == 1500 and capabilities['max_model_calls'] == 3
+        check('chat_output_budget_exposed_before_submission')
         note = http(prefix + '/notes', {'id': str(uuid4()), 'title': '合成验证笔记',
             'content_md': '# 梯度下降\n\n沿负梯度方向更新。test_private_note_marker',
             'knowledge_point_ids': ['gradient_descent']}, expected=201)
@@ -146,7 +161,7 @@ def verify(output):
         (directory / 'mode').write_text('fenced')
         empty_request, empty = ask([course], question='hi deepseek')
         assert empty['answer_basis'] == 'model_knowledge' and empty['status'] == 'complete' and empty['citations'] == []
-        assert calls()[-1] == {'evidence_count': 0, 'source_types': [], 'tools_count': 0}
+        assert calls()[-1] == {'evidence_count': 0, 'source_types': [], 'tools_count': 0, 'max_output_tokens': 1500, 'json_output': True}
         count = len(calls())
         assert http(prefix + '/workbench/questions', empty_request)['answer'] == empty['answer'] and len(calls()) == count
         check('no_match_calls_model_question_only_and_replay_is_idempotent')
@@ -167,6 +182,19 @@ def verify(output):
         assert 'rejected provider text' not in json.dumps(bad)
         assert http(prefix + '/workbench/runs/' + bad_request['request_id'])['validation_error'] == 'invalid_json'
         check('specific_validation_codes_persist_without_rejected_private_text')
+        for shape in ('schema_metadata', 'schema_aliases', 'schema_envelope'):
+            (directory / 'mode').write_text(shape)
+            _, compatible = ask([course])
+            assert compatible['status'] == 'complete' and compatible['validation_error'] is None
+            assert '不可信原文' not in json.dumps(compatible, ensure_ascii=False)
+            assert '不可信来源说明' not in json.dumps(compatible, ensure_ascii=False)
+        check('compatible_metadata_aliases_and_envelopes_keep_server_owned_citations')
+        (directory / 'mode').write_text('missing_answer')
+        _, missing = ask([course])
+        assert missing['validation_error'] == 'missing_answer'
+        assert missing['validation_summary'] == {'root_type': 'object', 'recognized_fields': [], 'unknown_field_count': 1}
+        assert 'untrusted private' not in json.dumps(missing)
+        check('invalid_shape_diagnostics_store_counts_and_known_names_only')
         saved = http(prefix + '/workbench/runs/' + empty_request['request_id'] + '/note', {})
         saved_again = http(prefix + '/workbench/runs/' + empty_request['request_id'] + '/note', {})
         assert saved['note_id'] == saved_again['note_id']
@@ -189,6 +217,16 @@ def verify(output):
         _, general = ask([course])
         assert general['status'] == 'complete' and general['answer_basis'] == 'model_knowledge' and general['citations'] == []
         check('uncited_general_answer_becomes_explicit_supplement_without_false_local_attribution')
+        for finish, code in [('length', 'model_output_truncated'), ('content_filter', 'model_content_filtered')]:
+            (directory / 'mode').write_text(finish)
+            failure_request, failure = ask([course])
+            assert failure['reason'] == code and failure['finish_reason'] == finish and failure['status'] == 'local'
+            assert failure['usage']['prompt_tokens'] == 37 and failure['usage']['completion_tokens'] == (1500 if finish == 'length' else 12)
+            assert failure['max_output_tokens'] == 1500
+            count = len(calls())
+            assert http(prefix + '/workbench/questions', failure_request)['finish_reason'] == finish and len(calls()) == count
+            assert http(prefix + '/workbench/runs/' + failure_request['request_id'])['reason'] == code
+        check('truncation_and_filter_causes_and_failed_usage_survive_replay_without_retry')
         count = len(calls()); stop(); start()
         restored = http(prefix + '/workbench/runs/' + empty_request['request_id'])
         assert restored['answer_basis'] == 'model_knowledge' and restored['answer'] == empty['answer']
