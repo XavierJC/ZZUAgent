@@ -1,0 +1,35 @@
+{
+  "version": "policy-paired-dev-v1",
+  "split": "development",
+  "review_status": "pending",
+  "source": "项目自建合成答题情景，仅用于离线工程验证；不含真实学生记录。",
+  "notes": "8 个配对状态共享若干历史前缀，并非 8 位独立学生。历史通过实际评分、BKT 和内存 SQLite 重放，随后比较同一状态的下一步决策。作者已知策略与答案，尚未人工审阅，不用于推断学习效果、统计显著性或普遍教学优劣。",
+  "cases": [
+    {"id": "initial", "label": "尚无答题证据", "goals": ["logistic_regression"], "history": []},
+    {"id": "lr-wrong", "label": "线性回归首题答错", "goals": ["logistic_regression"], "history": [
+      {"question_id": "lr_01", "answer": "A"}
+    ]},
+    {"id": "lr-mixed", "label": "线性回归先错后对，现用题耗尽", "goals": ["logistic_regression"], "history": [
+      {"question_id": "lr_01", "answer": "A"}, {"question_id": "lr_02", "answer": "A"}
+    ]},
+    {"id": "lr-two-wrong", "label": "线性回归两题均错，现用题耗尽", "goals": ["logistic_regression"], "history": [
+      {"question_id": "lr_01", "answer": "A"}, {"question_id": "lr_02", "answer": "B"}
+    ]},
+    {"id": "lr-mastered", "label": "线性回归两题正确，达到演示阈值", "goals": ["logistic_regression"], "history": [
+      {"question_id": "lr_01", "answer": "B"}, {"question_id": "lr_02", "answer": "A"}
+    ]},
+    {"id": "gd-wrong", "label": "线性回归达阈值，梯度下降首题答错", "goals": ["logistic_regression"], "history": [
+      {"question_id": "lr_01", "answer": "B"}, {"question_id": "lr_02", "answer": "A"},
+      {"question_id": "gd_01", "answer": "A"}
+    ]},
+    {"id": "gd-mixed", "label": "梯度下降先错后对，现用题耗尽", "goals": ["logistic_regression"], "history": [
+      {"question_id": "lr_01", "answer": "B"}, {"question_id": "lr_02", "answer": "A"},
+      {"question_id": "gd_01", "answer": "A"}, {"question_id": "gd_02", "answer": "D"}
+    ]},
+    {"id": "goal-done", "label": "目标及先修各两题正确", "goals": ["logistic_regression"], "history": [
+      {"question_id": "lr_01", "answer": "B"}, {"question_id": "lr_02", "answer": "A"},
+      {"question_id": "gd_01", "answer": "C"}, {"question_id": "gd_02", "answer": "D"},
+      {"question_id": "log_01", "answer": "C"}, {"question_id": "log_02", "answer": "D"}
+    ]}
+  ]
+}

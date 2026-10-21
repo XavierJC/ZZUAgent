@@ -1,0 +1,53 @@
+{
+  "from_version": 3,
+  "to_version": 4,
+  "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v3-0f3561f44a87.sqlite3",
+  "changed": true,
+  "learning_facts_verified": true,
+  "original_tables_verified": true,
+  "facts": {
+    "metadata": {
+      "rows": 1,
+      "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+    },
+    "students": {
+      "rows": 12,
+      "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+    },
+    "mastery": {
+      "rows": 14,
+      "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+    },
+    "decisions": {
+      "rows": 37,
+      "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+    },
+    "attempts": {
+      "rows": 27,
+      "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+    },
+    "tutor_runs": {
+      "rows": 5,
+      "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+    },
+    "notes": {
+      "rows": 5,
+      "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+    },
+    "note_knowledge_points": {
+      "rows": 6,
+      "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+    },
+    "note_index_state": {
+      "rows": 5,
+      "sha256": "7e37b9183d9edeb56185562858a9dfb245e514d69fdfc4bbaeb7fd8470fd471f"
+    }
+  },
+  "date": "2026-10-20T13:05:32.969736+00:00",
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "code_archive": "data/local/phase3a-prechange-8ffd16d4.zip",
+  "active_notes": 2,
+  "original_tables_compared": 9,
+  "chunks_before_startup": 0
+}

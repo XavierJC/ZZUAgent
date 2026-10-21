@@ -1,0 +1,33 @@
+{
+  "version": "retrieval-challenge-v1",
+  "split": "development",
+  "review_status": "pending",
+  "notes": "词组过滤实现前写定的自建挑战开发集：10 个课程问题、15 个无可支持资料的问题。包含共享课程词的课程外意图，作者可见资料且标签待审，不是独立人工测试集。不得为提高指标删改失败案例。",
+  "cases": [
+    {"id":"positive-lr-1","query":"误差先平方再平均，为何对特别大的误差更敏感？","knowledge_id":null,"expected_citation_ids":["linear:2"]},
+    {"id":"positive-lr-2","query":"y_hat=w*x 无偏置时，平方损失的梯度公式怎么推导？","knowledge_id":null,"expected_citation_ids":["linear:3"]},
+    {"id":"positive-gd-1","query":"整个训练集算梯度与每次抽一个样本有什么差别？","knowledge_id":null,"expected_citation_ids":["gradient:3"]},
+    {"id":"positive-gd-2","query":"对 L(w)=w^2/2 取 eta=2，为何会来回振荡？","knowledge_id":null,"expected_citation_ids":["gradient:2"]},
+    {"id":"positive-log-1","query":"sigmoid(0) 的值是多少？","knowledge_id":null,"expected_citation_ids":["logistic:1"]},
+    {"id":"positive-log-2","query":"log-odds 为什么是特征的线性函数？","knowledge_id":null,"expected_citation_ids":["logistic:3"]},
+    {"id":"positive-reg-1","query":"训练误差在变好而验证误差变差，是过拟合吗？","knowledge_id":null,"expected_citation_ids":["regularization:1"]},
+    {"id":"positive-reg-2","query":"正则梯度中 lambda*w_j 这一项从哪里来？","knowledge_id":null,"expected_citation_ids":["regularization:2"]},
+    {"id":"positive-eval-1","query":"用测试集参与超参数搜索，会对最终评估产生什么影响？","knowledge_id":null,"expected_citation_ids":["evaluation:1"]},
+    {"id":"positive-eval-2","query":"没有预测出任何正类时，该怎样报告 precision？","knowledge_id":null,"expected_citation_ids":["evaluation:2"]},
+    {"id":"negative-1","query":"宿舍热水卡在哪里充值？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-2","query":"餐厅买饭需要下载什么 App？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-3","query":"校内 AI 比赛的报名地点在哪里？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-4","query":"这门课程选课学分可以转到其他专业吗？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-5","query":"图书馆借书证丢了怎么补办？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-6","query":"放假回家坐哪一班公交车最方便？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-7","query":"学校模型社团下次报名是什么时候？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-8","query":"机器学习课程的 QQ 群号是多少？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-9","query":"逻辑回归作业提交到哪个邮箱？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-10","query":"梯度下降课程的考试时间安排是什么？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-11","query":"模型评估教材在哪个书店可以买？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-12","query":"训练模型需要的 GPU 现在多少钱？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-13","query":"端午节食堂营业到几点？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-14","query":"明天郑州是否降温，穿什么衣服？","knowledge_id":null,"expected_citation_ids":[]},
+    {"id":"negative-15","query":"怎样制作一杯好喝的冰拿铁？","knowledge_id":null,"expected_citation_ids":[]}
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "compared_to": "data/local/phase3a-prechange-8ffd16d4.json",
+  "files": [
+    {
+      "path": ".env.example",
+      "status": "modified"
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "modified"
+    },
+    {
+      "path": "README.md",
+      "status": "modified"
+    },
+    {
+      "path": "backend/pyproject.toml",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/api/app.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/api/body_limit.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/api/knowledge.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/src/eduagent/api/knowledge_schemas.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/src/eduagent/api/note_schemas.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/api/settings.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/config.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/retrieval/index.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/retrieval/lexical.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/src/eduagent/retrieval/note_chunks.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/src/eduagent/retrieval/personal.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/src/eduagent/services/knowledge.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/src/eduagent/services/note_index.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/src/eduagent/services/notes.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/storage/notes.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/storage/personal.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/tests/test_api.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/tests/test_knowledge_api.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/tests/test_notes.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/tests/test_notes_api.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/tests/test_personal_rag.py",
+      "status": "added"
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "status": "modified"
+    },
+    {
+      "path": "data/evaluation/personal-rag-course-challenge-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "data/evaluation/personal-rag-course-dev-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "data/evaluation/personal-rag-files-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "data/evaluation/personal-rag-http-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "data/evaluation/personal-rag-http-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/evaluation/personal-rag-integrity-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "data/evaluation/personal-rag-migration-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/API_GUIDE.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs/MARKDOWN_GUIDE.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs/NOTES_GUIDE.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs/PERSONAL_RAG_GUIDE.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs/V0_5_0_DESIGN.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs/WEB_GUIDE.md",
+      "status": "modified"
+    },
+    {
+      "path": "frontend/src/components/NotesPanel.vue",
+      "status": "modified"
+    },
+    {
+      "path": "scripts/verify_personal_rag.py",
+      "status": "added"
+    }
+  ],
+  "count": 47,
+  "deployed_assets": [
+    "/assets/index-B_AL10Ae.js",
+    "/assets/index-CyO2ujuE.css"
+  ],
+  "doc_files_checked": 10,
+  "credential_patterns_found": 0,
+  "catalog_fingerprint_unchanged": true,
+  "course_corpus_fingerprint_unchanged": true,
+  "compiled_output_ignored": true
+}

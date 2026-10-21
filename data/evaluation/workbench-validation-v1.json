@@ -1,0 +1,34 @@
+{
+  "backend": {
+    "passed": 318,
+    "duration_seconds": 15.8,
+    "command": ".\\.venv\\Scripts\\python.exe -m pytest backend/tests -c backend/pyproject.toml -q",
+    "model": "simulated only"
+  },
+  "frontend": {
+    "passed": 87,
+    "files": 7,
+    "duration_seconds": 3.97,
+    "command": "npm.cmd run test"
+  },
+  "build": {
+    "passed": true,
+    "command": "npm.cmd run build -- --outDir dist-phase3b",
+    "js_kb": 574.2,
+    "js_gzip_kb": 199.65,
+    "css_kb": 68.73,
+    "css_gzip_kb": 17.41,
+    "warning": "default 500kB chunk size warning retained"
+  },
+  "http": {
+    "passed_groups": 14,
+    "simulated_model_calls": 6,
+    "real_model_calls": 0,
+    "restarts": "two service lifecycles"
+  },
+  "browser": {
+    "manual": "pending",
+    "jsdom_is_not_real_browser": true
+  },
+  "live_model": "pending budget confirmation"
+}

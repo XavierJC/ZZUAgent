@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-20T13:04:36.200938+00:00",
+  "phase": "v0.5.0 Phase3A",
+  "synthetic_data": true,
+  "isolated_database": "D:\\ZZUAgent\\data\\local\\personal-rag-http-f8736c6d\\http.sqlite3",
+  "main_database_modified": false,
+  "model_api_key_present": false,
+  "agent_enabled": false,
+  "model_requests": 0,
+  "actual_process_starts": 2,
+  "actual_restart_verified": true,
+  "failure_injection": "isolated DB states and test-only delayed builder",
+  "learning_effect_measured": false,
+  "checks": [
+    {
+      "name": "course and personal retrieval enabled with explicit empty model key",
+      "passed": true
+    },
+    {
+      "name": "saved Markdown is locally searchable with source positions and revision",
+      "passed": true
+    },
+    {
+      "name": "unselected sources excluded for course, notes and combined scopes",
+      "passed": true
+    },
+    {
+      "name": "empty source list is rejected without falling back to all sources",
+      "passed": true
+    },
+    {
+      "name": "foreign learner cannot list, retrieve or rebuild private note sources",
+      "passed": true
+    },
+    {
+      "name": "update invalidates old source version and removes old unique content",
+      "passed": true
+    },
+    {
+      "name": "oversized atomic code block fails safely while original Markdown remains saved",
+      "passed": true
+    },
+    {
+      "name": "injected transient failure can be retried safely through real HTTP",
+      "passed": true
+    },
+    {
+      "name": "real HTTP delayed rebuild loses to concurrent save; old task cannot publish",
+      "passed": true
+    },
+    {
+      "name": "real process restart restores interrupted index and persisted retrieval",
+      "passed": true
+    },
+    {
+      "name": "soft-deleted notes and their chunks cannot reenter search",
+      "passed": true
+    },
+    {
+      "name": "indexing and retrieval leave BKT, scores, learning history and tutor history unchanged",
+      "passed": true
+    },
+    {
+      "name": "original scoring, event replay, six-question finish and wrong-answer pause work in isolated DB",
+      "passed": true
+    }
+  ]
+}

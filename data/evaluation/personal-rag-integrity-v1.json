@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-20T13:56:30.840365+00:00",
+  "authority_tables_unchanged": {
+    "metadata": {
+      "rows": 1,
+      "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+    },
+    "students": {
+      "rows": 12,
+      "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+    },
+    "mastery": {
+      "rows": 14,
+      "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+    },
+    "decisions": {
+      "rows": 37,
+      "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+    },
+    "attempts": {
+      "rows": 27,
+      "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+    },
+    "tutor_runs": {
+      "rows": 5,
+      "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+    },
+    "notes": {
+      "rows": 5,
+      "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+    },
+    "note_knowledge_points": {
+      "rows": 6,
+      "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+    }
+  },
+  "active_note_index_states": {
+    "ready": 2
+  },
+  "current_chunk_count": 11,
+  "schema": 4,
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "unchanged_critical_files": [
+    "backend/src/eduagent/services/learning.py",
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/agent/policy.py",
+    "backend/src/eduagent/agent/tutor.py",
+    "backend/src/eduagent/domain/catalog.py",
+    "frontend/package.json",
+    "frontend/package-lock.json",
+    "data/questions.json",
+    "data/knowledge_points.json",
+    "data/materials/manifest.json"
+  ],
+  "rollback_probe": {
+    "old_code_reads_schema3_backup_copy": true,
+    "old_code_rejects_schema4": true
+  },
+  "rollback_probe_directory": "D:\\ZZUAgent\\data\\local\\personal-rag-rollback-check-24f0ec7b",
+  "actual_rollback_performed": false,
+  "new_model_requests": 0,
+  "live_health": {
+    "status": "ok",
+    "version": "0.4.1",
+    "mode": "offline_rules",
+    "question_count": 10,
+    "pending_review_count": 10,
+    "agent_enabled": true,
+    "retrieval_available": true
+  },
+  "openapi_paths": 17
+}

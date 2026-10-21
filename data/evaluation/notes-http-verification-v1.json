@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-20T08:50:58.103Z",
+  "manifest_version": "0.4.1",
+  "phase": "v0.5.0 Phase 2",
+  "synthetic_data": true,
+  "student_ids": [
+    "verify-notes-fbc734dd",
+    "verify-notes-other-fbc734dd"
+  ],
+  "new_model_requests": 0,
+  "learning_effect_measured": false,
+  "browser_checks_performed": false,
+  "checks": [
+    {
+      "name": "create Markdown/LaTeX, multiple links, hash and duplicate replay",
+      "passed": true
+    },
+    {
+      "name": "save, restore and stale revision protection",
+      "passed": true
+    },
+    {
+      "name": "concurrent update has exactly one winner",
+      "passed": true
+    },
+    {
+      "name": "cross-learner read, update and delete isolation",
+      "passed": true
+    },
+    {
+      "name": "UTF-8 Markdown/TXT import with BOM/LF normalization and delete",
+      "passed": true
+    },
+    {
+      "name": "invalid file path/format/encoding, oversized content/request and forbidden fields",
+      "passed": true
+    },
+    {
+      "name": "soft delete hides note and blocks delayed create replay",
+      "passed": true
+    },
+    {
+      "name": "notes do not change BKT, scores, history or tutor runs",
+      "passed": true
+    }
+  ],
+  "bkt_revision_before": 0,
+  "bkt_revision_after": 0,
+  "note_ids_retained_as_deleted": true
+}

@@ -1,0 +1,11 @@
+{
+  "version": "ml-knowledge-v1",
+  "notes": "MVP 教学顺序假设，先修边待负责人审阅，并非唯一课程组织方式。",
+  "knowledge_points": [
+    {"id": "linear_regression_loss", "name": "线性回归与损失函数", "prerequisites": [], "review_tip": "区分模型预测值与真实标签，复习残差、平方误差和均方误差。"},
+    {"id": "gradient_descent", "name": "梯度下降", "prerequisites": ["linear_regression_loss"], "review_tip": "复习参数沿负梯度方向更新，以及学习率对收敛的影响。"},
+    {"id": "logistic_regression", "name": "逻辑回归", "prerequisites": ["gradient_descent"], "review_tip": "复习 sigmoid 如何将线性输出映射为概率，以及二元交叉熵。"},
+    {"id": "overfitting_regularization", "name": "过拟合与正则化", "prerequisites": ["linear_regression_loss", "model_evaluation"], "review_tip": "结合训练与验证误差判断过拟合，理解 L2 惩罚对参数的约束。"},
+    {"id": "model_evaluation", "name": "模型评估", "prerequisites": [], "review_tip": "复习训练集、验证集与测试集的分工，以及精确率和召回率。"}
+  ]
+}

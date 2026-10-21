@@ -1,0 +1,150 @@
+{
+  "version": "markdown-render-p1-v1",
+  "source": "项目自建固定渲染与安全样例，不含真实学生记录；只验证显示和程序行为。",
+  "cases": [
+    {
+      "id": "structure",
+      "source": "# 课程笔记\n\n## 梯度下降\n\n段落中的 **重点** 和 *补充*。\n\n- 定义\n- 更新\n\n1. 计算\n2. 检查\n\n> 先检查适用条件。\n\n| 参数 | 含义 |\n| --- | --- |\n| w | 权重 |",
+      "selectors": {
+        "h1": 1,
+        "h2": 1,
+        "strong": 1,
+        "em": 1,
+        "ul": 1,
+        "ol": 1,
+        "blockquote": 1,
+        "table": 1
+      },
+      "contains": "先检查适用条件"
+    },
+    {
+      "id": "inline-math",
+      "source": "损失 $L=\\frac{1}{n}\\sum_{i=1}^{n}(y_i-\\hat y_i)^2$ 与学习率 $\\alpha$。",
+      "selectors": {
+        ".katex": 2,
+        ".katex-mathml math": 2,
+        "mfrac": 1
+      },
+      "contains": "损失"
+    },
+    {
+      "id": "matrix",
+      "source": "$$\n\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\n$$",
+      "selectors": {
+        ".katex-display": 1,
+        "mtable": 1
+      }
+    },
+    {
+      "id": "sqrt-svg",
+      "source": "$\\sqrt{x^2+y^2}$",
+      "selectors": {
+        ".katex": 1,
+        "svg": 1
+      }
+    },
+    {
+      "id": "code",
+      "source": "用 `w -= lr * grad` 更新。\n\n```python\ndef step(w):\n    return w - 0.1\n```",
+      "selectors": {
+        "pre": 1,
+        "code": 2,
+        ".hljs-keyword": 2
+      },
+      "contains": "def step(w)"
+    },
+    {
+      "id": "literal-dollars",
+      "source": "价格 \\$5，代码 `$x$`。\n\n```txt\n$$x$$\n```",
+      "selectors": {
+        ".katex": 0,
+        "code": 2
+      },
+      "contains": "价格 $5"
+    },
+    {
+      "id": "special-characters",
+      "source": "A < B & C > D；中文 Ω，\"引号\"与 [linear:1]。",
+      "selectors": {
+        "script": 0,
+        "img": 0
+      },
+      "contains": "A < B & C > D"
+    },
+    {
+      "id": "html-attack",
+      "source": "<script>window.pwned=true</script><img src=x onerror=alert(1)><iframe srcdoc=\"<script>alert(1)</script>\"></iframe><svg onload=alert(1)></svg>",
+      "selectors": {
+        "script": 0,
+        "img": 0,
+        "iframe": 0,
+        "svg": 0
+      },
+      "contains": "<script>"
+    },
+    {
+      "id": "unsafe-links",
+      "source": "[a](javascript:alert%281%29) [b](data:text/html;base64,PHNjcmlwdD4=) [c](file:///C:/private) [d](//evil.example) [e](/api/v1/students) [f](blob:https://evil.example/id)",
+      "selectors": {
+        "a": 0
+      }
+    },
+    {
+      "id": "encoded-link",
+      "source": "[危险](jav&#x61;script:alert%281%29) [混入控制符](java\nscript:alert%281%29)",
+      "selectors": {
+        "a": 0
+      }
+    },
+    {
+      "id": "safe-links",
+      "source": "[官方](https://example.com/path) [本地说明](http://example.com) [段落](#section)",
+      "selectors": {
+        "a": 3
+      },
+      "contains": "官方"
+    },
+    {
+      "id": "remote-image",
+      "source": "![我的示意图](https://example.com/tracker.png)",
+      "selectors": {
+        "img": 0
+      },
+      "contains": "我的示意图"
+    },
+    {
+      "id": "math-external-resources",
+      "source": "$\\href{javascript:alert(1)}{x}$ $\\includegraphics{https://example.com/a.png}$",
+      "selectors": {
+        "a": 0,
+        "img": 0
+      }
+    },
+    {
+      "id": "invalid-math",
+      "source": "保留错误公式 $\\notARealCommand{x}$，其余文字继续显示。",
+      "selectors": {
+        ".math-raw": 1
+      },
+      "contains": "\\notARealCommand{x}",
+      "notice": true
+    },
+    {
+      "id": "math-html-style",
+      "source": "$\\htmlStyle{position:fixed;inset:0}{x}$ $\\htmlClass{owned}{x}$",
+      "selectors": {
+        ".owned": 0,
+        "iframe": 0
+      }
+    },
+    {
+      "id": "fence-injection",
+      "source": "```javascript\" onmouseover=\"alert(1)\n<script>alert(1)</script>\n```",
+      "selectors": {
+        "script": 0,
+        "pre": 1
+      },
+      "contains": "<script>alert(1)</script>"
+    }
+  ]
+}

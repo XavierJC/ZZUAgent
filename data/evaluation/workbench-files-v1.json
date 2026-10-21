@@ -1,0 +1,256 @@
+{
+  "baseline_archive": "data/local/phase3b-prechange-ea87d691.zip",
+  "files": [
+    {
+      "path": ".gitignore",
+      "status": "modified",
+      "sha256": "eb9c07c3db787d634b17d3b0267bb4d572bb2561fe3794f6bb6b30b9ccbad3fa"
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "sha256": "72c5b328a49357c662e41fb8951ff63afe2530f7884ee8b9cf986c1268e0cb94"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "status": "added",
+      "sha256": "6b75ec28f82cfaded32910479da0f93810a18950b4ef3683d53950e0ac205e05"
+    },
+    {
+      "path": "backend/src/eduagent/api/app.py",
+      "status": "modified",
+      "sha256": "32f8eec182b6e396e5737939e19077f625c15d1782028526d004b1670df502f8"
+    },
+    {
+      "path": "backend/src/eduagent/api/body_limit.py",
+      "status": "modified",
+      "sha256": "d46b3cbd71bd7204587bce5ef3ab7da302dc90f8bce2249fbf4bb0adfb6747c2"
+    },
+    {
+      "path": "backend/src/eduagent/api/note_schemas.py",
+      "status": "modified",
+      "sha256": "aacdb61417d284ccfd25fe874d9d13d532e640ef1a2830bca612f2adef99d8a9"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench.py",
+      "status": "added",
+      "sha256": "09bb77cca628252b987602e49b61355cf4952f059f6e6ca28bd13f906624ff6d"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench_schemas.py",
+      "status": "added",
+      "sha256": "22639887924961e639eb29c3ae78818910560702628150cf0408b30376368c31"
+    },
+    {
+      "path": "backend/src/eduagent/services/notes.py",
+      "status": "modified",
+      "sha256": "e8a62f3617ff667bab2852c100b86cd52c3c92c432680329f9f3ad890c0657c2"
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "status": "added",
+      "sha256": "932d4ebef3c28fbbc51e4df3e99fdbbbcf972cba06f151a49818c3826d719a6b"
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "status": "modified",
+      "sha256": "3bf31d68bf50b6e721e57b11384184e4be6c48ac86c702102584106e9f0e8814"
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "status": "modified",
+      "sha256": "892fd5e6d6cf20579e6c79cd6b46e7266403c9dd237ca4e1b8c499a60a70b321"
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "status": "modified",
+      "sha256": "28f2375656193f613c4d91c8a5a701c309e2b55c74a8b203565ef3c672e9e765"
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "status": "modified",
+      "sha256": "718c8baefaad82e6a0cd437fe9163c5c239c63f7e3ddf86e3ba56e38797ded33"
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "status": "modified",
+      "sha256": "6a70f12565b343dacb64771e0c935a9e25e9b357b084620c08c23e8b9dbbed6f"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "status": "added",
+      "sha256": "183ca78e6939e3ad6cee15e74b660dc003bb409d911afc818d2b5307ef33c34d"
+    },
+    {
+      "path": "data/evaluation/workbench-deployment-v1.json",
+      "status": "added",
+      "sha256": "bc69483935bb448ab4557d8a016066cda2b70427db445be4a924ea451c155072"
+    },
+    {
+      "path": "data/evaluation/workbench-http-v1.json",
+      "status": "added",
+      "sha256": "9c6580b5379393d0441686bc0aba8f5ecce136e8466ecde8d0fd8174dd7cbcbd"
+    },
+    {
+      "path": "data/evaluation/workbench-integrity-v1.json",
+      "status": "added",
+      "sha256": "a471dafe99beb141279d66608b53ef17b8b950d5bebbd40d4f55aafa784f4690"
+    },
+    {
+      "path": "data/evaluation/workbench-migration-v1.json",
+      "status": "added",
+      "sha256": "95a7cf9d4196a0bac3c7166b0d163dbdd586b16725d34b8be3cb4c96d4daa8b9"
+    },
+    {
+      "path": "data/evaluation/workbench-validation-v1.json",
+      "status": "added",
+      "sha256": "b85efc8dbfe0ac2d152d82f5f932a84c28f8972fd9bd524cd5aa21b9a0a9b75d"
+    },
+    {
+      "path": "docs/AGENT_GUIDE.md",
+      "status": "modified",
+      "sha256": "d3f02aa66ccfe4c73a99e8e045e56099971a1c9b67d0de8af5c0868a740ba34b"
+    },
+    {
+      "path": "docs/API_GUIDE.md",
+      "status": "modified",
+      "sha256": "d2dafdefcb962689cfc83e2c55cf0047816c3ac19548ce556c8743f1cfa3e4f3"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "status": "modified",
+      "sha256": "37d48d15e6a81405d6543898070cedf02bf58d086fb3ca39933c4a6337ea45fe"
+    },
+    {
+      "path": "docs/MARKDOWN_GUIDE.md",
+      "status": "modified",
+      "sha256": "725007715025e54ac959dca63e1212d067dc6e8eafd7278ce74a430044d071cb"
+    },
+    {
+      "path": "docs/NOTES_GUIDE.md",
+      "status": "modified",
+      "sha256": "8a3e1ba7b0eacabb4383cdf73e6fabcd6495b7592694a358ff0438b2f3e8a4a0"
+    },
+    {
+      "path": "docs/PERSONAL_RAG_GUIDE.md",
+      "status": "modified",
+      "sha256": "5345602d1704a6ac6ccc87e07d10e8e520732a3d29a506d478a802bd9397162f"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "status": "modified",
+      "sha256": "e04f7b73d2aff8b8e475da4296d39d36fc166ae034a1457f6de396792a180fcd"
+    },
+    {
+      "path": "docs/V0_5_0_DESIGN.md",
+      "status": "modified",
+      "sha256": "8afe8804b8578ac2733fd5a7feb24e4c1cc643bc8a6b686c743b4d95bea65546"
+    },
+    {
+      "path": "docs/WEB_GUIDE.md",
+      "status": "modified",
+      "sha256": "fa847546913134d3daf996cc80561354e729a7d52b26cb0c56fcd1177375af4d"
+    },
+    {
+      "path": "docs/WORKBENCH_GUIDE.md",
+      "status": "added",
+      "sha256": "3cd63d7361b64d7cea0dd841eef79165efc8ae681966bb12421f47819078ae70"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "status": "added",
+      "sha256": "115df032ea32e089bcb89621acb5746f14c99658a3b6b8d0bedb5dba7b9828f8"
+    },
+    {
+      "path": "frontend/src/api.js",
+      "status": "modified",
+      "sha256": "cd5bd67e9e7692d709d438aa2a99921cf3f5365ed0c3eff92ca84fc946b6cab8"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "status": "modified",
+      "sha256": "851de988fb45948fe6cd8e3ebe6a5162e00df78252cefe3c95c487e32a8d0c53"
+    },
+    {
+      "path": "frontend/src/components/MarkdownRenderer.vue",
+      "status": "modified",
+      "sha256": "c1af55029983965f628abc9dd261f6dcdd14f877676284a6676eb46e15ba77ad"
+    },
+    {
+      "path": "frontend/src/components/NotesPanel.vue",
+      "status": "modified",
+      "sha256": "d74f59de2d245551c278c37456a5417187d9e9a2995df1cac1ad3070a16fe27c"
+    },
+    {
+      "path": "frontend/src/components/SourceDrawer.vue",
+      "status": "added",
+      "sha256": "f9db11e52ec83cbcf306fc9f177b8a59296dcdf12d7deda31572e0a176fa013b"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "status": "added",
+      "sha256": "a5d30216890aea8f190aa4235c84d8e1c0618068e712a9bb01f5f34ff2b9e8a0"
+    },
+    {
+      "path": "frontend/src/rendering/markdown.js",
+      "status": "modified",
+      "sha256": "5a92fd59dc7a0e4b489da8be53c28fd7be87c387fb643d74e1ed6c2161e03156"
+    },
+    {
+      "path": "frontend/src/useStudyWorkbench.js",
+      "status": "added",
+      "sha256": "c7fc4b788b8bd932836e5ac29d82909804c3df0a0f521f120937ad97479dd516"
+    },
+    {
+      "path": "frontend/src/workbench.css",
+      "status": "added",
+      "sha256": "ca83940fc447fe90144a413bb8775696f98286b9f1365f6fd7897975793c2089"
+    },
+    {
+      "path": "README.md",
+      "status": "modified",
+      "sha256": "1230ba0fb136714deabbeeff607f0c6594a8bf4cda6831a69fe45f1d156b2614"
+    },
+    {
+      "path": "scripts/verify_workbench.py",
+      "status": "added",
+      "sha256": "5f2724da9a2580bd5a173dc34a19b3945248c18d8d98128572436ec494bb1771"
+    },
+    {
+      "path": "scripts/verify_workbench_deployment.py",
+      "status": "added",
+      "sha256": "d8dc3eef72ae84c112b0a911c7b812c0e0e9539c4893575f60afc104fb41e93e"
+    }
+  ],
+  "ignored_deployment_artifacts": [
+    {
+      "path": "frontend/dist/assets/index-b78_a2t0.css",
+      "status": "added",
+      "sha256": "8c9a5829d6b534d791daa1c0c60ff647642159250ccfb43b99877e545a315010"
+    },
+    {
+      "path": "frontend/dist/assets/index-C49oOBJ-.js",
+      "status": "added",
+      "sha256": "f71ca5ba329d4881378328be8c0009d1c6fe22f648e449283410361428ccdc5b"
+    },
+    {
+      "path": "frontend/dist/assets/index-CeBWzr8H.js",
+      "status": "added",
+      "sha256": "dc2961b30a7f4ee437adcda363fbd28c1073bfbb21e0203988ea0ca95146cd9e"
+    },
+    {
+      "path": "frontend/dist/assets/index-DGvFpzl2.css",
+      "status": "added",
+      "sha256": "a530e16351f16a5b1d0656f31b8e2a87293db59c1290a1a893a5bab13027c744"
+    },
+    {
+      "path": "frontend/dist/index.html",
+      "status": "modified",
+      "sha256": "f92d5a8a0b8a653bae5be9aaa5214f277b59ec557098a26dece27c955672c527"
+    }
+  ],
+  "staging_directory": "frontend/dist-phase3b (ignored)",
+  "deleted_files": [],
+  "manifest_itself": "data/evaluation/workbench-files-v1.json (generated; not self-hashed)",
+  "changed_source_document_report_files": 44
+}

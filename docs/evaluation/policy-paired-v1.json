@@ -1,0 +1,1164 @@
+{
+  "evaluation_version": "paired-next-decision-v1",
+  "dataset_version": "policy-paired-dev-v1",
+  "dataset_fingerprint": "7f671e93056fb4d6acea20e9ca779540869ec301765b58d7a07bacecdd08901f",
+  "split": "development",
+  "review_status": "pending",
+  "source": "项目自建合成答题情景，仅用于离线工程验证；不含真实学生记录。",
+  "notes": "8 个配对状态共享若干历史前缀，并非 8 位独立学生。历史通过实际评分、BKT 和内存 SQLite 重放，随后比较同一状态的下一步决策。作者已知策略与答案，尚未人工审阅，不用于推断学习效果、统计显著性或普遍教学优劣。",
+  "catalog_fingerprint": "f6cbfb68ace13e48641498419c007379ef416b9ac28f65b4500789a5fed83ebb",
+  "bank_version": "ml-questions-p1-v1",
+  "question_count": 10,
+  "pending_question_count": 10,
+  "bkt_parameters": {
+    "initial": 0.2,
+    "learn": 0.1,
+    "slip": 0.1,
+    "guess": 0.25,
+    "version": "bkt-demo-v1"
+  },
+  "policies": {
+    "adaptive": {
+      "threshold": 0.8,
+      "max_rounds": 20,
+      "version": "rules-v1"
+    },
+    "fixed": {
+      "questions_per_skill": 2,
+      "max_rounds": 20,
+      "version": "fixed-quota-v1"
+    }
+  },
+  "prerequisite_reference": "attempts > 0 AND probability >= 0.80 AND last_correct is True; all ancestors",
+  "case_count": 8,
+  "counts": {
+    "adaptive": {
+      "exercise_assignments": 4,
+      "stopped": 3,
+      "finished": 1,
+      "assignments_with_weak_prerequisites": 0
+    },
+    "fixed": {
+      "exercise_assignments": 7,
+      "stopped": 0,
+      "finished": 1,
+      "assignments_with_weak_prerequisites": 3
+    }
+  },
+  "selection_difference_cases": 3,
+  "action_only_difference_cases": 2,
+  "identical_behavior_cases": 3,
+  "model_requests": 0,
+  "database": ":memory:",
+  "live_database_written": false,
+  "learning_effect_measured": false,
+  "cases": [
+    {
+      "id": "initial",
+      "label": "尚无答题证据",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 0,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": []
+      },
+      "input_fingerprints": {
+        "adaptive": "3f6016667e857ef3745832d7089fcb40d15cf98c4047da5b780a46639b90cc61",
+        "fixed": "3f6016667e857ef3745832d7089fcb40d15cf98c4047da5b780a46639b90cc61"
+      },
+      "input_unchanged": true,
+      "observations": [],
+      "adaptive": {
+        "action": "diagnose",
+        "knowledge_id": "linear_regression_loss",
+        "question_id": "lr_01",
+        "stop_reason": null,
+        "reason": "线性回归与损失函数尚无答题证据，先用一道题诊断。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 0,
+          "mastery": 0.2,
+          "attempts": 0,
+          "last_correct": null,
+          "prerequisites": {},
+          "supports_goals": [
+            "logistic_regression"
+          ]
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "diagnose",
+        "knowledge_id": "linear_regression_loss",
+        "question_id": "lr_01",
+        "stop_reason": null,
+        "reason": "按先修顺序完成固定题额，不依据答题正误调整安排。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 0,
+            "gradient_descent": 0,
+            "logistic_regression": 0
+          },
+          "max_rounds": 20,
+          "state_revision": 0,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": []
+      },
+      "selection_differs": false,
+      "behavior_differs": false
+    },
+    {
+      "id": "lr-wrong",
+      "label": "线性回归首题答错",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 1,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.12903225806451613,
+            "attempts": 1,
+            "last_correct": false
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": [
+          "lr_01"
+        ]
+      },
+      "input_fingerprints": {
+        "adaptive": "00dc9f9105a21962810e00173f5d1eebb8e7d35218db7218957447b2efead9b6",
+        "fixed": "00dc9f9105a21962810e00173f5d1eebb8e7d35218db7218957447b2efead9b6"
+      },
+      "input_unchanged": true,
+      "observations": [
+        {
+          "question_id": "lr_01",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": false,
+          "prior": 0.2,
+          "posterior": 0.03225806451612903,
+          "next_mastery": 0.12903225806451613
+        }
+      ],
+      "adaptive": {
+        "action": "review",
+        "knowledge_id": "linear_regression_loss",
+        "question_id": "lr_02",
+        "stop_reason": null,
+        "reason": "线性回归与损失函数最近一次答错，先复习再完成下一道练习。区分模型预测值与真实标签，复习残差、平方误差和均方误差。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 1,
+          "mastery": 0.12903225806451613,
+          "attempts": 1,
+          "last_correct": false,
+          "prerequisites": {},
+          "supports_goals": [
+            "logistic_regression"
+          ]
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "practice",
+        "knowledge_id": "linear_regression_loss",
+        "question_id": "lr_02",
+        "stop_reason": null,
+        "reason": "按先修顺序完成固定题额，不依据答题正误调整安排。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 1,
+            "gradient_descent": 0,
+            "logistic_regression": 0
+          },
+          "max_rounds": 20,
+          "state_revision": 1,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": []
+      },
+      "selection_differs": false,
+      "behavior_differs": true
+    },
+    {
+      "id": "lr-mixed",
+      "label": "线性回归先错后对，现用题耗尽",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 2,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.4130434782608696,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": [
+          "lr_01",
+          "lr_02"
+        ]
+      },
+      "input_fingerprints": {
+        "adaptive": "3972feee9068f8bc8ede93a0ba0135217907b24fdbc6ec990be89f155e4f9474",
+        "fixed": "3972feee9068f8bc8ede93a0ba0135217907b24fdbc6ec990be89f155e4f9474"
+      },
+      "input_unchanged": true,
+      "observations": [
+        {
+          "question_id": "lr_01",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": false,
+          "prior": 0.2,
+          "posterior": 0.03225806451612903,
+          "next_mastery": 0.12903225806451613
+        },
+        {
+          "question_id": "lr_02",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": true,
+          "prior": 0.12903225806451613,
+          "posterior": 0.3478260869565218,
+          "next_mastery": 0.4130434782608696
+        }
+      ],
+      "adaptive": {
+        "action": "stopped",
+        "knowledge_id": "linear_regression_loss",
+        "question_id": null,
+        "stop_reason": "insufficient_questions",
+        "reason": "线性回归与损失函数尚未满足条件，但可用新题已耗尽；需要补充题库。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 2,
+          "mastery": 0.4130434782608696,
+          "attempts": 2,
+          "last_correct": true,
+          "prerequisites": {},
+          "supports_goals": [
+            "logistic_regression"
+          ]
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "advance",
+        "knowledge_id": "gradient_descent",
+        "question_id": "gd_01",
+        "stop_reason": null,
+        "reason": "按先修顺序完成固定题额，不依据答题正误调整安排。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 2,
+            "gradient_descent": 0,
+            "logistic_regression": 0
+          },
+          "max_rounds": 20,
+          "state_revision": 2,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": [
+          "linear_regression_loss"
+        ]
+      },
+      "selection_differs": true,
+      "behavior_differs": true
+    },
+    {
+      "id": "lr-two-wrong",
+      "label": "线性回归两题均错，现用题耗尽",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 2,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.11743341404358354,
+            "attempts": 2,
+            "last_correct": false
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": [
+          "lr_01",
+          "lr_02"
+        ]
+      },
+      "input_fingerprints": {
+        "adaptive": "fc6dd4ffd7f68ac203ba7cbe7ff405ec05947a4250a68493346527271e5a001b",
+        "fixed": "fc6dd4ffd7f68ac203ba7cbe7ff405ec05947a4250a68493346527271e5a001b"
+      },
+      "input_unchanged": true,
+      "observations": [
+        {
+          "question_id": "lr_01",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": false,
+          "prior": 0.2,
+          "posterior": 0.03225806451612903,
+          "next_mastery": 0.12903225806451613
+        },
+        {
+          "question_id": "lr_02",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "B",
+          "correct": false,
+          "prior": 0.12903225806451613,
+          "posterior": 0.01937046004842615,
+          "next_mastery": 0.11743341404358354
+        }
+      ],
+      "adaptive": {
+        "action": "stopped",
+        "knowledge_id": "linear_regression_loss",
+        "question_id": null,
+        "stop_reason": "insufficient_questions",
+        "reason": "线性回归与损失函数尚未满足条件，但可用新题已耗尽；需要补充题库。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 2,
+          "mastery": 0.11743341404358354,
+          "attempts": 2,
+          "last_correct": false,
+          "prerequisites": {},
+          "supports_goals": [
+            "logistic_regression"
+          ]
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "advance",
+        "knowledge_id": "gradient_descent",
+        "question_id": "gd_01",
+        "stop_reason": null,
+        "reason": "按先修顺序完成固定题额，不依据答题正误调整安排。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 2,
+            "gradient_descent": 0,
+            "logistic_regression": 0
+          },
+          "max_rounds": 20,
+          "state_revision": 2,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": [
+          "linear_regression_loss"
+        ]
+      },
+      "selection_differs": true,
+      "behavior_differs": true
+    },
+    {
+      "id": "lr-mastered",
+      "label": "线性回归两题正确，达到演示阈值",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 2,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.8200000000000001,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": [
+          "lr_01",
+          "lr_02"
+        ]
+      },
+      "input_fingerprints": {
+        "adaptive": "eb81c103e0778faa5f4946e0ec1326d50ad5a053741d3b1110d8ad0f8c9c2edf",
+        "fixed": "eb81c103e0778faa5f4946e0ec1326d50ad5a053741d3b1110d8ad0f8c9c2edf"
+      },
+      "input_unchanged": true,
+      "observations": [
+        {
+          "question_id": "lr_01",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "B",
+          "correct": true,
+          "prior": 0.2,
+          "posterior": 0.4736842105263158,
+          "next_mastery": 0.5263157894736843
+        },
+        {
+          "question_id": "lr_02",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": true,
+          "prior": 0.5263157894736843,
+          "posterior": 0.8,
+          "next_mastery": 0.8200000000000001
+        }
+      ],
+      "adaptive": {
+        "action": "advance",
+        "knowledge_id": "gradient_descent",
+        "question_id": "gd_01",
+        "stop_reason": null,
+        "reason": "先修知识点已满足演示阈值。梯度下降尚无答题证据，先用一道题诊断。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 2,
+          "mastery": 0.2,
+          "attempts": 0,
+          "last_correct": null,
+          "prerequisites": {
+            "linear_regression_loss": 0.8200000000000001
+          },
+          "supports_goals": [
+            "logistic_regression"
+          ]
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "advance",
+        "knowledge_id": "gradient_descent",
+        "question_id": "gd_01",
+        "stop_reason": null,
+        "reason": "按先修顺序完成固定题额，不依据答题正误调整安排。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 2,
+            "gradient_descent": 0,
+            "logistic_regression": 0
+          },
+          "max_rounds": 20,
+          "state_revision": 2,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": []
+      },
+      "selection_differs": false,
+      "behavior_differs": false
+    },
+    {
+      "id": "gd-wrong",
+      "label": "线性回归达阈值，梯度下降首题答错",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 3,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.8200000000000001,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.12903225806451613,
+            "attempts": 1,
+            "last_correct": false
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": [
+          "gd_01",
+          "lr_01",
+          "lr_02"
+        ]
+      },
+      "input_fingerprints": {
+        "adaptive": "a9f98d720cfc33b81d4f8b4f721a390c91472eb2a0a90e2c23bb1f5fbf19cc20",
+        "fixed": "a9f98d720cfc33b81d4f8b4f721a390c91472eb2a0a90e2c23bb1f5fbf19cc20"
+      },
+      "input_unchanged": true,
+      "observations": [
+        {
+          "question_id": "lr_01",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "B",
+          "correct": true,
+          "prior": 0.2,
+          "posterior": 0.4736842105263158,
+          "next_mastery": 0.5263157894736843
+        },
+        {
+          "question_id": "lr_02",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": true,
+          "prior": 0.5263157894736843,
+          "posterior": 0.8,
+          "next_mastery": 0.8200000000000001
+        },
+        {
+          "question_id": "gd_01",
+          "knowledge_id": "gradient_descent",
+          "selected_answer": "A",
+          "correct": false,
+          "prior": 0.2,
+          "posterior": 0.03225806451612903,
+          "next_mastery": 0.12903225806451613
+        }
+      ],
+      "adaptive": {
+        "action": "review",
+        "knowledge_id": "gradient_descent",
+        "question_id": "gd_02",
+        "stop_reason": null,
+        "reason": "梯度下降最近一次答错，先复习再完成下一道练习。复习参数沿负梯度方向更新，以及学习率对收敛的影响。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 3,
+          "mastery": 0.12903225806451613,
+          "attempts": 1,
+          "last_correct": false,
+          "prerequisites": {
+            "linear_regression_loss": 0.8200000000000001
+          },
+          "supports_goals": [
+            "logistic_regression"
+          ]
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "practice",
+        "knowledge_id": "gradient_descent",
+        "question_id": "gd_02",
+        "stop_reason": null,
+        "reason": "按先修顺序完成固定题额，不依据答题正误调整安排。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 2,
+            "gradient_descent": 1,
+            "logistic_regression": 0
+          },
+          "max_rounds": 20,
+          "state_revision": 3,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": []
+      },
+      "selection_differs": false,
+      "behavior_differs": true
+    },
+    {
+      "id": "gd-mixed",
+      "label": "梯度下降先错后对，现用题耗尽",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 4,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.8200000000000001,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.4130434782608696,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": [
+          "gd_01",
+          "gd_02",
+          "lr_01",
+          "lr_02"
+        ]
+      },
+      "input_fingerprints": {
+        "adaptive": "d7b58535c92b06f4fe7a828b54eb4dc1b112a7acc0ca352c23d7340b6a1280d2",
+        "fixed": "d7b58535c92b06f4fe7a828b54eb4dc1b112a7acc0ca352c23d7340b6a1280d2"
+      },
+      "input_unchanged": true,
+      "observations": [
+        {
+          "question_id": "lr_01",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "B",
+          "correct": true,
+          "prior": 0.2,
+          "posterior": 0.4736842105263158,
+          "next_mastery": 0.5263157894736843
+        },
+        {
+          "question_id": "lr_02",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": true,
+          "prior": 0.5263157894736843,
+          "posterior": 0.8,
+          "next_mastery": 0.8200000000000001
+        },
+        {
+          "question_id": "gd_01",
+          "knowledge_id": "gradient_descent",
+          "selected_answer": "A",
+          "correct": false,
+          "prior": 0.2,
+          "posterior": 0.03225806451612903,
+          "next_mastery": 0.12903225806451613
+        },
+        {
+          "question_id": "gd_02",
+          "knowledge_id": "gradient_descent",
+          "selected_answer": "D",
+          "correct": true,
+          "prior": 0.12903225806451613,
+          "posterior": 0.3478260869565218,
+          "next_mastery": 0.4130434782608696
+        }
+      ],
+      "adaptive": {
+        "action": "stopped",
+        "knowledge_id": "gradient_descent",
+        "question_id": null,
+        "stop_reason": "insufficient_questions",
+        "reason": "梯度下降尚未满足条件，但可用新题已耗尽；需要补充题库。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 4,
+          "mastery": 0.4130434782608696,
+          "attempts": 2,
+          "last_correct": true,
+          "prerequisites": {
+            "linear_regression_loss": 0.8200000000000001
+          },
+          "supports_goals": [
+            "logistic_regression"
+          ]
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "advance",
+        "knowledge_id": "logistic_regression",
+        "question_id": "log_01",
+        "stop_reason": null,
+        "reason": "按先修顺序完成固定题额，不依据答题正误调整安排。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 2,
+            "gradient_descent": 2,
+            "logistic_regression": 0
+          },
+          "max_rounds": 20,
+          "state_revision": 4,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": [
+          "gradient_descent"
+        ]
+      },
+      "selection_differs": true,
+      "behavior_differs": true
+    },
+    {
+      "id": "goal-done",
+      "label": "目标及先修各两题正确",
+      "shared_input": {
+        "student_id": "synthetic-paired-state",
+        "revision": 6,
+        "goals": [
+          "logistic_regression"
+        ],
+        "states": {
+          "linear_regression_loss": {
+            "knowledge_id": "linear_regression_loss",
+            "probability": 0.8200000000000001,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "gradient_descent": {
+            "knowledge_id": "gradient_descent",
+            "probability": 0.8200000000000001,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "logistic_regression": {
+            "knowledge_id": "logistic_regression",
+            "probability": 0.8200000000000001,
+            "attempts": 2,
+            "last_correct": true
+          },
+          "overfitting_regularization": {
+            "knowledge_id": "overfitting_regularization",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          },
+          "model_evaluation": {
+            "knowledge_id": "model_evaluation",
+            "probability": 0.2,
+            "attempts": 0,
+            "last_correct": null
+          }
+        },
+        "answered": [
+          "gd_01",
+          "gd_02",
+          "log_01",
+          "log_02",
+          "lr_01",
+          "lr_02"
+        ]
+      },
+      "input_fingerprints": {
+        "adaptive": "d6b91414ad7dace42fc316da9c5cad88d04d084f2bf5c398d5043b86e44246cc",
+        "fixed": "d6b91414ad7dace42fc316da9c5cad88d04d084f2bf5c398d5043b86e44246cc"
+      },
+      "input_unchanged": true,
+      "observations": [
+        {
+          "question_id": "lr_01",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "B",
+          "correct": true,
+          "prior": 0.2,
+          "posterior": 0.4736842105263158,
+          "next_mastery": 0.5263157894736843
+        },
+        {
+          "question_id": "lr_02",
+          "knowledge_id": "linear_regression_loss",
+          "selected_answer": "A",
+          "correct": true,
+          "prior": 0.5263157894736843,
+          "posterior": 0.8,
+          "next_mastery": 0.8200000000000001
+        },
+        {
+          "question_id": "gd_01",
+          "knowledge_id": "gradient_descent",
+          "selected_answer": "C",
+          "correct": true,
+          "prior": 0.2,
+          "posterior": 0.4736842105263158,
+          "next_mastery": 0.5263157894736843
+        },
+        {
+          "question_id": "gd_02",
+          "knowledge_id": "gradient_descent",
+          "selected_answer": "D",
+          "correct": true,
+          "prior": 0.5263157894736843,
+          "posterior": 0.8,
+          "next_mastery": 0.8200000000000001
+        },
+        {
+          "question_id": "log_01",
+          "knowledge_id": "logistic_regression",
+          "selected_answer": "C",
+          "correct": true,
+          "prior": 0.2,
+          "posterior": 0.4736842105263158,
+          "next_mastery": 0.5263157894736843
+        },
+        {
+          "question_id": "log_02",
+          "knowledge_id": "logistic_regression",
+          "selected_answer": "D",
+          "correct": true,
+          "prior": 0.5263157894736843,
+          "posterior": 0.8,
+          "next_mastery": 0.8200000000000001
+        }
+      ],
+      "adaptive": {
+        "action": "finish",
+        "knowledge_id": null,
+        "question_id": null,
+        "stop_reason": null,
+        "reason": "目标及先修知识点均满足演示掌握阈值；不代表真实能力已被验证。",
+        "evidence": {
+          "mode": "offline_rules",
+          "policy_version": "rules-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "threshold": 0.8,
+          "max_rounds": 20,
+          "state_revision": 6
+        },
+        "weak_prerequisites": []
+      },
+      "fixed": {
+        "action": "finish",
+        "knowledge_id": null,
+        "question_id": null,
+        "stop_reason": null,
+        "reason": "固定练习额度已完成；不判定知识掌握或真实能力。",
+        "evidence": {
+          "mode": "offline_fixed_baseline",
+          "policy_version": "fixed-quota-v1",
+          "goals": [
+            "logistic_regression"
+          ],
+          "required_knowledge": [
+            "linear_regression_loss",
+            "gradient_descent",
+            "logistic_regression"
+          ],
+          "questions_per_skill": 2,
+          "completed_counts": {
+            "linear_regression_loss": 2,
+            "gradient_descent": 2,
+            "logistic_regression": 2
+          },
+          "max_rounds": 20,
+          "state_revision": 6,
+          "completion_basis": "exercise_quota_only"
+        },
+        "weak_prerequisites": []
+      },
+      "selection_differs": false,
+      "behavior_differs": false
+    }
+  ]
+}

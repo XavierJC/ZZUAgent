@@ -1,0 +1,219 @@
+{
+  "verified_at": "2026-10-21T11:17:53.223178+00:00",
+  "status": "deployed",
+  "backend_tests": {
+    "passed": 382,
+    "elapsed_seconds": 18.94
+  },
+  "frontend_tests": {
+    "passed": 103,
+    "test_files": 8,
+    "elapsed_seconds": 4.82
+  },
+  "build": {
+    "success": true,
+    "modules": 67,
+    "main_js_kb": 599.71,
+    "main_js_gzip_kb": 207.01,
+    "warning": "default 500 kB JavaScript chunk warning retained"
+  },
+  "http_fix_groups": 7,
+  "http_phase4a_regression_groups": 18,
+  "simulated_model_calls": 15,
+  "real_model_calls_by_this_verification": 0,
+  "historical_chat_requests_replayed": false,
+  "deployment": {
+    "url": "http://127.0.0.1:8000",
+    "schema": 6,
+    "openapi_paths": 29,
+    "new_response_fields_present": true,
+    "old_history_readable_without_model_call": true,
+    "assets": [
+      "/assets/index-DUa_ONlB.js",
+      "/assets/index-CaOrV89j.css"
+    ],
+    "static_assets_http_ok": true
+  },
+  "integrity": {
+    "migration_needed": false,
+    "all_fifteen_tables_unchanged": true,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 5,
+        "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 6,
+        "sha256": "8fb6195c60ec1ce4a5c00d01b045526164a9f2eb6657ae37d6557f7713694fcd"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "integrity_check": "ok",
+    "foreign_key_check": [],
+    "original_data_files_unchanged": true,
+    "production_database_writes_by_verification": 0
+  },
+  "code_backup": "D:\\ZZUAgent\\data\\local\\rag-answer-fix-1887de43\\before-code.zip",
+  "code_backup_sha256": "14ac027971fec69aa8919986168ed5848ac7ac67aa71bc1ffa24f4aa52481795",
+  "changed_files": [
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "sha256": "fed4c2210e77b5f56a148bc8281a17041b894d446ff4c6a0586ab7d65d54a16e"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "3f0ff30a712acb0722e8bc75fa93b7112e5316d5f05880a8e8744d0c66367ec2"
+    },
+    {
+      "path": "backend/src/eduagent/agent/deepseek.py",
+      "change": "modified",
+      "sha256": "d26c433d8c11c9cef5d3c5022734a9ac2f1f3ff3d83b307b7c444e1ef8fd310b"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "change": "modified",
+      "sha256": "60ca330b28d7fe51e0fe091643e2dd843478b9d9e8b6b75e63327d859567942e"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench_answers.py",
+      "change": "added",
+      "sha256": "2e85f60bef33596fddd9d95bdf2c38e0c2a1fea74e4e90d9228ee5b5936ea114"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench_schemas.py",
+      "change": "modified",
+      "sha256": "5aec77e115d5cc5faca064e425934a5972e30dd7035f7f89c909f1e77f61b1e6"
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "change": "modified",
+      "sha256": "cb26a5a6a12d881456b8ba87b422b0580b40790f9d68953bd1197c4325267739"
+    },
+    {
+      "path": "backend/tests/test_model_client.py",
+      "change": "modified",
+      "sha256": "071d7e14d353e833c6525c7a72aebaea5538a389ceeb5a34d2a8d9bb84674d18"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "change": "modified",
+      "sha256": "8920c4376418b26fa7b37664a8796e166608baad0cab7ccb47fe035f8d0c56b6"
+    },
+    {
+      "path": "backend/tests/test_workbench_answers.py",
+      "change": "added",
+      "sha256": "ac9f16c8f84cf166f526550244fef8430ebfd50709fbca1980da64b371186ecf"
+    },
+    {
+      "path": "docs/API_GUIDE.md",
+      "change": "modified",
+      "sha256": "ac9169a6e9666a92ce7fb9a087f318f276d1fc5b309373226d7ce9136ccba10a"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "sha256": "0c98881f9a28fce07d34ae5644fe3ce1cd313395e7771737a56e05dcf5e453e3"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "sha256": "30b5d7c4c159a92f980ce87fc4ec41811d8e408db51529b59eb32f2678e1d017"
+    },
+    {
+      "path": "docs/WORKBENCH_ANSWER_FIX.md",
+      "change": "added",
+      "sha256": "581722ddaf3a761dcf2654eb71d96f11e2754c9a54191fe4cc751a725b7d7331"
+    },
+    {
+      "path": "docs/WORKBENCH_GUIDE.md",
+      "change": "modified",
+      "sha256": "b4f9aa5240e90eaae4958a47ea104d4212ccd0627ed2df739581841c31239ad1"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "change": "modified",
+      "sha256": "4ebcdd2b49d45d72a2cc70b72f16d56892e6bdefd26ef36f5925a8f76d5cb7c1"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "sha256": "ef49603e3ef78b769e8ec378f0b3f614b2eb3617793b81be2fc191ae0f385606"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "change": "added",
+      "sha256": "076ce3a71f1481e7261be63f13ccdb96773446c68f01a930ec9ac036c0f8532c"
+    }
+  ],
+  "new_reports": [
+    "data/evaluation/workbench-answers-http-v1.json",
+    "data/evaluation/workbench-answers-phase4a-regression-v1.json",
+    "data/evaluation/workbench-answers-validation-v1.json"
+  ],
+  "initial_failure": "New HTTP script passed agent_settings directly to create_app; startup failed. Corrected to APISettings.agent; all checks passed.",
+  "not_performed": [
+    "Real DeepSeek smoke test: separate budget confirmation required.",
+    "Real-browser visual/keyboard manual acceptance.",
+    "Teaching effectiveness evaluation."
+  ],
+  "limitations": [
+    "Old failed PCA outputs and specific errors were not stored and cannot be reconstructed.",
+    "Unknown citations, conflicting inline references, invalid JSON or formula escapes still reject.",
+    "Selected personal notes without current consent still keep the whole request local.",
+    "Empty selected-source lists still reject; empty retrieval results do not expand retrieval scope.",
+    "General model knowledge is not independently fact-checked or web-retrieved."
+  ]
+}

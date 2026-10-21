@@ -1,0 +1,517 @@
+{
+  "dataset_version": "retrieval-dev-v1",
+  "split": "development",
+  "review_status": "pending",
+  "positive_cases": 25,
+  "negative_cases": 5,
+  "metrics": {
+    "hit_at_1": 0.96,
+    "hit_at_3": 1.0,
+    "mrr_at_3": 0.98,
+    "negative_empty_rate": 0.8
+  },
+  "model_requests": 0,
+  "cases": [
+    {
+      "id": "lr-1",
+      "query": "线性回归怎样预测连续数值？残差的正负能不能抵消？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "linear:1"
+      ],
+      "retrieved_citation_ids": [
+        "linear:1"
+      ],
+      "scores": [
+        0.5076770782470703
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "lr-2",
+      "query": "MSE 与带 1/2 系数的目标有什么区别？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "linear:2"
+      ],
+      "retrieved_citation_ids": [
+        "linear:3",
+        "linear:2"
+      ],
+      "scores": [
+        0.21600854396820068,
+        0.14240412414073944
+      ],
+      "first_relevant_rank": 2,
+      "passed": true
+    },
+    {
+      "id": "lr-3",
+      "query": "平方损失对参数 w 求导时为什么还要乘以 x？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "linear:3"
+      ],
+      "retrieved_citation_ids": [
+        "linear:3",
+        "linear:2",
+        "linear:1"
+      ],
+      "scores": [
+        0.32608315348625183,
+        0.20854443311691284,
+        0.13939543068408966
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "lr-4",
+      "query": "预测偏差特别大的样本会怎样影响均方误差？",
+      "knowledge_id": "linear_regression_loss",
+      "expected_citation_ids": [
+        "linear:2"
+      ],
+      "retrieved_citation_ids": [
+        "linear:2",
+        "linear:1"
+      ],
+      "scores": [
+        0.2961724102497101,
+        0.1969597339630127
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "lr-5",
+      "query": "不带截距时如何用链式法则求训练目标的导数？",
+      "knowledge_id": "linear_regression_loss",
+      "expected_citation_ids": [
+        "linear:3"
+      ],
+      "retrieved_citation_ids": [
+        "linear:3"
+      ],
+      "scores": [
+        0.29595115780830383
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "gd-1",
+      "query": "为什么参数更新需要减去学习率乘梯度？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "gradient:1"
+      ],
+      "retrieved_citation_ids": [
+        "gradient:1",
+        "gradient:2",
+        "evaluation:3"
+      ],
+      "scores": [
+        0.3534508943557739,
+        0.3060604929924011,
+        0.12344092130661011
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "gd-2",
+      "query": "学习率太大是否会振荡甚至发散？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "gradient:2"
+      ],
+      "retrieved_citation_ids": [
+        "gradient:2"
+      ],
+      "scores": [
+        0.3862649202346802
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "gd-3",
+      "query": "随机梯度和小批量梯度每步使用多少样本？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "gradient:3"
+      ],
+      "retrieved_citation_ids": [
+        "gradient:3",
+        "gradient:1"
+      ],
+      "scores": [
+        0.5183693170547485,
+        0.13873711228370667
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "gd-4",
+      "query": "步子迈得很小就一定能很快完成优化吗？",
+      "knowledge_id": "gradient_descent",
+      "expected_citation_ids": [
+        "gradient:2"
+      ],
+      "retrieved_citation_ids": [
+        "gradient:2"
+      ],
+      "scores": [
+        0.12776939570903778
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "gd-5",
+      "query": "求最小值时往导数相反方向走就能保证每次损失都下降吗？",
+      "knowledge_id": "gradient_descent",
+      "expected_citation_ids": [
+        "gradient:1"
+      ],
+      "retrieved_citation_ids": [
+        "gradient:1",
+        "gradient:3"
+      ],
+      "scores": [
+        0.30148398876190186,
+        0.17627573013305664
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "log-1",
+      "query": "sigmoid 怎样把线性输出映射为概率？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "logistic:1"
+      ],
+      "retrieved_citation_ids": [
+        "logistic:1",
+        "logistic:3"
+      ],
+      "scores": [
+        0.4095194935798645,
+        0.12854400277137756
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "log-2",
+      "query": "标签为零时二元交叉熵的公式是什么？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "logistic:2"
+      ],
+      "retrieved_citation_ids": [
+        "logistic:2"
+      ],
+      "scores": [
+        0.3624754548072815
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "log-3",
+      "query": "逻辑回归在原特征空间的决策边界是否线性？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "logistic:3"
+      ],
+      "retrieved_citation_ids": [
+        "logistic:3",
+        "logistic:1",
+        "linear:1"
+      ],
+      "scores": [
+        0.6043460965156555,
+        0.21094614267349243,
+        0.17493262887001038
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "log-4",
+      "query": "p 接近 0 或 1 时，如何避免取对数的数值问题？",
+      "knowledge_id": "logistic_regression",
+      "expected_citation_ids": [
+        "logistic:2"
+      ],
+      "retrieved_citation_ids": [
+        "logistic:2"
+      ],
+      "scores": [
+        0.35103946924209595
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "log-5",
+      "query": "概率大于 0.5 就必须永远判成正类吗，分类阈值能改吗？",
+      "knowledge_id": "logistic_regression",
+      "expected_citation_ids": [
+        "logistic:1"
+      ],
+      "retrieved_citation_ids": [
+        "logistic:1"
+      ],
+      "scores": [
+        0.37702780961990356
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "reg-1",
+      "query": "训练误差下降但验证误差上升意味着什么？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "regularization:1"
+      ],
+      "retrieved_citation_ids": [
+        "regularization:1",
+        "gradient:1",
+        "evaluation:1"
+      ],
+      "scores": [
+        0.3676789104938507,
+        0.14584198594093323,
+        0.13665004074573517
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "reg-2",
+      "query": "L2 正则项的梯度为何是 lambda 乘权重？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "regularization:2"
+      ],
+      "retrieved_citation_ids": [
+        "regularization:2",
+        "gradient:1"
+      ],
+      "scores": [
+        0.3101852536201477,
+        0.13259565830230713
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "reg-3",
+      "query": "早停和简化模型可以用于缓解过拟合吗？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "regularization:3"
+      ],
+      "retrieved_citation_ids": [
+        "regularization:3",
+        "evaluation:1"
+      ],
+      "scores": [
+        0.2951793670654297,
+        0.1554858684539795
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "reg-4",
+      "query": "模型把课上样本背下来了但换一批数据就变差，应该排查什么？",
+      "knowledge_id": "overfitting_regularization",
+      "expected_citation_ids": [
+        "regularization:1"
+      ],
+      "retrieved_citation_ids": [
+        "regularization:1"
+      ],
+      "scores": [
+        0.23030713200569153
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "reg-5",
+      "query": "惩罚系数可以反复依据独立测试集选择吗？",
+      "knowledge_id": "overfitting_regularization",
+      "expected_citation_ids": [
+        "regularization:2"
+      ],
+      "retrieved_citation_ids": [
+        "regularization:2"
+      ],
+      "scores": [
+        0.2726224362850189
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "eval-1",
+      "query": "做交叉验证时标准化参数应在哪里拟合以免泄漏？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "evaluation:1"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:1",
+        "regularization:2",
+        "regularization:1"
+      ],
+      "scores": [
+        0.3469299376010895,
+        0.21330749988555908,
+        0.16649693250656128
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "eval-2",
+      "query": "精确率和召回率分别怎么用 TP FP FN 计算？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "evaluation:2"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:2",
+        "logistic:1",
+        "evaluation:3"
+      ],
+      "scores": [
+        0.33947283029556274,
+        0.2903735041618347,
+        0.17840120196342468
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "eval-3",
+      "query": "类别不平衡时为何不能只看准确率？F1 怎么算？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "evaluation:3"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:3",
+        "logistic:1"
+      ],
+      "scores": [
+        0.3754800856113434,
+        0.13456425070762634
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "eval-4",
+      "query": "预测没有一个是正类时，Precision 的分母为零怎么办？",
+      "knowledge_id": "model_evaluation",
+      "expected_citation_ids": [
+        "evaluation:2"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:2",
+        "evaluation:3"
+      ],
+      "scores": [
+        0.33355712890625,
+        0.15425312519073486
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "eval-5",
+      "query": "自动测试全部通过，是否说明学生学习成绩提高？",
+      "knowledge_id": "model_evaluation",
+      "expected_citation_ids": [
+        "evaluation:3"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:3"
+      ],
+      "scores": [
+        0.13628101348876953
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "negative-1",
+      "query": "qzzzxxyywwwunrelated",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-2",
+      "query": "郑州大学宿舍电费在哪里缴纳？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "gradient:2"
+      ],
+      "scores": [
+        0.1453586220741272
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-3",
+      "query": "今天郑州下雨吗，出门要不要带伞？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-4",
+      "query": "红烧茄子的做法和配料是什么？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-5",
+      "query": "校园图书馆周末几点闭馆？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    }
+  ],
+  "corpus_fingerprint": "096c19f27907bf1d46e51f44382df73c10e6b24d2e520004158fb690ad70355d",
+  "dataset_fingerprint": "de6a288af69ea2ed1f8752bea47b0abc62a6b76c5681843ec167d808ef23f699",
+  "passage_count": 15,
+  "top_k": 3,
+  "algorithm": "FAISS + normalized TF-IDF; minimum cosine score 0.12"
+}

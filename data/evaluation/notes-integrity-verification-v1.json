@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-20",
+  "original_fact_rows_preserved_after_http_checks": {
+    "metadata": 1,
+    "students": 8,
+    "mastery": 10,
+    "decisions": 26,
+    "attempts": 18,
+    "tutor_runs": 4
+  },
+  "critical_files_unchanged_from_archive": [
+    "backend/src/eduagent/services/learning.py",
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/domain/catalog.py",
+    "backend/src/eduagent/agent/policy.py",
+    "backend/src/eduagent/agent/tutor.py",
+    "backend/src/eduagent/retrieval/index.py",
+    "backend/pyproject.toml",
+    "frontend/package.json",
+    "frontend/package-lock.json"
+  ],
+  "schema3_integrity": "ok",
+  "foreign_key_violations": 0,
+  "active_synthetic_notes_after_checks": 0,
+  "all_note_indexes_disabled": true,
+  "isolated_old_code_backup_restore_probe": {
+    "old_code_read_succeeded": true,
+    "schema": 2,
+    "student_rows": 8
+  },
+  "restore_directory": "D:\\ZZUAgent\\data\\local\\notes-rollback-check-b3097451",
+  "production_rollback_performed": false
+}

@@ -1,0 +1,98 @@
+{
+  "recorded_at": "2026-10-21T10:50:34.960340+00:00",
+  "phase": "4A",
+  "engineering_status": "implemented_and_deployed",
+  "package_manifest_version": "0.4.1",
+  "backend": {
+    "passed": 355,
+    "failed": 0,
+    "elapsed_seconds": 19.13,
+    "command": ".\\.venv\\Scripts\\python.exe -m pytest backend/tests -c backend/pyproject.toml -q"
+  },
+  "frontend": {
+    "passed": 101,
+    "failed": 0,
+    "unhandled_errors": 0,
+    "files": 8,
+    "elapsed_seconds": 4.32,
+    "command": "npm.cmd run test",
+    "directory": "frontend",
+    "environment": "Vitest / jsdom"
+  },
+  "build": {
+    "passed": true,
+    "command": "npm.cmd run build",
+    "directory": "frontend",
+    "modules": 67,
+    "main_js_kb": 598.36,
+    "main_js_gzip_kb": 206.41,
+    "css_kb": 70.3,
+    "css_gzip_kb": 17.73,
+    "warning": "Main JavaScript chunk exceeds the default 500 kB warning threshold; retained and disclosed."
+  },
+  "http": {
+    "passed_groups": 18,
+    "server_starts": 2,
+    "database": "isolated_temporary",
+    "simulated_model_calls": 9,
+    "real_model_calls": 0,
+    "report": "phase4a-http-v1.json"
+  },
+  "deployment": {
+    "passed": true,
+    "schema": 6,
+    "openapi_paths": 29,
+    "url": "http://127.0.0.1:8000",
+    "read_only_checks": true,
+    "report": "phase4a-deployment-v1.json"
+  },
+  "migration": {
+    "from": 5,
+    "to": 6,
+    "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v5-4c770859bdb5.sqlite3",
+    "original_twelve_tables_equal": true,
+    "integrity_check": "ok",
+    "foreign_key_check": [],
+    "old_code_reads_schema5_backup_copy": true,
+    "old_code_rejects_schema6_copy_without_changes": true,
+    "current_database_rolled_back": false,
+    "report": "phase4a-migration-v1.json"
+  },
+  "integrity_report": "phase4a-integrity-v1.json",
+  "initial_failures_and_resolutions": [
+    {
+      "check": "self_assessment_tests",
+      "initial_result": "8 failed, 7 passed",
+      "cause": "Test helper constructed dictionaries with duplicate keyword arguments.",
+      "resolution": "Corrected test data construction; final full backend suite passed."
+    },
+    {
+      "check": "frontend_initial_run",
+      "initial_result": "100 assertions passed but exit failure due to one unhandled asynchronous error",
+      "cause": "Self-assessment panel accessed draft entries before asynchronous initialization.",
+      "resolution": "Guarded form rendering until draft entries are ready; final 101 tests passed with no unhandled errors."
+    },
+    {
+      "check": "http_cross_student_fixture",
+      "initial_result": "409 rather than expected 404",
+      "cause": "Student B request incorrectly used student A self-assessment revision.",
+      "resolution": "Used B current revision; cross-student source access correctly returned 404."
+    }
+  ],
+  "not_performed": [
+    "Real model smoke requests: separate budget approval is still required.",
+    "Real-browser visual, narrow-screen and keyboard manual acceptance: prior URL safety restriction was not bypassed.",
+    "Real student learning outcomes and calibration of self-assessment, confidence or recommendation quality."
+  ],
+  "limitations": [
+    "Demo student scope is not real identity authentication.",
+    "Rules are explainable engineering heuristics, not validated teaching efficacy.",
+    "Word-based retrieval and the previous 5/15 out-of-course challenge false positives remain unchanged.",
+    "Self-assessment and guide history has no physical-deletion/retention management in this phase.",
+    "Uncertain model requests require explicit reconciliation; refresh never retries paid requests."
+  ],
+  "new_dependencies": [],
+  "real_model_calls": 0,
+  "production_learning_writes": 0,
+  "next_phase_automatically_started": false
+}

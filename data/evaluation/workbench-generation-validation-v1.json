@@ -1,0 +1,210 @@
+{
+  "verified_at": "2026-10-21T11:49:11.869603+00:00",
+  "status": "deployed",
+  "backend_tests": {
+    "passed": 391,
+    "elapsed_seconds": 22.68
+  },
+  "frontend_tests": {
+    "passed": 104,
+    "test_files": 8,
+    "elapsed_seconds": 5.52
+  },
+  "build": {
+    "success": true,
+    "modules": 67,
+    "main_js_kb": 600.06,
+    "main_js_gzip_kb": 207.15,
+    "warning": "default 500 kB JavaScript chunk warning retained"
+  },
+  "http_fix_groups": 10,
+  "http_phase4a_regression_groups": 18,
+  "simulated_model_calls": 18,
+  "real_model_calls_by_this_verification": 0,
+  "historical_chat_requests_replayed": false,
+  "deployment": {
+    "url": "http://127.0.0.1:8000",
+    "schema": 6,
+    "openapi_paths": 29,
+    "new_response_fields_present": true,
+    "old_history_readable_without_model_call": true,
+    "assets": [
+      "/assets/index-AYxnXumX.js",
+      "/assets/index-CaOrV89j.css"
+    ],
+    "static_assets_http_ok": true
+  },
+  "integrity": {
+    "migration_needed": false,
+    "all_fifteen_tables_unchanged": true,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 5,
+        "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 12,
+        "sha256": "076053543516437182e6e6eb527e09b052fbbac8724e04edf96ade99853073f0"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "integrity_check": "ok",
+    "foreign_key_check": [],
+    "original_data_files_unchanged": true,
+    "production_database_writes_by_verification": 0
+  },
+  "code_backup": "D:\\ZZUAgent\\data\\local\\rag-generation-2a863b4e\\before-code.zip",
+  "code_backup_sha256": "51b0df581f2c367e50b468e837cc4c74884ac0b9f7d3484b93844f5043fa8030",
+  "changed_files": [
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "sha256": "2025e13a8f9663510f63d34cd14eee456966b951323e4e93fb5c28055799dfc9"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "38ba0226c1fd807c8d8ae62c1aa49ede1d89ee59e865bea5ebf21e3d2b70e41c"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "change": "modified",
+      "sha256": "2540d860b36c6b17cedbf90a6b7a78577790c01b11c063fdb1251893aca58406"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench_schemas.py",
+      "change": "modified",
+      "sha256": "9db4847f9d4a851c2f3968a9a86e56483339a31a17598b49bccedc3ecda15975"
+    },
+    {
+      "path": "backend/src/eduagent/services/clock.py",
+      "change": "deleted",
+      "sha256": null
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "change": "modified",
+      "sha256": "a659923487c592087aa46ac468c098badbb81a1be9d663ed0c80411c5b853953"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "change": "modified",
+      "sha256": "18dc5b821f95006ae1e162f09eaf50165a183e692e8f04e2c4dbfe340d0f1058"
+    },
+    {
+      "path": "backend/tests/test_workbench_hybrid.py",
+      "change": "modified",
+      "sha256": "04a1b58000c08974481b5c37fe6fdb5e5be0558b1f8c5c31df5e915fd4e237ae"
+    },
+    {
+      "path": "docs/API_GUIDE.md",
+      "change": "modified",
+      "sha256": "75142c69b7d1581363e7f8aefaffc397ef8f1ca180b22ce1b6382892ead04b5b"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "sha256": "5ec853eb82a923a862ae64022de32f61c42962507fb0648b53f212ed2fb9bd7f"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "sha256": "3daf8be6b534d9007fd82e27ef62952060d28dfa6679c6a5e09a0d26c7771f49"
+    },
+    {
+      "path": "docs/WORKBENCH_GUIDE.md",
+      "change": "modified",
+      "sha256": "c68b7c45222d471503b3c61e11403bba66e179fa3f93980fe8a822cf1d809639"
+    },
+    {
+      "path": "docs/WORKBENCH_HYBRID_GUIDE.md",
+      "change": "modified",
+      "sha256": "c7eb0077d759c8ac880b3f0e578ca6126ffec9721b234ef2620c31aa0a4a933c"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "change": "modified",
+      "sha256": "887a5207cb15e596dc8ea9ab3d6fc7153cce2fac498b8f32b3eda45c7a34a677"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "sha256": "a21ce9378b1eda485ea9c9271aa2161a9632591f564c43abd6c839515d8be70a"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "change": "modified",
+      "sha256": "9c886c63ead952892fdac000b4f6d097914a5f1ac245d43f277010b6d85374a4"
+    }
+  ],
+  "new_reports": [
+    "data/evaluation/workbench-generation-http-v1.json",
+    "data/evaluation/workbench-generation-phase4a-regression-v1.json",
+    "data/evaluation/workbench-generation-validation-v1.json"
+  ],
+  "initial_failure": null,
+  "scope_correction": "Removed the mistakenly added clock; kept RAG-assisted model generation for full, partial and empty retrieval contexts.",
+  "not_performed": [
+    "Real DeepSeek smoke test: separate budget confirmation required.",
+    "Real-browser visual/keyboard manual acceptance.",
+    "Teaching effectiveness evaluation."
+  ],
+  "limitations": [
+    "Old failed PCA outputs and specific errors were not stored and cannot be reconstructed.",
+    "Unknown citations or references in model supplements still reject; supplementation and reference labels do not prove factual accuracy.",
+    "Selected personal notes without current consent still keep the whole request local.",
+    "Empty selected-source lists still reject; empty retrieval results do not expand retrieval scope.",
+    "General model knowledge is not independently fact-checked or web-retrieved; no example-specific clock capability is included."
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-21T11:45:49.898548+00:00",
+  "checks": [
+    {
+      "name": "atomic_report_concurrent_idempotency",
+      "passed": true
+    },
+    {
+      "name": "report_cas_and_student_isolation",
+      "passed": true
+    },
+    {
+      "name": "consistent_snapshot_pending_diagnosis_no_assignment",
+      "passed": true
+    },
+    {
+      "name": "rules_empty_scope_never_queries_all_sources",
+      "passed": true
+    },
+    {
+      "name": "guide_personal_consent_not_inherited",
+      "passed": true
+    },
+    {
+      "name": "course_personal_mixed_scopes_and_summary_redaction",
+      "passed": true
+    },
+    {
+      "name": "citations_match_snapshots_and_cross_student_denied",
+      "passed": true
+    },
+    {
+      "name": "model_cannot_change_bkt_or_focus",
+      "passed": true
+    },
+    {
+      "name": "timeout_no_automatic_paid_retry",
+      "passed": true
+    },
+    {
+      "name": "reports_and_guides_preserve_all_original_twelve_tables",
+      "passed": true
+    },
+    {
+      "name": "timeout_and_expired_snapshot_preserve_no_retry_state",
+      "passed": true
+    },
+    {
+      "name": "inflight_duplicate_and_self_revision_race",
+      "passed": true
+    },
+    {
+      "name": "source_version_race_and_old_index_excluded",
+      "passed": true
+    },
+    {
+      "name": "objective_revision_race_and_explainable_recommendation_change",
+      "passed": true
+    },
+    {
+      "name": "formal_exercise_exhaustion_is_explicit",
+      "passed": true
+    },
+    {
+      "name": "deleted_sources_and_immutable_history_content",
+      "passed": true
+    },
+    {
+      "name": "process_restart_recovers_without_model_or_paid_replay",
+      "passed": true
+    },
+    {
+      "name": "legacy_retrieval_score_bkt_and_histories_compatible",
+      "passed": true
+    }
+  ],
+  "server_starts": 2,
+  "schema": 6,
+  "model_kind": "simulated",
+  "simulated_model_calls": 9,
+  "real_model_calls": 0,
+  "test_directory": "D:\\ZZUAgent\\data\\local\\phase4a-http-8cc7edda",
+  "production_learning_writes": 0,
+  "browser_manual_validation": "not_performed",
+  "fault_injection": "Private verification server/file controls and one unresolved claim in the isolated DB only."
+}

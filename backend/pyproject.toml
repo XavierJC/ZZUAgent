@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools==75.1.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zzu-eduagent"
+version = "0.4.1"
+description = "EduAgent offline knowledge-tracing learning loop"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+api = ["fastapi==0.148.0", "uvicorn==0.54.0", "pydantic==2.12.5", "starlette==1.9.0"]
+retrieval = ["faiss-cpu==1.15.1", "numpy==2.5.4"]
+agent = ["langgraph==1.2.16", "langsmith==0.14.11", "faiss-cpu==1.15.1", "numpy==2.5.4", "httpx2==2.14.0"]
+dev = ["pytest==7.4.4", "httpx2==2.14.0"]
+
+[project.scripts]
+eduagent = "eduagent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"

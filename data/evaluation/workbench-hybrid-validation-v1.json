@@ -1,0 +1,219 @@
+{
+  "verified_at": "2026-10-21T11:38:36.371954+00:00",
+  "status": "deployed",
+  "backend_tests": {
+    "passed": 391,
+    "elapsed_seconds": 17.83
+  },
+  "frontend_tests": {
+    "passed": 104,
+    "test_files": 8,
+    "elapsed_seconds": 5.15
+  },
+  "build": {
+    "success": true,
+    "modules": 67,
+    "main_js_kb": 600.34,
+    "main_js_gzip_kb": 207.24,
+    "warning": "default 500 kB JavaScript chunk warning retained"
+  },
+  "http_fix_groups": 10,
+  "http_phase4a_regression_groups": 18,
+  "simulated_model_calls": 18,
+  "real_model_calls_by_this_verification": 0,
+  "historical_chat_requests_replayed": false,
+  "deployment": {
+    "url": "http://127.0.0.1:8000",
+    "schema": 6,
+    "openapi_paths": 29,
+    "new_response_fields_present": true,
+    "old_history_readable_without_model_call": true,
+    "assets": [
+      "/assets/index-Dcp40VX_.js",
+      "/assets/index-CaOrV89j.css"
+    ],
+    "static_assets_http_ok": true
+  },
+  "integrity": {
+    "migration_needed": false,
+    "all_fifteen_tables_unchanged": true,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 5,
+        "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 12,
+        "sha256": "076053543516437182e6e6eb527e09b052fbbac8724e04edf96ade99853073f0"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "integrity_check": "ok",
+    "foreign_key_check": [],
+    "original_data_files_unchanged": true,
+    "production_database_writes_by_verification": 0
+  },
+  "code_backup": "D:\\ZZUAgent\\data\\local\\workbench-hybrid-05985260\\before-code.zip",
+  "code_backup_sha256": "ba3c310f6f8c31b5e88bcbad0e91e0eb41f5f0eecb4a8c28c1d94435208dc729",
+  "changed_files": [
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "sha256": "f80191d901efd3657baf16505746d8759bcdc75d583237e01dcc6fa555fd2ba8"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "5c1e2754170e524ac4ee2767ad49015bb70ee79c1c225f84baae240fa9ab9173"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "change": "modified",
+      "sha256": "1f6eb4c5257072fb3f45e156b902cfad6d7e1362c290e60aa90bc89cb750589c"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench_answers.py",
+      "change": "modified",
+      "sha256": "584e15c12d89728db59f422d37e734ccc42cc2a2f6811886fd51ebdac83e27e6"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench_schemas.py",
+      "change": "modified",
+      "sha256": "2d141ef85df8b1f3535f460b0cf670e2948fb6681a8e0d51f45583a63a704a77"
+    },
+    {
+      "path": "backend/src/eduagent/services/clock.py",
+      "change": "added",
+      "sha256": "6dd7d5b0ab240c7b17663487649fbec4b2b2ae7058355d03ebd2fbd2ad8a1ca4"
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "change": "modified",
+      "sha256": "0ffc1b468f8014c80c15bc30da3189b8ebe9bebefdcc8329713db5eea778bea3"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "change": "modified",
+      "sha256": "e18b25f5db6463009caf71173eb81e1fece7d1b59bd0db2bddb2a506ef8c448c"
+    },
+    {
+      "path": "backend/tests/test_workbench_hybrid.py",
+      "change": "added",
+      "sha256": "772b340ced36258c40b092e6d958cbc1d67f086b358646367a0aca6bd21f54b5"
+    },
+    {
+      "path": "docs/API_GUIDE.md",
+      "change": "modified",
+      "sha256": "9a788d3a830af27b0e2c21175d2ed83eb50c681d9c52ca90a3880fe9e9480bbc"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "sha256": "bf0a12d1204ca5118fcb40aa03a797abdf80929e60b6bfae40dd07d4d446ef1e"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "sha256": "cd52296d568449dac2a33cbb8c461358921924367b96abd6c414b142bae08976"
+    },
+    {
+      "path": "docs/WORKBENCH_ANSWER_FIX.md",
+      "change": "modified",
+      "sha256": "5f6cb1d9a70d4454172d96bbc031af4c917359912ba31cdf08867949ef92d505"
+    },
+    {
+      "path": "docs/WORKBENCH_GUIDE.md",
+      "change": "modified",
+      "sha256": "4e7d57e9ca764de091804291df4d931dd20448cd71b8ac375550d230fd82827a"
+    },
+    {
+      "path": "docs/WORKBENCH_HYBRID_GUIDE.md",
+      "change": "added",
+      "sha256": "60be85eb8f7cfda3702c656a97ed85f56bcf147f9f5445978309c9a9cb3fcf57"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "change": "modified",
+      "sha256": "baca675c218e3a29d37b27947265a2ffc8c375bdeaeb84dd4a08abde8b1e1cea"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "sha256": "520a21ce96b6c08bebe57cd88a03574d65e7936eed2ded3118b058d70ab464dc"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "change": "modified",
+      "sha256": "d60f3d49979283b4e590981f003c405328c6678eb998cf8ed7ccaacbfc738688"
+    }
+  ],
+  "new_reports": [
+    "data/evaluation/workbench-hybrid-http-v1.json",
+    "data/evaluation/workbench-hybrid-phase4a-regression-v1.json",
+    "data/evaluation/workbench-hybrid-validation-v1.json"
+  ],
+  "initial_failure": null,
+  "not_performed": [
+    "Real DeepSeek smoke test: separate budget confirmation required.",
+    "Real-browser visual/keyboard manual acceptance.",
+    "Teaching effectiveness evaluation."
+  ],
+  "limitations": [
+    "Old failed PCA outputs and specific errors were not stored and cannot be reconstructed.",
+    "Unknown citations or references in model supplements still reject; supplementation and reference labels do not prove factual accuracy.",
+    "Selected personal notes without current consent still keep the whole request local.",
+    "Empty selected-source lists still reject; empty retrieval results do not expand retrieval scope.",
+    "General model knowledge is not independently fact-checked or web-retrieved; server clock is not externally synchronized by this feature."
+  ]
+}

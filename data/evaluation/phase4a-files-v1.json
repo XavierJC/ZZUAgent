@@ -1,0 +1,440 @@
+{
+  "generated_at": "2026-10-21T10:50:34.960340+00:00",
+  "baseline": "data/local/phase4a-prechange-85a21e83.json",
+  "baseline_files": 248,
+  "missing_baseline_files": [],
+  "source_docs_scripts_and_reports": [
+    {
+      "path": ".gitignore",
+      "change": "modified",
+      "before_sha256": "eb9c07c3db787d634b17d3b0267bb4d572bb2561fe3794f6bb6b30b9ccbad3fa",
+      "after_sha256": "93841a9fec8fb626b0cf31f41c20c521280ac353151209e00c4065cc12818fa1",
+      "bytes": 241
+    },
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "before_sha256": "72c5b328a49357c662e41fb8951ff63afe2530f7884ee8b9cf986c1268e0cb94",
+      "after_sha256": "33448a29b2d9beb35f7a3db61b8619eb08718b7a477af8775a137aa90c3b33e0",
+      "bytes": 3093
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "before_sha256": "1230ba0fb136714deabbeeff607f0c6594a8bf4cda6831a69fe45f1d156b2614",
+      "after_sha256": "3f85adb28a5002dfd0550fc4e5f5936ddef9a77fe2337c1f1b81e1fcf4cc97ae",
+      "bytes": 10260
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "change": "modified",
+      "before_sha256": "6b75ec28f82cfaded32910479da0f93810a18950b4ef3683d53950e0ac205e05",
+      "after_sha256": "8c297305ce1b893cfe4e4bdaabaafdc66c0e8455eb2928696fce9239ba0a02b0",
+      "bytes": 8309
+    },
+    {
+      "path": "backend/src/eduagent/api/app.py",
+      "change": "modified",
+      "before_sha256": "32f8eec182b6e396e5737939e19077f625c15d1782028526d004b1670df502f8",
+      "after_sha256": "b0157bcbb493861ea95cc3101125c4a99d4eda6fea0236496442e41df2aea427",
+      "bytes": 12460
+    },
+    {
+      "path": "backend/src/eduagent/api/body_limit.py",
+      "change": "modified",
+      "before_sha256": "d46b3cbd71bd7204587bce5ef3ab7da302dc90f8bce2249fbf4bb0adfb6747c2",
+      "after_sha256": "2e58b2a445aa12b4483afdd84205ad30612b9a3ee6705e9f475b479c5a70a95e",
+      "bytes": 1499
+    },
+    {
+      "path": "backend/src/eduagent/api/self_assessment_schemas.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "939a46584245eb59e84d930fea7f59d13fdb1edaf53ef7b51e51698893fd7828",
+      "bytes": 1510
+    },
+    {
+      "path": "backend/src/eduagent/api/self_assessments.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "ff5e585fe08d573ba9f8ee3b4b0c74081768b776df22707c4365292b397cfb07",
+      "bytes": 1930
+    },
+    {
+      "path": "backend/src/eduagent/api/study_guide_schemas.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "744335a2dd8b06b57bd9bb47abdf1e199a2af5fd744581267d4647eb0adfbdce",
+      "bytes": 3044
+    },
+    {
+      "path": "backend/src/eduagent/api/study_guides.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "586f6b358faaa0fd44fd5965dd88bc261a52890de77d1aab8a4283bbf18f1fb4",
+      "bytes": 1706
+    },
+    {
+      "path": "backend/src/eduagent/domain/guidance.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "f8c17ea1073d3a7907722319e35c1c292286d7eb863bf4581c4e168db473f9ca",
+      "bytes": 6063
+    },
+    {
+      "path": "backend/src/eduagent/domain/self_assessment.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "9cee6ffcd3e2a9705ac85f045d7d6131d67ba8a019dca506226921b649bc37f0",
+      "bytes": 1600
+    },
+    {
+      "path": "backend/src/eduagent/services/guidance.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "14c29823f86fe162139d286ce962adeab79863a7fb399e23f75ea9735b753a68",
+      "bytes": 3971
+    },
+    {
+      "path": "backend/src/eduagent/services/self_assessments.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "99ecbfe6b6c88c05092ce17fd52bbe3bce767080b9756b1008f9f3204fe013ba",
+      "bytes": 4555
+    },
+    {
+      "path": "backend/src/eduagent/services/study_guides.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "ce8ad30571823524512f5d0a60d18baa0ccc7da6a800621990196f5d024fb4cf",
+      "bytes": 10093
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "change": "modified",
+      "before_sha256": "3bf31d68bf50b6e721e57b11384184e4be6c48ac86c702102584106e9f0e8814",
+      "after_sha256": "f356d8a8833d77ddfa27294cdc5e331619424690578c254ce072139e7ef5f5b0",
+      "bytes": 15248
+    },
+    {
+      "path": "backend/src/eduagent/storage/self_assessments.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "77a3d8e2e470538c341d38d1432125bd7696da3bfc7d91573d9b6560e47f1afe",
+      "bytes": 2601
+    },
+    {
+      "path": "backend/src/eduagent/storage/study_guides.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "0be1e42483f74a161b3a717d012bb9a0a37a52d424645820cb3ae51ab034e675",
+      "bytes": 1658
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "change": "modified",
+      "before_sha256": "892fd5e6d6cf20579e6c79cd6b46e7266403c9dd237ca4e1b8c499a60a70b321",
+      "after_sha256": "f9d91aae434a9560c665cbc353a3a9356805e81b6bd0e0781fc4e901dcf299fb",
+      "bytes": 4030
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "change": "modified",
+      "before_sha256": "28f2375656193f613c4d91c8a5a701c309e2b55c74a8b203565ef3c672e9e765",
+      "after_sha256": "cec66bc28d0972efd8425593366b2139a6ffc8834611ee9031bac1f3b27c8d6d",
+      "bytes": 3243
+    },
+    {
+      "path": "backend/tests/test_self_assessments.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "45a20c847f302f43fc95c157d34f09aadc142a83e02de7a515c33494aa62b574",
+      "bytes": 8791
+    },
+    {
+      "path": "backend/tests/test_study_guides.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "01137e2a48592371ea12cbd3ecd6fdf4e3822329e522a0cff339e33d2ae6923a",
+      "bytes": 14857
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "change": "modified",
+      "before_sha256": "718c8baefaad82e6a0cd437fe9163c5c239c63f7e3ddf86e3ba56e38797ded33",
+      "after_sha256": "844aac56f4412d4c6d694794659eb79f911b1dda78b15e8dee82b5e5b42b552a",
+      "bytes": 9873
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "change": "modified",
+      "before_sha256": "6a70f12565b343dacb64771e0c935a9e25e9b357b084620c08c23e8b9dbbed6f",
+      "after_sha256": "61c1cffda30066bfb59553919727c1eff3abb3d1f9a65197fe23f417159ad759",
+      "bytes": 5414
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "change": "modified",
+      "before_sha256": "183ca78e6939e3ad6cee15e74b660dc003bb409d911afc818d2b5307ef33c34d",
+      "after_sha256": "6336852018ef6e29401bf55a7562476704941ce622c2cef72c94c71b053274ab",
+      "bytes": 14461
+    },
+    {
+      "path": "data/evaluation/phase4a-deployment-v1.json",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "8a8cf341c1b99bd6e0eb213bc1dcbf6cff2830c1e023c8d46b75fafb8221b258",
+      "bytes": 665
+    },
+    {
+      "path": "data/evaluation/phase4a-http-v1.json",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "453f517ff3c53e5fd09d3f7fe20300a8611e18e5f34ff48d08cf830ea0e44a29",
+      "bytes": 2303
+    },
+    {
+      "path": "data/evaluation/phase4a-integrity-v1.json",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "3cff4c7da271806ff43aecd420521cd164eaa8f58ef09f6ddc3d342daab48a40",
+      "bytes": 11362
+    },
+    {
+      "path": "data/evaluation/phase4a-migration-v1.json",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "67cf1a325290aed42eece905df9cc53b0d004a96375f2d002f2a9fc0125fb043",
+      "bytes": 2849
+    },
+    {
+      "path": "data/evaluation/phase4a-validation-v1.json",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "2b260269540779625dde04222e6e3df4d07626c7a95f7edef1f9fcbc81d4ece6",
+      "bytes": 3838
+    },
+    {
+      "path": "docs/AGENT_GUIDE.md",
+      "change": "modified",
+      "before_sha256": "d3f02aa66ccfe4c73a99e8e045e56099971a1c9b67d0de8af5c0868a740ba34b",
+      "after_sha256": "f9b5b7c4bd3b7fd1a8823321e334abd7ef0d69945a8db0cda02061767f789755",
+      "bytes": 10520
+    },
+    {
+      "path": "docs/API_GUIDE.md",
+      "change": "modified",
+      "before_sha256": "d2dafdefcb962689cfc83e2c55cf0047816c3ac19548ce556c8743f1cfa3e4f3",
+      "after_sha256": "9169770925090a5697b62544bd22ecbc9c7d15691e5dcb87adc095823d76da46",
+      "bytes": 11495
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "before_sha256": "8b8f335223d65ae409840cc734d283cb8884a920e90f0a5db9667c9d7ab0c8b1",
+      "after_sha256": "2cd5635b9b9040cf2d123c106e856d3a4eaebc7942b6bb12d5c5df9df22d40f5",
+      "bytes": 73127
+    },
+    {
+      "path": "docs/NOTES_GUIDE.md",
+      "change": "modified",
+      "before_sha256": "8a3e1ba7b0eacabb4383cdf73e6fabcd6495b7592694a358ff0438b2f3e8a4a0",
+      "after_sha256": "2907bc36f3c889fff1e9213abbcfbf12e5840db557ec776e415689ff274a7c66",
+      "bytes": 18543
+    },
+    {
+      "path": "docs/PERSONAL_RAG_GUIDE.md",
+      "change": "modified",
+      "before_sha256": "5345602d1704a6ac6ccc87e07d10e8e520732a3d29a506d478a802bd9397162f",
+      "after_sha256": "279a64b29041e4190c0ebe0c5206e7bd9be5b8a91a162eddeb70480a63f9a5fe",
+      "bytes": 18182
+    },
+    {
+      "path": "docs/PHASE4A_DESIGN.md",
+      "change": "modified",
+      "before_sha256": "599a8c2c099c952d9f81a9f9c6ea5e4f05e1ccf73d7d5a7288dbfc5446a37c02",
+      "after_sha256": "d8f89cc3777923a197a520b13c3249572630503a3533830120902f379247c024",
+      "bytes": 25566
+    },
+    {
+      "path": "docs/PHASE4A_GUIDE.md",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "1e662739e3c2cfed712a0320c2c978058e166aa43b4b555b82a6541b36f5cc42",
+      "bytes": 16549
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "before_sha256": "ec13a8685f502e3fd00617da2fdadbd66f911e8991b9359b8d462ce6c8d0a4b4",
+      "after_sha256": "1dd88b142c82aae93fa81ae50903307c3283057f766031510c0e475b52de0bc9",
+      "bytes": 20714
+    },
+    {
+      "path": "docs/V0_5_0_DESIGN.md",
+      "change": "modified",
+      "before_sha256": "8afe8804b8578ac2733fd5a7feb24e4c1cc643bc8a6b686c743b4d95bea65546",
+      "after_sha256": "634b6c62d10f8af07d55907247db0fecf9efb1cd562a1e69c8ec5c19445c8792",
+      "bytes": 37742
+    },
+    {
+      "path": "docs/WEB_GUIDE.md",
+      "change": "modified",
+      "before_sha256": "fa847546913134d3daf996cc80561354e729a7d52b26cb0c56fcd1177375af4d",
+      "after_sha256": "33b475fd96eb0748e918cf9d165b528470f80094703cefdd260eaeb433e6c63d",
+      "bytes": 8768
+    },
+    {
+      "path": "docs/WORKBENCH_GUIDE.md",
+      "change": "modified",
+      "before_sha256": "3cd63d7361b64d7cea0dd841eef79165efc8ae681966bb12421f47819078ae70",
+      "after_sha256": "cb3ef6becbd267f300fc3a8a9a9c823e5d1d8305cfe2e30a47e8ab19f86e62da",
+      "bytes": 16213
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "change": "modified",
+      "before_sha256": "851de988fb45948fe6cd8e3ebe6a5162e00df78252cefe3c95c487e32a8d0c53",
+      "after_sha256": "a60642c1d7474d16c1ad79e488daf08a63a01cb4bbe070875afb17b56510246f",
+      "bytes": 14865
+    },
+    {
+      "path": "frontend/src/__tests__/study-guidance-fixtures.js",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "a9b45ed81cdc9972bbe8190eefed874eff4ccd96774068717a1f880e33765294",
+      "bytes": 4327
+    },
+    {
+      "path": "frontend/src/__tests__/study-guidance.test.js",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "863e2547d6bf47c21ae87ed021baa07761d8e9ae39f510d5ea8d8d4f2425d656",
+      "bytes": 11955
+    },
+    {
+      "path": "frontend/src/api.js",
+      "change": "modified",
+      "before_sha256": "cd5bd67e9e7692d709d438aa2a99921cf3f5365ed0c3eff92ca84fc946b6cab8",
+      "after_sha256": "cb0f8a7375fa582a1860d89f971818f25aedb0814181742e9949850233d644f9",
+      "bytes": 5098
+    },
+    {
+      "path": "frontend/src/components/LearningGuidancePanel.vue",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "5c2c00f76fa4bda46191800dae4539df1081e3a961a572c885799ce22ac970a9",
+      "bytes": 2475
+    },
+    {
+      "path": "frontend/src/components/SelfAssessmentPanel.vue",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "ce3d71e02cb2d8fea25ee540e75ce000a48e117f657389f31e60cbf6731cdfde",
+      "bytes": 3421
+    },
+    {
+      "path": "frontend/src/components/StudyGuidePanel.vue",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "a823e112e80a0d08d51799bb2008d53b0db4c4bf15ac9f98c32729b6a706ba95",
+      "bytes": 6468
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "before_sha256": "a5d30216890aea8f190aa4235c84d8e1c0618068e712a9bb01f5f34ff2b9e8a0",
+      "after_sha256": "72877ff901891bed096a5d1aa4ba07295af7fd38fe04913151a3ac22ddba2922",
+      "bytes": 11872
+    },
+    {
+      "path": "frontend/src/study-guidance.css",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "951f4566c6459afdf86ebe2acc97ca31642d414cb5981d9034e5cab05f27db96",
+      "bytes": 1738
+    },
+    {
+      "path": "frontend/src/useSelfAssessments.js",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "e78d803c4dbdc888673d4233c50dea8118067f24c17a212cd320e6c5b3c79b56",
+      "bytes": 9418
+    },
+    {
+      "path": "frontend/src/useStudyGuidance.js",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "d7e72d7739fc5d3639e4411d7a7166fea2ddda9b1f8da99bbc7b3dbe6726be27",
+      "bytes": 5405
+    },
+    {
+      "path": "scripts/verify_phase4a.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "82abe439a1a593af2bb7ad0927c5d868b04a5be54686e8c203638127ec838048",
+      "bytes": 17948
+    },
+    {
+      "path": "scripts/verify_phase4a_deployment.py",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "e88cbefa1e47b4af556c3bf56a6f1d1aad782a36fb76da9617c48e9378d404d6",
+      "bytes": 2735
+    },
+    {
+      "path": "data/evaluation/phase4a-files-v1.json",
+      "change": "added",
+      "after_sha256": null,
+      "note": "This manifest excludes its own hash to avoid a circular digest."
+    }
+  ],
+  "deployed_frontend_artifacts": [
+    {
+      "path": "frontend/dist/assets/index-BWsONBwC.js",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "947e8442f1753346fffa199697e9c3869c7357992dba0375009309dcd8b3222b",
+      "bytes": 598362
+    },
+    {
+      "path": "frontend/dist/assets/index-CaOrV89j.css",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "4805652c93bfb50f1923b6de0639349db1e55c8941db08f36b812dfebb3d8315",
+      "bytes": 70308
+    },
+    {
+      "path": "frontend/dist/assets/index-TPmUXQqx.js",
+      "change": "added",
+      "before_sha256": null,
+      "after_sha256": "293ff0377df3d16ffe18cfc317830c473518087bb02ee804f1f9f47b16ebc5c6",
+      "bytes": 598329
+    },
+    {
+      "path": "frontend/dist/index.html",
+      "change": "modified",
+      "before_sha256": "f92d5a8a0b8a653bae5be9aaa5214f277b59ec557098a26dece27c955672c527",
+      "after_sha256": "af6458bd90ec190cf6f4ecca7b9ce769f6d414e2d1843b7b5dde31b5eb801c74",
+      "bytes": 914
+    }
+  ],
+  "counts": {
+    "modified": 25,
+    "added": 30,
+    "deployed_artifacts_changed_or_added": 4
+  },
+  "excluded": [
+    ".env / credentials",
+    "data/local / private DBs, backups and scratch data",
+    "node_modules / Python caches",
+    "staging frontend builds"
+  ],
+  "checks": {
+    "changed_text_utf8_without_replacement_characters": true,
+    "changed_text_no_literal_api_key_pattern": true,
+    "changed_markdown_fences_balanced": true,
+    "phase4a_guide_local_links_exist": true,
+    "protected_files_and_original_data_unchanged": true
+  }
+}

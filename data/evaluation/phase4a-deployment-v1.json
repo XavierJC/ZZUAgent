@@ -1,0 +1,22 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "schema": 6,
+  "openapi_paths": 29,
+  "health_ok": true,
+  "assets": [
+    "/assets/index-BWsONBwC.js",
+    "/assets/index-CaOrV89j.css"
+  ],
+  "assets_http_ok": true,
+  "index_sha256": "af6458bd90ec190cf6f4ecca7b9ce769f6d414e2d1843b7b5dde31b5eb801c74",
+  "index_cache_control": "no-store",
+  "self_latest_and_guidance_read_ok": true,
+  "guide_history_read_ok": true,
+  "original_twelve_tables_equal": true,
+  "model_service": "DeepSeek",
+  "model": "deepseek-flash",
+  "model_enabled": true,
+  "real_model_calls": 0,
+  "production_learning_writes": 0,
+  "browser_manual_validation": "not_performed"
+}

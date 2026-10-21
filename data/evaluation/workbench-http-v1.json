@@ -1,0 +1,71 @@
+{
+  "verified_at": "2026-10-20T14:41:37.622961+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "course_only_scoped",
+      "passed": true
+    },
+    {
+      "name": "no_consent_zero_model_transmission",
+      "passed": true
+    },
+    {
+      "name": "personal_and_combined_scopes",
+      "passed": true
+    },
+    {
+      "name": "citation_snapshots_match_raw_positions",
+      "passed": true
+    },
+    {
+      "name": "empty_and_cross_student_denied",
+      "passed": true
+    },
+    {
+      "name": "model_scope_attack_rejected",
+      "passed": true
+    },
+    {
+      "name": "timeout_receipt_no_paid_retry",
+      "passed": true
+    },
+    {
+      "name": "inflight_duplicate_and_revision_race",
+      "passed": true
+    },
+    {
+      "name": "save_note_concurrent_idempotency_edit_and_index",
+      "passed": true
+    },
+    {
+      "name": "deleted_sources_excluded_history_snapshot_retained",
+      "passed": true
+    },
+    {
+      "name": "workbench_and_save_preserve_bkt_and_legacy_history",
+      "passed": true
+    },
+    {
+      "name": "restart_history_replay_and_no_key_local_retrieval",
+      "passed": true
+    },
+    {
+      "name": "legacy_course_retrieval_compatible",
+      "passed": true
+    },
+    {
+      "name": "legacy_score_bkt_history_http_regression",
+      "passed": true
+    }
+  ],
+  "server_starts": 2,
+  "model_kind": "simulated",
+  "simulated_model_calls": 6,
+  "real_model_calls": 0,
+  "test_directory": "D:\\ZZUAgent\\data\\local\\workbench-http-529e4b78",
+  "schema": 5,
+  "production_learning_writes": 0,
+  "browser_validation": "not_performed",
+  "notes": "HTTP sockets and real SQLite; provider replaced only by this test executable."
+}

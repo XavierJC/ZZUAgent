@@ -1,0 +1,38 @@
+{
+  "from_version": 2,
+  "to_version": 3,
+  "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v2-4058e3fc7d1e.sqlite3",
+  "changed": true,
+  "learning_facts_verified": true,
+  "facts": {
+    "metadata": {
+      "rows": 1,
+      "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+    },
+    "students": {
+      "rows": 8,
+      "sha256": "f471bd8d9d584f5d3d4bb4528998e3a38848851f4f136c6c97d1590929410e9a"
+    },
+    "mastery": {
+      "rows": 10,
+      "sha256": "51cf8f88c1cc682eda10e76b9d6e2c65aa15ba8bf9ffcf2656455881fb07afaf"
+    },
+    "decisions": {
+      "rows": 26,
+      "sha256": "5eae115c2fb1f6420bcfaf992e979df89dcdfe51080e14f185db3431392ba23f"
+    },
+    "attempts": {
+      "rows": 18,
+      "sha256": "be42fed7ba439668d353b4d248ae339a56c5f72687251e8eed51464e2c17ebe7"
+    },
+    "tutor_runs": {
+      "rows": 4,
+      "sha256": "f5c305f19a9c719807af117f8d1d7226d79e4e692b05ceee31e302a0a25f76f2"
+    }
+  },
+  "date": "2026-10-20",
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "code_archive": "data/local/phase2-prechange-85d644af.zip",
+  "notes_count": 0
+}

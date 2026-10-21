@@ -1,0 +1,11 @@
+{
+  "version": "ml-notes-draft-v1",
+  "description": "EduAgent 自建课程说明草稿；用于工程演示，均待负责人人工审阅；未复制第三方课程原文。",
+  "documents": [
+    {"id":"linear","knowledge_id":"linear_regression_loss","file":"linear_regression.md","title":"线性回归与损失函数","review_status":"pending","license":"EduAgent 自建项目资料，可用于本项目演示"},
+    {"id":"gradient","knowledge_id":"gradient_descent","file":"gradient_descent.md","title":"梯度下降","review_status":"pending","license":"EduAgent 自建项目资料，可用于本项目演示"},
+    {"id":"logistic","knowledge_id":"logistic_regression","file":"logistic_regression.md","title":"逻辑回归","review_status":"pending","license":"EduAgent 自建项目资料，可用于本项目演示"},
+    {"id":"regularization","knowledge_id":"overfitting_regularization","file":"regularization.md","title":"过拟合与正则化","review_status":"pending","license":"EduAgent 自建项目资料，可用于本项目演示"},
+    {"id":"evaluation","knowledge_id":"model_evaluation","file":"model_evaluation.md","title":"模型评估","review_status":"pending","license":"EduAgent 自建项目资料，可用于本项目演示"}
+  ]
+}

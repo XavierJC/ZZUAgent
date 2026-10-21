@@ -1,0 +1,52 @@
+{
+  "version": "0.4.1",
+  "synthetic_data": true,
+  "new_model_requests": 0,
+  "learning_effect_measured": false,
+  "success": {
+    "student_id": "verify-success-f5cdd7ea",
+    "revision": 6,
+    "steps": [
+      {
+        "question_id": "lr_01",
+        "action": "diagnose",
+        "mastery": 0.5263157894736843
+      },
+      {
+        "question_id": "lr_02",
+        "action": "practice",
+        "mastery": 0.8200000000000001
+      },
+      {
+        "question_id": "gd_01",
+        "action": "advance",
+        "mastery": 0.5263157894736843
+      },
+      {
+        "question_id": "gd_02",
+        "action": "practice",
+        "mastery": 0.8200000000000001
+      },
+      {
+        "question_id": "log_01",
+        "action": "advance",
+        "mastery": 0.5263157894736843
+      },
+      {
+        "question_id": "log_02",
+        "action": "practice",
+        "mastery": 0.8200000000000001
+      }
+    ],
+    "terminal_action": "finish"
+  },
+  "review": {
+    "student_id": "verify-review-f5cdd7ea",
+    "wrong_answer_mastery": 0.12903225806451613,
+    "local_feedback_reason": "insufficient_evidence",
+    "mastery_unchanged_by_question": true,
+    "terminal_action": "stopped",
+    "stop_reason": "insufficient_questions",
+    "saved_history_count": 2
+  }
+}

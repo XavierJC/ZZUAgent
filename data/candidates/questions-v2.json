@@ -1,0 +1,686 @@
+{
+  "version": "ml-questions-p3-v2-candidate",
+  "notes": "40 道自建候选题（原 10 题保持原样，新增 30 题）。全部 pending；未启用为当前服务题库，需负责人逐题审阅。",
+  "questions": [
+    {
+      "id": "lr_01",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "easy",
+      "stem": "两条样本的真实值为 [1, 3]，预测值为 [2, 1]。按 MSE=(1/n)Σ(y-ŷ)² 定义，均方误差是多少？",
+      "options": {
+        "A": "1.5",
+        "B": "2.5",
+        "C": "5",
+        "D": "0.5"
+      },
+      "answer": "B",
+      "explanation": "两条样本的平方误差分别是 1 和 4，MSE=(1+4)/2=2.5。",
+      "source": "EduAgent 自建题；依据题干给定的 MSE 定义",
+      "review_status": "pending"
+    },
+    {
+      "id": "lr_02",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "medium",
+      "stem": "标量线性模型 ŷ=wx，无偏置，单样本 x=2、y=3，损失 L=(wx-y)²。w=1 时，dL/dw 等于多少？",
+      "options": {
+        "A": "-4",
+        "B": "-2",
+        "C": "2",
+        "D": "4"
+      },
+      "answer": "A",
+      "explanation": "dL/dw=2(wx-y)x，代入得到 2×(2-3)×2=-4。",
+      "source": "EduAgent 自建题；依据平方损失与链式法则",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_01",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "easy",
+      "stem": "当前标量参数 w=2，损失梯度 dL/dw=3，学习率 η=0.1。一次标准梯度下降后 w 为多少？",
+      "options": {
+        "A": "2.3",
+        "B": "0.3",
+        "C": "1.7",
+        "D": "1.9"
+      },
+      "answer": "C",
+      "explanation": "梯度下降更新 w_new=w-η·dL/dw=2-0.1×3=1.7。",
+      "source": "EduAgent 自建题；依据梯度下降更新公式",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_02",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "medium",
+      "stem": "对 L(w)=w²/2 使用固定学习率梯度下降，w0≠0。下列哪个学习率范围可使 w_t 收敛到 0？",
+      "options": {
+        "A": "η<0",
+        "B": "η=0",
+        "C": "η>2",
+        "D": "0<η<2"
+      },
+      "answer": "D",
+      "explanation": "更新为 w_(t+1)=(1-η)w_t，收敛要求 |1-η|<1，即 0<η<2。",
+      "source": "EduAgent 自建题；依据题设递推式的收敛条件",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_01",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "easy",
+      "stem": "二分类逻辑回归采用 p=σ(z)=1/(1+e^(-z))。当 z=0 时，预测正类概率为多少？",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "0.5",
+        "D": "无法确定"
+      },
+      "answer": "C",
+      "explanation": "e^0=1，所以 σ(0)=1/(1+1)=0.5。",
+      "source": "EduAgent 自建题；依据 sigmoid 定义",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_02",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "medium",
+      "stem": "二元交叉熵 L=-[y ln(p)+(1-y)ln(1-p)]。当 y=1 时，哪个预测正类概率对应的损失最小？",
+      "options": {
+        "A": "0.1",
+        "B": "0.4",
+        "C": "0.6",
+        "D": "0.9"
+      },
+      "answer": "D",
+      "explanation": "y=1 时 L=-ln(p)，p 越大损失越小，因此选择 0.9。",
+      "source": "EduAgent 自建题；依据题干二元交叉熵定义",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_01",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "easy",
+      "stem": "同分布且合理划分的数据中，模型训练误差持续下降，验证误差先下降后明显上升。这通常提示什么？",
+      "options": {
+        "A": "过拟合",
+        "B": "欠拟合一定加重",
+        "C": "测试集可直接用于训练",
+        "D": "验证集已不再需要"
+      },
+      "answer": "A",
+      "explanation": "训练误差改善而验证误差恶化，通常说明模型开始拟合训练数据中的噪声，泛化变差。",
+      "source": "EduAgent 自建题；训练与验证误差的基础诊断情景",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_02",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "medium",
+      "stem": "目标函数为 J(w)=L(w)+(λ/2)Σw_j²，λ≥0。正则项对 w_j 的梯度贡献是什么？",
+      "options": {
+        "A": "λ/2",
+        "B": "λw_j",
+        "C": "w_j²",
+        "D": "-λw_j"
+      },
+      "answer": "B",
+      "explanation": "对 (λ/2)w_j² 求导得到 λw_j。",
+      "source": "EduAgent 自建题；依据 L2 正则项求导",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_01",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "easy",
+      "stem": "在没有嵌套交叉验证等额外设置时，以下哪种做法符合独立测试集的用途？",
+      "options": {
+        "A": "反复根据测试集结果选择超参数",
+        "B": "将测试集标签加入训练",
+        "C": "用测试集替代验证集调参",
+        "D": "模型和超参数确定后，用测试集评估泛化表现"
+      },
+      "answer": "D",
+      "explanation": "独立测试集用于最终评估；反复据此调参会使评估产生选择偏差。",
+      "source": "EduAgent 自建题；训练、验证与独立测试集的分工",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_02",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "medium",
+      "stem": "二分类任务中 TP=8、FP=2、FN=4，正类精确率 Precision=TP/(TP+FP) 是多少？",
+      "options": {
+        "A": "2/3",
+        "B": "0.5",
+        "C": "0.8",
+        "D": "4/7"
+      },
+      "answer": "C",
+      "explanation": "Precision=8/(8+2)=0.8；8/(8+4)=2/3 是召回率。",
+      "source": "EduAgent 自建题；依据精确率定义",
+      "review_status": "pending"
+    },
+    {
+      "id": "lr_03",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "easy",
+      "stem": "线性回归模型 ŷ=2x+1。当 x=3 时，预测值是多少？",
+      "options": {
+        "A": "5",
+        "B": "6",
+        "C": "7",
+        "D": "8"
+      },
+      "answer": "C",
+      "explanation": "代入模型得到 ŷ=2×3+1=7。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "lr_04",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "easy",
+      "stem": "两条样本的残差定义为 e=ŷ-y，分别为 -1 和 1。残差平均值与 MSE=(1/n)Σe² 分别是多少？",
+      "options": {
+        "A": "0 和 0",
+        "B": "1 和 1",
+        "C": "1 和 0",
+        "D": "0 和 1"
+      },
+      "answer": "D",
+      "explanation": "残差平均为 (-1+1)/2=0，但 MSE=(1+1)/2=1；正负抵消不表示预测准确。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "lr_05",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "medium",
+      "stem": "n=2，两条样本残差为 2 和 -2。目标函数 J=(1/(2n))Σ(ŷ-y)² 的值是多少？",
+      "options": {
+        "A": "2",
+        "B": "4",
+        "C": "8",
+        "D": "1"
+      },
+      "answer": "A",
+      "explanation": "平方误差总和为 4+4=8；J=8/(2×2)=2，需保留题干给定的 1/2 系数。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "lr_06",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "medium",
+      "stem": "仅含常数预测 b 的模型，用三条标签 [1,2,6] 最小化 MSE=(1/3)Σ(b-y)²。最优 b 是多少？",
+      "options": {
+        "A": "2",
+        "B": "3",
+        "C": "4.5",
+        "D": "6"
+      },
+      "answer": "B",
+      "explanation": "令导数 (2/3)Σ(b-y)=0，得到 b=(1+2+6)/3=3；平方损失的常数最优解是样本均值。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "lr_07",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "hard",
+      "stem": "线性模型 ŷ_i=wx_i+b，n=2，当前预测为 [1,3]，标签为 [2,1]。对 J=(1/(2n))Σ(ŷ_i-y_i)²，∂J/∂b 等于多少？",
+      "options": {
+        "A": "1",
+        "B": "-0.5",
+        "C": "2",
+        "D": "0.5"
+      },
+      "answer": "D",
+      "explanation": "对偏置求导为 (1/n)Σ(ŷ_i-y_i)，两条残差为 -1 和 2，因此导数为 (-1+2)/2=0.5。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "lr_08",
+      "version": "1",
+      "knowledge_id": "linear_regression_loss",
+      "difficulty": "hard",
+      "stem": "无偏置模型 ŷ=w₁x₁+w₂x₂，当前 w=(1,-1)，样本 x=(2,1)、y=4，损失 L=(1/2)(ŷ-y)²。梯度 (∂L/∂w₁,∂L/∂w₂) 是多少？",
+      "options": {
+        "A": "(-3,-3)",
+        "B": "(6,3)",
+        "C": "(-6,-3)",
+        "D": "(-12,-6)"
+      },
+      "answer": "C",
+      "explanation": "预测为 1，残差为 -3；梯度为 (ŷ-y)x=(-3)×(2,1)=(-6,-3)。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_03",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "easy",
+      "stem": "标量参数 w=1，当前梯度为 -4，学习率 η=0.25。一次 w_new=w-η·梯度 更新后 w 是多少？",
+      "options": {
+        "A": "0",
+        "B": "2",
+        "C": "-3",
+        "D": "1.25"
+      },
+      "answer": "B",
+      "explanation": "w_new=1-0.25×(-4)=2。负梯度意味着本次参数向增大的方向移动。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_04",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "easy",
+      "stem": "以下哪一项描述了批量梯度下降（batch gradient descent）每一步使用的数据？",
+      "options": {
+        "A": "整个训练集",
+        "B": "仅一个随机样本",
+        "C": "固定只使用验证集",
+        "D": "只使用测试集"
+      },
+      "answer": "A",
+      "explanation": "批量梯度下降以整个训练集计算每一步梯度；单样本和小批量方法使用的数据量不同。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_05",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "medium",
+      "stem": "对 L(w)=w²/2，w₀=4、η=0.5，使用标准梯度下降连续更新两次后 w₂ 是多少？",
+      "options": {
+        "A": "0",
+        "B": "2",
+        "C": "1",
+        "D": "4"
+      },
+      "answer": "C",
+      "explanation": "梯度为 w，更新为 w_(t+1)=0.5w_t；w₁=2，w₂=1。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_06",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "medium",
+      "stem": "对 L(w)=w²/2，w₀=1、η=3。一次梯度下降后，参数值及其绝对值变化是什么？",
+      "options": {
+        "A": "w₁=0，绝对值变小",
+        "B": "w₁=2，绝对值变大",
+        "C": "w₁=-1，绝对值不变",
+        "D": "w₁=-2，绝对值变大"
+      },
+      "answer": "D",
+      "explanation": "w₁=(1-3)×1=-2，绝对值从 1 增至 2。该二次函数在 η=3 时固定步长迭代会发散。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_07",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "hard",
+      "stem": "对 L(w₁,w₂)=(1/2)(w₁²+4w₂²)，使用正的固定学习率 η。要求任意初始点都收敛到原点，η 的范围应是什么？",
+      "options": {
+        "A": "0<η<0.5",
+        "B": "0<η<2",
+        "C": "η=0.5",
+        "D": "η>2"
+      },
+      "answer": "A",
+      "explanation": "两个坐标分别乘以 1-η 和 1-4η。两者绝对值均小于 1，要求 0<η<2 且 0<η<0.5，交集为 0<η<0.5。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "gd_08",
+      "version": "1",
+      "knowledge_id": "gradient_descent",
+      "difficulty": "hard",
+      "stem": "三条样本在当前标量参数处的梯度分别为 2、-1、5。以三者的平均值作小批量梯度，w=3、η=0.2。一次更新后 w 是多少？",
+      "options": {
+        "A": "1.8",
+        "B": "2.6",
+        "C": "3.4",
+        "D": "2.8"
+      },
+      "answer": "B",
+      "explanation": "平均梯度为 (2-1+5)/3=2，所以 w_new=3-0.2×2=2.6；不能把求和梯度和平均梯度混用。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_03",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "easy",
+      "stem": "逻辑回归输出正类概率 p=0.65，分类规则为 p≥0.7 时预测正类 1，否则预测负类 0。预测类别是什么？",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "0.65",
+        "D": "0.7"
+      },
+      "answer": "A",
+      "explanation": "0.65 小于阈值 0.7，因此类别为 0。概率和离散类别是不同的输出。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_04",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "easy",
+      "stem": "对 sigmoid(z)=1/(1+e^(-z))，当 z=-ln(3) 时，正类概率是多少？",
+      "options": {
+        "A": "0.75",
+        "B": "0.25",
+        "C": "0.5",
+        "D": "3"
+      },
+      "answer": "B",
+      "explanation": "e^(-z)=e^(ln 3)=3，因此 sigmoid(z)=1/(1+3)=0.25。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_05",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "medium",
+      "stem": "二元交叉熵 L=-[y ln(p)+(1-y)ln(1-p)]。当 y=0、p=0.2 时，L 等于哪一项？",
+      "options": {
+        "A": "-ln(0.2)",
+        "B": "ln(0.8)",
+        "C": "-ln(0.8)",
+        "D": "0.2"
+      },
+      "answer": "C",
+      "explanation": "y=0 时只保留 -ln(1-p)，代入 p=0.2 后得到 -ln(0.8)，约为 0.2231。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_06",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "medium",
+      "stem": "逻辑回归中 p=σ(z)，odds 定义为 p/(1-p)。当 z=ln(4) 时，odds 为多少？",
+      "options": {
+        "A": "0.25",
+        "B": "0.8",
+        "C": "1.25",
+        "D": "4"
+      },
+      "answer": "D",
+      "explanation": "sigmoid 对应 odds=e^z。z=ln(4) 时 odds=4，且 p=4/5=0.8；odds 不是概率。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_07",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "hard",
+      "stem": "单样本逻辑回归，p=σ(z)，损失为二元交叉熵且不加正则项。当前 y=1、p=0.8，∂L/∂z 是多少？",
+      "options": {
+        "A": "-0.2",
+        "B": "0.2",
+        "C": "-1.25",
+        "D": "0.8"
+      },
+      "answer": "A",
+      "explanation": "由链式法则，∂L/∂p=-1/p，∂p/∂z=p(1-p)，相乘得到 p-1=-0.2。一般形式为 p-y。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "log_08",
+      "version": "1",
+      "knowledge_id": "logistic_regression",
+      "difficulty": "hard",
+      "stem": "未作非线性特征变换的逻辑回归 z=2x₁-x₂+1，p=σ(z)。以概率阈值 0.5 分类，其决策边界是哪一项？",
+      "options": {
+        "A": "2x₁-x₂+1=0.5",
+        "B": "2x₁-x₂+1=0",
+        "C": "x₁²+x₂²=1",
+        "D": "所有样本都预测为正类"
+      },
+      "answer": "B",
+      "explanation": "sigmoid 严格单调且 σ(0)=0.5，因此边界 p=0.5 等价于 z=0，即 2x₁-x₂+1=0。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_03",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "easy",
+      "stem": "目标 J(w)=L(w)+(λ/2)Σw_j²。当 λ=0 时，下列描述正确的是哪一项？",
+      "options": {
+        "A": "所有参数必须为 0",
+        "B": "只剩正则项",
+        "C": "目标等于原损失 L(w)",
+        "D": "一定无法训练"
+      },
+      "answer": "C",
+      "explanation": "λ=0 时正则项为 0，J(w)=L(w)；不意味着参数被强制清零或训练无法进行。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_04",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "easy",
+      "stem": "采用早停选择训练停止时机时，通常应依据哪一项？",
+      "options": {
+        "A": "反复查询独立测试集结果",
+        "B": "训练误差必须下降到 0",
+        "C": "固定保证训练满最大轮数",
+        "D": "验证集表现及预设的停止规则"
+      },
+      "answer": "D",
+      "explanation": "早停依据验证表现和预先设定的规则选择时机；独立测试集应留给最终评估。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_05",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "medium",
+      "stem": "L2 正则项 R(w)=(λ/2)(w₁²+w₂²)，λ=0.2、w=(3,4)。R(w) 等于多少？",
+      "options": {
+        "A": "5",
+        "B": "2.5",
+        "C": "25",
+        "D": "0.5"
+      },
+      "answer": "B",
+      "explanation": "R=(0.2/2)×(3²+4²)=0.1×25=2.5。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_06",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "medium",
+      "stem": "标量目标 J(w)=L(w)+(λ/2)w²，当前 w=2、dL/dw=3、λ=0.5、η=0.1。按 J 做一次梯度下降后 w 是多少？",
+      "options": {
+        "A": "1.6",
+        "B": "1.7",
+        "C": "1.9",
+        "D": "2.4"
+      },
+      "answer": "A",
+      "explanation": "总梯度为 3+0.5×2=4，更新 w_new=2-0.1×4=1.6。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_07",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "hard",
+      "stem": "无偏置岭回归 J(w)=(1/2)||Xw-y||²+(λ/2)||w||²，已知 XᵀX=I、Xᵀy=(4,2)ᵀ、λ=1。最优 w 是多少？",
+      "options": {
+        "A": "(4,2)ᵀ",
+        "B": "(1,0.5)ᵀ",
+        "C": "(2,1)ᵀ",
+        "D": "(0,0)ᵀ"
+      },
+      "answer": "C",
+      "explanation": "一阶条件为 (XᵀX+λI)w=Xᵀy。代入得 2Iw=(4,2)ᵀ，所以 w=(2,1)ᵀ。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "reg_08",
+      "version": "1",
+      "knowledge_id": "overfitting_regularization",
+      "difficulty": "hard",
+      "stem": "对已经训练好的模型，计划增大 L2 正则强度并重新拟合。下列对未知测试数据表现的判断，哪一项最严谨？",
+      "options": {
+        "A": "准确率必然提高",
+        "B": "所有权重必然精确等于 0",
+        "C": "只要训练损失变大就证明泛化改善",
+        "D": "需以合理验证选择强度，无法保证未知测试表现一定改善"
+      },
+      "answer": "D",
+      "explanation": "正则化改变优化目标，可能降低过拟合，也可能增加欠拟合；应通过合理验证选择强度，不能预先承诺测试表现一定改善。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_03",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "easy",
+      "stem": "测试集有 90 个负类、10 个正类。模型全部预测为负类，则准确率和正类召回率分别是多少？",
+      "options": {
+        "A": "90% 和 0",
+        "B": "100% 和 0",
+        "C": "90% 和 100%",
+        "D": "10% 和 0"
+      },
+      "answer": "A",
+      "explanation": "90 个负类预测正确，准确率为 90/100=90%；TP=0、FN=10，正类召回率为 0，说明准确率可能掩盖少数类错误。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_04",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "easy",
+      "stem": "二分类 TP=6、FN=4。按 Recall=TP/(TP+FN) 定义，正类召回率是多少？",
+      "options": {
+        "A": "0.4",
+        "B": "0.6",
+        "C": "1.5",
+        "D": "0.24"
+      },
+      "answer": "B",
+      "explanation": "Recall=6/(6+4)=0.6，分母表示全部真实正类样本数。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_05",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "medium",
+      "stem": "已知 Precision=0.75、Recall=0.5。按 F1=2PR/(P+R) 定义，F1 为多少？",
+      "options": {
+        "A": "0.625",
+        "B": "0.75",
+        "C": "0.5",
+        "D": "0.6"
+      },
+      "answer": "D",
+      "explanation": "F1=2×0.75×0.5/(0.75+0.5)=0.75/1.25=0.6。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_06",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "medium",
+      "stem": "二分类混淆矩阵 TP=8、FP=2、FN=4、TN=6。准确率 Accuracy=(TP+TN)/(TP+FP+FN+TN) 是多少？",
+      "options": {
+        "A": "0.8",
+        "B": "2/3",
+        "C": "0.7",
+        "D": "0.6"
+      },
+      "answer": "C",
+      "explanation": "预测正确数为 8+6=14，总样本数为 8+2+4+6=20，准确率为 14/20=0.7。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_07",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "hard",
+      "stem": "做 K 折交叉验证并对特征标准化时，哪一种流程能避免验证折信息泄漏到训练预处理？",
+      "options": {
+        "A": "每折仅用该折训练部分拟合标准化参数，再变换训练与验证部分",
+        "B": "先用全部数据拟合标准化，再切分各折",
+        "C": "每折用验证部分的均值标准化训练部分",
+        "D": "把测试标签加入标准化计算"
+      },
+      "answer": "A",
+      "explanation": "每折的均值、方差等预处理参数仅从该折训练部分估计，再应用到验证部分。先在全数据拟合会让验证信息参与训练预处理。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    },
+    {
+      "id": "eval_08",
+      "version": "1",
+      "knowledge_id": "model_evaluation",
+      "difficulty": "hard",
+      "stem": "模型没有预测任何正类样本，即 TP=0、FP=0。关于 Precision=TP/(TP+FP) 的报告，下列哪项正确？",
+      "options": {
+        "A": "精确率必然为 1",
+        "B": "分母为 0，需声明采用的未定义值处理约定",
+        "C": "精确率必然为 0.5",
+        "D": "可以隐瞒这个指标而宣称全部预测正确"
+      },
+      "answer": "B",
+      "explanation": "原公式为 0/0，数学上未定义。软件可按明确约定返回 0、缺失值等，但报告中应说明约定及没有正类预测的事实。",
+      "source": "EduAgent 自建候选题；依据题干定义及基础数学推导，未复制第三方题目",
+      "review_status": "pending"
+    }
+  ]
+}

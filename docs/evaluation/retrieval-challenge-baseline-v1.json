@@ -1,0 +1,407 @@
+{
+  "dataset_version": "retrieval-challenge-v1",
+  "split": "development",
+  "review_status": "pending",
+  "positive_cases": 10,
+  "negative_cases": 15,
+  "metrics": {
+    "hit_at_1": 0.9,
+    "hit_at_3": 1.0,
+    "mrr_at_3": 0.95,
+    "negative_empty_rate": 0.4666666666666667
+  },
+  "model_requests": 0,
+  "cases": [
+    {
+      "id": "positive-lr-1",
+      "query": "误差先平方再平均，为何对特别大的误差更敏感？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "linear:2"
+      ],
+      "retrieved_citation_ids": [
+        "linear:2",
+        "linear:1",
+        "regularization:1"
+      ],
+      "scores": [
+        0.4052189588546753,
+        0.18165794014930725,
+        0.12428729236125946
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-lr-2",
+      "query": "y_hat=w*x 无偏置时，平方损失的梯度公式怎么推导？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "linear:3"
+      ],
+      "retrieved_citation_ids": [
+        "linear:3",
+        "linear:1",
+        "gradient:1"
+      ],
+      "scores": [
+        0.38265174627304077,
+        0.18340840935707092,
+        0.155528724193573
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-gd-1",
+      "query": "整个训练集算梯度与每次抽一个样本有什么差别？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "gradient:3"
+      ],
+      "retrieved_citation_ids": [
+        "gradient:3",
+        "evaluation:1",
+        "regularization:1"
+      ],
+      "scores": [
+        0.3997665047645569,
+        0.15085828304290771,
+        0.12710343301296234
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-gd-2",
+      "query": "对 L(w)=w^2/2 取 eta=2，为何会来回振荡？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "gradient:2"
+      ],
+      "retrieved_citation_ids": [
+        "gradient:2"
+      ],
+      "scores": [
+        0.25768691301345825
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-log-1",
+      "query": "sigmoid(0) 的值是多少？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "logistic:1"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:2",
+        "logistic:1"
+      ],
+      "scores": [
+        0.1673927754163742,
+        0.14926546812057495
+      ],
+      "first_relevant_rank": 2,
+      "passed": true
+    },
+    {
+      "id": "positive-log-2",
+      "query": "log-odds 为什么是特征的线性函数？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "logistic:3"
+      ],
+      "retrieved_citation_ids": [
+        "logistic:3",
+        "linear:1"
+      ],
+      "scores": [
+        0.36909788846969604,
+        0.2609056830406189
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-reg-1",
+      "query": "训练误差在变好而验证误差变差，是过拟合吗？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "regularization:1"
+      ],
+      "retrieved_citation_ids": [
+        "regularization:1",
+        "evaluation:1",
+        "regularization:3"
+      ],
+      "scores": [
+        0.42163026332855225,
+        0.17225569486618042,
+        0.17139188945293427
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-reg-2",
+      "query": "正则梯度中 lambda*w_j 这一项从哪里来？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "regularization:2"
+      ],
+      "retrieved_citation_ids": [
+        "regularization:2",
+        "gradient:2"
+      ],
+      "scores": [
+        0.298870712518692,
+        0.1314740777015686
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-eval-1",
+      "query": "用测试集参与超参数搜索，会对最终评估产生什么影响？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "evaluation:1"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:1",
+        "gradient:3"
+      ],
+      "scores": [
+        0.36994096636772156,
+        0.13706135749816895
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "positive-eval-2",
+      "query": "没有预测出任何正类时，该怎样报告 precision？",
+      "knowledge_id": null,
+      "expected_citation_ids": [
+        "evaluation:2"
+      ],
+      "retrieved_citation_ids": [
+        "evaluation:2",
+        "regularization:3"
+      ],
+      "scores": [
+        0.25677651166915894,
+        0.15746860206127167
+      ],
+      "first_relevant_rank": 1,
+      "passed": true
+    },
+    {
+      "id": "negative-1",
+      "query": "宿舍热水卡在哪里充值？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-2",
+      "query": "餐厅买饭需要下载什么 App？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-3",
+      "query": "校内 AI 比赛的报名地点在哪里？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-4",
+      "query": "这门课程选课学分可以转到其他专业吗？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "evaluation:3"
+      ],
+      "scores": [
+        0.16224661469459534
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-5",
+      "query": "图书馆借书证丢了怎么补办？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-6",
+      "query": "放假回家坐哪一班公交车最方便？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-7",
+      "query": "学校模型社团下次报名是什么时候？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "gradient:2"
+      ],
+      "scores": [
+        0.13475024700164795
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-8",
+      "query": "机器学习课程的 QQ 群号是多少？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "evaluation:3",
+        "evaluation:2",
+        "gradient:2"
+      ],
+      "scores": [
+        0.2015661895275116,
+        0.13382145762443542,
+        0.12088153511285782
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-9",
+      "query": "逻辑回归作业提交到哪个邮箱？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "logistic:3",
+        "logistic:1",
+        "logistic:2"
+      ],
+      "scores": [
+        0.23066003620624542,
+        0.20772406458854675,
+        0.15672041475772858
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-10",
+      "query": "梯度下降课程的考试时间安排是什么？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "gradient:1",
+        "gradient:3",
+        "gradient:2"
+      ],
+      "scores": [
+        0.23410636186599731,
+        0.21335062384605408,
+        0.1505495309829712
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-11",
+      "query": "模型评估教材在哪个书店可以买？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "evaluation:1",
+        "linear:2"
+      ],
+      "scores": [
+        0.1522613763809204,
+        0.1264229416847229
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-12",
+      "query": "训练模型需要的 GPU 现在多少钱？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "evaluation:2",
+        "regularization:1",
+        "evaluation:1"
+      ],
+      "scores": [
+        0.21124346554279327,
+        0.17046862840652466,
+        0.14617234468460083
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-13",
+      "query": "端午节食堂营业到几点？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [
+        "gradient:2"
+      ],
+      "scores": [
+        0.12177883833646774
+      ],
+      "first_relevant_rank": null,
+      "passed": false
+    },
+    {
+      "id": "negative-14",
+      "query": "明天郑州是否降温，穿什么衣服？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    },
+    {
+      "id": "negative-15",
+      "query": "怎样制作一杯好喝的冰拿铁？",
+      "knowledge_id": null,
+      "expected_citation_ids": [],
+      "retrieved_citation_ids": [],
+      "scores": [],
+      "first_relevant_rank": null,
+      "passed": true
+    }
+  ],
+  "corpus_fingerprint": "096c19f27907bf1d46e51f44382df73c10e6b24d2e520004158fb690ad70355d",
+  "dataset_fingerprint": "6bec353edbdae78b84e67517ed080c0993706b8d139ca55af08c3b3180701c71",
+  "passage_count": 15,
+  "top_k": 3,
+  "algorithm": "FAISS + normalized TF-IDF; minimum cosine score 0.12"
+}
