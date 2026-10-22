@@ -10,6 +10,10 @@
 
 ## 当前状态
 
+2026-10-22用户随后授权开启**DeepSeek PDF手动选页识别**。入口已启用，仍需每轮选择页码并勾选外发同意才会发送并计费；本次启用没有模型请求，真实视觉兼容性和质量尚未实测。下方“视觉关闭”为阶段交付时的历史状态。
+
+**当前新增阶段：Phase4B-2课程知识体系已交付。** 「资料学习工作台 → 课程知识体系」支持章节树/概念/关系编辑、课件规则候选预览、确认发布与历史、正式知识点学情只读关联。**501项后端、131项前端、64组隔离HTTP及构建通过**；schema8/27表，原21表与资料文件保持。本轮真实模型0次，视觉仍关闭。现存3页PDF保留为未分类，没有强行构建；真实内容和浏览器人工待验收。[4B-2指南](docs/PHASE4B2_GUIDE.md)含使用、API、迁移/回滚及限制。课件解析保持，4B-3映射/RAG扩展未实施；以下为阶段历史。
+
 Phase4A于 **2026-10-21** 交付时，**版本清单仍为0.4.1，后端355项、前端101项测试与构建通过**；自评、主客观对照、确定性建议、受控学习指南与历史已部署，现用库已备份迁至schema6。浏览器人工验收、真实模型预算与教学效果仍待完成；总结/卡片、教材/图片及下一阶段未实施。
 
 其后经单独授权完成[工作台问答修复](docs/WORKBENCH_ANSWER_FIX.md)，当前**后端382项、前端103项**与构建通过。仍先检索再交给模型；无匹配片段时发送问题并标注模型自身知识，改进格式兼容与具体错误提示。7组修复HTTP和18组4A回归通过，本次真实模型请求0次；schema6与学习数据保持。
@@ -41,7 +45,7 @@ Phase4A于 **2026-10-21** 交付时，**版本清单仍为0.4.1，后端355项�
 .\.venv\Scripts\python.exe -m uvicorn eduagent.api.app:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
-当前电脑已构建前端，启动后打开 [学习页面](http://127.0.0.1:8000/)，创建或恢复学习标识即可使用。答题后查看反馈并继续；显式发送助教问题且本地找到候选依据时，才会进入模型流程，刷新只读取已保存记录。[接口文档](http://127.0.0.1:8000/docs) 继续提供 API 调试。运行见 [Web 说明](docs/WEB_GUIDE.md)，演示路径见 [演示脚本](docs/DEMO_SCRIPT.md)。
+当前电脑已构建前端，启动后打开 [学习页面](http://127.0.0.1:8000/)，创建或恢复学习标识即可使用。答题后查看反馈并继续；资料工作台选择模型并显式提问后，先检索再结合模型生成，未命中部分标注模型知识，个人片段外发仍逐轮同意；刷新只读已保存记录。[接口文档](http://127.0.0.1:8000/docs) 提供API调试。运行见[Web说明](docs/WEB_GUIDE.md)，课件入口见[4B-1指南](docs/PHASE4B1_GUIDE.md)。
 
 后端进程必须持续运行，打开链接不会自动启动服务。若浏览器显示 `ERR_CONNECTION_REFUSED`，先执行上方启动命令，并保持该终端运行；按 Ctrl+C 或关闭运行终端后，地址将无法访问。
 
@@ -49,7 +53,7 @@ Phase4A于 **2026-10-21** 交付时，**版本清单仍为0.4.1，后端355项�
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e './backend[api,dev,agent]'
+.\.venv\Scripts\python.exe -m pip install -e './backend[api,dev,agent,documents]'
 .\.venv\Scripts\python.exe -m pytest backend/tests -c backend/pyproject.toml -q
 
 # 前端需要 Node 22（至少 22.12）；安装使用已有锁文件
@@ -83,7 +87,7 @@ python -m eduagent --student learner-01 --status
 .\.venv\Scripts\python.exe -m pytest backend/tests -c backend/pyproject.toml -q
 ```
 
-默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。已支持旧schema升级至4，仅扩展笔记/索引结构，不合并不同教学配置；迁移前停写并备份，见个人检索说明。题目不足会明确停止，不重复答题凑掌握度。
+默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。当前schema8，旧库须停写、备份并显式运行迁移入口，普通API启动拒绝版本不兼容，见[迁移与回滚](docs/PHASE4B2_GUIDE.md)。题目不足会明确停止，不重复答题凑掌握度。
 
 若仅测试无需 HTTP/Agent 的离线核心，可运行 `python -m pytest backend/tests/test_bkt.py backend/tests/test_catalog.py backend/tests/test_learning.py backend/tests/test_cli.py -c backend/pyproject.toml -q`（65 项）。详细机制见 [第一阶段说明](docs/PHASE1_GUIDE.md)。
 
@@ -102,6 +106,10 @@ python -m eduagent --student learner-01 --status
 第一阶段的规则闭环已接入模型工具调用、带来源讲解和 Web 页面。Web 工程已完成基础测试；浏览器人工操作、可视检查与教学内容验收仍待完成，见 [开发计划](docs/DEVELOPMENT_PLAN.md)。
 
 ## 文档与官方资料
+
+- [课程知识体系](docs/PHASE4B2_GUIDE.md)：稳定章节/概念、关系、候选/确认/版本、只读学情、schema8迁移及待人工清单。
+
+- [课件解析与管理](docs/PHASE4B1_GUIDE.md)：Phase4B-1实际API、依赖、资源限制、schema7备份/回滚、验证记录和待人工验收项。
 
 - [AGENTS.md](AGENTS.md)：长期开发规则，后续协作先读取。
 - [项目上下文](docs/PROJECT_CONTEXT.md)：目标、需求、赛事依据、技术路线与约束。

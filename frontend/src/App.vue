@@ -14,11 +14,15 @@ import { useStudyWorkbench } from './useStudyWorkbench.js'
 import StudyWorkbench from './components/StudyWorkbench.vue'
 import { useSelfAssessments } from './useSelfAssessments.js'
 import { useStudyGuidance } from './useStudyGuidance.js'
+import { useCourseDocuments } from './useCourseDocuments.js'
+import { useKnowledgeArchitecture } from './useKnowledgeArchitecture.js'
 
 const props = defineProps({ client: Object, store: Object, notesStore: Object })
 const w = reactive(useWorkspace(props.client, props.store))
 const n = reactive(useNotesWorkspace(props.client || defaultApi, computed(() => w.student), props.notesStore))
 const study = reactive(useStudyWorkbench(props.client || defaultApi, computed(() => w.student)))
+const documents = reactive(useCourseDocuments(props.client || defaultApi, computed(() => w.student)))
+const architecture = reactive(useKnowledgeArchitecture(props.client || defaultApi, computed(() => w.student)))
 const self = reactive(useSelfAssessments(props.client || defaultApi, computed(() => w.student)))
 const guides = reactive(useStudyGuidance(props.client || defaultApi, computed(() => w.student), computed(() => self.overview), computed(() => study.chosen), computed(() => self.canGenerate)))
 const tab = ref('learn'), formMode = ref('new'), learnerId = ref(`learner-${crypto.randomUUID().slice(0, 8)}`)
@@ -30,11 +34,11 @@ const recentAccuracy = computed(() => w.history.length ? `${Math.round(w.history
 function start() { w.start(learnerId.value, goals.value, formMode.value === 'restore') }
 async function search() { searched.value = true; await w.search(query.value) }
 function formatDate(value) { return new Intl.DateTimeFormat('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(value)) }
-function goTab(id) { if (self.dirty && !self.persist()) return; if (id !== tab.value) n.navigate(() => { tab.value = id }) }
-function leaveStudent() { if (self.dirty && !self.persist()) return; n.navigate(() => { w.leave(); tab.value = 'learn' }) }
-function refreshCurrent() { return tab.value === 'notes' ? n.load() : tab.value === 'study' ? Promise.all([study.load(), self.load(), guides.load()]) : w.active ? w.refresh() : w.boot() }
+function goTab(id) { if (self.dirty && !self.persist()) return; if (architecture.dirty && !architecture.persist()) return; if (id !== tab.value) n.navigate(() => { tab.value = id }) }
+function leaveStudent() { if (self.dirty && !self.persist()) return; if (architecture.dirty && !architecture.persist()) return; n.navigate(() => { w.leave(); tab.value = 'learn' }) }
+function refreshCurrent() { return tab.value === 'notes' ? n.load() : tab.value === 'study' ? architecture.visible ? architecture.load() : documents.visible ? documents.load() : Promise.all([study.load(), self.load(), guides.load()]) : w.active ? w.refresh() : w.boot() }
 function editStudyNote(id) { n.navigate(async () => { tab.value = 'notes'; await n.load(); await n.open(id) }) }
-function protectDraft(event) { if (n.dirty || n.pending || self.dirty || self.pending) { event.preventDefault(); event.returnValue = '' } }
+function protectDraft(event) { if (n.dirty || n.pending || self.dirty || self.pending || documents.file || documents.pending || architecture.dirty || architecture.pending) { event.preventDefault(); event.returnValue = '' } }
 onMounted(w.boot)
 onMounted(() => window.addEventListener('beforeunload', protectDraft))
 onUnmounted(() => window.removeEventListener('beforeunload', protectDraft))
@@ -71,7 +75,7 @@ onUnmounted(() => window.removeEventListener('beforeunload', protectDraft))
             <div class="learning-grid"><div class="learning-main"><QuestionPanel :decision="w.decision" :selected="w.selected" :feedback="w.feedback" :pending="w.pending" :busy="w.busy" :topic="w.activeTopic" @select="w.selected = $event" @submit="w.submit()" @next="w.next()" /><TutorPanel :reply="w.tutor" :runs="w.tutorRuns" :busy="w.busy" :pending="w.pending" :enabled="Boolean(w.health?.agent_enabled)" :topic="w.activeTopic" @ask="w.ask" @view="w.tutor = $event" /></div><MasteryPanel :snapshot="w.snapshot" :current="w.decision?.knowledge_id" /></div>
           </template>
           <section v-else-if="tab === 'history'" class="panel history-panel"><div class="panel-heading"><div><p class="eyebrow">LEARNING JOURNAL</p><h2>答题与反馈</h2></div><span class="badge">最近 {{ w.history.length }} 条</span></div><div v-if="w.history.length" class="history-summary"><span>已记录作答 <strong>{{ w.snapshot.revision }}</strong></span><span>最近 {{ w.history.length }} 题正确率 <strong>{{ recentAccuracy }}</strong></span></div><div v-if="w.history.length" class="history-list"><details v-for="item in w.history" :key="item.event_id" class="history-item"><summary><span class="result-mark" :class="item.correct ? 'right' : 'wrong'">{{ item.correct ? '✓' : '×' }}</span><span class="history-topic"><strong>{{ w.topicName(item.knowledge_id) }}</strong><small>{{ formatDate(item.created_at) }} · {{ item.question_id }}</small></span><span class="history-answer">{{ item.selected_answer }} <small>{{ item.correct ? '答对' : '答错' }}</small></span><span class="history-probability">{{ percent(item.next_mastery) }}<small>掌握度估计</small></span><Icon name="chevron" :size="16" /></summary><div class="history-detail"><p>正确答案 {{ item.correct_answer }}。</p><MarkdownRenderer :source="item.explanation" /><span>答题前 {{ percent(item.prior) }} → 后验 {{ percent(item.posterior) }} → 转移后 {{ percent(item.next_mastery) }}</span></div></details></div><div v-else class="empty-state"><Icon name="history" :size="36" /><h3>第一条记录，从下一次作答开始。</h3><p>完成练习后，可以在这里回看解析与掌握度变化。</p><button class="button primary" @click="tab = 'learn'">开始练习<Icon name="arrow" :size="17" /></button></div></section>
-          <StudyWorkbench v-else-if="tab === 'study'" :workspace="study" :snapshot="w.snapshot" :goal-names="goalsText" :current-topic="w.decision?.knowledge_id" :self-workspace="self" :guide-workspace="guides" @navigate="goTab" @edit-note="editStudyNote" />
+          <StudyWorkbench v-else-if="tab === 'study'" :workspace="study" :document-workspace="documents" :architecture-workspace="architecture" :snapshot="w.snapshot" :goal-names="goalsText" :current-topic="w.decision?.knowledge_id" :self-workspace="self" :guide-workspace="guides" @navigate="goTab" @edit-note="editStudyNote" />
           <NotesPanel v-else-if="tab === 'notes'" :workspace="n" :knowledge="w.knowledge" />
           <section v-else class="panel materials-panel"><div class="panel-heading"><div><p class="eyebrow">COURSE NOTES</p><h2>从课程资料中寻找依据</h2></div><span class="badge">5 个知识点</span></div><form class="search-form" @submit.prevent="search"><label class="sr-only" for="material-query">检索课程资料</label><input id="material-query" v-model="query" maxlength="1000" required placeholder="例如：为什么学习率过大会发散？" /><button class="button primary" :disabled="Boolean(w.searchBusy || !w.health?.retrieval_available)">{{ w.searchBusy ? '正在检索…' : '检索资料' }}<Icon name="arrow" :size="17" /></button></form><p class="small muted">从本地课程说明中检索，不调用模型生成。资料待审阅，检索结果的关联仍需核对。</p><div v-if="w.sources.length" class="source-list"><article v-for="source in w.sources" :key="source.citation_id" class="source-card"><div><span class="badge badge-blue">{{ source.title }}</span><span class="small muted">[{{ source.citation_id }}]</span></div><h3>{{ source.section }}</h3><MarkdownRenderer :source="source.content" /><small class="muted">{{ source.source }} · {{ source.review_status === 'pending' ? '待内容审阅' : '已审阅' }}</small></article></div><div v-else class="empty-state"><Icon name="book" :size="36" /><h3>{{ searched ? '没有找到足够相关的课程片段。' : '先从一个具体问题开始。' }}</h3><p>{{ searched ? '试试课程中的术语，或换一种表述。' : '目前覆盖线性回归、梯度下降、逻辑回归、正则化与模型评估。' }}</p></div></section>
         </template>

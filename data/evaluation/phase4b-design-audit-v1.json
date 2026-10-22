@@ -1,0 +1,395 @@
+{
+  "reviewed_at": "2026-10-21T12:50:00.460288+00:00",
+  "scope": "Phase4B design only; replaces textbook-outline-only proposal",
+  "inspection": "sqlite3 mode=ro/query_only; no repository construction, migration, HTTP or provider calls",
+  "database": {
+    "schema": 6,
+    "integrity_check": "ok",
+    "foreign_key_error_count": 0,
+    "table_count": 15,
+    "table_snapshots": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 5,
+        "sha256": "24110d68c3abbea36e6e02230ab59e032a1977eecc6cb686a2c81e4fc946d33b"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 19,
+        "sha256": "ebdfea9b6715cdd2a08f5d926ddca42de95ee5302bf7b19401dae8f013933a68"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 1,
+        "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+      }
+    },
+    "columns": {
+      "metadata": [
+        "key",
+        "value"
+      ],
+      "students": [
+        "id",
+        "goals_json",
+        "revision",
+        "created_at"
+      ],
+      "mastery": [
+        "student_id",
+        "knowledge_id",
+        "probability",
+        "attempts",
+        "last_correct"
+      ],
+      "decisions": [
+        "id",
+        "student_id",
+        "revision",
+        "payload_json",
+        "created_at"
+      ],
+      "attempts": [
+        "event_id",
+        "student_id",
+        "decision_id",
+        "question_id",
+        "knowledge_id",
+        "selected_answer",
+        "correct",
+        "prior",
+        "posterior",
+        "next_mastery",
+        "result_json",
+        "created_at"
+      ],
+      "tutor_runs": [
+        "id",
+        "student_id",
+        "state_revision",
+        "mode",
+        "payload_json",
+        "created_at"
+      ],
+      "notes": [
+        "id",
+        "student_id",
+        "course_id",
+        "title",
+        "content_md",
+        "revision",
+        "content_hash",
+        "created_via",
+        "created_at",
+        "updated_at",
+        "deleted_at"
+      ],
+      "note_knowledge_points": [
+        "note_id",
+        "knowledge_point_id"
+      ],
+      "note_index_state": [
+        "note_id",
+        "status",
+        "target_revision",
+        "indexed_revision",
+        "indexed_hash",
+        "indexer_version",
+        "error_code",
+        "chunk_count",
+        "updated_at",
+        "build_token",
+        "building_started_at"
+      ],
+      "note_chunks": [
+        "chunk_id",
+        "note_id",
+        "student_id",
+        "course_id",
+        "revision",
+        "content_hash",
+        "ordinal",
+        "title",
+        "section",
+        "start_offset",
+        "end_offset",
+        "start_line",
+        "end_line",
+        "raw_md",
+        "content_text",
+        "chunk_hash",
+        "indexer_version"
+      ],
+      "workbench_runs": [
+        "request_id",
+        "student_id",
+        "course_id",
+        "request_hash",
+        "request_json",
+        "context_json",
+        "result_json",
+        "status",
+        "model_calls",
+        "created_at",
+        "updated_at"
+      ],
+      "workbench_note_origins": [
+        "request_id",
+        "note_id",
+        "original_revision",
+        "original_hash",
+        "generated_at",
+        "saved_at",
+        "citations_json"
+      ],
+      "self_assessment_batches": [
+        "request_id",
+        "student_id",
+        "course_id",
+        "assessment_revision",
+        "expected_revision",
+        "request_hash",
+        "payload_json",
+        "learning_revision_at_save",
+        "created_at"
+      ],
+      "self_assessment_entries": [
+        "id",
+        "batch_id",
+        "student_id",
+        "course_id",
+        "knowledge_id",
+        "level",
+        "confidence"
+      ],
+      "study_guide_runs": [
+        "request_id",
+        "student_id",
+        "course_id",
+        "request_hash",
+        "request_json",
+        "learning_revision",
+        "assessment_revision",
+        "context_json",
+        "snapshot_json",
+        "recommendations_json",
+        "result_json",
+        "status",
+        "model_calls",
+        "created_at",
+        "updated_at"
+      ]
+    }
+  },
+  "source_files_before": {
+    "backend/src/eduagent/cli.py": "38817829ed7edc4182fa3b0ed16b1a3b01e266c8774c45025abdd653cae26b32",
+    "backend/src/eduagent/config.py": "39993cc37fda402758232c98b2395bc836e27c60e22f1bae3bba440a72376a01",
+    "backend/src/eduagent/content_review.py": "a293d03ccb2ed1e9c74389fb2e5869319edc4b9ae9ca450b95d62e4064470981",
+    "backend/src/eduagent/__init__.py": "dde136682bb40a576f30c1f5512717dfefb0b182889d34f8a5a158d48232c76a",
+    "backend/src/eduagent/__main__.py": "00c0d4c5cd972638d01988078908d49d2b054b7766afaaec6d1788e556b3eab1",
+    "backend/src/eduagent/agent/deepseek.py": "70f0e862f7a3ce505b56edba617d33e40a632d55d783a34f7e73304ea2398241",
+    "backend/src/eduagent/agent/policy.py": "7ec11b56250f82562d8973c05ea80b5e00ca9b6f74a31722bbc60105abbe648f",
+    "backend/src/eduagent/agent/settings.py": "3f90274da0fe94ff7eae2358e5e4e03ff8abfec7b6e2cd54cf149702564df849",
+    "backend/src/eduagent/agent/smoke.py": "c3514122e0ec3bdad6bec23423b060fb9632469eabfdd0eafc48334decfee03e",
+    "backend/src/eduagent/agent/tutor.py": "0790eeb3f7772f3439c5021663efd40d841a2ad96d613d490b0b1123e609b114",
+    "backend/src/eduagent/agent/workbench.py": "ccc8ec4615dd30d1a8f0fd33d4999e341f19e8b11e88e201d9432f25f3505257",
+    "backend/src/eduagent/agent/workbench_answers.py": "a9381c87058af182031f473c2de7763ce1d5a7f96e9bf89bf2bcd351d2ecf2d9",
+    "backend/src/eduagent/agent/__init__.py": "00c9f1217328ab65041da53689fdcdc71cd2eb2d9beb7f87b0017b1e8748eb41",
+    "backend/src/eduagent/api/app.py": "b0157bcbb493861ea95cc3101125c4a99d4eda6fea0236496442e41df2aea427",
+    "backend/src/eduagent/api/body_limit.py": "2e58b2a445aa12b4483afdd84205ad30612b9a3ee6705e9f475b479c5a70a95e",
+    "backend/src/eduagent/api/knowledge.py": "de0b5819a80326a0e27ef4dd50131b7d8d81a6c8f6dc22c253e5a4f582e91adb",
+    "backend/src/eduagent/api/knowledge_schemas.py": "e43b46bb7f0a44d5b22b3ee0b7cdac2cf20d5e1f79e1a9eda4dd47e7776900ff",
+    "backend/src/eduagent/api/notes.py": "1598ed44b689d8b9ce40f4ba56e897fd4b601ab2698cadc1f77e920129a18e0a",
+    "backend/src/eduagent/api/note_schemas.py": "aacdb61417d284ccfd25fe874d9d13d532e640ef1a2830bca612f2adef99d8a9",
+    "backend/src/eduagent/api/schemas.py": "44ebc7c81cde52b9a0863d5870d4f07ed5a6158d47fee6d01856963d82158054",
+    "backend/src/eduagent/api/self_assessments.py": "ff5e585fe08d573ba9f8ee3b4b0c74081768b776df22707c4365292b397cfb07",
+    "backend/src/eduagent/api/self_assessment_schemas.py": "939a46584245eb59e84d930fea7f59d13fdb1edaf53ef7b51e51698893fd7828",
+    "backend/src/eduagent/api/settings.py": "4cf463e1e5b42282887206e5868d7c0a32a25fd081df06f937e3a623451e2f31",
+    "backend/src/eduagent/api/study_guides.py": "586f6b358faaa0fd44fd5965dd88bc261a52890de77d1aab8a4283bbf18f1fb4",
+    "backend/src/eduagent/api/study_guide_schemas.py": "744335a2dd8b06b57bd9bb47abdf1e199a2af5fd744581267d4647eb0adfbdce",
+    "backend/src/eduagent/api/workbench.py": "15b00a589ad6522b8f05e0453c7478c371d211ecef037e06ce83fd973f88148d",
+    "backend/src/eduagent/api/workbench_schemas.py": "cc0945147e4540b181d7bf8f4d78b1e18006eddf8694765aea6c4e635337b62a",
+    "backend/src/eduagent/api/__init__.py": "c08a4e99f711e51bc480a8b4d1b967b229cf6fc449d273366c2596e446aec875",
+    "backend/src/eduagent/domain/bkt.py": "e349bc33464558e5d690d33dd0e89baa6135d7164783bde4c91baf61a448dc79",
+    "backend/src/eduagent/domain/catalog.py": "cdbb3d6e97e0c29064a1ef1934cc08a25cd1a7690effd67dbeae392420bbf44e",
+    "backend/src/eduagent/domain/guidance.py": "f8c17ea1073d3a7907722319e35c1c292286d7eb863bf4581c4e168db473f9ca",
+    "backend/src/eduagent/domain/models.py": "ba8b90d227f847adecefaf9913e346cb75f0109a64a3ff3d0e304a1aad2647cf",
+    "backend/src/eduagent/domain/notes.py": "01ef687e03034ec301965902dca53676eec46fc21b637c92e347bdd820ba81bf",
+    "backend/src/eduagent/domain/self_assessment.py": "9cee6ffcd3e2a9705ac85f045d7d6131d67ba8a019dca506226921b649bc37f0",
+    "backend/src/eduagent/domain/__init__.py": "57976c449c2d96d127374e8ff755f1dc17308d16587e31a50a954f6ad5739107",
+    "backend/src/eduagent/evaluation/compare.py": "f7685026502cf39cd2cad6010c4c31f76a8dabde9df2bed1f1c80cac214da334",
+    "backend/src/eduagent/evaluation/fixed.py": "5f4af85da7e2300b547170ee31dd51dd0647f3caf2f556933662a399c18314aa",
+    "backend/src/eduagent/evaluation/__init__.py": "2a0a816f8987dfeca75413d25f830f45845c8a3ccff577c1a70a8e2b26397c9b",
+    "backend/src/eduagent/retrieval/evaluate.py": "23c9cd87efa76142420ea2d3044b64f5135900fc8bc0b2c721cdf756138d3446",
+    "backend/src/eduagent/retrieval/index.py": "fd8dd82d7badd244e23fbc529086d657fa83281ed4f6429034fe2afb2c19a02d",
+    "backend/src/eduagent/retrieval/lexical.py": "cf9f2c41b935416ff62cae3600c00bee09ce6a8e6425009d0c6d3263b0b4fa88",
+    "backend/src/eduagent/retrieval/note_chunks.py": "e16e48e92f4d59a255efa10c3e3cee6b4854247b7999f1836b2a9660ef836d35",
+    "backend/src/eduagent/retrieval/personal.py": "05a5a636e6d6abd51b8db0bdf8166d02e67c45b221aa20f79093a0752f7f34d0",
+    "backend/src/eduagent/retrieval/__init__.py": "9c1ccd9b6c66a6be837c958915a9c724a6fbea802fa8891a3a7c6b09ce935e4d",
+    "backend/src/eduagent/services/guidance.py": "14c29823f86fe162139d286ce962adeab79863a7fb399e23f75ea9735b753a68",
+    "backend/src/eduagent/services/knowledge.py": "4ba6b3251255d649cb6437d8be5d6ab6f0423b963b842af505af548c2fce29e0",
+    "backend/src/eduagent/services/learning.py": "8bf478134db7c88677f9b2527a2a33f967f0580c912101d30a4731edc63e4c39",
+    "backend/src/eduagent/services/notes.py": "e8a62f3617ff667bab2852c100b86cd52c3c92c432680329f9f3ad890c0657c2",
+    "backend/src/eduagent/services/note_index.py": "544d3a04be82b374a1c82d140a178d375e76cc290cf78e9f3899102ca1b36ae1",
+    "backend/src/eduagent/services/self_assessments.py": "99ecbfe6b6c88c05092ce17fd52bbe3bce767080b9756b1008f9f3204fe013ba",
+    "backend/src/eduagent/services/study_guides.py": "ce8ad30571823524512f5d0a60d18baa0ccc7da6a800621990196f5d024fb4cf",
+    "backend/src/eduagent/services/workbench.py": "e66a8b634d1196887f7a7353b0e2910c460b9d3bf1974de4be510bdf76edcd07",
+    "backend/src/eduagent/services/__init__.py": "9d74fd402b6cb620fe1dc87060290973cec6c1405731be022522033bf9cdd236",
+    "backend/src/eduagent/storage/migrations.py": "f356d8a8833d77ddfa27294cdc5e331619424690578c254ce072139e7ef5f5b0",
+    "backend/src/eduagent/storage/notes.py": "202be8330f1d9013223268d15dd243ea20bb080792cde4579aa50df50a13b5a0",
+    "backend/src/eduagent/storage/personal.py": "9a0d8eacade2c6e898d1fb0bae9826aee8235636a32ad88d28d4aa4aca805bf9",
+    "backend/src/eduagent/storage/self_assessments.py": "77a3d8e2e470538c341d38d1432125bd7696da3bfc7d91573d9b6560e47f1afe",
+    "backend/src/eduagent/storage/sqlite.py": "2992dec955abbb64608bdbcaa5410315bf7c8f9fc5d20aee153e59156d45116b",
+    "backend/src/eduagent/storage/study_guides.py": "0be1e42483f74a161b3a717d012bb9a0a37a52d424645820cb3ae51ab034e675",
+    "backend/src/eduagent/storage/__init__.py": "e78d8e81fecf03996e8be45bb4cf1085d0bf5318e9746ad5262fc017554dbde8",
+    "frontend/src/api.js": "cb0f8a7375fa582a1860d89f971818f25aedb0814181742e9949850233d644f9",
+    "frontend/src/App.vue": "a60642c1d7474d16c1ad79e488daf08a63a01cb4bbe070875afb17b56510246f",
+    "frontend/src/main.js": "e6989f43be872be95a6bcf4185151038b63e88fc2ff7b4a776b654b909804598",
+    "frontend/src/notes.css": "2730c776636d9e3dc9c03b2b9ea9c2679c1cee907b3601d3990edccbc53b945b",
+    "frontend/src/noteStorage.js": "60309769638ba06c582dedce2ddd00b28c354c25948f3ed917270bb31bb5710a",
+    "frontend/src/storage.js": "d9ac0d5fc8bd36ecd085e04a68ea1c36c6bd8358d3283bcfe6e99d6b48e082d8",
+    "frontend/src/study-guidance.css": "951f4566c6459afdf86ebe2acc97ca31642d414cb5981d9034e5cab05f27db96",
+    "frontend/src/styles.css": "ca7d14eef39f65fdfa1c0db8c1a457d9cd63fb3b341846a8dbe5d5e3b45a7070",
+    "frontend/src/useNotesWorkspace.js": "6ff045aed18b44b4251bbec734a851e99fb798a297911e1114b780d3478be52d",
+    "frontend/src/useSelfAssessments.js": "e78d803c4dbdc888673d4233c50dea8118067f24c17a212cd320e6c5b3c79b56",
+    "frontend/src/useStudyGuidance.js": "d7e72d7739fc5d3639e4411d7a7166fea2ddda9b1f8da99bbc7b3dbe6726be27",
+    "frontend/src/useStudyWorkbench.js": "c7fc4b788b8bd932836e5ac29d82909804c3df0a0f521f120937ad97479dd516",
+    "frontend/src/useWorkspace.js": "ad6ff412176c97fe41303104707fea66c8d7f37647481b39936d43c10a63a15b",
+    "frontend/src/workbench.css": "ca83940fc447fe90144a413bb8775696f98286b9f1365f6fd7897975793c2089",
+    "frontend/src/components/Icon.vue": "4d2f6ecfa0a254accc4369af1141fc346c8fafcdb458fb5f02b11bc1319aca82",
+    "frontend/src/components/LearningGuidancePanel.vue": "5c2c00f76fa4bda46191800dae4539df1081e3a961a572c885799ce22ac970a9",
+    "frontend/src/components/MarkdownRenderer.vue": "c1af55029983965f628abc9dd261f6dcdd14f877676284a6676eb46e15ba77ad",
+    "frontend/src/components/MasteryPanel.vue": "2e52d0209985b018bc2000ce3d6084d3e45d536a91d509abfd8b66b7e6acbbcc",
+    "frontend/src/components/NotesDialogs.vue": "727845274d3bd221df12c6a3dd4051c4203e277f7cdb98353b807ac2ccb4cc4c",
+    "frontend/src/components/NotesPanel.vue": "d74f59de2d245551c278c37456a5417187d9e9a2995df1cac1ad3070a16fe27c",
+    "frontend/src/components/QuestionPanel.vue": "c044bbcec1408e3f1fcfa88269f808954fa1e971e260bd5b19b8d91560670adc",
+    "frontend/src/components/SelfAssessmentPanel.vue": "ce3d71e02cb2d8fea25ee540e75ce000a48e117f657389f31e60cbf6731cdfde",
+    "frontend/src/components/SourceDrawer.vue": "f9db11e52ec83cbcf306fc9f177b8a59296dcdf12d7deda31572e0a176fa013b",
+    "frontend/src/components/StudyGuidePanel.vue": "a823e112e80a0d08d51799bb2008d53b0db4c4bf15ac9f98c32729b6a706ba95",
+    "frontend/src/components/StudyWorkbench.vue": "fbf53dc8cc4e27f108caaa25d5598a6fc829e17c1ddcd1a69efb536946322411",
+    "frontend/src/components/TutorPanel.vue": "95afd4f1ca9559535d81a412fa9e2f6e4ee4a9a0c02e829c6b372a766429fce0",
+    "frontend/src/rendering/markdown.css": "0ee69a880a314161357530afd1e4c4020dd6694ed91885852a9848af499a8980",
+    "frontend/src/rendering/markdown.js": "5a92fd59dc7a0e4b489da8be53c28fd7be87c387fb643d74e1ed6c2161e03156",
+    "frontend/src/__tests__/api.test.js": "89762ccc98f867ba4e842d1d5de1327ca525d3f1df6c3ea9dba1456a348d73da",
+    "frontend/src/__tests__/app.test.js": "a8e386fbe7017f2bb23e8650990dc96b54395f3d6fb16d3c47341fc55b8fd5b4",
+    "frontend/src/__tests__/fixtures.js": "fa27b4fc76f74b53342341141a01dcd1a224936019e632680efb02b71a2d5d74",
+    "frontend/src/__tests__/markdown.test.js": "bd4e51cddaa8183128cf468439249325990835d4a118f6f1e1b816ec84bb4c01",
+    "frontend/src/__tests__/notes-fixtures.js": "4194bcbb4cc7c11bfc49e69dc2078023cf8be5e6789e89a45f20f89614e5d84f",
+    "frontend/src/__tests__/notes-ui.test.js": "90f82cfe1d303b18d4003f7d0b0797eb92d9c031a7a7945fe1117e4767d27861",
+    "frontend/src/__tests__/notes.test.js": "d8e4433e277ebc668f6bf0d45c79003b32fb0c86724ac1d0a40decd28d668974",
+    "frontend/src/__tests__/study-guidance-fixtures.js": "a9b45ed81cdc9972bbe8190eefed874eff4ccd96774068717a1f880e33765294",
+    "frontend/src/__tests__/study-guidance.test.js": "863e2547d6bf47c21ae87ed021baa07761d8e9ae39f510d5ea8d8d4f2425d656",
+    "frontend/src/__tests__/workbench.test.js": "03676e1d5f3ab984030dfa4775097d924842e2813d025ff043eeeb07302497ed",
+    "frontend/src/__tests__/workspace.test.js": "a66dc52be6049bc90ea67f4f577acc011dd7e8fad54fc726df11fc5b853dc38d",
+    "scripts/verify_notes.mjs": "5b6d8a11e766a54371af7f371e5d1ad31f47c671f922a40eaafd0dd80761f9e9",
+    "scripts/verify_personal_rag.py": "bf9599535165b5870ca62d2d031933757bbda96cc87fafc47ef7621012c9809b",
+    "scripts/verify_phase4a.py": "82abe439a1a593af2bb7ad0927c5d868b04a5be54686e8c203638127ec838048",
+    "scripts/verify_phase4a_deployment.py": "e88cbefa1e47b4af556c3bf56a6f1d1aad782a36fb76da9617c48e9378d404d6",
+    "scripts/verify_workbench.py": "5f2724da9a2580bd5a173dc34a19b3945248c18d8d98128572436ec494bb1771",
+    "scripts/verify_workbench_answers.py": "1824cf107ae7a83b84fc6a50caa45610c8f04677be8d331cfd73970a4c776601",
+    "scripts/verify_workbench_deployment.py": "d8dc3eef72ae84c112b0a911c7b812c0e0e9539c4893575f60afc104fb41e93e",
+    "scripts/verify_workflows.mjs": "c08309274f92be49f07d651c9d6cf203a0eb24de9552d773483d17a2ed305326",
+    "backend/pyproject.toml": "ec23ee1e3404779fc5619f4f9cfff1ab8629c748382be8a3a8037314292c8cdc",
+    "frontend/package.json": "896861a336c511a37361fffdaa6466cd4713ac633901ee6c0e93b240cf3c96d9",
+    "frontend/package-lock.json": "a0fe590fb6bde8b992f2810eed80338f21d8a23e9541103c7c139279443a1602"
+  },
+  "proposed_dependencies_currently_installed": {
+    "pypdf": null,
+    "python-pptx": null,
+    "lxml": null,
+    "defusedxml": null,
+    "python-multipart": null
+  },
+  "production_database_writes": 0,
+  "model_calls": 0,
+  "new_functional_tests_run": false,
+  "historical_baseline": {
+    "backend_passed": 428,
+    "frontend_passed": 107,
+    "isolated_http_groups": 32
+  },
+  "new_pdf_pptx_parsing_verified": false,
+  "completed_at": "2026-10-21T13:00:17.786160+00:00",
+  "runtime_source_and_dependencies_unchanged": true,
+  "schema_after_design": 6,
+  "all_fifteen_table_snapshots_unchanged": true,
+  "concurrent_table_changes": {},
+  "documentation_files": [
+    {
+      "path": "docs/PHASE4B_DESIGN.md",
+      "sha256": "6b3f854eec8c1ea151573ade1bedb8d9d83b19e92308dc39abac56e6d77c751b"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "cd65fbc7f8316e828139b6b8927eed3ccb1cafe68561df8b22392b6b4cff5883"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "sha256": "be90e1e2e7603880bc63f0eeba22fe0fc760a3565dc43f6866a29a16f2344257"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "sha256": "1e1273c12575f766dd27c8f5c70c0608aec3c3739802b12aab23ad1b1f2240f0"
+    },
+    {
+      "path": "README.md",
+      "sha256": "1942ec81df6c85e248551802a226bbdc91fe389759ec1a880c895bfc17d91992"
+    },
+    {
+      "path": "docs/V0_5_0_DESIGN.md",
+      "sha256": "295064167e56ed574f6dbc43bb16b87383e6c1f1f792faf6f174d4dc46bf1227"
+    }
+  ],
+  "documentation_checks": {
+    "utf8": true,
+    "secret_pattern_absent": true,
+    "fences_balanced": true,
+    "new_design_local_links_exist": true
+  },
+  "implementation_status": "design_only; 4B-1 is next; no new runtime code, migration, parser fixture tests, API or model calls"
+}

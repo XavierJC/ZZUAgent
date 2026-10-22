@@ -1,0 +1,266 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T01:13:35.620708+00:00",
+  "scope": "Phase4B-2 only",
+  "backend": {
+    "passed": 501,
+    "failed": 0,
+    "seconds": 42.29,
+    "previous": 476,
+    "added": 25
+  },
+  "frontend": {
+    "passed": 131,
+    "failed": 0,
+    "seconds": 37.23,
+    "previous": 118,
+    "added": 13,
+    "final_component_recheck_passed": 13,
+    "final_component_recheck_seconds": 1.86
+  },
+  "build": {
+    "passed": true,
+    "main_js_kb": 655.88,
+    "warning": "Default 500kB warning retained"
+  },
+  "http": {
+    "groups": 64,
+    "architecture": 17,
+    "documents": 15,
+    "phase4a": 18,
+    "workbench": 14,
+    "simulated_model_calls": 27
+  },
+  "schema": 8,
+  "tables": 27,
+  "preserved_original_tables": 21,
+  "protected_core_files_unchanged": [
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/domain/catalog.py",
+    "backend/src/eduagent/agent/policy.py",
+    "backend/src/eduagent/services/learning.py"
+  ],
+  "pre_existing_data_files_unchanged": 60,
+  "real_model_calls": 0,
+  "teacher_material_transmissions": 0,
+  "production_graph_creations": 0,
+  "production_learning_writes": 0,
+  "existing_material_extraction": {
+    "documents": 1,
+    "pdf_pages": 3,
+    "chapter_candidates": 0,
+    "concept_candidates": 0,
+    "unclassified_pages": 3,
+    "production_writes": 0
+  },
+  "browser_manual_validation": "not_performed",
+  "real_teaching_effect": "not_evaluated",
+  "phase4b3": "not_implemented",
+  "reports": [
+    "phase4b2-http-v1.json",
+    "phase4b2-documents-http-v1.json",
+    "phase4b2-phase4a-http-v1.json",
+    "phase4b2-workbench-http-v1.json",
+    "phase4b2-existing-material-v1.json",
+    "phase4b2-migration-v1.json",
+    "phase4b2-deployment-v1.json"
+  ],
+  "changed_file_count": 39,
+  "changed_files": [
+    {
+      "path": ".gitignore",
+      "change": "modified",
+      "sha256": "7156099c32c8be77c1077aa7f9d8cd7aa937259896ee081cd2dff42dcd4d6f46"
+    },
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "sha256": "a1df743c15ab11bee791d5398e3a55bc277fd6c8529077827c91019f93753241"
+    },
+    {
+      "path": "backend/src/eduagent/api/app.py",
+      "change": "modified",
+      "sha256": "2c66008464dad193e30a30919b51b51e4c6bb8fb5e700ee7f4d0cd4412ad3e15"
+    },
+    {
+      "path": "backend/src/eduagent/api/architectures.py",
+      "change": "added",
+      "sha256": "e0788540b27464583d437aefef7e4cddbfd6a263a510759aeb35ba8edea8fc59"
+    },
+    {
+      "path": "backend/src/eduagent/api/body_limit.py",
+      "change": "modified",
+      "sha256": "0b1c30da8c39ea67850e319c2e987e442dfa535c064da35d664bc704545cac8a"
+    },
+    {
+      "path": "backend/src/eduagent/documents/architecture_candidates.py",
+      "change": "added",
+      "sha256": "06a32308c28dece1a66a26d33edf933849b706247e45e941ed7ef842d2c0abae"
+    },
+    {
+      "path": "backend/src/eduagent/domain/architecture.py",
+      "change": "added",
+      "sha256": "068a976b973284811f93fdbc69d9201ddd61b41fbd2db2c176d74da782733c82"
+    },
+    {
+      "path": "backend/src/eduagent/services/architectures.py",
+      "change": "added",
+      "sha256": "f0a5e00c5c453702a765459248aea6286794d9a2cf690db41f81a37542abaf54"
+    },
+    {
+      "path": "backend/src/eduagent/storage/architecture_schema.py",
+      "change": "added",
+      "sha256": "21ef9918d419cf555f83a4bb1a9e175468f471db8a103299d4b13e82aee02504"
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "change": "modified",
+      "sha256": "44b20fc5f13e978982d59a7e67c4677eb5e5e62866aa1d279241733eb6add1b4"
+    },
+    {
+      "path": "backend/src/eduagent/storage/sqlite.py",
+      "change": "modified",
+      "sha256": "22deba7b3e8d5237c57179ca62441210081fd257bb65784a632cfbd55c87fd4b"
+    },
+    {
+      "path": "backend/tests/test_architectures.py",
+      "change": "added",
+      "sha256": "7e4db16651b0757fc60145ab30cdde8f109ff1b2bb64fd9166ab91d4a33bc3fb"
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "change": "modified",
+      "sha256": "431c0ef4e211a0cd165b25a9a97f3dc29e15df01de26d5d1099343d07cba5dc1"
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "change": "modified",
+      "sha256": "36400f36af706027ca8ae3d747673e8727f3186bee863282c00588607244486e"
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "change": "modified",
+      "sha256": "5c1101f0a92a1889a10d913a9e7438c8c8adeda0e9da2307728f55a8f10fd6be"
+    },
+    {
+      "path": "backend/tests/test_self_assessments.py",
+      "change": "modified",
+      "sha256": "707f3958942ffeaa32549100e0fd601ec2f486b9f9f57f63519f8200f0c7e306"
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "change": "modified",
+      "sha256": "ddb7051951bfc0ca508ac29de970768f6a3cbcf9271b5a8b4d10c4ac28b349f0"
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "change": "modified",
+      "sha256": "0f55d3739d36f53668410f07b46f8d835ad718a9a10bab0e71d96cceaf73e00d"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "change": "modified",
+      "sha256": "a3250d61cc0a2b9321be1c4fd0c8f35c8880d5edeaf34e69576cf54e5b4936e6"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "sha256": "7b97114475fb3f2480370d71649adf3ad4479a4d284ecdd88cc9cb3a6c101c39"
+    },
+    {
+      "path": "docs/PHASE4B2_DESIGN.md",
+      "change": "added",
+      "sha256": "8980056e18b5092ce19ad56e9bf176270ec9d84152f3d6beeacda18aa5d34977"
+    },
+    {
+      "path": "docs/PHASE4B2_GUIDE.md",
+      "change": "added",
+      "sha256": "6c7f1e9c540b965a9251856149741786c1358bc1f7c091036b0fe6ebadea098d"
+    },
+    {
+      "path": "docs/PHASE4B_DESIGN.md",
+      "change": "modified",
+      "sha256": "9ab9760b1250aab9d80371c21a8204ee825d45589f9306c4cacbf3e7ad5afb18"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "sha256": "7c9dfaa6e50cd982700e4e4f18cf1603e7a05863df63035b7a3a2153001650cf"
+    },
+    {
+      "path": "frontend/src/__tests__/architecture.test.js",
+      "change": "added",
+      "sha256": "4b010afb1759f9766f9199bfb81cc9c5f93917a28e85453f655e3f029596056e"
+    },
+    {
+      "path": "frontend/src/api.js",
+      "change": "modified",
+      "sha256": "320f0f9e6462e45853c65ecba189e3335b733540bcbd3f566afccd5e1be7b507"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "change": "modified",
+      "sha256": "31827982c1091419d13aedcbad996c13f1d6926bce6fa851bfad8a1d8fca12c3"
+    },
+    {
+      "path": "frontend/src/architecture.css",
+      "change": "added",
+      "sha256": "aade7b177e96894d45e01a7dbd1e4b813e9ad35b2dd232b84f864bde37cc0317"
+    },
+    {
+      "path": "frontend/src/components/KnowledgeArchitecture.vue",
+      "change": "added",
+      "sha256": "6b39fa315038d54aaf679c249ccb239467f41bee94a40373335014db7cbc66e1"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "sha256": "4ad18581a3937613bc59323629f3cadd5b14dc7ea75f39fded3c600aa97d9fae"
+    },
+    {
+      "path": "frontend/src/useKnowledgeArchitecture.js",
+      "change": "added",
+      "sha256": "934866736f088393a6446feb4c576e6ef650677c0c7f5eb0cee8912685afff30"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "e169470df03579d84a1ffde6351b1460796e22831eb4a818412ab497e661670e"
+    },
+    {
+      "path": "scripts/audit_existing_architecture_candidates.py",
+      "change": "added",
+      "sha256": "357ec5f4af4919204018a64ba1c5106d647a20f6e5fb101e51834a7eb9e4fceb"
+    },
+    {
+      "path": "scripts/verify_architecture_deployment.py",
+      "change": "added",
+      "sha256": "a09ffcd58bd8bc9f0969344cedc81c66f9816177d587ce76faca980bf63ca437"
+    },
+    {
+      "path": "scripts/verify_architecture_migration.py",
+      "change": "added",
+      "sha256": "a3db80a04afb89ad11bdadd5d8b53769a353bc90ce76b8193c8bc00c99a60bf3"
+    },
+    {
+      "path": "scripts/verify_architectures.py",
+      "change": "added",
+      "sha256": "132780e0b2186dcd3333faa0fbd72932273cfdcd5cc12b07907624a600f51b3c"
+    },
+    {
+      "path": "scripts/verify_documents.py",
+      "change": "modified",
+      "sha256": "3d80fe5795ede1eed0fcdb6acaa86cda583bf0844e1c30c23f2dc64f08220141"
+    },
+    {
+      "path": "scripts/verify_phase4a.py",
+      "change": "modified",
+      "sha256": "e4072468b54bc02723051c3aef0b43bcb0d5e13e773702eedd4d05a7775994bf"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "change": "modified",
+      "sha256": "f071d872ac3cc266c9be345774b6769ae798e82c43bb2b4641f945ddbca08262"
+    }
+  ]
+}

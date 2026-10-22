@@ -6,8 +6,10 @@ import json
 from pathlib import Path
 import sqlite3
 from uuid import uuid4
+from eduagent.storage.document_schema import DOCUMENTS, DOCUMENT_TABLES
+from eduagent.storage.architecture_schema import ARCHITECTURES, ARCHITECTURE_TABLES
 
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 8
 FACT_TABLES = ("metadata", "students", "mastery", "decisions", "attempts", "tutor_runs")
 NOTE_TABLES = ("notes", "note_knowledge_points", "note_index_state")
 WORKBENCH_TABLES = ('workbench_runs', 'workbench_note_origins')
@@ -137,7 +139,7 @@ def preserved_snapshot(connection: sqlite3.Connection, columns: dict | None = No
     if columns is None:
         names = table_names(connection)
         columns = {name: [row[1] for row in connection.execute(f'PRAGMA table_info("{name}")')]
-                   for name in FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES if name in names}
+                   for name in FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES if name in names}
     result = {}
     for name, fields in columns.items():
         projection = ','.join('"' + field.replace('"', '""') + '"' for field in fields)
@@ -166,16 +168,16 @@ def backup_database(connection: sqlite3.Connection, path: str | Path, version: i
 
 def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
     version = connection.execute("PRAGMA user_version").fetchone()[0]
-    if version not in (0, 1, 2, 3, 4, 5, 6):
+    if version not in (0, 1, 2, 3, 4, 5, 6, 7, 8):
         raise ValueError(f"不支持的数据库版本: {version}")
     tables = table_names(connection)
-    if version == 6:
-        if not set(FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES) <= tables:
-            raise ValueError("schema 6 数据表不完整，拒绝自动重建")
-        return {"from_version": 6, "to_version": 6, "backup": None, "changed": False}
+    if version == 8:
+        if not set(FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES) <= tables:
+            raise ValueError("schema 8 数据表不完整，拒绝自动重建")
+        return {"from_version": 8, "to_version": 8, "backup": None, "changed": False}
     if version == 0 and tables:
         raise ValueError("未版本化的非空数据库不能自动迁移")
-    required = set(FACT_TABLES[:5] if version == 1 else FACT_TABLES + (NOTE_TABLES if version >= 3 else ()) + (('note_chunks',) if version >= 4 else ()) + (WORKBENCH_TABLES if version >= 5 else ()))
+    required = set(FACT_TABLES[:5] if version == 1 else FACT_TABLES + (NOTE_TABLES if version >= 3 else ()) + (('note_chunks',) if version >= 4 else ()) + (WORKBENCH_TABLES if version >= 5 else ()) + (STUDY_TABLES if version >= 6 else ()) + (DOCUMENT_TABLES if version >= 7 else ()))
     if version and not required <= tables:
         raise ValueError("历史数据库结构不完整，拒绝迁移")
     if (connection.execute('PRAGMA integrity_check').fetchone()[0] != 'ok'
@@ -208,7 +210,11 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
             connection.execute(statement)
         for statement in WORKBENCH if version < 5 else ():
             connection.execute(statement)
-        for statement in STUDY:
+        for statement in STUDY if version < 6 else ():
+            connection.execute(statement)
+        for statement in DOCUMENTS if version < 7 else ():
+            connection.execute(statement)
+        for statement in ARCHITECTURES:
             connection.execute(statement)
         after = preserved_snapshot(connection, columns)[0]
         if any(after.get(name) != value for name, value in before.items()):
@@ -217,12 +223,12 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
             raise ValueError("外键校验失败，迁移已回滚")
         if connection.execute('PRAGMA integrity_check').fetchone()[0] != 'ok':
             raise ValueError('迁移后完整性检查失败，迁移已回滚')
-        connection.execute("PRAGMA user_version=6")
+        connection.execute("PRAGMA user_version=8")
         connection.execute("COMMIT")
     except BaseException:
         connection.execute("ROLLBACK")
         raise
-    return {"from_version": version, "to_version": 6, "backup": str(backup) if backup else None,
+    return {"from_version": version, "to_version": 8, "backup": str(backup) if backup else None,
             "changed": True, "learning_facts_verified": True, "original_tables_verified": True, "facts": before}
 
 

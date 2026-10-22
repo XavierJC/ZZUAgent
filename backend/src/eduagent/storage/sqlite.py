@@ -16,13 +16,15 @@ def encode(value: object) -> str:
 
 
 class SQLiteRepository:
-    def __init__(self, path: str | Path):
+    def __init__(self, path: str | Path, *, allow_upgrade=True):
         if str(path) != ":memory:":
             Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.connection = sqlite3.connect(str(path), isolation_level=None, timeout=10)
         self.connection.row_factory = sqlite3.Row
         self.connection.execute("PRAGMA foreign_keys = ON")
         try:
+            if not allow_upgrade and self.connection.execute('PRAGMA user_version').fetchone()[0] not in (0, 8):
+                raise ValueError('数据库需要显式迁移到schema8；请先停写并运行迁移入口')
             self.migration_report = migrate(self.connection, path)
         except BaseException:
             self.close()

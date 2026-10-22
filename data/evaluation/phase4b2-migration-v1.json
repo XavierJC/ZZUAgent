@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T01:05:44.594723+00:00",
+  "migration": {
+    "from_version": 7,
+    "to_version": 8,
+    "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v7-ccc46efc6ba3.sqlite3",
+    "changed": true,
+    "learning_facts_verified": true,
+    "original_tables_verified": true,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 7,
+        "sha256": "d2d3c86a875e8fb9c060d2066a19100fc8367ccd96a98ebb4d160c118e63c7a6"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 21,
+        "sha256": "99f30324de4d4b41fe2a557482693befb78e28633e6ef9a2ff5921dae4bf0d54"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 1,
+        "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+      },
+      "courses": {
+        "rows": 1,
+        "sha256": "3488ed80335f9507f60cb6a1532668cdfdeadcc28ba3ffe22cacb15dfec71ac2"
+      },
+      "course_documents": {
+        "rows": 1,
+        "sha256": "845d0b684a0759b92b3d812f26822f4d58d8816d410aa8947316786471971ddf"
+      },
+      "document_versions": {
+        "rows": 1,
+        "sha256": "8effb0f69ed9b76d9955ec16502a374eeeb7326ac8c01b78f1861c2affcd9610"
+      },
+      "document_parse_runs": {
+        "rows": 1,
+        "sha256": "27f2c258db7f700331b8b4b265c4d0f7f956c8d75440d3c22120af2ceab34e7f"
+      },
+      "document_units": {
+        "rows": 3,
+        "sha256": "8fc0e36faecce45f11f55b806ea11d63792f0e7bea128375b5cd0c7682920bc6"
+      },
+      "document_operations": {
+        "rows": 1,
+        "sha256": "a2c4017f8ca47f3567d0bfb78f2782443ae9413ad7fbc11e6f323f0224a9bb46"
+      }
+    }
+  },
+  "backup_sha256": "5139e45db1d170623266d09b51442746220b76ec3a4301a692f79c332e6a8993",
+  "code_backup": "D:\\ZZUAgent\\data\\local\\phase4b2-prechange-96851556\\code-before.zip",
+  "code_backup_sha256": "f6f8b73550354cbd0e264e6b170eb3e114c8d2e51770f4978360b79c19118d5f",
+  "original_table_count": 21,
+  "current_table_count": 27,
+  "original_tables_match": true,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "pre_existing_data_files_unchanged": true,
+  "pre_existing_data_file_count": 60,
+  "rollback_audit_directory": "D:\\ZZUAgent\\data\\local\\phase4b2-rollback-audit-f4e26c83",
+  "original_and_derived_files_unchanged": true,
+  "material_file_count": 2,
+  "legacy_accepts_restored_schema7": true,
+  "legacy_rejects_schema8": true,
+  "live_database_overwritten": false,
+  "new_data_retention": "Preserve upgraded schema8 DB and document directory; never overwrite with schema7."
+}

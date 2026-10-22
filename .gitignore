@@ -7,6 +7,8 @@ build/
 dist/
 frontend/dist-phase3b/
 frontend/dist-phase4a/
+frontend/dist-phase4b1/
+frontend/dist-phase4b2/
 .env
 .env.*
 !.env.example

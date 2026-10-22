@@ -1,0 +1,335 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-21T15:54:54.101281+00:00",
+  "scope": "Phase4B-1 only",
+  "backend": {
+    "passed": 476,
+    "failed": 0,
+    "seconds": 39.13,
+    "previous": 428,
+    "added": 48
+  },
+  "frontend": {
+    "passed": 118,
+    "failed": 0,
+    "seconds": 5.68,
+    "previous": 107,
+    "added": 11
+  },
+  "build": {
+    "passed": true,
+    "warning": "Default 500kB chunk warning retained",
+    "js_bytes_display_kb": 622.88
+  },
+  "http": {
+    "groups": 47,
+    "documents": 15,
+    "phase4a": 18,
+    "workbench": 14,
+    "simulated_vision_calls": 3,
+    "simulated_guide_calls": 9,
+    "simulated_chat_calls": 15
+  },
+  "real_model_calls": 0,
+  "teacher_material_transmissions": 0,
+  "pip_check": "No broken requirements found",
+  "protected_core_code_unchanged": [
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/services/learning.py"
+  ],
+  "browser_manual_validation": "not_performed",
+  "real_document_accuracy": "not_evaluated",
+  "knowledge_tree_mapping_rag": "not_implemented",
+  "vision_enabled": false,
+  "schema": 7,
+  "reports": [
+    "phase4b1-http-v1.json",
+    "phase4b1-phase4a-http-v1.json",
+    "phase4b1-workbench-http-v1.json",
+    "phase4b1-migration-v1.json",
+    "phase4b1-deployment-v1.json"
+  ],
+  "changed_file_count": 56,
+  "changed_files": [
+    {
+      "path": ".env.example",
+      "change": "modified",
+      "sha256": "00beff0c01f81557c0d0c5dbfd897320bc6e61dfa9088bdd9dc1c6fdfdedf453"
+    },
+    {
+      "path": ".gitignore",
+      "change": "modified",
+      "sha256": "ae9e99e8eaf649e3fa1dcb0527c01209b2762db65e18e08fb616e0ce9c3a3756"
+    },
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "sha256": "d25c9c2b5a0014c2660dd99858bd1c88ca81e06116188346afa52e89067ff77e"
+    },
+    {
+      "path": "backend/pyproject.toml",
+      "change": "modified",
+      "sha256": "b9c12a062ab19362aa95725a2fd42fbc6cc3d7f5c59f854b7426fcaaf6305861"
+    },
+    {
+      "path": "backend/requirements-documents.lock",
+      "change": "added",
+      "sha256": "b873bddbc08f8e25da85effb8e2e67e4e738ea19a0d751276fa2193db5adaa36"
+    },
+    {
+      "path": "backend/src/eduagent/api/app.py",
+      "change": "modified",
+      "sha256": "0dd1e29d0511240098e80ae41fb6513ef6f19990e846b483deab79e6b7c5276d"
+    },
+    {
+      "path": "backend/src/eduagent/api/document_schemas.py",
+      "change": "added",
+      "sha256": "ebc4d83d478c03d658bb9b891ae941be6fbe53f33eeca3d2e8d9dc03cc187b2a"
+    },
+    {
+      "path": "backend/src/eduagent/api/documents.py",
+      "change": "added",
+      "sha256": "df204e7e2fdfad7651de4e915c1ecade80e69a12e02237e9da851a7aaf9139f7"
+    },
+    {
+      "path": "backend/src/eduagent/api/settings.py",
+      "change": "modified",
+      "sha256": "acedc3a034969ea3af3d72ade78836305a6e1d51d883f508db9ff20f4de05eeb"
+    },
+    {
+      "path": "backend/src/eduagent/api/upload_limit.py",
+      "change": "added",
+      "sha256": "16c6481479a41a3e707d8329dc0c606ef7ea9446d83d3261488bf197d7ba4e0d"
+    },
+    {
+      "path": "backend/src/eduagent/config.py",
+      "change": "modified",
+      "sha256": "8779127cc697b029cfacaa7307f30faafd406c33a9a15dd5d13059b55f610bc7"
+    },
+    {
+      "path": "backend/src/eduagent/documents/__init__.py",
+      "change": "added",
+      "sha256": "74eabe38406349a2b8bd70f708044168a934882fac3597c4721b8ca95e31ec65"
+    },
+    {
+      "path": "backend/src/eduagent/documents/coordinator.py",
+      "change": "added",
+      "sha256": "fba850107a853d9724ec6f87131e7303dc867f8062bc8884336ad4150cde7689"
+    },
+    {
+      "path": "backend/src/eduagent/documents/files.py",
+      "change": "added",
+      "sha256": "deb028530428c21eeec7c270fccc2e409092f6de251e849f728013b58eabdc89"
+    },
+    {
+      "path": "backend/src/eduagent/documents/limits.py",
+      "change": "added",
+      "sha256": "6e173870c01ab6f63d6d35b60e6ae9db38473dc6608fd3f1d9a8cdc10ff31dca"
+    },
+    {
+      "path": "backend/src/eduagent/documents/models.py",
+      "change": "added",
+      "sha256": "f08124fc46b08970d9ce698d7af0568270f7b3685a6b2e00367b53b224b31d99"
+    },
+    {
+      "path": "backend/src/eduagent/documents/parsers/__init__.py",
+      "change": "added",
+      "sha256": "779ad03787d0795745aaee77e2c21bba68cfe1904e16ba11de8458f5448bea82"
+    },
+    {
+      "path": "backend/src/eduagent/documents/parsers/pdf.py",
+      "change": "added",
+      "sha256": "2f8aa703b7b855b178b482aea8ae0f0abdc9f1ada67274fd238832b3f878da4b"
+    },
+    {
+      "path": "backend/src/eduagent/documents/parsers/pptx.py",
+      "change": "added",
+      "sha256": "1a5f91f05367b7a419183a2c426c8e3328a4d66a0f18dd680c23cde956790cd2"
+    },
+    {
+      "path": "backend/src/eduagent/documents/parsers/text.py",
+      "change": "added",
+      "sha256": "4a99346d85abd792d0cbe61a0849db612a4ff2bad6276ecb1e7fc5f0351e6e7f"
+    },
+    {
+      "path": "backend/src/eduagent/documents/preflight.py",
+      "change": "added",
+      "sha256": "f576bd0c2d0f7498d6c4fcb3aae49cd93540427889db06adb8c673b1ca64d0c1"
+    },
+    {
+      "path": "backend/src/eduagent/documents/vision.py",
+      "change": "added",
+      "sha256": "853168e7c4c08e4b5f32a041f98d3da6382029f47c2e8114046144258d103c71"
+    },
+    {
+      "path": "backend/src/eduagent/documents/worker.py",
+      "change": "added",
+      "sha256": "23b0ce1598173519bef74ab5a7baa7cd0015cbb4bc976d50c05f6d7928fecee9"
+    },
+    {
+      "path": "backend/src/eduagent/services/documents.py",
+      "change": "added",
+      "sha256": "96f9af3a5dca92346875c4d38ddbf81a7fdac0180308978f9d96176b0a2114c5"
+    },
+    {
+      "path": "backend/src/eduagent/storage/document_schema.py",
+      "change": "added",
+      "sha256": "13be15aacfe792bed9dd5725f91f51785e2296c59c549515d12c2060e5796e64"
+    },
+    {
+      "path": "backend/src/eduagent/storage/documents.py",
+      "change": "added",
+      "sha256": "4fa5a523e97704d226eff2105e0c53973c13b259527be8c5d888040c7f131b7f"
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "change": "modified",
+      "sha256": "5b506e3006783f2b08989de86046d9224815342bc53b3b5623ce1933fc36e0e1"
+    },
+    {
+      "path": "backend/src/eduagent/storage/sqlite.py",
+      "change": "modified",
+      "sha256": "d16048cdecc177afb3d4261372af2d4f9de6ad350f0396dbf78bfd924b4f3409"
+    },
+    {
+      "path": "backend/tests/document_fixtures.py",
+      "change": "added",
+      "sha256": "dd9310280e26d45e6554fe3da7ebdf9b16bddea1c9cf9596562dd78aa49f1057"
+    },
+    {
+      "path": "backend/tests/test_document_limits.py",
+      "change": "added",
+      "sha256": "1d0c7d4b6a93501d5ea86bfce962533797193f01eb8b2068b89b8e84b842b430"
+    },
+    {
+      "path": "backend/tests/test_document_parsers.py",
+      "change": "added",
+      "sha256": "5d404aee0c3f6635f2f2dcfa3b7480834f25aeac2a7cc689c00609e5166d845a"
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "change": "added",
+      "sha256": "bae6989b9aecb9a5bed443f89c816f0c0466d96f59583ad733e6cecc7b3bb0f0"
+    },
+    {
+      "path": "backend/tests/test_documents_api.py",
+      "change": "added",
+      "sha256": "10f0f4c824e8751c64327f768b283808813e3aad1803b9708203284680eab262"
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "change": "modified",
+      "sha256": "2e6cb0e704275bdbcbbaebd163c9158a7f9aa67675a005ffa72ff6807216ad80"
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "change": "modified",
+      "sha256": "64d1e85696bb163dd184710c2860552d28b515eabc82b38b2d36cadce31b903f"
+    },
+    {
+      "path": "backend/tests/test_self_assessments.py",
+      "change": "modified",
+      "sha256": "e835d48d02621cddb567c8dc8f85175c98690c69300c7bab14b13b00aae16128"
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "change": "modified",
+      "sha256": "8c4ce17ad03fc0c737d3ae495b32aff4340106a962eb39aff03f1f0fde4da10d"
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "change": "modified",
+      "sha256": "8669abda715024f1844e51126e9fa51c7639ac116eba102d98ef170d88b42f1c"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "change": "modified",
+      "sha256": "62b21f3bd08657e287b838b6841e20a50a41fd65bdbe0065e210e380b43b55e6"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified",
+      "sha256": "9adf05353455076ffed2b4d8d2823cf4db1370f8eff764738887a9846bba740f"
+    },
+    {
+      "path": "docs/PHASE4B1_GUIDE.md",
+      "change": "added",
+      "sha256": "04b1a93efffaf1ba1113f7f781735b00072835cbd1a7f6a6ba732c322c535114"
+    },
+    {
+      "path": "docs/PHASE4B_DESIGN.md",
+      "change": "modified",
+      "sha256": "edcc70a8f82ed29dbe2654da3c45361dc4f5c1a9b0667d9a766814e99e674801"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified",
+      "sha256": "983e4f9733ebadebe3b0500b76542b7f9b853c0b497b7758c5119895796c6c3b"
+    },
+    {
+      "path": "frontend/src/__tests__/documents.test.js",
+      "change": "added",
+      "sha256": "419d950e5312a12b381d6355f75795bb4f6c28079005e9f22ba49d22c85a90de"
+    },
+    {
+      "path": "frontend/src/api.js",
+      "change": "modified",
+      "sha256": "b7eb925378db3842ef0d2694deb9da56fa29bb5983498f2aa7ed2b44340ef98e"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "change": "modified",
+      "sha256": "858d138727356639ec53b4b92678785eedf94ecf7b36f5a308dc07b56862b2b7"
+    },
+    {
+      "path": "frontend/src/components/DocumentManager.vue",
+      "change": "added",
+      "sha256": "5d4ee72f8c572d5eb099acbc8be331468c4a1e6e18403464e0e3e75710255ea9"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "change": "modified",
+      "sha256": "afdb8a693e76b626f4cc2efc9c06e4b8861eb4d5d7e78f9ba88290da2b8b6070"
+    },
+    {
+      "path": "frontend/src/documents.css",
+      "change": "added",
+      "sha256": "4e7db11fe07120d1aa7da96f37b290eeffa2db12dd167e5dc5dcb43661ff6db3"
+    },
+    {
+      "path": "frontend/src/useCourseDocuments.js",
+      "change": "added",
+      "sha256": "500339edcb127ca6d99c230f95696e959710ccd1de0a1881c0b203240da2bfcf"
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "sha256": "bfcb503e13ac09aff425e3a85c8a80f4e65becd1eaa3cbc6604bd3525e7c16da"
+    },
+    {
+      "path": "scripts/verify_document_migration.py",
+      "change": "added",
+      "sha256": "2790aa983b9399484fec17a0582d804a6fce8f9c190794e6e94df2fd38c40010"
+    },
+    {
+      "path": "scripts/verify_documents.py",
+      "change": "added",
+      "sha256": "45917a4856fdbb1da9534f16987028f4bc6fc0d01eca3a2c49faf61bcbd660f0"
+    },
+    {
+      "path": "scripts/verify_documents_deployment.py",
+      "change": "added",
+      "sha256": "82f558986cf1f13eb1d764d5bb6b9efcb6a488e2b569660b96ee12f1312c6c5d"
+    },
+    {
+      "path": "scripts/verify_phase4a.py",
+      "change": "modified",
+      "sha256": "2cc34d7486d0e1505f32c0d9f5b2ee838e7d5122063fd56dcdd0ee7a0025698d"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "change": "modified",
+      "sha256": "ec3cec49a3364309b82a650203272299e74344381fd2453dc53da19e933086b3"
+    }
+  ]
+}

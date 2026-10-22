@@ -14,6 +14,8 @@ def schema3(path, catalog):
         LearningService(catalog, repository).register('existing')
         NotesService(catalog, repository).create('existing', id=str(uuid4()), title='原笔记', content_md='$w$ 原文', knowledge_point_ids=['gradient_descent'])
         db = repository.connection
+        for table in reversed(migrations.DOCUMENT_TABLES + migrations.ARCHITECTURE_TABLES):
+            db.execute('DROP TABLE '+table)
         for table in ('study_guide_runs', 'self_assessment_entries', 'self_assessment_batches'):
             db.execute('DROP TABLE '+table)
         db.execute('DROP TABLE workbench_note_origins')
@@ -32,7 +34,7 @@ def test_schema3_backup_preserves_all_nine_tables(tmp_path, catalog):
     assert len(before) == 9
     with SQLiteRepository(path) as repository:
         report = repository.migration_report
-        assert report['from_version'] == 3 and report['to_version'] == 6
+        assert report['from_version'] == 3 and report['to_version'] == 8
         assert report['facts'] == before and report['original_tables_verified']
         assert migrations.preserved_snapshot(repository.connection, columns)[0] == before
         assert not repository.connection.execute('PRAGMA foreign_key_check').fetchall()

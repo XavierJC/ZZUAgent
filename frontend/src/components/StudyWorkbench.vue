@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { sourceKey } from '../useStudyWorkbench.js'
 import MarkdownRenderer from './MarkdownRenderer.vue'
 import MasteryPanel from './MasteryPanel.vue'
@@ -7,9 +7,12 @@ import SourceDrawer from './SourceDrawer.vue'
 import SelfAssessmentPanel from './SelfAssessmentPanel.vue'
 import LearningGuidancePanel from './LearningGuidancePanel.vue'
 import StudyGuidePanel from './StudyGuidePanel.vue'
+import DocumentManager from './DocumentManager.vue'
+import KnowledgeArchitecture from './KnowledgeArchitecture.vue'
 import '../workbench.css'
 import '../study-guidance.css'
-const props = defineProps({ workspace: { type: Object, required: true }, snapshot: Object, goalNames: String, currentTopic: String, selfWorkspace: Object, guideWorkspace: Object })
+const props = defineProps({ workspace: { type: Object, required: true }, snapshot: Object, goalNames: String, currentTopic: String, selfWorkspace: Object, guideWorkspace: Object, documentWorkspace: Object, architectureWorkspace: Object })
+const view = ref('study')
 const emit = defineEmits(['navigate', 'edit-note'])
 const indexNames = { ready: '已就绪', empty: '无可检索正文', pending: '等待索引', building: '正在索引', failed: '索引失败', disabled: '索引停用' }
 const reasons = { local_requested: '本轮仅本地检索，未调用模型。', personal_consent_required: '本轮未同意个人笔记外发，已仅在本地检索。',
@@ -42,6 +45,10 @@ onMounted(() => { props.selfWorkspace?.load(); props.guideWorkspace?.load() })
 
 <template>
   <section class="study-workbench" aria-label="资料学习工作台">
+    <nav v-if="documentWorkspace" class="doc-switch" aria-label="资料工作台视图"><button class="button secondary" :aria-pressed="view === 'study'" @click="view = 'study'">资料问答</button><button class="button secondary" :aria-pressed="view === 'documents'" @click="view = 'documents'">课程课件解析</button><button v-if="architectureWorkspace" class="button secondary" :aria-pressed="view === 'architecture'" @click="view = 'architecture'">课程知识体系</button></nav>
+    <DocumentManager v-if="view === 'documents' && documentWorkspace" :workspace="documentWorkspace" />
+    <KnowledgeArchitecture v-else-if="view === 'architecture' && architectureWorkspace" :workspace="architectureWorkspace" @navigate="emit('navigate', $event)" />
+    <template v-else>
     <div class="wb-toolbar"><p>资料与学情共同支持学习。演示标识仅用于本机分组，不是真实身份认证。</p><button class="button secondary" :disabled="Boolean(workspace.busy)" @click="workspace.load()">刷新来源与历史</button></div>
     <div v-if="workspace.error" class="alert alert-error" role="alert">{{ workspace.error }}</div>
     <div v-if="workspace.notice" class="alert alert-info" role="status">{{ workspace.notice }}</div>
@@ -93,5 +100,6 @@ onMounted(() => { props.selfWorkspace?.load(); props.guideWorkspace?.load() })
       <aside class="wb-studio" aria-labelledby="wb-studio-title"><section class="panel"><h2 id="wb-studio-title">学习工作室</h2><h3>当前学习目标</h3><p>{{ goalNames }}</p><p class="small muted">学情版本 {{ selfWorkspace?.overview?.learning_revision ?? snapshot?.revision }} · 根据正式作答更新</p><div class="wb-studio-actions"><button class="button primary" @click="emit('navigate', 'learn')">进入正式练习</button><button class="button secondary" @click="emit('navigate', 'history')">查看学习历史</button><button v-if="selfWorkspace" class="button secondary" :disabled="Boolean(selfWorkspace.busy)" @click="selfWorkspace.load()">只读刷新学情与自评</button></div></section><SelfAssessmentPanel v-if="selfWorkspace" :workspace="selfWorkspace" /><LearningGuidancePanel v-if="selfWorkspace" :overview="selfWorkspace.overview" @navigate="emit('navigate', $event)" /><StudyGuidePanel v-if="selfWorkspace && guideWorkspace" :workspace="guideWorkspace" :self-workspace="selfWorkspace" :capabilities="workspace.capabilities" /><MasteryPanel :snapshot="selfWorkspace?.masterySnapshot || snapshot" :current="currentTopic" /></aside>
     </div>
     <SourceDrawer :source="workspace.drawer" @close="workspace.drawer = null" />
+    </template>
   </section>
 </template>

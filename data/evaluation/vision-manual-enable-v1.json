@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T01:20:03.668657+00:00",
+  "action": "Enable manual PDF page vision after explicit user approval",
+  "vision_enabled": true,
+  "provider": "DeepSeek",
+  "model": "deepseek-flash",
+  "max_pages": 3,
+  "max_output_tokens_per_page": 3000,
+  "requires_per_round_external_consent": true,
+  "automatic_material_transmission": false,
+  "model_requests_by_this_action": 0,
+  "existing_vision_model_calls": 0,
+  "database_tables_unchanged": 27,
+  "real_visual_api_compatibility": "not_tested"
+}

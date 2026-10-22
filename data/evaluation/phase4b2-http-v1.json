@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T00:59:13.422113+00:00",
+  "checks": [
+    {
+      "name": "create_concurrent_idempotency_hash_conflict",
+      "passed": true
+    },
+    {
+      "name": "manual_multi_chapter_same_name_identity_and_unpublished_navigation",
+      "passed": true
+    },
+    {
+      "name": "chapter_cycle_rejected_atomically",
+      "passed": true
+    },
+    {
+      "name": "symmetric_relation_uniqueness_and_referenced_delete",
+      "passed": true
+    },
+    {
+      "name": "explicit_confirmation_and_locked_publication",
+      "passed": true
+    },
+    {
+      "name": "stable_ids_fork_and_immutable_version_history",
+      "passed": true
+    },
+    {
+      "name": "demo_student_isolation",
+      "passed": true
+    },
+    {
+      "name": "all_original_twenty_one_tables_preserved_by_manual_graph_operations",
+      "passed": true
+    },
+    {
+      "name": "readonly_formal_association_reads_real_scoring_and_self_report",
+      "passed": true
+    },
+    {
+      "name": "actual_native_markdown_pptx_candidate_extraction_and_evidence_offsets",
+      "passed": true
+    },
+    {
+      "name": "editable_preview_import_confirmation_and_no_learning_writes",
+      "passed": true
+    },
+    {
+      "name": "independent_revision_concurrent_writer_cas",
+      "passed": true
+    },
+    {
+      "name": "updated_source_blocks_old_candidates_and_labels_historical_evidence",
+      "passed": true
+    },
+    {
+      "name": "deleted_source_snapshot_semantics_and_candidate_isolation",
+      "passed": true
+    },
+    {
+      "name": "bkt_scores_self_reports_notes_and_learning_history_unchanged_by_structures",
+      "passed": true
+    },
+    {
+      "name": "restart_and_no_key_local_retrieval_compatible",
+      "passed": true
+    },
+    {
+      "name": "schema8_integrity_foreign_keys",
+      "passed": true
+    }
+  ],
+  "server_starts": 2,
+  "schema": 8,
+  "real_model_calls": 0,
+  "simulated_model_calls": 0,
+  "production_writes": 0,
+  "browser_manual_validation": "not_performed",
+  "test_directory": "D:\\ZZUAgent\\data\\local\\phase4b2-http-0c6ee29d",
+  "synthetic_learning_events": 1,
+  "scope": "Self-built uploaded files through actual parser and real HTTP, no teacher-material external transmission"
+}

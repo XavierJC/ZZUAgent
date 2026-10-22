@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T01:01:26.551608+00:00",
+  "mode": "actual saved local parse, read-only extraction in memory",
+  "documents": [
+    {
+      "format": "pdf",
+      "units": 3,
+      "chapter_candidates": 0,
+      "concept_candidates": 0,
+      "unclassified": 3,
+      "evidence_offsets_match": true
+    }
+  ],
+  "production_database_writes": 0,
+  "model_calls": 0,
+  "private_source_content_saved_in_report": false,
+  "accuracy": "not manually evaluated"
+}

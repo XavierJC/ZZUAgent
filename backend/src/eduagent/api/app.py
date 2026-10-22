@@ -30,6 +30,13 @@ from eduagent.api.knowledge import knowledge_router
 from eduagent.api.workbench import workbench_router
 from eduagent.api.self_assessments import self_assessments_router
 from eduagent.api.study_guides import study_guides_router
+from eduagent.api.documents import documents_router
+from eduagent.api.architectures import architectures_router
+from eduagent.domain.architecture import ArchitectureError
+from eduagent.api.upload_limit import DocumentBodyLimit
+from eduagent.documents.models import DocumentError
+from eduagent.documents.coordinator import DocumentCoordinator
+from eduagent.services.documents import DocumentsService
 from eduagent.services.guidance import LearningContextChanged
 from eduagent.services.knowledge import CourseSources, SourceChanged, IndexUnavailable
 from eduagent.services.note_index import NoteIndexer
@@ -42,7 +49,7 @@ from eduagent.storage.sqlite import SQLiteRepository
 logger = logging.getLogger(__name__)
 
 
-def create_app(settings: APISettings | None = None) -> FastAPI:
+def create_app(settings: APISettings | None = None, *, document_runner=None, document_vision_factory=None) -> FastAPI:
     settings = settings or APISettings.from_environment()
     catalog: Catalog | None = None
     course_index = None
@@ -53,7 +60,7 @@ def create_app(settings: APISettings | None = None) -> FastAPI:
         nonlocal catalog, course_index, course_sources
         catalog = Catalog.load(settings.data_dir)
         # Fail at startup for corrupt data or a mismatched historical configuration.
-        with SQLiteRepository(settings.db_path) as repository:
+        with SQLiteRepository(settings.db_path, allow_upgrade=False) as repository:
             LearningService(catalog, repository)
             if settings.retrieval_enabled:
                 NoteIndexer(repository).recover()
@@ -65,9 +72,12 @@ def create_app(settings: APISettings | None = None) -> FastAPI:
             else:
                 course_index = CourseIndex(settings.data_dir / "materials", set(catalog.knowledge))
                 course_sources = CourseSources(course_index, settings.data_dir / 'materials')
+        settings.document_dir.mkdir(parents=True, exist_ok=True)
+        coordinator = DocumentCoordinator(document_service, settings.document_dir, document_runner, document_vision_factory)
         try:
             yield
         finally:
+            coordinator.close()
             catalog = None
             course_index = None
             course_sources = None
@@ -85,8 +95,13 @@ def create_app(settings: APISettings | None = None) -> FastAPI:
 
     @contextmanager
     def learning_service() -> Iterator[LearningService]:
-        with SQLiteRepository(settings.db_path) as repository:
+        with SQLiteRepository(settings.db_path, allow_upgrade=False) as repository:
             yield LearningService(loaded_catalog(), repository)
+
+    @contextmanager
+    def document_service():
+        with SQLiteRepository(settings.db_path, allow_upgrade=False) as repository:
+            yield DocumentsService(repository, settings.document_dir, vision_enabled=settings.document_vision_enabled, agent_settings=settings.agent)
 
     def mastery_view(service: LearningService, student_id: str) -> MasteryResponse:
         snapshot = service.snapshot(student_id)
@@ -103,11 +118,22 @@ def create_app(settings: APISettings | None = None) -> FastAPI:
         return JSONResponse(status_code=status, content={"error": {"code": code, "message": message, **extra}})
 
     app.add_middleware(NotesBodyLimit)
+    app.add_middleware(DocumentBodyLimit)
     app.include_router(notes_router(learning_service))
     app.include_router(knowledge_router(learning_service, lambda: course_sources, settings.retrieval_enabled))
     app.include_router(workbench_router(learning_service, lambda: course_sources, settings.retrieval_enabled, settings.agent))
     app.include_router(self_assessments_router(learning_service))
     app.include_router(study_guides_router(learning_service, lambda: course_sources, settings.retrieval_enabled, settings.agent))
+    app.include_router(documents_router(document_service, settings))
+    app.include_router(architectures_router(learning_service))
+
+    @app.exception_handler(ArchitectureError)
+    async def architecture_error(request: Request, exc: ArchitectureError):
+        return error(exc.status, exc.code, str(exc))
+
+    @app.exception_handler(DocumentError)
+    async def document_error(request: Request, exc: DocumentError):
+        return error(exc.status, exc.code, str(exc))
 
     @app.exception_handler(LearningContextChanged)
     async def learning_context_changed(request: Request, exc: LearningContextChanged):

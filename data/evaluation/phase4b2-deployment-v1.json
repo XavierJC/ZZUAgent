@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T01:08:19.231868+00:00",
+  "schema": 8,
+  "table_count": 27,
+  "original_twenty_one_tables_unchanged": true,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "openapi_paths": 50,
+  "assets_verified": [
+    "/assets/index-CoPmtrcj.js",
+    "/assets/index-SW8a-qKj.css"
+  ],
+  "vision_enabled": false,
+  "production_graph_creations": 0,
+  "production_learning_writes": 0,
+  "real_model_calls": 0,
+  "browser_manual_validation": "not_performed"
+}

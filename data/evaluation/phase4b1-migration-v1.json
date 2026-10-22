@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-21T15:48:15.473188+00:00",
+  "migration": {
+    "from_version": 6,
+    "to_version": 7,
+    "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v6-d6cc03e2934d.sqlite3",
+    "changed": true,
+    "learning_facts_verified": true,
+    "original_tables_verified": true,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 7,
+        "sha256": "d2d3c86a875e8fb9c060d2066a19100fc8367ccd96a98ebb4d160c118e63c7a6"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 19,
+        "sha256": "ebdfea9b6715cdd2a08f5d926ddca42de95ee5302bf7b19401dae8f013933a68"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 1,
+        "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+      }
+    }
+  },
+  "backup_sha256": "d5a912a41f19fb0e5b19b31b33eb7d64103d51bfdbfa8dc7e16ef02d960ab655",
+  "code_backup": "D:\\ZZUAgent\\data\\local\\phase4b1-prechange-fbe47f37\\code-before.zip",
+  "code_backup_sha256": "ec9a18c9c77cb46e769285616bb89a223bc282321f99a8fabfee4ac3ff540fbf",
+  "original_table_count": 15,
+  "current_table_count": 21,
+  "original_tables_match": true,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "pre_existing_data_files_unchanged": true,
+  "pre_existing_data_file_count": 54,
+  "rollback_audit_directory": "D:\\ZZUAgent\\data\\local\\phase4b1-rollback-audit-d25f434b",
+  "legacy_accepts_restored_schema6": true,
+  "legacy_rejects_schema7": true,
+  "live_database_overwritten": false,
+  "new_data_retention": "Preserve upgraded DB, its WAL/SHM when applicable and document directory; never overwrite with schema6."
+}

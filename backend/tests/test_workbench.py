@@ -375,6 +375,8 @@ def test_schema4_backup_preserves_ten_tables_and_ddl_failure_rolls_back(tmp_path
     with SQLiteRepository(path) as repo:
         from eduagent.services.learning import LearningService
         LearningService(catalog, repo).register('old')
+        for table in reversed(migrations.DOCUMENT_TABLES + migrations.ARCHITECTURE_TABLES):
+            repo.connection.execute('DROP TABLE '+table)
         for table in ('study_guide_runs', 'self_assessment_entries', 'self_assessment_batches'):
             repo.connection.execute('DROP TABLE '+table)
         repo.connection.execute('DROP TABLE workbench_note_origins')
@@ -392,7 +394,7 @@ def test_schema4_backup_preserves_ten_tables_and_ddl_failure_rolls_back(tmp_path
     monkeypatch.setattr(migrations, 'WORKBENCH', original)
     with SQLiteRepository(path) as repo:
         report = repo.migration_report
-        assert report['from_version'] == 4 and report['to_version'] == 6
+        assert report['from_version'] == 4 and report['to_version'] == 8
         assert migrations.preserved_snapshot(repo.connection, columns)[0] == before
     with sqlite3.connect(report['backup']) as db:
         assert db.execute('PRAGMA user_version').fetchone()[0] == 4
