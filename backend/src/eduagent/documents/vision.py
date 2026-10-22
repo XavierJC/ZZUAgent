@@ -22,6 +22,12 @@ class VisionSettings:
 
 
 def render_pages(path, pages):
+    with path.open('rb') as f: is_pdf=f.read(5)==b'%PDF-'
+    if not is_pdf:
+        from eduagent.documents.parsers.image import image_bytes
+        if pages != [1]: raise DocumentError('invalid_document')
+        raw,size=image_bytes(path)
+        return {'images':[dict(page_number=1,image_base64=base64.b64encode(raw).decode('ascii'),kind='image',width=size[0],height=size[1])]}
     import pypdfium2 as pdfium
     images = []
     with pdfium.PdfDocument(path) as pdf:
@@ -91,4 +97,6 @@ def transcribe(client, image):
                   value['transcription_md'], dict(page_number=image['page_number']),
                   warnings=['model_extraction_unverified', *value['warnings']])
     result.update(interpretation_md=value['interpretation_md'], origin='deepseek_vision')
+    if image.get('kind')=='image':
+        result.update(kind='image',location=dict(image_number=1,region=[0,0,image['width'],image['height']]))
     return result, dict(prompt_tokens=reply.prompt_tokens, completion_tokens=reply.completion_tokens)

@@ -209,7 +209,7 @@ describe('workbench interface', () => {
     api.note.mockResolvedValue({ id: savedId, title: '助教回答', content_md: '$w$ 原回答', revision: 1, knowledge_point_ids: [], content_hash: 'h', index_status: 'ready',
       generation_origin: { request_id: 'run-1', original_revision: 1, generated_at: '2026-10-20T08:00:00Z', edited: false } })
     wrapper = mount(App, { props: { client: api, store: memoryStore({ student_id: 'learner-test' }) } }); await flushPromises()
-    await wrapper.findAll('nav button').find(b => b.text() === '资料学习工作台').trigger('click'); await flushPromises()
+    await wrapper.findAll('nav button').find(b => b.text() === 'AI助教').trigger('click'); await flushPromises()
     await wrapper.findAll('.wb-answer > button')[0].trigger('click'); await flushPromises()
     expect(api.note).toHaveBeenCalledWith('learner-test', savedId)
     expect(wrapper.get('#note-title').element.value).toBe('助教回答')

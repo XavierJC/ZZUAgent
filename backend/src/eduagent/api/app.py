@@ -32,11 +32,15 @@ from eduagent.api.self_assessments import self_assessments_router
 from eduagent.api.study_guides import study_guides_router
 from eduagent.api.documents import documents_router
 from eduagent.api.architectures import architectures_router
+from eduagent.api.personal_bank import personal_bank_router
 from eduagent.domain.architecture import ArchitectureError
 from eduagent.api.upload_limit import DocumentBodyLimit
 from eduagent.documents.models import DocumentError
 from eduagent.documents.coordinator import DocumentCoordinator
 from eduagent.services.documents import DocumentsService
+from eduagent.services.personal_bank import PersonalBankService
+from eduagent.services.question_extraction import QuestionExtractionService
+from eduagent.documents.extraction_coordinator import ExtractionCoordinator
 from eduagent.services.guidance import LearningContextChanged
 from eduagent.services.knowledge import CourseSources, SourceChanged, IndexUnavailable
 from eduagent.services.note_index import NoteIndexer
@@ -49,7 +53,7 @@ from eduagent.storage.sqlite import SQLiteRepository
 logger = logging.getLogger(__name__)
 
 
-def create_app(settings: APISettings | None = None, *, document_runner=None, document_vision_factory=None) -> FastAPI:
+def create_app(settings: APISettings | None = None, *, document_runner=None, document_vision_factory=None, extraction_client_factory=None) -> FastAPI:
     settings = settings or APISettings.from_environment()
     catalog: Catalog | None = None
     course_index = None
@@ -74,9 +78,11 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
                 course_sources = CourseSources(course_index, settings.data_dir / 'materials')
         settings.document_dir.mkdir(parents=True, exist_ok=True)
         coordinator = DocumentCoordinator(document_service, settings.document_dir, document_runner, document_vision_factory)
+        extraction_coordinator = ExtractionCoordinator(extraction_factory)
         try:
             yield
         finally:
+            extraction_coordinator.close()
             coordinator.close()
             catalog = None
             course_index = None
@@ -103,6 +109,14 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
         with SQLiteRepository(settings.db_path, allow_upgrade=False) as repository:
             yield DocumentsService(repository, settings.document_dir, vision_enabled=settings.document_vision_enabled, agent_settings=settings.agent)
 
+    def extraction_service(learning):
+        docs=DocumentsService(learning.repository,settings.document_dir,vision_enabled=settings.document_vision_enabled,agent_settings=settings.agent)
+        return QuestionExtractionService(PersonalBankService(learning,settings.data_dir/'materials'),settings.agent,docs,extraction_client_factory)
+
+    @contextmanager
+    def extraction_factory():
+        with learning_service() as learning:yield extraction_service(learning)
+
     def mastery_view(service: LearningService, student_id: str) -> MasteryResponse:
         snapshot = service.snapshot(student_id)
         return MasteryResponse(
@@ -126,6 +140,7 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
     app.include_router(study_guides_router(learning_service, lambda: course_sources, settings.retrieval_enabled, settings.agent))
     app.include_router(documents_router(document_service, settings))
     app.include_router(architectures_router(learning_service))
+    app.include_router(personal_bank_router(learning_service,settings.data_dir/'materials',extraction_service))
 
     @app.exception_handler(ArchitectureError)
     async def architecture_error(request: Request, exc: ArchitectureError):

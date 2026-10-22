@@ -8,6 +8,8 @@ def parse(path, kind):
         from .pdf import extract
     elif kind == 'pptx':
         from .pptx import extract
+    elif kind in ('png','jpg','jpeg','webp'):
+        from .image import extract
     else:
         from .text import extract
     return extract(path, kind)

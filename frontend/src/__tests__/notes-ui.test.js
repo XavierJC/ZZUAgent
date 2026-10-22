@@ -45,7 +45,7 @@ describe('notes page integration', () => {
   it('protects unsaved work across pages and identity changes with a keyboard accessible dialog', async () => {
     const api = { ...client(), ...notesApi() }; await openNotes(api, notesStore())
     await button('新建笔记').trigger('click'); await wrapper.get('#note-content').setValue('retain this draft')
-    const history = button('学习记录', 'nav button'); history.element.focus(); await history.trigger('click'); await flushPromises()
+    const history = button('学习概览', 'nav button'); history.element.focus(); await history.trigger('click'); await flushPromises()
     const dialog = wrapper.get('[role="dialog"]')
     expect(dialog.attributes('aria-modal')).toBe('true')
     expect(document.activeElement).toBe(dialog.get('[data-cancel]').element)
@@ -56,7 +56,7 @@ describe('notes page integration', () => {
     expect(document.activeElement).toBe(history.element)
     expect(wrapper.get('#note-content').element.value).toBe('retain this draft')
     await history.trigger('click'); await button('保留本机草稿并继续').trigger('click'); await flushPromises()
-    expect(wrapper.find('.history-panel').exists()).toBe(true)
+    expect(wrapper.find('.learning-grid').exists()).toBe(true)
     await button('我的笔记', 'nav button').trigger('click'); await flushPromises()
     // Returning from another tab still acknowledges the retained dirty editor.
     if (wrapper.find('[role="dialog"]').exists()) { await button('保留本机草稿并继续').trigger('click'); await flushPromises() }

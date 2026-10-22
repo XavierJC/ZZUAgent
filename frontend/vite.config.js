@@ -9,5 +9,5 @@ export default defineConfig({
     strictPort: true,
     proxy: { '/api': 'http://127.0.0.1:8000', '/health': 'http://127.0.0.1:8000' },
   },
-  test: { environment: 'jsdom', restoreMocks: true, clearMocks: true },
+  test: { setupFiles: ['./src/__tests__/setup.js'], environment: 'jsdom', restoreMocks: true, clearMocks: true },
 })

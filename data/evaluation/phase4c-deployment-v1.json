@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T11:25:41.465657+00:00",
+  "schema": 9,
+  "tables": 34,
+  "paths": 62,
+  "assets": [
+    "/assets/index-C_iJy3E7.js",
+    "/assets/index-DYkU296n.css"
+  ],
+  "health": "ok",
+  "formal_question_count": 10,
+  "all_original_27_tables_unchanged": true,
+  "original_files_unchanged": true,
+  "previous_evaluations_and_course_data_unchanged": true,
+  "previous_data_files_verified": 69,
+  "new_phase4c_reports_excluded_from_original_inventory": true,
+  "new_tables_counts": {
+    "course_resources": 0,
+    "question_extractions": 0,
+    "personal_questions": 0,
+    "personal_question_revisions": 0,
+    "personal_practice_sessions": 0,
+    "personal_practice_attempts": 0,
+    "personal_bank_operations": 0
+  },
+  "catalogue_existing_document_visible": true,
+  "vision_manually_enabled": true,
+  "vision_model_calls_before_phase4c": 4,
+  "vision_model_calls_in_production": 4,
+  "new_vision_calls": 0,
+  "real_model_calls": 0,
+  "browser_manual": "not_performed",
+  "browser_limitation": "Prior localhost automation denial; no workaround attempted",
+  "integrity": "ok",
+  "foreign_key_errors": 0
+}

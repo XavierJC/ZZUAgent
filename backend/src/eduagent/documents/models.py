@@ -6,7 +6,7 @@ from uuid import UUID
 import re
 
 PARSER_VERSION = 'course-documents-v1'
-FORMATS = {'pdf', 'pptx', 'md', 'txt'}
+FORMATS = {'pdf', 'pptx', 'md', 'txt', 'png', 'jpg', 'jpeg', 'webp'}
 ROLES = {'teaching_slides', 'textbook', 'framework', 'handout'}
 MAX_FILE = 20 * 1024 * 1024
 MAX_TEXT_FILE = 2 * 1024 * 1024
@@ -20,7 +20,7 @@ MAX_DOCUMENTS = 25
 
 MESSAGES = {
     'document_not_found': '当前学习标识下没有该资料',
-    'unsupported_document_type': '仅支持PDF、PPTX、Markdown和TXT',
+    'unsupported_document_type': '支持PDF、PPTX、Markdown、TXT和PNG/JPEG/WebP图片',
     'document_too_large': '文件、解析内容或保留资料超过限额',
     'invalid_document': '文件损坏或格式与内容不匹配',
     'invalid_encoding': '文本须为有效UTF-8编码',
@@ -41,8 +41,8 @@ MESSAGES = {
     'document_storage_unavailable': '资料文件暂时不可保存，请检查磁盘',
     'parse_interrupted': '解析多次中断，请显式重试',
     'vision_disabled': '页面视觉解析尚未启用；本地解析仍可使用',
-    'external_consent_required': '需要本轮明确同意发送所选PDF页面至DeepSeek',
-    'vision_requires_pdf': '本阶段视觉解析仅支持选定PDF页面',
+    'external_consent_required': '需要本轮明确同意发送所选PDF页面或图片至DeepSeek',
+    'vision_requires_pdf': '视觉解析仅支持选定PDF页面或PNG/JPEG/WebP图片',
     'execution_unconfirmed': '无法确认模型是否已执行；请查看原记录，不自动重发',
     'invalid_vision_output': '视觉解析输出不完整或不符合约定，原件及本地解析保留',
 }

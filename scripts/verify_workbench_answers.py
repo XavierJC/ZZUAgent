@@ -236,7 +236,7 @@ def verify(output):
         assert learning_facts() == baseline
         check('restart_restores_original_answer_without_model_retry')
         report = {'verified_at': datetime.now(timezone.utc).isoformat(), 'passed': True, 'checks': checks,
-                  'schema': 8, 'server_starts': starts, 'simulated_model_calls': len(calls()), 'real_model_calls': 0,
+                  'schema': 10, 'server_starts': starts, 'simulated_model_calls': len(calls()), 'real_model_calls': 0,
                   'test_directory': str(directory), 'production_database_writes': 0, 'browser_manual_validation': 'not_performed'}
         output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf8')
         print(json.dumps(report))

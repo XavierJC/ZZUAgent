@@ -111,6 +111,22 @@ class DocumentsService:
         path = self.files.verified(version['storage_key'], version['content_hash'], version['size_bytes'])
         return path, version['file_name']
 
+    def preview(self,student,key,version_id,page):
+        """Re-encode one private original page in the existing bounded worker."""
+        from eduagent.documents.limits import run_worker
+        import base64
+        with self.repository.transaction():
+            doc=self._document(student,key);version=self.storage.version(doc,version_id)
+            if version['format'] not in ('pdf','png','jpg','jpeg','webp'):raise DocumentError('unsupported_document_type',415)
+        path=self.files.verified(**self._file_args(version))
+        a,manifest=self.files.stage();b,output=self.files.stage()
+        try:
+            manifest.write_text(encode(dict(path=str(path),mode='render',pages=[page])),encoding='utf-8')
+            payload=run_worker(manifest,output)
+            return base64.b64decode(payload['images'][0]['image_base64'],validate=True)
+        finally:
+            self.files.discard_stage(a);self.files.discard_stage(b)
+
     def _quota(self, student, byte_count, creating):
         active = self.db.execute('SELECT count(*) FROM course_documents WHERE student_id=? AND deleted_at IS NULL', (student,)).fetchone()[0]
         used = self.db.execute('SELECT coalesce(sum(size_bytes),0) FROM document_versions WHERE student_id=?', (student,)).fetchone()[0]
@@ -220,7 +236,7 @@ class DocumentsService:
                 if body.get('consent_external') is not True:
                     raise DocumentError('external_consent_required', 422)
                 version = self.storage.version(doc)
-                if version['format'] != 'pdf':
+                if version['format'] not in ('pdf','png','jpg','jpeg','webp'):
                     raise DocumentError('vision_requires_pdf')
                 if body['version_id'] != version['id']:
                     raise DocumentError('revision_conflict', 409)

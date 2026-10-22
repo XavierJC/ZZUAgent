@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T13:12:43.218571+00:00",
+  "schema": 10,
+  "tables": 36,
+  "api_paths": 67,
+  "assets": [
+    "/assets/index-RoP3cRHk.js",
+    "/assets/index-BuuabxLX.css"
+  ],
+  "original_34_tables_unchanged": true,
+  "formal_files_unchanged": true,
+  "counts": {
+    "personal_questions": 12,
+    "notes": 5,
+    "course_documents": 2,
+    "attempts": 27
+  },
+  "production_new_model_calls": 0,
+  "production_extraction_tasks": 0,
+  "historical_document_vision_calls": 4,
+  "model_capabilities": {
+    "enabled": true,
+    "provider": "DeepSeek",
+    "model": "deepseek-flash",
+    "max_units": 3,
+    "max_characters": 18000,
+    "max_questions": 20,
+    "max_calls": 2,
+    "max_output_tokens": 10000
+  },
+  "browser_manual": "not_performed",
+  "browser_limitation": "Earlier browser access to localhost was denied; no bypass using another browser or automation tool.",
+  "integrity": "ok",
+  "foreign_key_errors": 0
+}

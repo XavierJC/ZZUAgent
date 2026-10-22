@@ -26,10 +26,11 @@ class ModelReply:
 class DeepSeekClient:
     ENDPOINT = "https://api.deepseek.com/chat/completions"
 
-    def __init__(self, settings: AgentSettings, transport=None, *, json_output=False):
+    def __init__(self, settings: AgentSettings, transport=None, *, json_output=False, max_content_chars=12000):
         self.settings = settings
         self.transport = transport
         self.json_output = json_output
+        self.max_content_chars = max_content_chars
 
     def complete(self, messages: list[dict], tools: list[dict], required: bool = False) -> ModelReply:
         payload = {
@@ -73,7 +74,7 @@ class DeepSeekClient:
                 raise ModelError(code, finish_reason=reason, prompt_tokens=prompt_tokens, completion_tokens=completion_tokens)
             message = choice["message"]
             content = message.get("content")
-            if content is not None and (not isinstance(content, str) or len(content) > 12000):
+            if content is not None and (not isinstance(content, str) or len(content) > self.max_content_chars):
                 raise ModelError("invalid_model_response")
             calls = message.get("tool_calls") or []
             if not isinstance(calls, list) or len(calls) > 4:

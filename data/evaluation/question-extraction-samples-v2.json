@@ -1,0 +1,405 @@
+{
+  "version": "self-created-24-v1",
+  "source": "自建工程样本，未由用户人工审阅，不代表真实试卷分布",
+  "samples": [
+    {
+      "id": "q01",
+      "raw": "1. 单选题：梯度下降用于最小化损失时，参数应沿哪个方向更新？\nA. 负梯度方向\nB. 正梯度方向\n答案：A",
+      "reference": {
+        "question_type": "single_choice",
+        "essential": [
+          "负梯度方向",
+          "正梯度方向"
+        ],
+        "options": 2,
+        "answer": "A",
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q02",
+      "raw": "2. 简答：比较训练误差和测试误差。\nA. 解释训练误差。\nB. 解释测试误差。",
+      "reference": {
+        "question_type": "short_answer",
+        "essential": [
+          "解释训练误差",
+          "解释测试误差"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q03",
+      "raw": "3. 计算：给定 $f(x)=x^2+3x$，求 $f'(2)$。",
+      "reference": {
+        "question_type": "calculation",
+        "essential": [
+          "x^2+3x",
+          "f'(2)"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q04",
+      "raw": "4. 证明：若 $X^TX$ 正定，平方损失的最小解唯一。",
+      "reference": {
+        "question_type": "proof",
+        "essential": [
+          "X^TX",
+          "最小解唯一"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q05",
+      "raw": "5. 判断题：训练集准确率高总能保证测试集准确率高。\n答案：错误",
+      "reference": {
+        "question_type": "true_false",
+        "essential": [
+          "测试集准确率高"
+        ],
+        "options": 0,
+        "answer": "false",
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q06",
+      "raw": "6. 多选题：哪些方法可缓解过拟合？\nA. 正则化\nB. 增加可靠训练样本\nC. 一味增加模型复杂度\n答案：AB",
+      "reference": {
+        "question_type": "multiple_choice",
+        "essential": [
+          "正则化",
+          "可靠训练样本",
+          "模型复杂度"
+        ],
+        "options": 3,
+        "answer": [
+          "A",
+          "B"
+        ],
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q07",
+      "raw": "7. 填空题：二分类逻辑回归常用的激活函数是____。\n答案：sigmoid",
+      "reference": {
+        "question_type": "fill_blank",
+        "essential": [
+          "激活函数"
+        ],
+        "options": 0,
+        "answer": "sigmoid",
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q08",
+      "raw": "8. 简答：解释PCA为何在降维前通常需要中心化。",
+      "reference": {
+        "question_type": "short_answer",
+        "essential": [
+          "PCA",
+          "中心化"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q09",
+      "raw": "9. 单选题：学习率过大可能导致什么？\nA. 迭代发散\nB. 一定精确收敛",
+      "reference": {
+        "question_type": "single_choice",
+        "essential": [
+          "迭代发散",
+          "精确收敛"
+        ],
+        "options": 2,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q10",
+      "raw": "10. 计算题：给定样本 $(x,y)=(2,5)$，模型 $y=wx$，取 $w=1$。\n(1) 计算平方误差。\n(2) 求误差对 $w$ 的梯度。",
+      "reference": {
+        "question_type": "calculation",
+        "essential": [
+          "(2,5)",
+          "w=1",
+          "平方误差",
+          "梯度"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 2,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q11",
+      "raw": "11. 简答：如图所示两条学习曲线，请说明哪条可能过拟合；原题图像缺失。",
+      "reference": {
+        "question_type": "short_answer",
+        "essential": [
+          "学习曲线",
+          "过拟合",
+          "图像缺失"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": true
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q12",
+      "raw": "12. 题目：[无法辨认]，条件被遮挡，题型无法确定。",
+      "reference": {
+        "question_type": "unknown",
+        "essential": [
+          "条件被遮挡"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q13",
+      "raw": "13. 单选题：L2正则化常对应哪种惩罚？\nA. 参数平方和\nB. 参数绝对值和\n答案：A",
+      "reference": {
+        "question_type": "single_choice",
+        "essential": [
+          "参数平方和",
+          "参数绝对值和"
+        ],
+        "options": 2,
+        "answer": "A",
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q14",
+      "raw": "14. 简答题：A. 描述欠拟合。B. 描述过拟合。不要将A/B任务误作备选项。",
+      "reference": {
+        "question_type": "short_answer",
+        "essential": [
+          "描述欠拟合",
+          "描述过拟合"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q15",
+      "raw": "15. 判断题：归一化总会改变线性模型的表达能力。",
+      "reference": {
+        "question_type": "true_false",
+        "essential": [
+          "线性模型",
+          "表达能力"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q16",
+      "raw": "16. 多选题：哪些属于常见模型评估指标？\nA. 准确率\nB. 召回率\nC. F1\n答案：ABC",
+      "reference": {
+        "question_type": "multiple_choice",
+        "essential": [
+          "准确率",
+          "召回率",
+          "F1"
+        ],
+        "options": 3,
+        "answer": [
+          "A",
+          "B",
+          "C"
+        ],
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q17",
+      "raw": "17. 证明题：对任意实数 $a,b$，有 $(a-b)^2\\geq0$。",
+      "reference": {
+        "question_type": "proof",
+        "essential": [
+          "(a-b)^2",
+          "a,b"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q18",
+      "raw": "18. 填空题：精确率的分母是____。",
+      "reference": {
+        "question_type": "fill_blank",
+        "essential": [
+          "精确率",
+          "分母"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q19",
+      "raw": "19. 计算：给定混淆矩阵 TP=8, FP=2, FN=3, TN=7，计算精确率与召回率。",
+      "reference": {
+        "question_type": "calculation",
+        "essential": [
+          "TP=8",
+          "FP=2",
+          "FN=3",
+          "TN=7"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q20",
+      "raw": "20. 简答：表格含两组实验，A组训练误差0.1/测试误差0.4，B组训练误差0.2/测试误差0.25。比较泛化表现。",
+      "reference": {
+        "question_type": "short_answer",
+        "essential": [
+          "0.1",
+          "0.4",
+          "0.2",
+          "0.25",
+          "泛化表现"
+        ],
+        "options": 0,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q21",
+      "raw": "21. 单选题：交叉验证主要用于什么？\nA. 估计泛化性能\nB. 保证零误差\n答案：A",
+      "reference": {
+        "question_type": "single_choice",
+        "essential": [
+          "估计泛化性能",
+          "保证零误差"
+        ],
+        "options": 2,
+        "answer": "A",
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q22",
+      "raw": "22. 简答：为什么不能用测试集选择超参数？\n答案：会泄漏测试信息，导致评估偏乐观。",
+      "reference": {
+        "question_type": "short_answer",
+        "essential": [
+          "测试集",
+          "超参数"
+        ],
+        "options": 0,
+        "answer": "会泄漏测试信息，导致评估偏乐观。",
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q23",
+      "raw": "23. 多选题：哪些是监督学习任务？\nA. 带标签分类\nB. 带标签回归\nC. 无标签聚类",
+      "reference": {
+        "question_type": "multiple_choice",
+        "essential": [
+          "带标签分类",
+          "带标签回归",
+          "无标签聚类"
+        ],
+        "options": 3,
+        "answer": null,
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    },
+    {
+      "id": "q24",
+      "raw": "24. 选择题：若损失梯度为0，哪个说法更谨慎？\nA. 可能位于驻点\nB. 必定全局最小\n答案：A",
+      "reference": {
+        "question_type": "single_choice",
+        "essential": [
+          "可能位于驻点",
+          "必定全局最小"
+        ],
+        "options": 2,
+        "answer": "A",
+        "subquestions": 0,
+        "dependencies": false
+      },
+      "annotation_status": "developer_self_created_reference_not_user_reviewed"
+    }
+  ]
+}

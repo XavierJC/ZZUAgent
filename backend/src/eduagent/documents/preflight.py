@@ -15,6 +15,11 @@ def signature(path, kind):
         raise DocumentError('invalid_document')
     if kind == 'pptx' and not head.startswith(b'PK\x03\x04'):
         raise DocumentError('invalid_document')
+    if kind in ('png','jpg','jpeg','webp'):
+        valid = (head.startswith(b'\x89PNG\r\n\x1a\n') if kind=='png' else
+                 head.startswith(b'\xff\xd8\xff') if kind in ('jpg','jpeg') else
+                 head.startswith(b'RIFF') and head[8:12]==b'WEBP')
+        if not valid: raise DocumentError('invalid_document')
     if kind in ('md', 'txt'):
         try:
             text = path.read_bytes().decode('utf-8-sig')

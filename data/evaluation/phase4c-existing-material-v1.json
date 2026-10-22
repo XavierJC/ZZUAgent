@@ -1,0 +1,50 @@
+{
+  "verified_at": "2026-10-22T11:17:35.269536+00:00",
+  "read_only": true,
+  "parses": [
+    {
+      "document_id": "0a5c3a77-2a19-4f06-9420-186d9b6f913a",
+      "format": "pdf",
+      "mode": "local",
+      "run_id": "b6e97055-c9ec-45d7-be00-0f1409cdd248",
+      "prior_model_calls": 0,
+      "units": 3,
+      "draft_candidates": 21,
+      "single_choice": 10,
+      "true_false": 3,
+      "source_answers": 0,
+      "requires_human_review": true
+    },
+    {
+      "document_id": "0a5c3a77-2a19-4f06-9420-186d9b6f913a",
+      "format": "pdf",
+      "mode": "vision",
+      "run_id": "f33b7365-e616-456b-ab59-751488361446",
+      "prior_model_calls": 2,
+      "units": 2,
+      "draft_candidates": 18,
+      "single_choice": 10,
+      "true_false": 1,
+      "source_answers": 0,
+      "requires_human_review": true
+    },
+    {
+      "document_id": "0a5c3a77-2a19-4f06-9420-186d9b6f913a",
+      "format": "pdf",
+      "mode": "vision",
+      "run_id": "55784e01-528b-4397-9ad7-3d667f7c200a",
+      "prior_model_calls": 2,
+      "units": 2,
+      "draft_candidates": 12,
+      "single_choice": 8,
+      "true_false": 2,
+      "source_answers": 0,
+      "requires_human_review": true
+    }
+  ],
+  "production_questions_written": 0,
+  "new_model_calls": 0,
+  "historical_vision_calls": 4,
+  "private_text_retained_in_report": false,
+  "accuracy": "not_human_verified"
+}

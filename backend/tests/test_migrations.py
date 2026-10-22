@@ -13,7 +13,7 @@ def legacy_database(path, catalog, version=2):
         service.register("existing", ("logistic_regression",))
         first = service.next_action("existing")
         service.submit("existing", first.decision_id, "B", "existing-answer")
-        for table in reversed(migrations.DOCUMENT_TABLES + migrations.ARCHITECTURE_TABLES):
+        for table in reversed(migrations.DOCUMENT_TABLES + migrations.ARCHITECTURE_TABLES + migrations.BANK_TABLES + migrations.EXTRACTION_TABLES):
             repository.connection.execute(f'DROP TABLE {table}')
         for table in ("study_guide_runs", "self_assessment_entries", "self_assessment_batches", "workbench_note_origins", "workbench_runs", "note_chunks", "note_index_state", "note_knowledge_points", "notes"):
             repository.connection.execute(f"DROP TABLE {table}")
@@ -29,10 +29,10 @@ def test_migration_backs_up_and_preserves_all_legacy_facts(tmp_path, catalog, ve
     expected = legacy_database(path, catalog, version)
     with SQLiteRepository(path) as repository:
         report = repository.migration_report
-        assert report["from_version"] == version and report["to_version"] == 8
+        assert report["from_version"] == version and report["to_version"] == 10
         assert report["learning_facts_verified"]
         assert all(migrations.fact_snapshot(repository.connection)[key] == value for key, value in expected.items())
-        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 8
+        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 10
         assert LearningService(catalog, repository).snapshot("existing").revision == 1
         backup_path = report["backup"]
     with sqlite3.connect(backup_path) as backup:

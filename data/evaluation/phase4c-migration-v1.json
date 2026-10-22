@@ -1,0 +1,139 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T11:12:56.536878+00:00",
+  "migration": {
+    "from_version": 8,
+    "to_version": 9,
+    "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v8-d960b38b4843.sqlite3",
+    "changed": true,
+    "learning_facts_verified": true,
+    "original_tables_verified": true,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 7,
+        "sha256": "d2d3c86a875e8fb9c060d2066a19100fc8367ccd96a98ebb4d160c118e63c7a6"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 21,
+        "sha256": "99f30324de4d4b41fe2a557482693befb78e28633e6ef9a2ff5921dae4bf0d54"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 1,
+        "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+      },
+      "courses": {
+        "rows": 1,
+        "sha256": "3488ed80335f9507f60cb6a1532668cdfdeadcc28ba3ffe22cacb15dfec71ac2"
+      },
+      "course_documents": {
+        "rows": 1,
+        "sha256": "ee7fa557a5d17eb3afc42e67095d53087d2d5523ba191fc239a8cb3f71534d8b"
+      },
+      "document_versions": {
+        "rows": 1,
+        "sha256": "8effb0f69ed9b76d9955ec16502a374eeeb7326ac8c01b78f1861c2affcd9610"
+      },
+      "document_parse_runs": {
+        "rows": 3,
+        "sha256": "e0826303992d121c456e6bc25c02630398cc4b2cadb25c2f5f79f61326131efd"
+      },
+      "document_units": {
+        "rows": 7,
+        "sha256": "383652393002962713654380bade9c6f2481d3fcbb0b82c698fae6243d1ea7b6"
+      },
+      "document_operations": {
+        "rows": 4,
+        "sha256": "172c1010a339a856289982a43ca252d1694614a3fcd91bb631f4be5fe5f7c042"
+      },
+      "knowledge_architectures": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_entities": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_drafts": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_versions": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_candidate_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_operations": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    }
+  },
+  "old_tables": 27,
+  "new_tables": 34,
+  "original_table_data_unchanged": true,
+  "original_files_unchanged": true,
+  "original_evaluations_and_course_files_unchanged": true,
+  "backup_sha256": "637b2b39bcbae954aa745fa29594d75714fea3ba106fbeb4c0c1a5edbfada7b0",
+  "code_archive": "D:\\ZZUAgent\\data\\local\\phase4c-prechange-0259bc2a\\code-before.zip",
+  "code_archive_sha256": "463987d03429ecda3308dc0e874bb79089631c34778cd642f48ecf41abe9508a",
+  "old_code_accepts_restored8": true,
+  "old_code_rejects9": true,
+  "rollback_directory": "D:\\ZZUAgent\\data\\local\\phase4c-rollback-audit-cfed5c2e",
+  "upgraded_copy": "D:\\ZZUAgent\\data\\local\\phase4c-rollback-audit-cfed5c2e\\preserved-schema9.sqlite3",
+  "live_database_overwritten": false,
+  "format_constraint_change": "document_versions rebuilt transactionally to allow PNG/JPEG/WebP; original rows/columns preserved",
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "real_model_calls": 0
+}

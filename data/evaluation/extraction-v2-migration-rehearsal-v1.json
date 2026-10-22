@@ -1,0 +1,695 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T12:56:21.485255+00:00",
+  "migration": {
+    "from_version": 9,
+    "to_version": 10,
+    "backup": "D:\\ZZUAgent\\data\\local\\extraction-v2-rehearsal.before-v9-5c7d489d9746.sqlite3",
+    "changed": true,
+    "learning_facts_verified": true,
+    "original_tables_verified": true,
+    "facts": {
+      "metadata": {
+        "rows": 1,
+        "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+      },
+      "students": {
+        "rows": 12,
+        "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+      },
+      "mastery": {
+        "rows": 14,
+        "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+      },
+      "decisions": {
+        "rows": 37,
+        "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+      },
+      "attempts": {
+        "rows": 27,
+        "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+      },
+      "tutor_runs": {
+        "rows": 7,
+        "sha256": "d2d3c86a875e8fb9c060d2066a19100fc8367ccd96a98ebb4d160c118e63c7a6"
+      },
+      "notes": {
+        "rows": 5,
+        "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+      },
+      "note_knowledge_points": {
+        "rows": 6,
+        "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+      },
+      "note_index_state": {
+        "rows": 5,
+        "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+      },
+      "note_chunks": {
+        "rows": 11,
+        "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+      },
+      "workbench_runs": {
+        "rows": 21,
+        "sha256": "99f30324de4d4b41fe2a557482693befb78e28633e6ef9a2ff5921dae4bf0d54"
+      },
+      "workbench_note_origins": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "self_assessment_entries": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "study_guide_runs": {
+        "rows": 1,
+        "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+      },
+      "courses": {
+        "rows": 1,
+        "sha256": "3488ed80335f9507f60cb6a1532668cdfdeadcc28ba3ffe22cacb15dfec71ac2"
+      },
+      "course_documents": {
+        "rows": 2,
+        "sha256": "aed9ad2395ce0f809744fc73beffe7b4291e43ca4542dd48769a2fa908c8c98c"
+      },
+      "document_versions": {
+        "rows": 2,
+        "sha256": "c9a1f369c246e1255d84e1825e246e6131e10fe1136b3ac8692553285590dd4c"
+      },
+      "document_parse_runs": {
+        "rows": 4,
+        "sha256": "ef5480662c2ec39419a7caa5347e7360a57ac144295420e662f990c6b43a9932"
+      },
+      "document_units": {
+        "rows": 9,
+        "sha256": "907e47a6b979fd3d8becda4625b958be2dff1c0641858f3939bdbf516db6448b"
+      },
+      "document_operations": {
+        "rows": 5,
+        "sha256": "666b2286c55d554131544a409cca6a624cb5ec65a88cd8c982484c37940cec37"
+      },
+      "knowledge_architectures": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_entities": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_drafts": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_versions": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_candidate_batches": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_operations": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "course_resources": {
+        "rows": 1,
+        "sha256": "08440e9caef12f707a67d8a52c73a71cd5d4df20f3652e07b366c846fdf7c2f9"
+      },
+      "question_extractions": {
+        "rows": 1,
+        "sha256": "10b3f1338cb6bf7b380adf90d03aa0fcc756809cda3f4e75ad10f17ac811d923"
+      },
+      "personal_questions": {
+        "rows": 12,
+        "sha256": "dda19fe6aa69f6a1b7a7b77bf72035fd4ee603d7486a081b38bada3d38e13181"
+      },
+      "personal_question_revisions": {
+        "rows": 12,
+        "sha256": "d96f95bb5dfd7d4ee3450c83a04e1920f2ccb791178baa154f33b4b1e6d63135"
+      },
+      "personal_practice_sessions": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "personal_practice_attempts": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "personal_bank_operations": {
+        "rows": 1,
+        "sha256": "b42887738b5663486b6638282efd115cd29c0f2164e5e091c83bc10b7514b1ac"
+      }
+    }
+  },
+  "old_tables": 34,
+  "new_tables": 36,
+  "original_table_summaries": {
+    "metadata": {
+      "rows": 1,
+      "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+    },
+    "students": {
+      "rows": 12,
+      "sha256": "26f5333af9a3fd78b98b03c0b7569a9aa63d59a89621ba6bc7ee03fee61f439e"
+    },
+    "mastery": {
+      "rows": 14,
+      "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+    },
+    "decisions": {
+      "rows": 37,
+      "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+    },
+    "attempts": {
+      "rows": 27,
+      "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+    },
+    "tutor_runs": {
+      "rows": 7,
+      "sha256": "d2d3c86a875e8fb9c060d2066a19100fc8367ccd96a98ebb4d160c118e63c7a6"
+    },
+    "notes": {
+      "rows": 5,
+      "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+    },
+    "note_knowledge_points": {
+      "rows": 6,
+      "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+    },
+    "note_index_state": {
+      "rows": 5,
+      "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+    },
+    "note_chunks": {
+      "rows": 11,
+      "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+    },
+    "workbench_runs": {
+      "rows": 21,
+      "sha256": "99f30324de4d4b41fe2a557482693befb78e28633e6ef9a2ff5921dae4bf0d54"
+    },
+    "workbench_note_origins": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "self_assessment_batches": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "self_assessment_entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "study_guide_runs": {
+      "rows": 1,
+      "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+    },
+    "courses": {
+      "rows": 1,
+      "sha256": "3488ed80335f9507f60cb6a1532668cdfdeadcc28ba3ffe22cacb15dfec71ac2"
+    },
+    "course_documents": {
+      "rows": 2,
+      "sha256": "aed9ad2395ce0f809744fc73beffe7b4291e43ca4542dd48769a2fa908c8c98c"
+    },
+    "document_versions": {
+      "rows": 2,
+      "sha256": "c9a1f369c246e1255d84e1825e246e6131e10fe1136b3ac8692553285590dd4c"
+    },
+    "document_parse_runs": {
+      "rows": 4,
+      "sha256": "ef5480662c2ec39419a7caa5347e7360a57ac144295420e662f990c6b43a9932"
+    },
+    "document_units": {
+      "rows": 9,
+      "sha256": "907e47a6b979fd3d8becda4625b958be2dff1c0641858f3939bdbf516db6448b"
+    },
+    "document_operations": {
+      "rows": 5,
+      "sha256": "666b2286c55d554131544a409cca6a624cb5ec65a88cd8c982484c37940cec37"
+    },
+    "knowledge_architectures": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_entities": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_drafts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_versions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_candidate_batches": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_operations": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "course_resources": {
+      "rows": 1,
+      "sha256": "08440e9caef12f707a67d8a52c73a71cd5d4df20f3652e07b366c846fdf7c2f9"
+    },
+    "question_extractions": {
+      "rows": 1,
+      "sha256": "10b3f1338cb6bf7b380adf90d03aa0fcc756809cda3f4e75ad10f17ac811d923"
+    },
+    "personal_questions": {
+      "rows": 12,
+      "sha256": "dda19fe6aa69f6a1b7a7b77bf72035fd4ee603d7486a081b38bada3d38e13181"
+    },
+    "personal_question_revisions": {
+      "rows": 12,
+      "sha256": "d96f95bb5dfd7d4ee3450c83a04e1920f2ccb791178baa154f33b4b1e6d63135"
+    },
+    "personal_practice_sessions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "personal_practice_attempts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "personal_bank_operations": {
+      "rows": 1,
+      "sha256": "b42887738b5663486b6638282efd115cd29c0f2164e5e091c83bc10b7514b1ac"
+    }
+  },
+  "original_columns": {
+    "metadata": [
+      "key",
+      "value"
+    ],
+    "students": [
+      "id",
+      "goals_json",
+      "revision",
+      "created_at"
+    ],
+    "mastery": [
+      "student_id",
+      "knowledge_id",
+      "probability",
+      "attempts",
+      "last_correct"
+    ],
+    "decisions": [
+      "id",
+      "student_id",
+      "revision",
+      "payload_json",
+      "created_at"
+    ],
+    "attempts": [
+      "event_id",
+      "student_id",
+      "decision_id",
+      "question_id",
+      "knowledge_id",
+      "selected_answer",
+      "correct",
+      "prior",
+      "posterior",
+      "next_mastery",
+      "result_json",
+      "created_at"
+    ],
+    "tutor_runs": [
+      "id",
+      "student_id",
+      "state_revision",
+      "mode",
+      "payload_json",
+      "created_at"
+    ],
+    "notes": [
+      "id",
+      "student_id",
+      "course_id",
+      "title",
+      "content_md",
+      "revision",
+      "content_hash",
+      "created_via",
+      "created_at",
+      "updated_at",
+      "deleted_at"
+    ],
+    "note_knowledge_points": [
+      "note_id",
+      "knowledge_point_id"
+    ],
+    "note_index_state": [
+      "note_id",
+      "status",
+      "target_revision",
+      "indexed_revision",
+      "indexed_hash",
+      "indexer_version",
+      "error_code",
+      "chunk_count",
+      "updated_at",
+      "build_token",
+      "building_started_at"
+    ],
+    "note_chunks": [
+      "chunk_id",
+      "note_id",
+      "student_id",
+      "course_id",
+      "revision",
+      "content_hash",
+      "ordinal",
+      "title",
+      "section",
+      "start_offset",
+      "end_offset",
+      "start_line",
+      "end_line",
+      "raw_md",
+      "content_text",
+      "chunk_hash",
+      "indexer_version"
+    ],
+    "workbench_runs": [
+      "request_id",
+      "student_id",
+      "course_id",
+      "request_hash",
+      "request_json",
+      "context_json",
+      "result_json",
+      "status",
+      "model_calls",
+      "created_at",
+      "updated_at"
+    ],
+    "workbench_note_origins": [
+      "request_id",
+      "note_id",
+      "original_revision",
+      "original_hash",
+      "generated_at",
+      "saved_at",
+      "citations_json"
+    ],
+    "self_assessment_batches": [
+      "request_id",
+      "student_id",
+      "course_id",
+      "assessment_revision",
+      "expected_revision",
+      "request_hash",
+      "payload_json",
+      "learning_revision_at_save",
+      "created_at"
+    ],
+    "self_assessment_entries": [
+      "id",
+      "batch_id",
+      "student_id",
+      "course_id",
+      "knowledge_id",
+      "level",
+      "confidence"
+    ],
+    "study_guide_runs": [
+      "request_id",
+      "student_id",
+      "course_id",
+      "request_hash",
+      "request_json",
+      "learning_revision",
+      "assessment_revision",
+      "context_json",
+      "snapshot_json",
+      "recommendations_json",
+      "result_json",
+      "status",
+      "model_calls",
+      "created_at",
+      "updated_at"
+    ],
+    "courses": [
+      "id",
+      "name"
+    ],
+    "course_documents": [
+      "id",
+      "student_id",
+      "course_id",
+      "title",
+      "material_role",
+      "source_note",
+      "local_rights_confirmed",
+      "revision",
+      "file_revision",
+      "parse_generation",
+      "current_version_id",
+      "current_parse_id",
+      "created_at",
+      "updated_at",
+      "deleted_at"
+    ],
+    "document_versions": [
+      "id",
+      "document_id",
+      "student_id",
+      "course_id",
+      "file_revision",
+      "file_name",
+      "format",
+      "size_bytes",
+      "content_hash",
+      "storage_key",
+      "created_at"
+    ],
+    "document_parse_runs": [
+      "id",
+      "document_id",
+      "version_id",
+      "student_id",
+      "course_id",
+      "generation",
+      "mode",
+      "status",
+      "expected_revision",
+      "parser_version",
+      "pages_json",
+      "external_consent",
+      "build_token",
+      "recovery_count",
+      "error_code",
+      "warnings_json",
+      "artifact_key",
+      "artifact_hash",
+      "artifact_bytes",
+      "unit_count",
+      "model_calls",
+      "usage_json",
+      "model",
+      "created_at",
+      "updated_at"
+    ],
+    "document_units": [
+      "id",
+      "run_id",
+      "version_id",
+      "document_id",
+      "student_id",
+      "course_id",
+      "ordinal",
+      "kind",
+      "title",
+      "text",
+      "content_md",
+      "interpretation_md",
+      "origin",
+      "location_json",
+      "blocks_json",
+      "warnings_json",
+      "content_hash"
+    ],
+    "document_operations": [
+      "student_id",
+      "course_id",
+      "request_id",
+      "request_hash",
+      "operation",
+      "document_id",
+      "result_json",
+      "created_at"
+    ],
+    "knowledge_architectures": [
+      "id",
+      "student_id",
+      "course_id",
+      "title",
+      "revision",
+      "published_version",
+      "created_at",
+      "updated_at"
+    ],
+    "knowledge_entities": [
+      "architecture_id",
+      "id",
+      "student_id",
+      "course_id",
+      "kind",
+      "created_at"
+    ],
+    "knowledge_drafts": [
+      "architecture_id",
+      "student_id",
+      "course_id",
+      "status",
+      "base_version",
+      "graph_json",
+      "updated_at"
+    ],
+    "knowledge_versions": [
+      "architecture_id",
+      "version",
+      "student_id",
+      "course_id",
+      "graph_json",
+      "graph_hash",
+      "sources_json",
+      "published_at"
+    ],
+    "knowledge_candidate_batches": [
+      "id",
+      "architecture_id",
+      "student_id",
+      "course_id",
+      "rule_version",
+      "graph_json",
+      "evidence_json",
+      "unclassified_json",
+      "created_at"
+    ],
+    "knowledge_operations": [
+      "student_id",
+      "course_id",
+      "request_id",
+      "architecture_id",
+      "request_hash",
+      "result_json",
+      "created_at"
+    ],
+    "course_resources": [
+      "id",
+      "student_id",
+      "course_id",
+      "source_type",
+      "source_id",
+      "resource_type",
+      "title",
+      "revision",
+      "links_json",
+      "content_md",
+      "created_at",
+      "updated_at"
+    ],
+    "question_extractions": [
+      "id",
+      "student_id",
+      "course_id",
+      "resource_id",
+      "source_version",
+      "source_json",
+      "warnings_json",
+      "rule_version",
+      "created_at"
+    ],
+    "personal_questions": [
+      "id",
+      "student_id",
+      "course_id",
+      "extraction_id",
+      "resource_id",
+      "source_version",
+      "source_json",
+      "payload_json",
+      "revision",
+      "status",
+      "created_at",
+      "updated_at"
+    ],
+    "personal_question_revisions": [
+      "question_id",
+      "revision",
+      "student_id",
+      "course_id",
+      "payload_json",
+      "status",
+      "review_json",
+      "created_at"
+    ],
+    "personal_practice_sessions": [
+      "id",
+      "student_id",
+      "course_id",
+      "question_id",
+      "question_revision",
+      "snapshot_json",
+      "source_json",
+      "status",
+      "created_at"
+    ],
+    "personal_practice_attempts": [
+      "session_id",
+      "student_id",
+      "course_id",
+      "selected_answer",
+      "correct",
+      "result_json",
+      "created_at"
+    ],
+    "personal_bank_operations": [
+      "student_id",
+      "course_id",
+      "request_id",
+      "request_hash",
+      "result_json",
+      "created_at"
+    ]
+  },
+  "original_tables_unchanged": true,
+  "original_files_unchanged": true,
+  "original_evaluations_unchanged": true,
+  "changed_since_start_retained": [],
+  "code_archive": "D:\\ZZUAgent\\data\\local\\extraction-v2-prechange-08c1caa3\\code-before.zip",
+  "rollback_directory": "D:\\ZZUAgent\\data\\local\\extraction-v2-rollback-2ddce2d0",
+  "restored_old_copy": "D:\\ZZUAgent\\data\\local\\extraction-v2-rollback-2ddce2d0\\restored-schema9.sqlite3",
+  "retained_upgraded_copy": "D:\\ZZUAgent\\data\\local\\extraction-v2-rollback-2ddce2d0\\preserved-schema10.sqlite3",
+  "old_code_accepts_restored9": true,
+  "old_code_rejects10": true,
+  "live_database_overwritten": false,
+  "integrity": "ok",
+  "foreign_key_errors": 0,
+  "backup_sha256": "787edb041f22a0503dc0e9f6600a8447d4b5f5b2ddfd1608b10059007c6122e1",
+  "formal_files": {
+    "data\\knowledge_points.json": "9d31eb1b3ef7a7c5294379e76773ed7b2d59f6609977548611b90c72a926266d",
+    "data\\questions.json": "d428fee5fa7e1d9ed8d4dc0c3db9be0f72a2091a1b51439e832c06c083971f08",
+    "data\\materials\\gradient_descent.md": "efe1e619b64a54e2ed1131806d53a8eeb1bc59651e9e06b02e467cc4f783f943",
+    "data\\materials\\linear_regression.md": "2b343df396cca67e0c489960ea3c338436156428e873faaa9cf3880a316aee8d",
+    "data\\materials\\logistic_regression.md": "37eac5d7be16c1171cd7660eb759bded2aa16da4fd04b1b6b50bfd8594d7fe6a",
+    "data\\materials\\manifest.json": "e4dc7df34cc361ab8d1c7b2fa7685d7c486e7c2f8e51c02fa6210af32c63dd73",
+    "data\\materials\\model_evaluation.md": "6ff4ca8940e89153921debad334af608c4f1eeefe7c0c03fd451187dc5bd84e0",
+    "data\\materials\\regularization.md": "606209460bf7cf8fd7f144a045c79ab2b65d4ba4a77ad25b4e854f021b6a4371"
+  },
+  "recovery": "Stop API; retain schema10 DB and documents, run archived schema9 code against restored-schema9 copy using a separate DB path. New tasks/drafts remain in retained schema10 copy; never overwrite it."
+}

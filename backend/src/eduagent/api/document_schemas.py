@@ -56,7 +56,7 @@ class DocumentVersion(BaseModel):
     document_id: str
     file_revision: int
     file_name: str
-    format: Literal['pdf', 'pptx', 'md', 'txt']
+    format: Literal['pdf', 'pptx', 'md', 'txt', 'png', 'jpg', 'jpeg', 'webp']
     size_bytes: int
     content_hash: str
     created_at: str

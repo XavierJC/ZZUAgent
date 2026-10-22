@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "real_model_calls": 1,
+  "call_limit": 2,
+  "status": "complete",
+  "seconds": 5.39,
+  "two_original_pages": true,
+  "cross_page_subquestions_preserved": true,
+  "model_answer_generation_requested": false,
+  "private_teacher_or_note_content_sent": false,
+  "payloads": [
+    {
+      "answer": null,
+      "answer_keys": [],
+      "answer_text": "",
+      "concepts": [],
+      "dependencies": [],
+      "explanation": "",
+      "issues": [
+        "image_transcription_unverified",
+        "answer_missing"
+      ],
+      "number": "1",
+      "options": [],
+      "question_type": "calculation",
+      "shared_context": "",
+      "stem": "Calculation: Given f(x) = x^2 + 3x.\n(a) Compute the derivative at x = 2.\n(b) Explain whether f is convex.\nInclude the reason for your answer to (b).",
+      "subquestions": [
+        {
+          "answer": null,
+          "answer_keys": [],
+          "answer_text": "",
+          "concepts": [],
+          "dependencies": [],
+          "explanation": "",
+          "issues": [],
+          "number": "(a)",
+          "options": [],
+          "question_type": "calculation",
+          "shared_context": "Given f(x) = x^2 + 3x.",
+          "stem": "Compute the derivative at x = 2.",
+          "subquestions": []
+        },
+        {
+          "answer": null,
+          "answer_keys": [],
+          "answer_text": "",
+          "concepts": [],
+          "dependencies": [],
+          "explanation": "",
+          "issues": [],
+          "number": "(b)",
+          "options": [],
+          "question_type": "short_answer",
+          "shared_context": "Given f(x) = x^2 + 3x.",
+          "stem": "Explain whether f is convex.\nInclude the reason for your answer to (b).",
+          "subquestions": []
+        }
+      ]
+    },
+    {
+      "answer": null,
+      "answer_keys": [],
+      "answer_text": "",
+      "concepts": [],
+      "dependencies": [],
+      "explanation": "",
+      "issues": [
+        "image_transcription_unverified",
+        "answer_missing"
+      ],
+      "number": "2",
+      "options": [],
+      "question_type": "proof",
+      "shared_context": "",
+      "stem": "Proof: For any real numbers a and b,\nprove that (a-b)^2 >= 0.",
+      "subquestions": []
+    }
+  ],
+  "result": {
+    "extraction_id": "6d2bb3dd-9141-41a3-855e-d15e1b6ddf96",
+    "message": "仅保存新的待审核草稿；没有覆盖原题。",
+    "question_ids": [
+      "f3dfbb16-26ea-4a39-9158-02e1378a7bda",
+      "3826e666-4f94-49cc-8ab5-842b147a4c68"
+    ],
+    "usage": [
+      {
+        "completion_tokens": 487,
+        "prompt_tokens": 2523
+      }
+    ],
+    "warnings": []
+  },
+  "folder": "data\\local\\extraction-v2-visual-219d4ff2",
+  "limitation": "Self-created clear raster PDF; not a real scanning quality benchmark or user-reviewed exam."
+}

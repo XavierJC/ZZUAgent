@@ -1,0 +1,379 @@
+{
+  "completed_at": "2026-10-22T13:12:44.780600+00:00",
+  "scope": "approved five batches: navigation and controlled original-question extraction; no later phases",
+  "source_files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "3cff6f2cd13a4c60a28b98ee48168efc10b87f602435fcabc201ece2134af744",
+      "change": "modified"
+    },
+    {
+      "path": "README.md",
+      "sha256": "e5823c9fecf5180762aa642c7107ba8bbeddc618c64ed55aeb27037f605ac387",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/agent/deepseek.py",
+      "sha256": "e25f6cca76d1ffcc084c4d28f348bb55884ff2796e43bcb13ab5204e8cd5812b",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/agent/question_extractor.py",
+      "sha256": "6255ae79913d0cae3997d8e145bff06a556c8f279e2d8e5dc83ead3c2db4eff8",
+      "change": "added"
+    },
+    {
+      "path": "backend/src/eduagent/api/app.py",
+      "sha256": "5e41967d4ae90fe708875b34828609d3969abda6a66e14bd4f2730fdf6fd5cc8",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/api/personal_bank.py",
+      "sha256": "7c5b8ad4d3091d4d1d7080fee10c8fce3cb2fa7da6cc6db42425f308455d9990",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/documents/extraction_coordinator.py",
+      "sha256": "ba1d8619205996695ce7314c222a31d0eeffe1f5c7c5b9fabc482831195322b6",
+      "change": "added"
+    },
+    {
+      "path": "backend/src/eduagent/documents/question_extraction.py",
+      "sha256": "6df8d653a9577d97d23b13a3265c663d07ba1cafd17f6a1924ae22f7fc2d2630",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/domain/personal_bank.py",
+      "sha256": "e0b2eca07bc3a8cd6f31a06aef80a23dc69f755733bd25dd6c2d402705062495",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/services/personal_bank.py",
+      "sha256": "7e7fed8b5230e3397d25798c39d823ff06f7df2093f176d4d455cf5f30598a55",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/services/question_extraction.py",
+      "sha256": "e151c18e0afb660edd5849464fe6e4a2f288176b54a0c88e3f7833bdda38c70c",
+      "change": "added"
+    },
+    {
+      "path": "backend/src/eduagent/storage/extraction_schema.py",
+      "sha256": "eaaa66c4f8a3fc30a08b0d6d4c07519fc269ccf9899723d0774ef44e2f6146d5",
+      "change": "added"
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "sha256": "8b38d0a384ad9d366691c07bca3dca92adf178f1819459e872dd6b556f0d107a",
+      "change": "modified"
+    },
+    {
+      "path": "backend/src/eduagent/storage/sqlite.py",
+      "sha256": "b64a81c5ef673b760cf7e5fd955a6b53127ee19bf8d1d1fd283a14f1124d7f8d",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_architectures.py",
+      "sha256": "28e4aaf33e48afe434a9c4a4cc88307aa76e4ccad7f5f52c9f9dd77413c229f9",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "sha256": "73762fbe4c3cc50688f016c834ef5620aaec49b8ef6c6a7375945117fdf9ec44",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "sha256": "d2e68c2dc9546fa01701b04b87e1fefeaf3bb7b57c86e3dab203aca504377f35",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_personal_bank.py",
+      "sha256": "92a2684b6c823d3380c661d3b6a82f0a2ab787e5d78e7bb383c034af5a858294",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "sha256": "ede29a1c96cef99942f2e9de8acf5c00949cece9d2f182259282aee9ea18fb15",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_self_assessments.py",
+      "sha256": "5dee1595506d50e6ee4523f5dbd71f711a079d7c63f70ba46aedf1991a44f21e",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_semantic_extraction.py",
+      "sha256": "e20ccb90062ce4c07a9a5f03b91711c131abd45a437b2858c2beda031a8eaef6",
+      "change": "added"
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "sha256": "f66b24893ee1b984d01aa6a9a8dac5f841173ff04e269d61723b8d604f2868d7",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "sha256": "4dac281e746f36344f0f63ee5342462924efc469940c48e93f188b6ccc243400",
+      "change": "modified"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "sha256": "f65cbaf310d2fdf15d39752b1b4de450d9622abb98886fd8fe86d389ff8030c9",
+      "change": "modified"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "sha256": "428798358f1edc8a260486f15e5c4fa87a585a26b9bb27bad64b5465a103d064",
+      "change": "modified"
+    },
+    {
+      "path": "docs/EXTRACTION_V2_GUIDE.md",
+      "sha256": "ca90117a105bece9f48164955c3240437707c1c29458b6e889c17fa260accd4e",
+      "change": "added"
+    },
+    {
+      "path": "docs/EXTRACTION_V2_VALIDATION.md",
+      "sha256": "9c5e9078d7dda907a0c95efa7ecb652d43fa4e81fe9ed4cedf7f616136a4520c",
+      "change": "added"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "sha256": "9a9e7599a5a3eb095f50d7f84115cbdae66c7703130b82d78c4ac1972e624544",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "sha256": "1bb103b18eb55f8d6768e7d6fe0fa321832bbec3733c4ace5f1f80d5dd58fe89",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/app.test.js",
+      "sha256": "ffca5813f27e8017936784af6011a0435608d9ef09001c11b034001450ea721d",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/extraction-v2.test.js",
+      "sha256": "6aba1127dd8c2b5f79fdf620f6818036625a10ab966eeb8f2505aebb59fc4fed",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/__tests__/notes-ui.test.js",
+      "sha256": "91cb8c59464f9cef0df97c8390042a80176bcbe85387f3c63de7a05011cd8b49",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/personal-bank.test.js",
+      "sha256": "02edfb9223c7cd14c18bcb65c3ee173f9fe839ad7139536d1f90184e61ab9539",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/setup.js",
+      "sha256": "8572739e0560bb1c31b0cf58a093e8e1b76b03e13263abae7f26a23f82616027",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/__tests__/study-guidance.test.js",
+      "sha256": "e55ef50399456a3dac7229be9af7cf5eb43ccaea3e030a07a5cbd41cc89b92dc",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "sha256": "13f575f6be721f4d93e3b5a7c2007dc5ec2a16d98026271403d87a61441e96c9",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/api.js",
+      "sha256": "cb03c554a8f9d3d19293d69f99b1cb5ddf96b11b60c0f3cc31c7f5afa010747b",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/api/notes.js",
+      "sha256": "61432a1fbf71449cbe486a4855110e3d6236f320bd4efae91e242f119cd3d148",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/api/resources.js",
+      "sha256": "13010a3fcc5ab494df41efba2cb2fdcc4c9020d59ffd97b289f7f69a3f5ceabe",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/api/workbench.js",
+      "sha256": "3453f78e4bab684952a747db94ffba5d6923c4982493a7df226c3d731123a97f",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/components/PersonalBankWorkspace.vue",
+      "sha256": "4fdee2b9aa2dc696d081363dba28f8bac2c6b706dfb0738dc91afcaa9ed517e6",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "sha256": "63e8d80470ab3ce0d106e6deb538866e177d56b8653cd2e13d6bbe8ca8ff43b0",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/questions/ExtractionTasks.vue",
+      "sha256": "afc6118e59bfb61b193852cb73dee70bdc4b05fa030dfe9155f51c97cf66e59d",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/features/questions/QuestionContent.vue",
+      "sha256": "61914915d393f000d4c15bcd46c4e136bd97afc07ca5d7c0c79e5089aae68a38",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/features/questions/QuestionFields.vue",
+      "sha256": "9f27aa09ea81fb5ea0db37deb9633cfbfc17ff41141bb511c4974835cd5ff81b",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/features/questions/types.js",
+      "sha256": "f306d5a9d471d6d0cdd67914d9ce9f68974ded0880b238c091d7deb8eae3c60a",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/usePageRoute.js",
+      "sha256": "cf459cdded88e6b3a8056f97f9091d04d704643ab39b961904a59cc6f906bcdb",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/usePersonalBank.js",
+      "sha256": "11f11b29e9a0b8b8537431d068506e50ac7ea2fa64be4b405900eb2236a07064",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/views/LearningHistory.vue",
+      "sha256": "a28f6a1196127157e7319e7bb2d12be4af641393c9e65d119b41007d9eb5935d",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/views/LearningOverview.vue",
+      "sha256": "85026b69f7c93ca0c6cb1a0e6d251b239fc9c48140d98bc44a051bfa7fd43444",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/views/QuestionBankView.vue",
+      "sha256": "719b4696cfd2cea12b1bbfded5e3bb7fdbbf5a212bc67a211d9f64ed9c974ba0",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/views/ResourcesView.vue",
+      "sha256": "3d28a3acfb58b6ea3ceb7d96b701ed09125f5e69f7ff3da5c0fc39876db20ca3",
+      "change": "added"
+    },
+    {
+      "path": "frontend/vite.config.js",
+      "sha256": "6abae7ce1cb17e6e03043e34991f0ea45b28d5ec6e071e6a1fddcd0a5afd8a27",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/verify_architectures.py",
+      "sha256": "983cf1051bba9cef920e71cf912bbe4fddf03f7f6a93743e6523445af4c9eea1",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/verify_documents.py",
+      "sha256": "f23c703bbe0c6c99c23071744f12953407b9983a5aaf2f2335b7bd94291018d0",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/verify_extraction_deployment.py",
+      "sha256": "6df5892b0a7a684ec11ed788b01059c04dc7249b4f878e5a644945e8a0500fba",
+      "change": "added"
+    },
+    {
+      "path": "scripts/verify_extraction_migration.py",
+      "sha256": "7aeff56c63814f03e2737d4f1048b12d3a7553a0b4111e292392d33b15fe9b45",
+      "change": "added"
+    },
+    {
+      "path": "scripts/verify_extraction_model.py",
+      "sha256": "4cad06cd084aeed493a215b24622628390e2869cd8f4ff38bd4103b19f4bba35",
+      "change": "added"
+    },
+    {
+      "path": "scripts/verify_extraction_visual.py",
+      "sha256": "45c6ec8133635bb081aaa6501df5ce01b93aac957ddd35b5f04683803bc41098",
+      "change": "added"
+    },
+    {
+      "path": "scripts/verify_phase4a.py",
+      "sha256": "555a1972f69acde83dfae06c0848063da6cd60c8e96e3321c44f1c9ec5b41ebf",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/verify_semantic_extraction.py",
+      "sha256": "c0256dcc648051bd2858e57bdf0a0ff7944d312ff0ed219666ad56369b16efb2",
+      "change": "added"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "sha256": "af092cc5b5ef4571b442b2b831d7c3db86bd7b7de145afaf401c925ee628615d",
+      "change": "modified"
+    }
+  ],
+  "backend_tests": 552,
+  "frontend_tests": 149,
+  "frontend_build": "passed_with_existing_500kB_warning",
+  "http": [
+    {
+      "report": "extraction-v2-http-v2.json",
+      "groups": 13
+    },
+    {
+      "report": "extraction-v2-bank-http-v1.json",
+      "groups": 21
+    },
+    {
+      "report": "extraction-v2-documents-http-v1.json",
+      "groups": 15
+    },
+    {
+      "report": "extraction-v2-architectures-http-v1.json",
+      "groups": 17
+    },
+    {
+      "report": "extraction-v2-guidance-http-v1.json",
+      "groups": 18
+    },
+    {
+      "report": "extraction-v2-chat-http-v1.json",
+      "groups": 14
+    }
+  ],
+  "http_groups": 98,
+  "final_report_set_simulated_calls": 33,
+  "real_deepseek_calls": 12,
+  "real_data_scope": "self-created only; no teacher or personal-note content",
+  "quality": "24/24 self-created reference checks; one clear 2-page visual PDF; not independent exam accuracy",
+  "preserved_core_source_hashes": [
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/domain/catalog.py",
+    "backend/src/eduagent/services/learning.py",
+    "backend/src/eduagent/agent/policy.py"
+  ],
+  "production_schema": 10,
+  "tables": 36,
+  "production_old_34_tables_preserved": true,
+  "existing_personal_questions": 12,
+  "new_dependencies": 0,
+  "migration_report": "data/evaluation/extraction-v2-migration-v1.json",
+  "deployment_report": "data/evaluation/extraction-v2-deployment-v1.json",
+  "browser_manual": "not_performed; earlier localhost access denial respected",
+  "human_reference_review": "pending",
+  "teaching_effects": "not_evaluated",
+  "retained_failures": [
+    "first navigation/legacy-fixture test failures",
+    "real model rounds v1/v2",
+    "two local visual fixture parameter failures (0 model calls)",
+    "legacy HTTP scripts schema assertions before update"
+  ],
+  "stopped_before": [
+    "4B-3 mappings",
+    "teacher RAG expansion",
+    "new question generation",
+    "subjective auto grading",
+    "formal BKT admission"
+  ]
+}

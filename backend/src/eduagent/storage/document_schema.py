@@ -18,7 +18,7 @@ DOCUMENTS = (
     """CREATE TABLE document_versions (
        id TEXT PRIMARY KEY, document_id TEXT NOT NULL, student_id TEXT NOT NULL, course_id TEXT NOT NULL,
        file_revision INTEGER NOT NULL CHECK(file_revision>=1), file_name TEXT NOT NULL,
-       format TEXT NOT NULL CHECK(format IN ('pdf','pptx','md','txt')), size_bytes INTEGER NOT NULL CHECK(size_bytes>=0),
+       format TEXT NOT NULL CHECK(format IN ('pdf','pptx','md','txt','png','jpg','jpeg','webp')), size_bytes INTEGER NOT NULL CHECK(size_bytes>=0),
        content_hash TEXT NOT NULL, storage_key TEXT NOT NULL UNIQUE, created_at TEXT NOT NULL,
        UNIQUE(document_id,file_revision), UNIQUE(id,document_id,student_id,course_id),
        FOREIGN KEY(document_id,student_id,course_id) REFERENCES course_documents(id,student_id,course_id))""",

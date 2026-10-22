@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-22T11:24:53.362727+00:00",
+  "checks": [
+    {
+      "name": "readonly_catalogue_reuses_course_sources_without_model",
+      "passed": true
+    },
+    {
+      "name": "paste_extract_idempotency_and_request_mismatch",
+      "passed": true
+    },
+    {
+      "name": "original_answer_preserved_and_manual_promotion_required",
+      "passed": true
+    },
+    {
+      "name": "optimistic_concurrency_and_student_isolation",
+      "passed": true
+    },
+    {
+      "name": "ordinary_single_choice_score_idempotency_and_wrong_history",
+      "passed": true
+    },
+    {
+      "name": "private_practice_history_scope",
+      "passed": true
+    },
+    {
+      "name": "true_false_practice_real_http",
+      "passed": true
+    },
+    {
+      "name": "missing_answer_never_fabricates_score",
+      "passed": true
+    },
+    {
+      "name": "practice_immutable_question_and_grading_basis",
+      "passed": true
+    },
+    {
+      "name": "same_pdf_reused_cross_page_questions_exact_locations",
+      "passed": true
+    },
+    {
+      "name": "private_bounded_pdf_preview",
+      "passed": true
+    },
+    {
+      "name": "image_upload_without_fake_ocr_manual_recovery",
+      "passed": true
+    },
+    {
+      "name": "mock_vision_one_and_multiple_questions_explicit_consent_no_paid_calls",
+      "passed": true
+    },
+    {
+      "name": "image_private_preview_and_other_student_denied",
+      "passed": true
+    },
+    {
+      "name": "many_concept_links_and_chapter_filter",
+      "passed": true
+    },
+    {
+      "name": "source_update_marks_old_question_and_rejects_old_extraction",
+      "passed": true
+    },
+    {
+      "name": "source_delete_preserves_review_snapshot_but_invalidates_current_source",
+      "passed": true
+    },
+    {
+      "name": "merge_split_review_and_archive_transaction",
+      "passed": true
+    },
+    {
+      "name": "all_formal_learning_notes_guidance_facts_unchanged",
+      "passed": true
+    },
+    {
+      "name": "restart_readonly_restore_no_repeat_generation",
+      "passed": true
+    },
+    {
+      "name": "original_formal_learning_still_works_separately",
+      "passed": true
+    }
+  ],
+  "groups": 21,
+  "server_starts": 2,
+  "synthetic_vision_calls": 2,
+  "real_model_calls": 0,
+  "private_materials_sent": 0,
+  "formal_facts_unchanged_before_explicit_formal_regression": true,
+  "directory": "D:\\ZZUAgent\\data\\local\\phase4c-http-99abe36d"
+}

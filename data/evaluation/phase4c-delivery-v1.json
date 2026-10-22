@@ -1,0 +1,295 @@
+{
+  "passed": true,
+  "completed_at": "2026-10-22T11:26:47.117703+00:00",
+  "scope": [
+    "4C-0",
+    "4C-1",
+    "4C-2"
+  ],
+  "next_phase_started": false,
+  "backend_tests": {
+    "passed": 525,
+    "duration_seconds": 43.99
+  },
+  "frontend_tests": {
+    "passed": 143,
+    "duration_seconds": 5.76,
+    "environment": "jsdom"
+  },
+  "build": {
+    "passed": true,
+    "main_js_kb": 693.82,
+    "warning": "default 500 kB chunk threshold"
+  },
+  "isolated_http": {
+    "groups": 85,
+    "new_bank_groups": 21,
+    "regression_groups": 64,
+    "simulated_model_calls": 29,
+    "real_model_calls": 0,
+    "reports": [
+      "phase4c-http-v1.json",
+      "phase4c-documents-http-v1.json",
+      "phase4c-architectures-http-v1.json",
+      "phase4c-phase4a-http-v1.json",
+      "phase4c-workbench-http-v1.json"
+    ]
+  },
+  "production": {
+    "schema": 9,
+    "tables": 34,
+    "original_tables_preserved": 27,
+    "formal_question_count": 10,
+    "synthetic_question_writes": 0,
+    "new_model_calls": 0,
+    "historical_vision_calls": 4,
+    "historical_vision_records": 2
+  },
+  "migration_report": "data/evaluation/phase4c-migration-v1.json",
+  "deployment_report": "data/evaluation/phase4c-deployment-v1.json",
+  "actual_material_report": "data/evaluation/phase4c-existing-material-v1.json",
+  "new_dependencies": 0,
+  "protected_source_hashes_unchanged": [
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/domain/catalog.py",
+    "backend/src/eduagent/services/learning.py",
+    "backend/src/eduagent/agent/policy.py",
+    "backend/pyproject.toml",
+    "frontend/package.json",
+    "frontend/package-lock.json",
+    ".env.example"
+  ],
+  "browser_manual": "not_performed",
+  "visual_accuracy": "not_human_verified",
+  "teaching_effectiveness": "not_evaluated",
+  "limitations": [
+    "Native image parser is not OCR; new real vision requests were not made",
+    "Complex layout/formulas/diagrams require human review",
+    "Teacher-uploaded documents are not newly RAG-indexed",
+    "Local student scope is not authentication",
+    "History list displays latest 100 sessions; original rows remain stored",
+    "Soft delete/archive retain source snapshots and backups"
+  ],
+  "changed_files": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified"
+    },
+    {
+      "path": "README.md",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\api\\app.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\api\\body_limit.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\api\\document_schemas.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\api\\documents.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\api\\personal_bank.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\src\\eduagent\\documents\\models.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\documents\\parsers\\__init__.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\documents\\parsers\\image.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\src\\eduagent\\documents\\preflight.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\documents\\question_extraction.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\src\\eduagent\\documents\\vision.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\domain\\personal_bank.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\src\\eduagent\\services\\documents.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\services\\personal_bank.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\src\\eduagent\\services\\resources.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\src\\eduagent\\storage\\document_schema.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\storage\\migrations.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\src\\eduagent\\storage\\personal_bank_schema.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\src\\eduagent\\storage\\sqlite.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_architectures.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_documents.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_migrations.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_personal_bank.py",
+      "status": "added"
+    },
+    {
+      "path": "backend\\tests\\test_personal_migration.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_self_assessments.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_tutor.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_web.py",
+      "status": "modified"
+    },
+    {
+      "path": "backend\\tests\\test_workbench.py",
+      "status": "modified"
+    },
+    {
+      "path": "docs\\DEVELOPMENT_PLAN.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs\\PERSONAL_BANK_API.md",
+      "status": "added"
+    },
+    {
+      "path": "docs\\PHASE4C_EXTRACTION_FORMAT.md",
+      "status": "added"
+    },
+    {
+      "path": "docs\\PHASE4C_GUIDE.md",
+      "status": "added"
+    },
+    {
+      "path": "docs\\PHASE4C_VALIDATION.md",
+      "status": "added"
+    },
+    {
+      "path": "docs\\PROJECT_CONTEXT.md",
+      "status": "modified"
+    },
+    {
+      "path": "docs\\requirements\\PHASE4C_TASK_BRIEF.md",
+      "status": "added"
+    },
+    {
+      "path": "frontend\\src\\App.vue",
+      "status": "modified"
+    },
+    {
+      "path": "frontend\\src\\__tests__\\personal-bank.test.js",
+      "status": "added"
+    },
+    {
+      "path": "frontend\\src\\api.js",
+      "status": "modified"
+    },
+    {
+      "path": "frontend\\src\\components\\DocumentManager.vue",
+      "status": "modified"
+    },
+    {
+      "path": "frontend\\src\\components\\PersonalBankWorkspace.vue",
+      "status": "added"
+    },
+    {
+      "path": "frontend\\src\\components\\StudyWorkbench.vue",
+      "status": "modified"
+    },
+    {
+      "path": "frontend\\src\\personal-bank.css",
+      "status": "added"
+    },
+    {
+      "path": "frontend\\src\\usePersonalBank.js",
+      "status": "added"
+    },
+    {
+      "path": "scripts\\verify_architectures.py",
+      "status": "modified"
+    },
+    {
+      "path": "scripts\\verify_documents.py",
+      "status": "modified"
+    },
+    {
+      "path": "scripts\\verify_personal_bank.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts\\verify_personal_bank_deployment.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts\\verify_personal_bank_migration.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts\\verify_phase4a.py",
+      "status": "modified"
+    },
+    {
+      "path": "scripts\\verify_workbench_answers.py",
+      "status": "modified"
+    }
+  ],
+  "changed_file_count": 52,
+  "guide": "docs/PHASE4C_GUIDE.md",
+  "validation": "docs/PHASE4C_VALIDATION.md",
+  "corrections_recorded": [
+    "Legacy migration/path-count expectations updated",
+    "New fixture API assumptions corrected",
+    "Formal HTTP response uses nested question.id",
+    "Existing historical vision counts compared to backup rather than assumed zero",
+    "Deployment selects real document owner scope, preserving isolation",
+    "Original evaluation inventory excludes this phase generated report, captured during work",
+    "System conhost identified read-only; only project Python restarted"
+  ]
+}

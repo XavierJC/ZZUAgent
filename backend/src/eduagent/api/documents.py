@@ -30,7 +30,7 @@ def documents_router(service_factory, settings):
         with service_factory() as service:
             service.student(student_id)
         return dict(formats={'md': True, 'txt': True, 'pdf': find_spec('pypdf') is not None,
-                             'pptx': find_spec('pptx') is not None},
+                             'pptx': find_spec('pptx') is not None, 'png': True, 'jpg': True, 'jpeg': True, 'webp': True},
                     vision_enabled=settings.document_vision_enabled and bool(settings.agent.api_key), vision_provider='DeepSeek',
                     vision_model=VISION_MODEL, vision_max_pages=VISION_MAX_PAGES, vision_max_output_tokens=VISION_MAX_TOKENS,
                     max_file_bytes=MAX_FILE, max_text_file_bytes=MAX_TEXT_FILE, max_pages=200,
@@ -65,7 +65,8 @@ def documents_router(service_factory, settings):
                 file = form['file']
                 name, kind = filename(file.filename)
                 allowed_mime = {'pdf': {'application/pdf'}, 'pptx': {'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/zip'},
-                                'md': {'text/markdown', 'text/x-markdown', 'text/plain'}, 'txt': {'text/plain'}}
+                                'md': {'text/markdown', 'text/x-markdown', 'text/plain'}, 'txt': {'text/plain'},
+                                'png': {'image/png'}, 'jpg': {'image/jpeg'}, 'jpeg': {'image/jpeg'}, 'webp': {'image/webp'}}
                 mime = (file.content_type or 'application/octet-stream').split(';', 1)[0].strip().lower()
                 if mime not in allowed_mime[kind] | {'application/octet-stream'}:
                     raise DocumentError('invalid_document', 415)
@@ -100,6 +101,12 @@ def documents_router(service_factory, settings):
     def versions(student_id: Identifier, document_id: str):
         with service_factory() as service:
             return service.versions(student_id, document_id)
+
+    @router.get('/{document_id}/preview')
+    def preview(student_id:Identifier,document_id:str,version_id:str|None=None,page:Annotated[int,Query(ge=1,le=200)]=1):
+        with service_factory() as service:
+            raw=service.preview(student_id,document_id,version_id,page)
+        return Response(raw,media_type='image/png',headers={'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'})
 
     @router.patch('/{document_id}', response_model=CourseDocument)
     def update(student_id: Identifier, document_id: str, body: UpdateDocument):

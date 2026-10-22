@@ -40,12 +40,12 @@ function choose(event) {
       <aside class="panel doc-list" aria-label="课件列表与上传">
         <h3>上传资料</h3>
         <form @submit.prevent="upload">
-          <label for="doc-file">PDF / PPTX / Markdown / TXT</label><input id="doc-file" ref="input" type="file" accept=".pdf,.pptx,.md,.txt" @change="choose" />
+          <label for="doc-file">PDF / PPTX / Markdown / TXT / 图片</label><input id="doc-file" ref="input" type="file" accept=".pdf,.pptx,.md,.txt,.png,.jpg,.jpeg,.webp" @change="choose" />
           <p v-if="workspace.file" class="small">已选：{{ workspace.file.name }}</p>
           <label for="doc-title">资料标题</label><input id="doc-title" v-model="workspace.title" maxlength="120" required />
           <label for="doc-source">来源说明（可选）</label><textarea id="doc-source" v-model="workspace.sourceNote" maxlength="500" rows="2" />
           <label class="doc-check"><input v-model="workspace.rights" type="checkbox" />我确认有权在本机保存和处理这份资料。</label>
-          <p class="small muted">PDF/PPTX最多20MiB、200页；MD/TXT最多2MiB且须UTF-8。上传不授权模型外发。</p>
+          <p class="small muted">PDF/PPTX/图片最多20MiB（图片≤1600万像素且单帧）、200页；MD/TXT最多2MiB且须UTF-8。上传不授权模型外发。</p>
           <button class="button primary" :disabled="Boolean(workspace.busy || workspace.pending || !workspace.file || !workspace.rights || !workspace.title.trim())">{{ workspace.busy === 'upload' ? '正在保存原件…' : '上传并本地解析' }}</button>
         </form>
         <h3>已保存资料</h3><p v-if="!workspace.items.length" class="small muted">尚无课件。资料按当前本机演示学习标识隔离，该标识不是账号认证。</p>
@@ -54,13 +54,13 @@ function choose(event) {
       <section v-if="workspace.current" class="panel doc-detail" aria-label="资料解析详情">
         <h3>{{ workspace.current.title }}</h3><p class="small muted">导入资料 · 内容未核验 · 元数据r{{ workspace.current.revision }} · 文件v{{ workspace.current.version.file_revision }}</p>
         <div class="doc-actions"><a class="button secondary" :href="workspace.download">下载当前原件</a><button class="button secondary" :disabled="Boolean(workspace.busy || workspace.pending)" @click="workspace.retry()">重新本地解析</button></div>
-        <div class="doc-metadata"><label for="doc-version">上传新版本（文件替换后重新解析）</label><input id="doc-version" type="file" accept=".pdf,.pptx,.md,.txt" :disabled="Boolean(workspace.busy || workspace.pending)" @change="workspace.updateVersion($event.target.files?.[0]); $event.target.value = ''" /></div>
+        <div class="doc-metadata"><label for="doc-version">上传新版本（文件替换后重新解析）</label><input id="doc-version" type="file" accept=".pdf,.pptx,.md,.txt,.png,.jpg,.jpeg,.webp" :disabled="Boolean(workspace.busy || workspace.pending)" @change="workspace.updateVersion($event.target.files?.[0]); $event.target.value = ''" /></div>
         <form class="doc-metadata" @submit.prevent="workspace.saveMetadata()"><label for="doc-edit-title">修改标题</label><input id="doc-edit-title" v-model="workspace.editTitle" maxlength="120" required /><label for="doc-edit-source">修改来源说明</label><textarea id="doc-edit-source" v-model="workspace.editSource" maxlength="500" rows="2" /><button class="button secondary" :disabled="Boolean(workspace.busy || workspace.pending)">保存资料信息</button></form>
         <p role="status">本地解析：{{ names[workspace.current.parse.status] }} · {{ workspace.current.parse.unit_count }}个页面/文本单位</p>
         <p v-if="workspace.current.parse.error_code" class="wb-run-notice">{{ errors[workspace.current.parse.error_code] || '资料处理失败，请检查原件后显式重试。' }}</p>
-        <details class="doc-vision"><summary>可选：DeepSeek PDF页面识别</summary><p class="small muted">仅发送本轮指定页的图片，可能包含该页全部文字和图像；服务为 {{ workspace.capabilities?.vision_provider }} / {{ workspace.capabilities?.vision_model }}。最多3页，每页最多{{ workspace.capabilities?.vision_max_output_tokens }}输出token，按量计费，失败不自动重发。本轮授权与聊天、笔记外发分开。</p>
+        <details class="doc-vision"><summary>可选：DeepSeek PDF / 图片识别</summary><p class="small muted">仅发送本轮指定页的图片，可能包含该页全部文字和图像；服务为 {{ workspace.capabilities?.vision_provider }} / {{ workspace.capabilities?.vision_model }}。最多3页，每页最多{{ workspace.capabilities?.vision_max_output_tokens }}输出token，按量计费，失败不自动重发。本轮授权与聊天、笔记外发分开。</p>
           <p v-if="!workspace.capabilities?.vision_enabled" role="status">视觉解析通道尚未启用；真实调用预算与教师资料外发授权需另行确认。本地解析可继续使用。</p>
-          <form @submit.prevent="workspace.vision()"><label for="doc-pages">PDF页码，例如1,2</label><input id="doc-pages" v-model="workspace.pages" placeholder="1,2" :disabled="!workspace.capabilities?.vision_enabled || workspace.current.version.format !== 'pdf'" /><label class="doc-check"><input v-model="workspace.consent" type="checkbox" :disabled="!workspace.capabilities?.vision_enabled" />我有权外发，并同意本轮将上述PDF页图片发送至DeepSeek。</label><button class="button secondary" :disabled="Boolean(workspace.busy || workspace.pending || workspace.activeJobs || !workspace.consent || !workspace.capabilities?.vision_enabled || workspace.current.version.format !== 'pdf')">发起本轮页面识别</button></form>
+          <form @submit.prevent="workspace.vision()"><label for="doc-pages">PDF页码或图片编号1，例如1,2</label><input id="doc-pages" v-model="workspace.pages" placeholder="1,2" :disabled="!workspace.capabilities?.vision_enabled || !['pdf','png','jpg','jpeg','webp'].includes(workspace.current.version.format)" /><label class="doc-check"><input v-model="workspace.consent" type="checkbox" :disabled="!workspace.capabilities?.vision_enabled" />我有权外发，并同意本轮将上述PDF页或图片发送至DeepSeek。</label><button class="button secondary" :disabled="Boolean(workspace.busy || workspace.pending || workspace.activeJobs || !workspace.consent || !workspace.capabilities?.vision_enabled || !['pdf','png','jpg','jpeg','webp'].includes(workspace.current.version.format))">发起本轮页面识别</button></form>
         </details>
         <label for="doc-run">查看已保存解析记录（不重新调用模型）</label><select id="doc-run" :value="workspace.run?.id" :disabled="Boolean(workspace.busy)" @change="workspace.selectRun($event.target.value)"><option v-for="job in workspace.runs" :key="job.id" :value="job.id">{{ job.mode === 'vision' ? 'DeepSeek页面识别' : '本地解析' }} · {{ names[job.status] }} · {{ job.created_at }}</option></select>
         <p v-if="workspace.run" class="small muted">{{ names[workspace.run.status] }} · 模型调用{{ workspace.run.model_calls }}次 · {{ workspace.run.parser_version }}</p>

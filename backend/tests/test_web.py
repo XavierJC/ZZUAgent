@@ -78,7 +78,7 @@ def test_frontend_only_serves_compiled_index_and_asset_directory(web_settings):
         for path in ["/.env", "/src/App.vue", "/data/questions.json", "/backend/pyproject.toml", "/assets/%2e%2e/.env"]:
             assert client.get(path).status_code == 404
         schema = client.get("/openapi.json").json()
-        assert "/" not in schema["paths"] and len(schema["paths"]) == 50
+    assert "/" not in schema["paths"] and len(schema["paths"]) == 67
 
 
 def test_missing_frontend_build_keeps_api_available(web_settings):

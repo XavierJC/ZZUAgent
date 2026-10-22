@@ -236,10 +236,10 @@ def verify(output):
         assert len(http(prefix+'/history')['items'])==2 and http(prefix+'/tutor-runs')==[] and http(prefix+'/workbench/runs')==[]
         check('legacy_retrieval_score_bkt_and_histories_compatible')
         with sqlite3.connect(directory/'http.sqlite3') as db:
-            assert db.execute('PRAGMA user_version').fetchone()[0]==8
+            assert db.execute('PRAGMA user_version').fetchone()[0]==10
             assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok' and not db.execute('PRAGMA foreign_key_check').fetchall()
         output.write_text(json.dumps({'passed':True,'verified_at':datetime.now(timezone.utc).isoformat(),'checks':checks,
-            'server_starts':starts,'schema':8,'model_kind':'simulated','simulated_model_calls':len(calls()),'real_model_calls':0,
+            'server_starts':starts,'schema':10,'model_kind':'simulated','simulated_model_calls':len(calls()),'real_model_calls':0,
             'test_directory':str(directory),'production_learning_writes':0,'browser_manual_validation':'not_performed',
             'fault_injection':'Private verification server/file controls and one unresolved claim in the isolated DB only.'},ensure_ascii=False,indent=2),encoding='utf8')
         print(json.dumps({'passed':True,'checks':len(checks),'simulated_calls':len(calls()),'real_calls':0,'report':str(output)}))
