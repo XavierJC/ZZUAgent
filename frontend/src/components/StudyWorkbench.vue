@@ -42,7 +42,7 @@ onMounted(() => { props.selfWorkspace?.load(); props.guideWorkspace?.load() })
 
 <template>
   <section class="study-workbench" aria-label="资料学习工作台">
-    <div class="wb-toolbar"><p>资料与学情共同支持学习。演示标识仅用于本机分组，不是真实身份认证。</p><button class="button secondary" :disabled="Boolean(workspace.busy)" @click="workspace.load()">刷新来源与历史</button></div>
+    <div v-if="workspace.current?.lesson_context" class="phase5-context"><p>此回答基于答题版本{{ workspace.current.lesson_context.learning_revision }}、自评版本{{ workspace.current.lesson_context.assessment_revision }}及课程发布版本{{ workspace.current.lesson_context.release_version }}。</p><p v-if="workspace.current.lesson_stale">学习状态或课程来源后来已变化，以上为当时讲解。</p></div><div class="wb-toolbar"><p>资料与学情共同支持学习。演示标识仅用于本机分组，不是真实身份认证。</p><button class="button secondary" :disabled="Boolean(workspace.busy)" @click="workspace.load()">刷新来源与历史</button></div>
     <div v-if="workspace.error" class="alert alert-error" role="alert">{{ workspace.error }}</div>
     <div v-if="workspace.notice" class="alert alert-info" role="status">{{ workspace.notice }}</div>
     <nav class="wb-mobile-tabs" aria-label="工作台分栏"><button v-for="item in [['sources','资料来源'],['chat','助教问答'],['studio','学习工作室']]" :key="item[0]" class="button secondary" :aria-pressed="workspace.panel === item[0]" @click="workspace.panel = item[0]">{{ item[1] }}</button></nav>

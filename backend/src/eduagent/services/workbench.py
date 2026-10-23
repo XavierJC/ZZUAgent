@@ -130,6 +130,7 @@ class WorkbenchService:
                 self.knowledge.courses.verify()
             if self.repository.student(context.student_id)['revision'] != context.state_revision:
                 raise SourceChanged('学习状态已变化，请重新发起一轮问答')
+            if getattr(self,'lesson_guard',None):self.lesson_guard()
 
     def ask(self, student, body):
         request_id = str(UUID(body['request_id']))
@@ -193,7 +194,7 @@ class WorkbenchService:
             from eduagent.agent.workbench import WorkbenchAgent
             try:
                 client = self.client_factory() if self.client_factory else None
-                output = WorkbenchAgent(self, context, client, self.settings, learning_state).run(body['question'], evidence)
+                output = WorkbenchAgent(self, context, client, self.settings, learning_state).run(body['question'], evidence, lesson_context=getattr(self,'lesson_context',None))
                 reason = output.get('reason')
                 status = 'complete' if not reason else ('uncertain' if reason in (
                     'model_timeout', 'network_error', 'upstream_error', 'invalid_model_response') else 'local')

@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-23T10:51:37.738983+00:00",
+  "groups": 19,
+  "checks": [
+    {
+      "name": "prepublished_demo_available_without_builder_no_false_review",
+      "passed": true
+    },
+    {
+      "name": "refresh_and_history_are_read_only_no_allocation",
+      "passed": true
+    },
+    {
+      "name": "goals_bound_to_release_no_prior_diagnosis",
+      "passed": true
+    },
+    {
+      "name": "explicit_diagnosis_idempotency_and_pending_session_protection",
+      "passed": true
+    },
+    {
+      "name": "core_scoring_bkt_update_and_replanning_real_services",
+      "passed": true
+    },
+    {
+      "name": "candidate_pool_contains_original_ten_not_fifty",
+      "passed": true
+    },
+    {
+      "name": "release_bound_local_explanation_without_model",
+      "passed": true
+    },
+    {
+      "name": "mock_agent_context_citations_history_replay_no_repeat_call",
+      "passed": true
+    },
+    {
+      "name": "explanation_to_formal_retest_and_updated_evidence",
+      "passed": true
+    },
+    {
+      "name": "draft_review_blocks_unreviewed_formal_release_demo_explicit",
+      "passed": true
+    },
+    {
+      "name": "published_snapshot_frozen_draft_cas_and_version_history",
+      "passed": true
+    },
+    {
+      "name": "unselected_release_sources_and_empty_set_rejected_server_side",
+      "passed": true
+    },
+    {
+      "name": "private_course_and_session_scope_isolation",
+      "passed": true
+    },
+    {
+      "name": "private_note_consent_independent_zero_model_transfer_without_consent",
+      "passed": true
+    },
+    {
+      "name": "mock_personal_explicit_round_consent",
+      "passed": true
+    },
+    {
+      "name": "ordinary_practice_separate_from_bkt",
+      "passed": true
+    },
+    {
+      "name": "legacy_facts_not_relabelled_and_wrong_state_has_other_guidance",
+      "passed": true
+    },
+    {
+      "name": "source_update_invalidates_current_use_keeps_history_snapshot",
+      "passed": true
+    },
+    {
+      "name": "restart_restores_release_session_and_facts_no_auto_republish_or_model",
+      "passed": true
+    }
+  ],
+  "server_starts": 2,
+  "schema": 11,
+  "tables": 43,
+  "simulated_model_calls": 2,
+  "real_model_calls": 0,
+  "production_writes": 0,
+  "directory": "D:\\ZZUAgent\\data\\local\\phase5-http-897bb859",
+  "browser_manual": "not_performed"
+}

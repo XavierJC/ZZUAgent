@@ -199,7 +199,7 @@ def test_schema7_migration_preserves_twenty_one_tables_and_rollback(tmp_path,cat
     with SQLiteRepository(path) as repo:
         learning=LearningService(catalog,repo);learning.register('student-a')
         docs=DocumentsService(repo,tmp_path/'files');upload(docs,b'# Original',student='student-a');tick(docs)
-        for table in reversed(migrations.ARCHITECTURE_TABLES + migrations.BANK_TABLES + migrations.EXTRACTION_TABLES):repo.connection.execute('drop table '+table)
+        for table in reversed(migrations.ARCHITECTURE_TABLES + migrations.BANK_TABLES + migrations.EXTRACTION_TABLES + migrations.RELEASE_TABLES):repo.connection.execute('drop table '+table)
         repo.connection.execute('pragma user_version=7');before,columns=migrations.preserved_snapshot(repo.connection)
     assert len(before)==21
     with pytest.raises(ValueError,match='显式迁移'):SQLiteRepository(path,allow_upgrade=False)
@@ -209,7 +209,7 @@ def test_schema7_migration_preserves_twenty_one_tables_and_rollback(tmp_path,cat
         assert db.execute('pragma user_version').fetchone()[0]==7 and migrations.preserved_snapshot(db)[0]==before
     monkeypatch.setattr(migrations,'ARCHITECTURES',ddl)
     with SQLiteRepository(path) as repo:
-        assert repo.migration_report['to_version']==10 and migrations.preserved_snapshot(repo.connection,columns)[0]==before
+        assert repo.migration_report['to_version']==11 and migrations.preserved_snapshot(repo.connection,columns)[0]==before
         assert repo.connection.execute('pragma integrity_check').fetchone()[0]=='ok' and not repo.connection.execute('pragma foreign_key_check').fetchall()
         with sqlite3.connect(repo.migration_report['backup']) as old:assert migrations.preserved_snapshot(old)[0]==before
 

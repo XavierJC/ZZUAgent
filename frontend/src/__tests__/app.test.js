@@ -67,6 +67,7 @@ describe('Vue learning interface', () => {
     const api = client()
     wrapper = mount(App, { props: { client: api, store: memoryStore({ student_id: 'learner-test' }) } })
     await flushPromises()
+    await wrapper.findAll('button').find(button => button.text() === '课程构建').trigger('click'); await flushPromises()
     await wrapper.findAll('nav button').find(button => button.text().includes('课程资料')).trigger('click')
     await wrapper.findAll('button').find(button => button.text() === '课程片段检索').trigger('click')
     expect(api.search).not.toHaveBeenCalled()
@@ -79,7 +80,7 @@ describe('Vue learning interface', () => {
 
   it('does not paint a recovered old answer onto a newer exercise after reload', async () => {
     const api = client()
-    api.mastery.mockResolvedValue(state(1)); api.next.mockResolvedValue(assignment(1))
+    api.mastery.mockResolvedValue(state(1)); api.next.mockResolvedValue(assignment(1)); api.currentDecision.mockResolvedValue(assignment(1))
     api.submit.mockResolvedValue({ ...receipt(), replayed: true })
     wrapper = mount(App, { props: { client: api, store: memoryStore({ student_id: 'learner-test',
       pending: { student_id: 'learner-test', decision_id: 'decision-0', event_id: 'receipt-1', answer: 'B' } }) } })
@@ -125,6 +126,7 @@ describe('Vue learning interface', () => {
     expect(wrapper.find('.citation .katex').exists()).toBe(true)
     await wrapper.findAll('button').find(button => button.text().includes('查看正式学习记录')).trigger('click')
     expect(wrapper.find('.history-detail .katex').exists()).toBe(true)
+    await wrapper.findAll('button').find(button => button.text() === '课程构建').trigger('click'); await flushPromises()
     await wrapper.findAll('nav button').find(button => button.text().includes('课程资料')).trigger('click')
     await wrapper.findAll('button').find(button => button.text() === '课程片段检索').trigger('click')
     await wrapper.get('#material-query').setValue('平方损失')

@@ -1,6 +1,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const pages = new Set(['learn', 'study', 'materials', 'bank', 'notes', 'history'])
+const pages = new Set(['learn', 'study', 'materials', 'bank', 'notes', 'history', 'insights', 'builder', 'architecture', 'publish', 'resources', 'practice'])
 export function usePageRoute(before = () => true) {
   function read() {
     const [page, query = ''] = location.hash.replace(/^#\/?/, '').split('?')

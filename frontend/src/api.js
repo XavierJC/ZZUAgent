@@ -45,6 +45,14 @@ export function createApi(fetcher = (...args) => fetch(...args)) {
   const studentPath = (id) => `/api/v1/students/${encodeURIComponent(id)}`
   return {
     ...resourcesApi(request,studentPath),
+    publishedCourses: () => request('/api/v1/courses/published'),
+    courseReleases: id => request(`${studentPath(id)}/course-releases`),
+    courseBuilder: id => request(`${studentPath(id)}/course-builder`),
+    courseWorkflow: (id,path,method='GET',body) => request(`${studentPath(id)}/${path}`,{method,body}),
+    currentDecision: id => request(`${studentPath(id)}/current-decision`),
+    teachingHistory: id => request(`${studentPath(id)}/teaching-history`),
+    teachingContexts: id => request(`${studentPath(id)}/teaching-explanations`),
+    teachingExplain: (id,session,body) => request(`${studentPath(id)}/teaching-sessions/${encodeURIComponent(session)}/explain`,{method:'POST',body,timeout:260000}),
     health: () => request('/health'),
     knowledge: () => request('/api/v1/knowledge-points'),
     start: (id, goals) => request('/api/v1/students', {

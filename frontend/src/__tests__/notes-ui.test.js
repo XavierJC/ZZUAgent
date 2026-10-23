@@ -45,7 +45,7 @@ describe('notes page integration', () => {
   it('protects unsaved work across pages and identity changes with a keyboard accessible dialog', async () => {
     const api = { ...client(), ...notesApi() }; await openNotes(api, notesStore())
     await button('新建笔记').trigger('click'); await wrapper.get('#note-content').setValue('retain this draft')
-    const history = button('学习概览', 'nav button'); history.element.focus(); await history.trigger('click'); await flushPromises()
+    const history = button('我的学习', 'nav button'); history.element.focus(); await history.trigger('click'); await flushPromises()
     const dialog = wrapper.get('[role="dialog"]')
     expect(dialog.attributes('aria-modal')).toBe('true')
     expect(document.activeElement).toBe(dialog.get('[data-cancel]').element)

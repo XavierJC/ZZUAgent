@@ -46,7 +46,7 @@ export function client() {
   return { health: vi.fn().mockResolvedValue({ status: 'ok', version: '0.4.0', question_count: 10,
     pending_review_count: 10, agent_enabled: true, retrieval_available: true }),
   knowledge: vi.fn().mockResolvedValue(points), start: vi.fn().mockResolvedValue(state()),
-  mastery: vi.fn().mockResolvedValue(state()), next: vi.fn().mockResolvedValue(assignment()),
+  mastery: vi.fn().mockResolvedValue(state()), currentDecision: vi.fn().mockResolvedValue(assignment()), next: vi.fn().mockResolvedValue(assignment()),
   history: vi.fn().mockResolvedValue({ student_id: 'learner-test', revision: 0, items: [] }),
   tutorRuns: vi.fn().mockResolvedValue([]), submit: vi.fn().mockResolvedValue(receipt()),
   tutor: vi.fn().mockResolvedValue(savedReply()), search: vi.fn().mockResolvedValue(savedReply().citations) }

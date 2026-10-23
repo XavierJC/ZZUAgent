@@ -25,7 +25,7 @@ class WorkbenchAgent:
         self.service, self.context, self.client = service, context, client
         self.settings, self.learning_state = settings, learning_state
 
-    def run(self, question, evidence, *, guide_context=None):
+    def run(self, question, evidence, *, guide_context=None, lesson_context=None):
         # Defense in depth even if called outside WorkbenchService.ask.
         if any(ref[0] == 'personal_note' for ref in self.context.sources) and not self.context.allow_personal_external:
             return {'reason': 'personal_consent_required'}
@@ -68,6 +68,10 @@ class WorkbenchAgent:
                 '只能解释这些重点，不得修改顺序、数值、先修、评分或规则，不得增加行动字段或链接。'
                 '自评等级不等于BKT概率，缺少答题时不能把先验当诊断。严格只输出answer和citation_ids。')
         user_input = {'question': question, 'untrusted_evidence': evidence}
+        if lesson_context is not None:
+            system += ('server_learning_context是程序确定的只读目标与学情。结合它讲解知识、举例和启发追问；不得修改规则建议、先修、评分或掌握概率。'
+                       '没有客观证据时显示待诊断，不能将先验当诊断；下一步行动仍由原正式分配服务执行。')
+            user_input['server_learning_context'] = {k:v for k,v in lesson_context.items() if k not in ('session_id','release_id')}
         if guide_context is not None:
             user_input['server_guide_context'] = guide_context
         # No prior chats, identities, unselected notes, or full note bodies enter

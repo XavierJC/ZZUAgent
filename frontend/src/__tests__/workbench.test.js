@@ -66,6 +66,16 @@ describe('workbench state and per-round consent', () => {
     await w.load(); expect(w.chosen).toEqual([course]); expect(w.consent).toBe(false)
     expect(w.notice).toContain('重新勾选')
   })
+  it('restores the original lesson version on a pending receipt without another model call', async () => {
+    const api=client(), store=storage()
+    store.setItem('eduagent.workbench.v1.a',JSON.stringify({pending_request_id:'run-1'}))
+    const context={release_id:'old-release',release_version:2,learning_revision:0}
+    api.teachingContexts=vi.fn().mockResolvedValue({items:[{request_id:'run-1',context,lesson_stale:true}]})
+    const w=reactive(useStudyWorkbench(api,ref('a'),store));await w.load()
+    expect(w.current.lesson_context).toEqual(context)
+    expect(w.current.lesson_stale).toBe(true)
+    expect(api.workbenchAsk).not.toHaveBeenCalled()
+  })
   it('ignores late responses after switching demo students', async () => {
     const api = client(), owner = ref('a'), w = reactive(useStudyWorkbench(api, owner, storage())); await w.load()
     let resolve
@@ -209,7 +219,7 @@ describe('workbench interface', () => {
     api.note.mockResolvedValue({ id: savedId, title: '助教回答', content_md: '$w$ 原回答', revision: 1, knowledge_point_ids: [], content_hash: 'h', index_status: 'ready',
       generation_origin: { request_id: 'run-1', original_revision: 1, generated_at: '2026-10-20T08:00:00Z', edited: false } })
     wrapper = mount(App, { props: { client: api, store: memoryStore({ student_id: 'learner-test' }) } }); await flushPromises()
-    await wrapper.findAll('nav button').find(b => b.text() === 'AI助教').trigger('click'); await flushPromises()
+    await wrapper.findAll('nav button').find(b => b.text() === 'AI伴学').trigger('click'); await flushPromises()
     await wrapper.findAll('.wb-answer > button')[0].trigger('click'); await flushPromises()
     expect(api.note).toHaveBeenCalledWith('learner-test', savedId)
     expect(wrapper.get('#note-title').element.value).toBe('助教回答')

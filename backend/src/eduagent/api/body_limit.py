@@ -12,7 +12,7 @@ class NotesBodyLimit:
         self.app = app
 
     async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or not re.fullmatch(r"/api/v1/students/[^/]+/(?:notes(?:/.*)?|knowledge(?:/.*)?|knowledge-architectures(?:/.*)?|workbench(?:/.*)?|self-assessments(?:/.*)?|study-guides(?:/.*)?|course-resources(?:/.*)?|personal-bank(?:/.*)?)", scope["path"]):
+        if scope["type"] != "http" or not re.fullmatch(r"/api/v1/students/[^/]+/(?:notes(?:/.*)?|knowledge(?:/.*)?|knowledge-architectures(?:/.*)?|workbench(?:/.*)?|self-assessments(?:/.*)?|study-guides(?:/.*)?|course-resources(?:/.*)?|personal-bank(?:/.*)?|course-builder(?:/.*)?|teaching-sessions(?:/.*)?|course-workflow(?:/.*)?)", scope["path"]):
             return await self.app(scope, receive, send)
         body = bytearray()
         while True:

@@ -205,11 +205,11 @@ def verify(output):
         assert http('/api/v1/students/a/self-assessments/latest')['assessment_revision']==0
         check('all_fifteen_original_tables_and_bkt_unchanged')
         with sqlite3.connect(directory/'http.sqlite3') as db:
-            assert db.execute('PRAGMA user_version').fetchone()[0]==10
+            assert db.execute('PRAGMA user_version').fetchone()[0]==11
             assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok' and not db.execute('PRAGMA foreign_key_check').fetchall()
         check('schema9_integrity_and_foreign_keys')
         output.write_text(json.dumps({'passed':True,'verified_at':datetime.now(timezone.utc).isoformat(),'checks':checks,
-            'server_starts':starts,'schema':10,'simulated_vision_calls':len(calls()),'real_model_calls':0,'real_material_transmissions':0,
+            'server_starts':starts,'schema':11,'simulated_vision_calls':len(calls()),'real_model_calls':0,'real_material_transmissions':0,
             'test_directory':str(directory),'production_writes':0,'browser_manual_validation':'not_performed',
             'accuracy_scope':'Self-created text/OOXML fixtures; no real textbook or visual recognition accuracy claim.'},ensure_ascii=False,indent=2),encoding='utf8')
         print(json.dumps({'passed':True,'checks':len(checks),'simulated_vision_calls':len(calls()),'real_calls':0,'report':str(output)}))

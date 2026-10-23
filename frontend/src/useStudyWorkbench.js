@@ -4,7 +4,7 @@ const reference = (s) => ({ source_type: s.source_type, source_id: s.source_id, 
 export const sourceKey = (s) => `${s.source_type}:${s.source_id}`
 const usable = (s) => ['ready', 'empty'].includes(s.index_status)
 
-export function useStudyWorkbench(client, student, storage = globalThis.localStorage) {
+export function useStudyWorkbench(client, student, storage = globalThis.localStorage, lesson = null) {
   const sources = ref([]), selected = ref([]), query = ref(''), mode = ref('local'), consent = ref(false)
   const runs = ref([]), current = ref(null), busy = ref(''), error = ref(''), notice = ref(''), pendingId = ref(null)
   const capabilities = ref(null), drawer = ref(null), panel = ref('chat'), initialized = ref(false)
@@ -34,7 +34,8 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     try {
       const [catalog, history, config] = await Promise.all([client.knowledgeSources(owner), client.workbenchRuns(owner), client.workbenchCapabilities(owner)])
       if (token !== epoch) return
-      sources.value = catalog.items; runs.value = history; capabilities.value = config
+      const scope = lesson?.scope?.()
+      sources.value = scope ? catalog.items.filter(s=>s.source_type==='personal_note' || scope.some(r=>sourceKey(r)===sourceKey(s) && r.source_version===s.source_version)) : catalog.items; runs.value = history; capabilities.value = config
       let saved = null
       if (!initialized.value) {
         try { saved = JSON.parse(storage.getItem(`eduagent.workbench.v1.${owner}`) || 'null') } catch { notice.value = '本机工作台状态无法读取，服务器历史仍可查看。' }
@@ -50,6 +51,9 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
       const previous = selected.value
       selected.value = previous.filter(ref => catalog.items.some(s => usable(s) && sourceKey(s) === sourceKey(ref) && s.source_version === ref.source_version))
       if (previous.length !== selected.value.length) notice.value = '部分所选来源已变化或未就绪，已取消其选择，请核对后重新勾选。'
+      const contexts=client.teachingContexts ? (await client.teachingContexts(owner)).items : lesson?.contexts?.() || []
+      if(token!==epoch)return
+      for(const run of runs.value){const linked=contexts.find(r=>r.request_id===run.request_id);if(linked){run.lesson_context=linked.context;run.lesson_stale=linked.lesson_stale ?? linked.context.learning_revision!==lesson?.revision?.()}}
       if (current.value) current.value = history.find(r => r.request_id === current.value.request_id) || current.value
       if (pendingId.value) {
         try {
@@ -58,6 +62,10 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
           current.value = result
           if (result.status !== 'uncertain') pendingId.value = null
         } catch { if (token === epoch) notice.value = '尚不能确认原请求状态。仅查询记录，不会自动重新发送模型请求。' }
+      }
+      if (current.value) {
+        const linked=contexts.find(r=>r.request_id===current.value.request_id)
+        if(linked){current.value.lesson_context=linked.context;current.value.lesson_stale=linked.lesson_stale}
       }
       if (current.value?.status === 'uncertain') pendingId.value = current.value.request_id
       persist()
@@ -80,11 +88,13 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     if (!persist()) { pendingId.value = null; return }
     busy.value = 'ask'; error.value = ''; notice.value = ''; consent.value = false
     try {
-      const result = await client.workbenchAsk(owner, request)
+      const session=lesson?.session?.()
+      const result = await (session && client.teachingExplain ? client.teachingExplain(owner,session.id,request) : client.workbenchAsk(owner, request))
       if (token !== epoch) return
       current.value = result; runs.value = [result, ...runs.value.filter(r => r.request_id !== result.request_id)].slice(0, 20)
       if (result.status !== 'uncertain') pendingId.value = null
       persist()
+      await lesson?.refresh?.()
     } catch (e) {
       if (token !== epoch) return
       error.value = e.message

@@ -23,8 +23,8 @@ class SQLiteRepository:
         self.connection.row_factory = sqlite3.Row
         self.connection.execute("PRAGMA foreign_keys = ON")
         try:
-            if not allow_upgrade and self.connection.execute('PRAGMA user_version').fetchone()[0] not in (0, 10):
-                raise ValueError('数据库需要显式迁移到schema10；请先停写并运行迁移入口')
+            if not allow_upgrade and self.connection.execute('PRAGMA user_version').fetchone()[0] not in (0, 11):
+                raise ValueError('数据库需要显式迁移到schema11；请先停写并运行迁移入口')
             self.migration_report = migrate(self.connection, path)
         except BaseException:
             self.close()
@@ -32,13 +32,23 @@ class SQLiteRepository:
 
     @contextmanager
     def transaction(self) -> Iterator[None]:
-        # Serialize read/modify/write, including concurrent retries from another connection.
-        self.connection.execute("BEGIN IMMEDIATE")
+        # Compose a release/session command and the unchanged learning service
+        # atomically. A nested failure rolls back to its savepoint; the outer
+        # transaction still owns the final commit and all fact/provenance writes.
+        nested=self.connection.in_transaction
+        if nested:
+            from uuid import uuid4
+            savepoint='eduagent_'+uuid4().hex
+            self.connection.execute('SAVEPOINT '+savepoint)
+        else:self.connection.execute("BEGIN IMMEDIATE")
         try:
             yield
-            self.connection.execute("COMMIT")
+            self.connection.execute("RELEASE SAVEPOINT "+savepoint if nested else "COMMIT")
         except BaseException:
-            self.connection.execute("ROLLBACK")
+            if nested:
+                self.connection.execute("ROLLBACK TO SAVEPOINT "+savepoint)
+                self.connection.execute("RELEASE SAVEPOINT "+savepoint)
+            else:self.connection.execute("ROLLBACK")
             raise
 
     def bind_configuration(self, configuration: dict) -> None:

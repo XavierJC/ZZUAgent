@@ -1,0 +1,69 @@
+{
+  "verified_at": "2026-10-23T10:43:29.364989+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "chat_output_budget_exposed_before_submission",
+      "passed": true
+    },
+    {
+      "name": "fenced_json_received_after_selected_source_rag",
+      "passed": true
+    },
+    {
+      "name": "valid_reference_footer_added_without_extra_provider_call",
+      "passed": true
+    },
+    {
+      "name": "no_match_calls_model_question_only_and_replay_is_idempotent",
+      "passed": true
+    },
+    {
+      "name": "consent_student_isolation_and_empty_source_constraints_preserved",
+      "passed": true
+    },
+    {
+      "name": "specific_validation_codes_persist_without_rejected_private_text",
+      "passed": true
+    },
+    {
+      "name": "compatible_metadata_aliases_and_envelopes_keep_server_owned_citations",
+      "passed": true
+    },
+    {
+      "name": "invalid_shape_diagnostics_store_counts_and_known_names_only",
+      "passed": true
+    },
+    {
+      "name": "answer_note_provenance_and_learning_facts_unchanged",
+      "passed": true
+    },
+    {
+      "name": "partial_rag_context_still_generates_applications_and_uncovered_topic",
+      "passed": true
+    },
+    {
+      "name": "unused_retrieval_hits_do_not_force_invented_citations",
+      "passed": true
+    },
+    {
+      "name": "uncited_general_answer_becomes_explicit_supplement_without_false_local_attribution",
+      "passed": true
+    },
+    {
+      "name": "truncation_and_filter_causes_and_failed_usage_survive_replay_without_retry",
+      "passed": true
+    },
+    {
+      "name": "restart_restores_original_answer_without_model_retry",
+      "passed": true
+    }
+  ],
+  "schema": 11,
+  "server_starts": 2,
+  "simulated_model_calls": 15,
+  "real_model_calls": 0,
+  "test_directory": "D:\\ZZUAgent\\data\\local\\workbench-answers-http-f04126c7",
+  "production_database_writes": 0,
+  "browser_manual_validation": "not_performed"
+}

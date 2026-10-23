@@ -33,7 +33,7 @@ describe('learning workspace', () => {
     expect(store.read().pending.event_id).toBe(body.event_id)
     expect(first.pending.value).not.toBeNull()
     // Simulate the server having committed despite the lost HTTP response.
-    api.mastery.mockResolvedValue(state(1)); api.next.mockResolvedValue(assignment(1))
+    api.mastery.mockResolvedValue(state(1)); api.next.mockResolvedValue(assignment(1)); api.currentDecision.mockResolvedValue(assignment(1))
     api.history.mockResolvedValue({ revision: 1, items: [receipt()] })
     api.submit.mockResolvedValue({ ...receipt(), event_id: body.event_id, replayed: true })
     const restored = useWorkspace(api, store)
@@ -72,7 +72,7 @@ describe('learning workspace', () => {
     const api = client(), w = useWorkspace(api, memoryStore({ student_id: 'learner-test' }))
     await w.boot(); w.selected.value = 'B'
     api.submit.mockRejectedValue(new ApiError('题目已过期', { status: 409 }))
-    api.mastery.mockResolvedValue(state(1)); api.next.mockResolvedValue(assignment(1))
+    api.mastery.mockResolvedValue(state(1)); api.next.mockResolvedValue(assignment(1)); api.currentDecision.mockResolvedValue(assignment(1))
     await w.submit()
     expect(w.pending.value).toBeNull()
     expect(w.feedback.value).toBeNull()

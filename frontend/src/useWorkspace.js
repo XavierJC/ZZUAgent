@@ -27,7 +27,7 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
   }
   async function readState() {
     const [state, answers, runs] = await Promise.all([
-      api.mastery(student.value), api.history(student.value), api.tutorRuns(student.value),
+      api.mastery(student.value), (api.teachingHistory || api.history)(student.value), api.tutorRuns(student.value),
     ])
     snapshot.value = state; history.value = answers.items; tutorRuns.value = runs
     tutor.value = runs[0] || null
@@ -39,6 +39,7 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
       pending.value = entry; selected.value = entry.answer
     }
   }
+  const readDecision = () => api.currentDecision ? api.currentDecision(student.value) : Promise.resolve(null)
   async function boot() {
     await lock('boot', async () => {
       const [service, points] = await Promise.all([api.health(), api.knowledge()])
@@ -48,11 +49,11 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
       student.value = saved.student_id
       restorePending(saved)
       await readState()
-      decision.value = await api.next(student.value)
+      decision.value = await readDecision()
       if (pending.value) notice.value = '有一笔尚未确认的答题提交。请先重试原提交，以确认评分结果。'
     })
   }
-  async function start(id, goals, restore = false) {
+  async function start(id, goals, restore = false, deferAllocation = false) {
     await lock('start', async () => {
       const normalized = id.trim()
       if (!normalized || normalized.length > 128) throw new Error('请填写 1～128 字符的学习标识。')
@@ -64,7 +65,7 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
       history.value = []; tutorRuns.value = []; sources.value = []
       remember()
       await readState()
-      decision.value = await api.next(student.value)
+      decision.value = deferAllocation ? await readDecision() : await api.next(student.value)
     })
   }
   async function refresh() {
@@ -72,7 +73,7 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
       health.value = await api.health()
       if (!student.value) return
       await readState()
-      decision.value = await api.next(student.value)
+      decision.value = await readDecision()
       if (!pending.value) { feedback.value = null; selected.value = '' }
     })
   }
@@ -96,7 +97,7 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
         if (!exception.uncertain && exception.status >= 400 && exception.status < 500) {
           pending.value = null; remember()
           await readState()
-          decision.value = await api.next(student.value)
+          decision.value = await readDecision()
           selected.value = ''
         }
         throw exception
@@ -124,7 +125,7 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
       tutorRuns.value = [tutor.value, ...tutorRuns.value.filter((run) => run.run_id !== tutor.value.run_id)].slice(0, 5)
       // Do not automatically replace an unsubmitted exercise with text from
       // the model. The server supplies the sole authoritative assignment.
-      if (!feedback.value) decision.value = await api.next(student.value)
+      if (!feedback.value) decision.value = await readDecision()
     })
   }
   async function search(query) {

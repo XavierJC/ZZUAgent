@@ -1,0 +1,403 @@
+{
+  "created_at": "2026-10-23T11:01:13.028836+00:00",
+  "comparison_archive": "D:\\ZZUAgent\\data\\local\\phase5-prechange-5626ce15\\code-before.zip",
+  "source_changes": [
+    {
+      "path": "AGENTS.md",
+      "kind": "modified",
+      "before_sha256": "3cff6f2cd13a4c60a28b98ee48168efc10b87f602435fcabc201ece2134af744",
+      "after_sha256": "f94e6128d874ec32d6bdf312be1cccfcecd04122682ec4e220cfd6a7dc211a77"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "kind": "modified",
+      "before_sha256": "ccc8ec4615dd30d1a8f0fd33d4999e341f19e8b11e88e201d9432f25f3505257",
+      "after_sha256": "a5c4ea17d2a3a30888506d73f646848b02251e002c92db0a64a73c801dfbefcb"
+    },
+    {
+      "path": "backend/src/eduagent/api/app.py",
+      "kind": "modified",
+      "before_sha256": "5e41967d4ae90fe708875b34828609d3969abda6a66e14bd4f2730fdf6fd5cc8",
+      "after_sha256": "8f46d1630de2c995ece46d557019adf386742b5af6aaab9a6bfc316d532fe998"
+    },
+    {
+      "path": "backend/src/eduagent/api/body_limit.py",
+      "kind": "modified",
+      "before_sha256": "baec565a7287706f3f5b4161c9762115e49a4c8ae72c9def4c39d817d28ad043",
+      "after_sha256": "a1a42346a6410dfd95826535ac670db4ede4aad404f42552f32c83daa85f72fa"
+    },
+    {
+      "path": "backend/src/eduagent/api/course_workspaces.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "e4594324ed04b5ac0793ee3e8f2e105d98ca370ff31481f5505abcb1473757bb"
+    },
+    {
+      "path": "backend/src/eduagent/services/course_releases.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "8317845ddf88495b5c0195657b4dbd4e75a845e51b7098f9067ce5f0bdf952ec"
+    },
+    {
+      "path": "backend/src/eduagent/services/teaching.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "9ef39260ce542605c1378fbd4b45708450794ae828fe6691d8ec3357ea0d6e18"
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "kind": "modified",
+      "before_sha256": "e66a8b634d1196887f7a7353b0e2910c460b9d3bf1974de4be510bdf76edcd07",
+      "after_sha256": "7c65f6b4faf15686876f1fe03fb75a92409e620bf516ea3f548d10bb91f0c6cd"
+    },
+    {
+      "path": "backend/src/eduagent/storage/course_release_schema.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "ff55bdc52bb34709ba41d3b8022c9d86ff6c75d02ed18f5d02ed31bfb6408fb7"
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "kind": "modified",
+      "before_sha256": "8b38d0a384ad9d366691c07bca3dca92adf178f1819459e872dd6b556f0d107a",
+      "after_sha256": "51a5e0603f6d58fe772c6162f01423f0ab69a327cae4d518deb85e15ab05c027"
+    },
+    {
+      "path": "backend/src/eduagent/storage/sqlite.py",
+      "kind": "modified",
+      "before_sha256": "b64a81c5ef673b760cf7e5fd955a6b53127ee19bf8d1d1fd283a14f1124d7f8d",
+      "after_sha256": "96d04bd8cb71394d04ed1f05dbeddda5fea5b9e6487d387027353766ec494590"
+    },
+    {
+      "path": "backend/tests/test_architectures.py",
+      "kind": "modified",
+      "before_sha256": "28e4aaf33e48afe434a9c4a4cc88307aa76e4ccad7f5f52c9f9dd77413c229f9",
+      "after_sha256": "46278dff322c885742476525c7bd07a4796b127b36e68be0987766d49dc147aa"
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "kind": "modified",
+      "before_sha256": "73762fbe4c3cc50688f016c834ef5620aaec49b8ef6c6a7375945117fdf9ec44",
+      "after_sha256": "b23c8e82cb85752a402dd60ddddade0757fdab557933c01075cef50e23410352"
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "kind": "modified",
+      "before_sha256": "d2e68c2dc9546fa01701b04b87e1fefeaf3bb7b57c86e3dab203aca504377f35",
+      "after_sha256": "543474321a207a5102c0efb77d93ec4ceb820d41d67f0788ad9df3dc1d8556ef"
+    },
+    {
+      "path": "backend/tests/test_personal_bank.py",
+      "kind": "modified",
+      "before_sha256": "92a2684b6c823d3380c661d3b6a82f0a2ab787e5d78e7bb383c034af5a858294",
+      "after_sha256": "ccb8f98de0e3500c2ece3e1710830fcdb02ea238600e8efe93876c8b603a7997"
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "kind": "modified",
+      "before_sha256": "ede29a1c96cef99942f2e9de8acf5c00949cece9d2f182259282aee9ea18fb15",
+      "after_sha256": "75479c2f4f73d62f37605696a46aa81f7983626fbfcf10e1cfa903f2ea5a02e1"
+    },
+    {
+      "path": "backend/tests/test_phase5.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "5676d1119b44e3d29270fbc9a8d53a9dde4edaabde0a4ee500878d25d863cc7e"
+    },
+    {
+      "path": "backend/tests/test_self_assessments.py",
+      "kind": "modified",
+      "before_sha256": "5dee1595506d50e6ee4523f5dbd71f711a079d7c63f70ba46aedf1991a44f21e",
+      "after_sha256": "aa04a73c0bc10a0656e0752cb499d66cebd0be969851d378097f3305942ed082"
+    },
+    {
+      "path": "backend/tests/test_semantic_extraction.py",
+      "kind": "modified",
+      "before_sha256": "e20ccb90062ce4c07a9a5f03b91711c131abd45a437b2858c2beda031a8eaef6",
+      "after_sha256": "6228e3e8457fdbc849b395e56e10328c382fdaa0880b31b203a3f03c3c1955ad"
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "kind": "modified",
+      "before_sha256": "f66b24893ee1b984d01aa6a9a8dac5f841173ff04e269d61723b8d604f2868d7",
+      "after_sha256": "d7eaa32b007059cfd2c57f1d4129e002dbf6b08be24a4fc44ef535b0507f7441"
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "kind": "modified",
+      "before_sha256": "4dac281e746f36344f0f63ee5342462924efc469940c48e93f188b6ccc243400",
+      "after_sha256": "6d38501af110746674569ed75296f1aaed267676f4feb0d97afdf8ebab35c623"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "kind": "modified",
+      "before_sha256": "f65cbaf310d2fdf15d39752b1b4de450d9622abb98886fd8fe86d389ff8030c9",
+      "after_sha256": "43ea7a27417bb8e6c2621c7df07acd964b2c75aab528d620764c89a6d547b3e2"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "kind": "modified",
+      "before_sha256": "428798358f1edc8a260486f15e5c4fa87a585a26b9bb27bad64b5465a103d064",
+      "after_sha256": "a579d520b50711857153acbd1562e6f5828267c4b5d608f906f9b7460625be4f"
+    },
+    {
+      "path": "docs/EXTRACTION_V2_GUIDE.md",
+      "kind": "modified",
+      "before_sha256": "ca90117a105bece9f48164955c3240437707c1c29458b6e889c17fa260accd4e",
+      "after_sha256": "514005c5d7cde3199ebc646eeb3e4ab494275a0586433f719c84ab87cfcd19a3"
+    },
+    {
+      "path": "docs/PHASE4B2_GUIDE.md",
+      "kind": "modified",
+      "before_sha256": "74a08579bdb4fc0df45d0f5e360ee9a7de3a4f43e238873476196ea8335ef701",
+      "after_sha256": "ea361eeb3921e501edf95992e0f933a7ce43b4c74abb65d3650a422f71b06347"
+    },
+    {
+      "path": "docs/PHASE4C_GUIDE.md",
+      "kind": "modified",
+      "before_sha256": "aff88b6371bc7f971d7e7b3384768dd6a5989f8892b4961f7c7c562015009d70",
+      "after_sha256": "e3541946e40337ea457f92132ebf7c705cfdd886109a546f25e109e05345860a"
+    },
+    {
+      "path": "docs/PHASE5_GUIDE.md",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "bf231a94a30c1cefd9082e2d1251cf26bf084d9ae0f938882531869b6e8d3404"
+    },
+    {
+      "path": "docs/PHASE5_VALIDATION.md",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "5072e4b2abf9f3c3ff4cc579af72eab959efdbe1aaefb955a892da4022a87f00"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "kind": "modified",
+      "before_sha256": "9a9e7599a5a3eb095f50d7f84115cbdae66c7703130b82d78c4ac1972e624544",
+      "after_sha256": "19ffc9fdaecac56f5bdf62e9e0178d341f9be0f225652f9ff6c61e5a42982d80"
+    },
+    {
+      "path": "docs/requirements/PHASE5_TASK_BRIEF.md",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "00e229ae2d04860d5d57b421ec8d5a2b2df1464690542a4f61f30672c2480ae3"
+    },
+    {
+      "path": "docs/WEB_GUIDE.md",
+      "kind": "modified",
+      "before_sha256": "33b475fd96eb0748e918cf9d165b528470f80094703cefdd260eaeb433e6c63d",
+      "after_sha256": "c3e0a5109fa95a867b1c3d39ce193a06aa00428faa1c0638d46c32875e975f41"
+    },
+    {
+      "path": "docs/WORKBENCH_GUIDE.md",
+      "kind": "modified",
+      "before_sha256": "c68b7c45222d471503b3c61e11403bba66e179fa3f93980fe8a822cf1d809639",
+      "after_sha256": "983241600512f214477ab9e4a964afb0c49565c26829233158b0950767f67f1b"
+    },
+    {
+      "path": "frontend/src/__tests__/app.test.js",
+      "kind": "modified",
+      "before_sha256": "ffca5813f27e8017936784af6011a0435608d9ef09001c11b034001450ea721d",
+      "after_sha256": "2bb99bd86627f694b6b78de2720fa07bfcd245b5da77c7c3f3018f8a07078b22"
+    },
+    {
+      "path": "frontend/src/__tests__/fixtures.js",
+      "kind": "modified",
+      "before_sha256": "fa27b4fc76f74b53342341141a01dcd1a224936019e632680efb02b71a2d5d74",
+      "after_sha256": "e92de41a7db6aa2657dd0d87a8ebd718d0b5611ed99af5ce4fc026557d843078"
+    },
+    {
+      "path": "frontend/src/__tests__/notes-ui.test.js",
+      "kind": "modified",
+      "before_sha256": "91cb8c59464f9cef0df97c8390042a80176bcbe85387f3c63de7a05011cd8b49",
+      "after_sha256": "f3fef501704230becb63ba45822d50871a3804cb0f3b0561f39913ca76fc0889"
+    },
+    {
+      "path": "frontend/src/__tests__/phase5.test.js",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "336d087c73d4603b1bdf9a6795fe7b46bbc3fecd93ac11735c54ada1a9fd3c2f"
+    },
+    {
+      "path": "frontend/src/__tests__/study-guidance.test.js",
+      "kind": "modified",
+      "before_sha256": "e55ef50399456a3dac7229be9af7cf5eb43ccaea3e030a07a5cbd41cc89b92dc",
+      "after_sha256": "a15d5de9e1babc04cf9dca97bccb1097797901715dccbe57dd70e53166c01941"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "kind": "modified",
+      "before_sha256": "13f575f6be721f4d93e3b5a7c2007dc5ec2a16d98026271403d87a61441e96c9",
+      "after_sha256": "6641af6ce2f0fcfd39d693c69e67b07c0b6bbb0f8bbb8a171ca79459b866fd57"
+    },
+    {
+      "path": "frontend/src/__tests__/workspace.test.js",
+      "kind": "modified",
+      "before_sha256": "a66dc52be6049bc90ea67f4f577acc011dd7e8fad54fc726df11fc5b853dc38d",
+      "after_sha256": "8ae4310908162e678fcf91b3bab12c0661f96a2f99038f5413a98d2dec0c7a42"
+    },
+    {
+      "path": "frontend/src/api.js",
+      "kind": "modified",
+      "before_sha256": "cb03c554a8f9d3d19293d69f99b1cb5ddf96b11b60c0f3cc31c7f5afa010747b",
+      "after_sha256": "ed1650d9d4a8eac1675ee5785cfe88df164dd4182152c594963ae411c737f0c4"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "kind": "modified",
+      "before_sha256": "1bb103b18eb55f8d6768e7d6fe0fa321832bbec3733c4ace5f1f80d5dd58fe89",
+      "after_sha256": "580ec1434bf3c3f1d19303e1488efd02abebc4d1eef174f6492618f0baa997f6"
+    },
+    {
+      "path": "frontend/src/components/PersonalBankWorkspace.vue",
+      "kind": "modified",
+      "before_sha256": "4fdee2b9aa2dc696d081363dba28f8bac2c6b706dfb0738dc91afcaa9ed517e6",
+      "after_sha256": "1f89ff4909bdf640539d1df6086f451425dd4689e97ec4abb20ecd1e92408766"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "kind": "modified",
+      "before_sha256": "63e8d80470ab3ce0d106e6deb538866e177d56b8653cd2e13d6bbe8ca8ff43b0",
+      "after_sha256": "86e10e2307aeedb9f3d769a204192d1583da81ab22c479661ea67cf659fa8746"
+    },
+    {
+      "path": "frontend/src/phase5.css",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "2cdd54b59442c03b6e2d2c2215b5ed1e083ff86402dfcbf91e872188050be7a7"
+    },
+    {
+      "path": "frontend/src/useCourseBuilder.js",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "7fcc89fcbc708a65e1a7a12b1695a2f185bb80e879983657bf2ce2141192d921"
+    },
+    {
+      "path": "frontend/src/usePageRoute.js",
+      "kind": "modified",
+      "before_sha256": "cf459cdded88e6b3a8056f97f9091d04d704643ab39b961904a59cc6f906bcdb",
+      "after_sha256": "f44704a8007958734f59f25535c79d68b6a5af3d30534804d7df973208f478ad"
+    },
+    {
+      "path": "frontend/src/useStudyWorkbench.js",
+      "kind": "modified",
+      "before_sha256": "c7fc4b788b8bd932836e5ac29d82909804c3df0a0f521f120937ad97479dd516",
+      "after_sha256": "71702ba7da9e14526c342f2f8da89482342ec9ca294af48c65f1541f7b626612"
+    },
+    {
+      "path": "frontend/src/useTeachingWorkspace.js",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "26c0af6021dedf39f6c87af5036dcff43bd3bfa52dfdee920641279b8daa774f"
+    },
+    {
+      "path": "frontend/src/useWorkspace.js",
+      "kind": "modified",
+      "before_sha256": "ad6ff412176c97fe41303104707fea66c8d7f37647481b39936d43c10a63a15b",
+      "after_sha256": "d1f2ac327a175e3c294eb012b052b0539374b984d9b5b1ad7b6e8cbe18b6493b"
+    },
+    {
+      "path": "frontend/src/views/CourseBuilderView.vue",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "aacfa2910b261bf07b04be2830504fb404b0efc0145c789335a4d76e4236da9f"
+    },
+    {
+      "path": "frontend/src/views/LearningHistory.vue",
+      "kind": "modified",
+      "before_sha256": "a28f6a1196127157e7319e7bb2d12be4af641393c9e65d119b41007d9eb5935d",
+      "after_sha256": "b0773aeb28dc19392c2aa0c3fe42a12f9925b48f2b11e5f238c8e6d557990430"
+    },
+    {
+      "path": "frontend/src/views/LearningInsights.vue",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "6715416cea64e5016d4a9c21153ce380e120c17b6853186f964f60f025557482"
+    },
+    {
+      "path": "frontend/src/views/LearningOverview.vue",
+      "kind": "modified",
+      "before_sha256": "85026b69f7c93ca0c6cb1a0e6d251b239fc9c48140d98bc44a051bfa7fd43444",
+      "after_sha256": "b9626eccfcbd8128954e7bb9c9a2851529b57f6555fc5b0e5a6885007dc5bf31"
+    },
+    {
+      "path": "frontend/src/views/LearningResources.vue",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "746a00120b010cb611fde8358a4866d70246bcbfa0b94eca415d93999a062125"
+    },
+    {
+      "path": "frontend/src/views/ResourcesView.vue",
+      "kind": "modified",
+      "before_sha256": "3d28a3acfb58b6ea3ceb7d96b701ed09125f5e69f7ff3da5c0fc39876db20ca3",
+      "after_sha256": "fd863e3060dafbe9fd573d93b201b9b71bbc74dd9ac8d91f2a0788071bff11b3"
+    },
+    {
+      "path": "README.md",
+      "kind": "modified",
+      "before_sha256": "e5823c9fecf5180762aa642c7107ba8bbeddc618c64ed55aeb27037f605ac387",
+      "after_sha256": "6b4e828794529d82ec49e64c15fb52edd0b1cdbbd38328b01638a3d023bef5f7"
+    },
+    {
+      "path": "scripts/verify_architectures.py",
+      "kind": "modified",
+      "before_sha256": "983cf1051bba9cef920e71cf912bbe4fddf03f7f6a93743e6523445af4c9eea1",
+      "after_sha256": "444b569a997d8051c43859f4c5a327b08f55dace5315eb3d4fef3871a4c38703"
+    },
+    {
+      "path": "scripts/verify_documents.py",
+      "kind": "modified",
+      "before_sha256": "f23c703bbe0c6c99c23071744f12953407b9983a5aaf2f2335b7bd94291018d0",
+      "after_sha256": "e3a3d5e422fb29437fa76a4abe3b85d4402b49d328300481cf84d3fcdafce239"
+    },
+    {
+      "path": "scripts/verify_phase4a.py",
+      "kind": "modified",
+      "before_sha256": "555a1972f69acde83dfae06c0848063da6cd60c8e96e3321c44f1c9ec5b41ebf",
+      "after_sha256": "f0a0d00eb05ee0f93fc7004cb9d4a30af19eb8775214e5d0afcfe08317df9854"
+    },
+    {
+      "path": "scripts/verify_phase5.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "db464013f66703adea812858b2f84accb00073dc3f6f72b1ee40dd3509299b25"
+    },
+    {
+      "path": "scripts/verify_phase5_deployment.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "a6afab8728eacd2a1c4fbefb0be7fbb7eaa5ef07f326c842873423dbcdb15cc5"
+    },
+    {
+      "path": "scripts/verify_phase5_migration.py",
+      "kind": "added",
+      "before_sha256": null,
+      "after_sha256": "4475335b8f1699f01d92eafb3cfc11f217f0aa06260204732180555f8895f8ec"
+    },
+    {
+      "path": "scripts/verify_workbench_answers.py",
+      "kind": "modified",
+      "before_sha256": "af092cc5b5ef4571b442b2b831d7c3db86bd7b7de145afaf401c925ee628615d",
+      "after_sha256": "711331f648bc2bba68a4466f2cbc2b5d5da18a0638ba861ad8081aac434d2c37"
+    }
+  ],
+  "source_count": 63,
+  "evaluation_reports": [
+    "data/evaluation/phase5-architectures-http-v1.json",
+    "data/evaluation/phase5-bank-http-v1.json",
+    "data/evaluation/phase5-chat-http-v1.json",
+    "data/evaluation/phase5-deployment-v1.json",
+    "data/evaluation/phase5-documents-http-v1.json",
+    "data/evaluation/phase5-extraction-http-v1.json",
+    "data/evaluation/phase5-guidance-http-v1.json",
+    "data/evaluation/phase5-http-v1.json",
+    "data/evaluation/phase5-migration-rehearsal-v1.json",
+    "data/evaluation/phase5-migration-v1.json"
+  ],
+  "built_assets": [
+    "/assets/index-CNR-q0j9.js",
+    "/assets/index-DGsuFkDC.css"
+  ],
+  "database_files": "Excluded from source manifest; see phase5-migration-v1.json",
+  "secrets": "No environment file or credential included"
+}

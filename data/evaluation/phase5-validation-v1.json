@@ -1,0 +1,71 @@
+{
+  "verified_at": "2026-10-23T11:01:13.035766+00:00",
+  "backend": {
+    "passed": 570,
+    "failed": 0,
+    "command": "python -m pytest backend/tests -c backend/pyproject.toml -q --tb=short"
+  },
+  "frontend": {
+    "passed": 158,
+    "failed": 0,
+    "files": 13,
+    "command": "npm run test",
+    "unhandled_errors": 0
+  },
+  "build": {
+    "passed": true,
+    "command": "npm run build",
+    "main_js_kb": 742.83,
+    "main_js_gzip_kb": 249.55,
+    "warning": "Main bundle exceeds 500kB"
+  },
+  "http": [
+    {
+      "report": "data/evaluation/phase5-architectures-http-v1.json",
+      "groups": 17,
+      "simulated_model_calls": 0,
+      "real_model_calls": 0
+    },
+    {
+      "report": "data/evaluation/phase5-bank-http-v1.json",
+      "groups": 21,
+      "simulated_model_calls": 2,
+      "real_model_calls": 0
+    },
+    {
+      "report": "data/evaluation/phase5-chat-http-v1.json",
+      "groups": 14,
+      "simulated_model_calls": 15,
+      "real_model_calls": 0
+    },
+    {
+      "report": "data/evaluation/phase5-documents-http-v1.json",
+      "groups": 15,
+      "simulated_model_calls": 3,
+      "real_model_calls": 0
+    },
+    {
+      "report": "data/evaluation/phase5-extraction-http-v1.json",
+      "groups": 13,
+      "simulated_model_calls": 4,
+      "real_model_calls": 0
+    },
+    {
+      "report": "data/evaluation/phase5-guidance-http-v1.json",
+      "groups": 18,
+      "simulated_model_calls": 9,
+      "real_model_calls": 0
+    },
+    {
+      "report": "data/evaluation/phase5-http-v1.json",
+      "groups": 19,
+      "simulated_model_calls": 2,
+      "real_model_calls": 0
+    }
+  ],
+  "total_http_groups": 117,
+  "real_model_calls": 0,
+  "browser_manual": "not_performed",
+  "teaching_effectiveness": "not_verified",
+  "source": "Actual command and HTTP results from this Phase 5 session; no synthetic pass counts"
+}

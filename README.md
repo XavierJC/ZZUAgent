@@ -10,17 +10,18 @@
 
 ## 当前状态
 
-已部署本轮入口整理与Agent原题识别改进：**学习概览 / AI助教 / 课程资料 / 我的题库 / 我的笔记**。从资料选择→原题识别→原文校对→确认入库→按原题型练习，题库不再嵌套在问答工作台内。
+已完成并部署 **Phase5双工作区与教学闭环整合**。学生端以“下一步学习任务”为中心；课程构建端独立准备资料、知识体系、习题及发布版本。
 
-- 语义提取可使用选定原文及PDF/图片原页，保留简答、计算、证明、子问、公式和未知答案。每轮明确外发同意，任务刷新/超时不自动重发模型。
-- 修正旧题先生成对照草稿，显式接受后仍需审核；原12道个人题不自动改写。文字作答可保存恢复、不自动判分；只有人工确认答案的单选/判断普通练习继续确定性评分。BKT与正式学习规则保持。
-- 当前schema10/36表；迁移前备份、原34表/原件/旧评估核对及回退副本验证通过。**552项后端、149项前端、98组隔离HTTP及构建通过**。
-- 本轮真实DeepSeek共12次均使用自建资料；最终24题参考检查与清晰两页图片PDF烟测通过，前两轮失败保留。**真实试卷准确率、浏览器人工验收及学习效果尚未验证**。
-- 正式仍原5知识点/10演示题；40候选题待人工确认，原55条检索记录和5/15课程外误检保持。教师课件RAG全面扩展、新题生成、主观自动评分及BKT准入未实施。
+- 学生端：我的学习、学情与目标、AI伴学、学习记录；笔记、学习资料和普通练习作为辅助入口。课程构建：课程概览、课程资料、知识体系、习题管理、课程审核与发布。
+- 已发布工程演示课程可直接开始：目标→诊断→客观学情/自评→受控讲解→正式复测→BKT更新及重新规划。刷新只读，不分配新题、不重发模型。旧历史不补认新发布版本。
+- 新增不可变课程发布清单、审核与版本检查，正式仍原5知识点/10演示题，内容待人工审核。40候选**包含原10题**，额外30题，不自动启用。普通练习和文字作答不更新BKT。
+- 笔记、RAG、四格式课件/图片解析、原题提取/修正、知识树、自评及指南保持；新界面复用原模块。教师课件仅支持发布来源引用，尚未全面接入RAG。
+- 当前schema11/43表；升级前备份、原36表/原件/旧评估摘要及回退副本验证通过。现有24道个人题、5篇笔记、2份资料和27条正式作答保持。
+- **本轮570项后端、158项前端、117组隔离HTTP及构建通过；35次HTTP模拟模型，真实付费调用0。** 浏览器人工、真实模型质量及教学效果待验证；保留原55条检索评估与5/15课程外误检。
 
-[本轮使用/API/迁移说明](docs/EXTRACTION_V2_GUIDE.md) · [实际验收与人工清单](docs/EXTRACTION_V2_VALIDATION.md) · [开发计划与历史](docs/DEVELOPMENT_PLAN.md)。新增依赖0，版本清单仍0.4.1，完整v0.5.0未发布。
+[本轮使用/API/迁移说明](docs/PHASE5_GUIDE.md) · [实际验收、修改文件与人工清单](docs/PHASE5_VALIDATION.md) · [开发计划与历史](docs/DEVELOPMENT_PLAN.md)。新增依赖0，版本清单仍0.4.1，完整v0.5.0未发布。仅本机演示，没有教师/学生身份认证。
 
-此前功能记录：[个人题库](docs/PHASE4C_GUIDE.md)、[课件解析](docs/PHASE4B1_GUIDE.md)、[知识体系](docs/PHASE4B2_GUIDE.md)、[自评与指南](docs/PHASE4A_GUIDE.md)、[资料问答](docs/WORKBENCH_GUIDE.md)、[个人检索](docs/PERSONAL_RAG_GUIDE.md)、[笔记](docs/NOTES_GUIDE.md)。旧报告的schema和测试数字为阶段历史。
+此前功能记录：[原题识别](docs/EXTRACTION_V2_GUIDE.md)、[个人题库](docs/PHASE4C_GUIDE.md)、[课件解析](docs/PHASE4B1_GUIDE.md)、[知识体系](docs/PHASE4B2_GUIDE.md)、[自评与指南](docs/PHASE4A_GUIDE.md)、[资料问答](docs/WORKBENCH_GUIDE.md)、[个人检索](docs/PERSONAL_RAG_GUIDE.md)、[笔记](docs/NOTES_GUIDE.md)。旧报告的schema和测试数字为阶段历史。
 
 ## 打开学习页面
 
@@ -72,7 +73,7 @@ python -m eduagent --student learner-01 --status
 .\.venv\Scripts\python.exe -m pytest backend/tests -c backend/pyproject.toml -q
 ```
 
-默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。当前schema8，旧库须停写、备份并显式运行迁移入口，普通API启动拒绝版本不兼容，见[迁移与回滚](docs/PHASE4B2_GUIDE.md)。题目不足会明确停止，不重复答题凑掌握度。
+默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。当前schema11，旧库须停写、备份并显式迁移，普通API启动拒绝不兼容版本，见[本轮迁移与回滚](docs/PHASE5_GUIDE.md)。现用库已完成升级，勿重复执行schema10迁移脚本。题目不足会明确停止，不重复答题凑掌握度。
 
 若仅测试无需 HTTP/Agent 的离线核心，可运行 `python -m pytest backend/tests/test_bkt.py backend/tests/test_catalog.py backend/tests/test_learning.py backend/tests/test_cli.py -c backend/pyproject.toml -q`（65 项）。详细机制见 [第一阶段说明](docs/PHASE1_GUIDE.md)。
 

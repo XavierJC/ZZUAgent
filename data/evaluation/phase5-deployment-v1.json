@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-23T11:00:34.913783+00:00",
+  "schema": 11,
+  "tables": 43,
+  "api_paths": 83,
+  "assets": [
+    "/assets/index-CNR-q0j9.js",
+    "/assets/index-DGsuFkDC.css"
+  ],
+  "original_36_tables_unchanged": true,
+  "original_files_unchanged": true,
+  "original_evaluations_unchanged": true,
+  "formal_files_unchanged": true,
+  "protected_learning_sources": [
+    "backend/src/eduagent/services/learning.py",
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/agent/policy.py"
+  ],
+  "existing_counts": {
+    "personal_questions": 24,
+    "notes": 5,
+    "course_documents": 2,
+    "attempts": 27,
+    "decisions": 37
+  },
+  "new_table_counts": {
+    "course_release_drafts": 0,
+    "course_releases": 1,
+    "teaching_sessions": 0,
+    "teaching_decisions": 0,
+    "teaching_events": 0,
+    "teaching_explanations": 0,
+    "course_workflow_operations": 0
+  },
+  "old_students_read_only_checked": 12,
+  "old_history_remains_unbound": true,
+  "historical_saved_model_calls": {
+    "document_parse_runs": 4,
+    "workbench_runs": 15,
+    "study_guide_runs": 1,
+    "question_extraction_tasks": 1
+  },
+  "phase5_real_model_calls": 0,
+  "browser_manual": "not_performed",
+  "browser_limitation": "Earlier browser access to localhost was denied; no bypass attempted.",
+  "integrity": "ok",
+  "foreign_key_errors": 0
+}

@@ -25,7 +25,7 @@ const recoveries = computed(() => Object.entries(w.drafts).filter(([key, value])
 watch(() => w.resource, r => { role.value = r?.resource_type || 'teaching_material'; links.value = JSON.parse(JSON.stringify(r?.links || [])) })
 watch(source, s => { previewPage.value = s?.evidence?.[0]?.location?.page_number || 1; imageFailed.value = false; archiveConfirm.value = false })
 watch(previewPage, () => { imageFailed.value = false })
-onMounted(async () => { w.visible = true; await w.load(); if (props.mode === 'resources') w.section = 'resources'; else if (props.mode === 'bank' && w.section === 'resources') w.section = 'bank' })
+onMounted(async () => { w.visible = true; await w.load(); if (props.mode === 'resources') w.section = 'resources'; else if (props.mode === 'bank') w.section = 'bank'; else if(props.mode==='practice') w.section='practice' })
 watch(() => w.section, value => { if (props.mode === 'resources' && value !== 'resources') emit('navigate', 'bank', { question: w.current?.id, view: value }); else if (props.mode === 'bank' && value === 'resources') emit('navigate', 'materials', { resource: w.resource?.resource_id }) })
 onUnmounted(() => { w.persist(); w.visible = false })
 function changeType() {
@@ -59,7 +59,7 @@ function originalUrl(s) {
 <template>
   <section class="pb-workspace" aria-label="课程资源与个人题库">
     <header class="panel pb-heading"><div><h2>{{ mode === 'resources' ? '课程资料' : '我的题库' }}</h2><p>同一份资料复用解析，经人工审核后进入普通练习。普通练习不更新BKT或正式学习记录。</p></div><button class="button secondary" :disabled="Boolean(w.busy)" @click="w.load()">只读刷新</button></header>
-    <nav v-if="mode !== 'resources'" class="doc-switch" aria-label="个人题库步骤"><button v-for="[key,label] in [['bank','提取与审核'],['practice','普通练习与历史']]" :key="key" class="button secondary" :aria-pressed="w.section === key" @click="w.section = key">{{ label }}</button></nav>
+    <nav v-if="mode !== 'resources' && mode !== 'practice'" class="doc-switch" aria-label="个人题库步骤"><button v-for="[key,label] in [['bank','提取与审核'],['practice','普通练习与历史']]" :key="key" class="button secondary" :aria-pressed="w.section === key" @click="w.section = key">{{ label }}</button></nav>
     <p v-if="w.error" class="alert alert-error" role="alert">{{ w.error }}</p><p v-if="w.notice" class="alert alert-info" role="status">{{ w.notice }}</p>
     <div v-if="w.pending" class="panel" role="status"><p>原操作待核对，不会自动重新导入或提交。</p><details><summary>技术详情</summary>{{ w.pending.request_id }}</details><button class="button secondary" @click="w.load()">查询原回执</button><button class="button secondary" @click="w.releasePending()">保留编号并结束等待</button></div>
     <p v-if="w.busy" role="status">正在处理，请稍候…</p>

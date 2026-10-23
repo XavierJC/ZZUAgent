@@ -33,6 +33,8 @@ from eduagent.api.study_guides import study_guides_router
 from eduagent.api.documents import documents_router
 from eduagent.api.architectures import architectures_router
 from eduagent.api.personal_bank import personal_bank_router
+from eduagent.api.course_workspaces import course_workspace_router
+from eduagent.services.course_releases import CourseReleases
 from eduagent.domain.architecture import ArchitectureError
 from eduagent.api.upload_limit import DocumentBodyLimit
 from eduagent.documents.models import DocumentError
@@ -53,7 +55,7 @@ from eduagent.storage.sqlite import SQLiteRepository
 logger = logging.getLogger(__name__)
 
 
-def create_app(settings: APISettings | None = None, *, document_runner=None, document_vision_factory=None, extraction_client_factory=None) -> FastAPI:
+def create_app(settings: APISettings | None = None, *, document_runner=None, document_vision_factory=None, extraction_client_factory=None, teaching_client_factory=None) -> FastAPI:
     settings = settings or APISettings.from_environment()
     catalog: Catalog | None = None
     course_index = None
@@ -65,7 +67,8 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
         catalog = Catalog.load(settings.data_dir)
         # Fail at startup for corrupt data or a mismatched historical configuration.
         with SQLiteRepository(settings.db_path, allow_upgrade=False) as repository:
-            LearningService(catalog, repository)
+            learning=LearningService(catalog, repository)
+            CourseReleases(learning,settings.data_dir).ensure_demo()
             if settings.retrieval_enabled:
                 NoteIndexer(repository).recover()
         if settings.retrieval_enabled:
@@ -141,6 +144,7 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
     app.include_router(documents_router(document_service, settings))
     app.include_router(architectures_router(learning_service))
     app.include_router(personal_bank_router(learning_service,settings.data_dir/'materials',extraction_service))
+    app.include_router(course_workspace_router(learning_service,settings,lambda:course_sources,teaching_client_factory))
 
     @app.exception_handler(ArchitectureError)
     async def architecture_error(request: Request, exc: ArchitectureError):
