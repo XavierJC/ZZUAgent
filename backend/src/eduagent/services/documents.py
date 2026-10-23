@@ -26,6 +26,7 @@ class DocumentsService:
     def __init__(self, repository, directory, *, vision_enabled=False, agent_settings=None):
         self.repository, self.storage = repository, DocumentRepository(repository)
         self.db, self.files = repository.connection, DocumentFiles(directory)
+        repository.document_root=self.files.root
         self.vision_enabled, self.agent = vision_enabled, agent_settings
 
     def student(self, student, course_id='machine_learning'):
@@ -59,6 +60,12 @@ class DocumentsService:
         output.update(source_type='teaching_material', review_status='imported_unverified', local_rights_confirmed=True,
                       index_status='not_implemented', version=self.version_view(self.storage.version(document)),
                       parse=self.run_view(self.storage.run(document), document))
+        if self.db.execute('SELECT 1 FROM teaching_material_links WHERE document_id=? AND student_id=?',(document['id'],document['student_id'])).fetchone():
+            from eduagent.services.teaching_sources import TeachingSources
+            from eduagent.services.resources import resource_id
+            output['index_status']='pending'
+            try:output['index_status']=TeachingSources(self.repository).source(document['student_id'],resource_id(document['student_id'],'document',document['id']))['index_status']
+            except ValueError:pass
         return output
 
     def list(self, student, course_id='machine_learning', limit=25, offset=0):

@@ -146,10 +146,10 @@ def verify(output):
         assert http('/api/v1/materials/search',dict(query='梯度下降')) and http('/health')['agent_enabled'] is False
         check('restart_and_no_key_local_retrieval_compatible')
         with sqlite3.connect(folder/'http.sqlite3') as db:
-            assert db.execute('pragma user_version').fetchone()[0]==11
+            assert db.execute('pragma user_version').fetchone()[0]==12
             assert db.execute('pragma integrity_check').fetchone()[0]=='ok' and not db.execute('pragma foreign_key_check').fetchall()
         check('schema9_integrity_foreign_keys')
-        report=dict(passed=True,verified_at=datetime.now(timezone.utc).isoformat(),checks=checks,server_starts=starts,schema=11,
+        report=dict(passed=True,verified_at=datetime.now(timezone.utc).isoformat(),checks=checks,server_starts=starts,schema=12,
             real_model_calls=0,simulated_model_calls=0,production_writes=0,browser_manual_validation='not_performed',test_directory=str(folder),
             synthetic_learning_events=1,scope='Self-built uploaded files through actual parser and real HTTP, no teacher-material external transmission')
         output.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8')

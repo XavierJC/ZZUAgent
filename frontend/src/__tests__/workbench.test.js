@@ -26,6 +26,20 @@ let wrapper
 afterEach(() => { wrapper?.unmount(); wrapper = null; localStorage.clear() })
 
 describe('workbench state and per-round consent', () => {
+  it('keeps teacher-material external consent independent and resets it each round', async () => {
+    const api=client(), teacher={...course,source_type:'teaching_material',source_id:'teacher-a',title:'教师课件'}
+    api.knowledgeSources.mockResolvedValue({items:[course,teacher]})
+    const w=reactive(useStudyWorkbench(api,ref('a'),storage()));await w.load();w.toggle(course,false);w.toggle(teacher,true);w.mode='model';w.query='Precision'
+    w.consent=true;await w.ask();expect(api.workbenchAsk.mock.calls[0][1].allow_teacher_external).toBe(false)
+    w.teacherConsent=true;await w.ask();expect(api.workbenchAsk.mock.calls[1][1].allow_teacher_external).toBe(true);expect(w.teacherConsent).toBe(false)
+    w.teacherConsent=true;w.query='Recall';expect(w.teacherConsent).toBe(false)
+  })
+  it('restores a teacher citation page and original version URL without model calls', async () => {
+    const api=client(),w=reactive(useStudyWorkbench(api,ref('a'),storage()));await w.load()
+    const item={...citation,source_type:'teaching_material',source_id:'teacher-a',document_id:'doc-a',version_id:'v-old',page_number:32}
+    w.current={...run(),source_statuses:[{...item,current_status:'modified'}]};w.citation(item)
+    expect(w.drawer.page_number).toBe(32);expect(w.drawer.current_status).toBe('modified');expect(w.drawer.original_page_url).toContain('version_id=v-old&page=32');expect(api.workbenchAsk).not.toHaveBeenCalled()
+  })
   it('selects only course defaults, preserves draft and selection across reload, never auto-posts', async () => {
     const api = client(), owner = ref('a'), store = storage()
     const w = reactive(useStudyWorkbench(api, owner, store)); await w.load()

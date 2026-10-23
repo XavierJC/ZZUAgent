@@ -2,6 +2,8 @@
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useTeachingWorkspace } from './useTeachingWorkspace.js'
 import { useCourseBuilder } from './useCourseBuilder.js'
+import { useTeachingLinks } from './useTeachingLinks.js'
+import TeachingMaterialReview from './components/TeachingMaterialReview.vue'
 import CourseBuilderView from './views/CourseBuilderView.vue'
 import LearningInsights from './views/LearningInsights.vue'
 import LearningResources from './views/LearningResources.vue'
@@ -9,6 +11,7 @@ import KnowledgeArchitecture from './components/KnowledgeArchitecture.vue'
 import PersonalBankWorkspace from './components/PersonalBankWorkspace.vue'
 import './phase5.css'
 import { useWorkspace } from './useWorkspace.js'
+import { useReviewPractice } from './useReviewPractice.js'
 import { usePageRoute } from './usePageRoute.js'
 import LearningOverview from './views/LearningOverview.vue'
 import LearningHistory from './views/LearningHistory.vue'
@@ -30,16 +33,18 @@ import { usePersonalBank } from './usePersonalBank.js'
 
 const props = defineProps({ client: Object, store: Object, notesStore: Object })
 const w = reactive(useWorkspace(props.client, props.store))
+const review = reactive(useReviewPractice(props.client || defaultApi, w))
 const n = reactive(useNotesWorkspace(props.client || defaultApi, computed(() => w.student), props.notesStore))
 const flow = reactive(useTeachingWorkspace(props.client || defaultApi,w))
 const builder = reactive(useCourseBuilder(props.client || defaultApi,computed(() => w.student)))
+const links=reactive(useTeachingLinks(props.client || defaultApi,computed(()=>w.student)))
 const study = reactive(useStudyWorkbench(props.client || defaultApi, computed(() => w.student),undefined,{session:()=>flow.session,scope:()=>flow.data?.release?.retrieval_scope || null,contexts:()=>flow.data?.explanations || [],revision:()=>w.snapshot?.revision,refresh:()=>flow.load()}))
 const documents = reactive(useCourseDocuments(props.client || defaultApi, computed(() => w.student)))
 const bank = reactive(usePersonalBank(props.client || defaultApi, computed(() => w.student)))
 const architecture = reactive(useKnowledgeArchitecture(props.client || defaultApi, computed(() => w.student)))
 const self = reactive(useSelfAssessments(props.client || defaultApi, computed(() => w.student)))
 const guides = reactive(useStudyGuidance(props.client || defaultApi, computed(() => w.student), computed(() => self.overview), computed(() => study.chosen), computed(() => self.canGenerate)))
-const { route, go } = usePageRoute(() => { if (builder.editor && !builder.persist()) return false; if (flow.pending && !flow.persist()) return false; if ((n.dirty || n.pending) && !n.persist()) return false; if ((bank.dirty || bank.pending) && !bank.persist()) return false; if (self.dirty && !self.persist()) return false; if (architecture.dirty && !architecture.persist()) return false; return true })
+const { route, go } = usePageRoute(() => { if (!links.persist()) return false; if (builder.editor && !builder.persist()) return false; if (flow.pending && !flow.persist()) return false; if ((n.dirty || n.pending) && !n.persist()) return false; if ((bank.dirty || bank.pending) && !bank.persist()) return false; if (self.dirty && !self.persist()) return false; if (architecture.dirty && !architecture.persist()) return false; return true })
 const tab = computed(() => route.value.page)
 const formMode = ref('new'), learnerId = ref(`learner-${crypto.randomUUID().slice(0, 8)}`)
 const goals = ref(['logistic_regression']), query = ref(''), searched = ref(false)
@@ -72,11 +77,21 @@ async function restoreRoute() {
 watch([route, () => w.active], restoreRoute)
 watch(()=>w.active,active=>{if(active)flow.load()})
 watch(()=>flow.data?.guidance,g=>{if(g)self.overview=g})
-async function explainNext(){await study.load();const scope=flow.data?.release?.retrieval_scope;if(scope)study.selected=scope.filter(r=>study.sources.some(s=>s.source_type===r.source_type && s.source_id===r.source_id && s.source_version===r.source_version));study.query=`请围绕${w.topicName(flow.data?.next_task?.knowledge_id || w.decision?.knowledge_id)}解释关键概念，举一个例子，并说明怎样准备下一次正式练习。`;goTab('study')}
+async function explainNext(){
+  await study.load()
+  const scope=flow.data?.release?.retrieval_scope,point=flow.data?.next_task?.knowledge_id || w.decision?.knowledge_id
+  if(scope){
+    const allowed=scope.filter(r=>study.sources.some(s=>s.source_type===r.source_type && s.source_id===r.source_id && s.source_version===r.source_version))
+    const linked=allowed.filter(r=>r.source_type==='teaching_material' && study.sources.some(s=>s.source_id===r.source_id && s.knowledge_point_ids.includes(point)))
+    study.selected=linked.length?linked:allowed
+  }
+  study.query=`请围绕${w.topicName(point)}解释关键概念，举一个例子，并说明怎样准备下一次正式练习。${flow.data?.next_task?.reason || ''}`.slice(0,1000)
+  goTab('study')
+}
 watch(() => bank.current?.id, id => { if (tab.value === 'bank' && id && route.value.params.question !== id) go('bank', { ...route.value.params, question: id, view: bank.section }, true) })
 watch(() => bank.section, value => { if (tab.value === 'bank' && ['bank','practice'].includes(value) && route.value.params.view !== value) go('bank',{...route.value.params,view:value},true) })
 watch(() => bank.resource?.resource_id, id => { if (tab.value === 'materials' && id && route.value.params.resource !== id) go('materials', { resource: id }, true) })
-function protectDraft(event) { if (n.dirty || n.pending || builder.dirty || builder.pending || flow.pending || self.dirty || self.pending || documents.file || documents.pending || bank.dirty || bank.pending || architecture.dirty || architecture.pending) { event.preventDefault(); event.returnValue = '' } }
+function protectDraft(event) { if (links.pending || (links.draft.document_id && links.draft.excerpt_md) || n.dirty || n.pending || builder.dirty || builder.pending || flow.pending || self.dirty || self.pending || documents.file || documents.pending || bank.dirty || bank.pending || architecture.dirty || architecture.pending) { event.preventDefault(); event.returnValue = '' } }
 onMounted(w.boot)
 onMounted(flow.publicCourses)
 onMounted(() => window.addEventListener('beforeunload', protectDraft))
@@ -109,7 +124,7 @@ onUnmounted(() => window.removeEventListener('beforeunload', protectDraft))
 
         <template v-else>
           <section class="page-heading"><div><p class="eyebrow">{{ tab === 'learn' ? 'YOUR NEXT SMALL STEP' : tab === 'history' ? 'EVERY ANSWER COUNTS' : tab === 'notes' ? 'MY LEARNING NOTES' : 'FOLLOW THE SOURCE' }}</p><h1>{{ tab === 'learn' ? '把理解，再向前推进一步。' : tab === 'history' ? '回看走过的每一步。' : tab === 'notes' ? '把理解，写成自己的笔记。' : tab === 'bank' ? '识别、校对，再开始练习。' : tab === 'materials' ? '把课程资料放在一起。' : '围绕资料，理解课程。' }}</h1><p>{{ tab === 'learn' ? `学习目标：${goalsText}` : tab === 'history' ? '从答题反馈中发现变化，而不是只看一个分数。' : tab === 'notes' ? '记录自己的理解，让原文、公式与知识点关联一起保存。' : tab === 'bank' ? '保留原题型与来源，普通练习独立保存。' : tab === 'materials' ? '上传、查看原件和解析，整理课程知识结构。' : '选择资料，再结合模型解释和可追溯引用。' }}</p></div><span class="course-badge"><Icon name="book" :size="17" />机器学习</span></section>
-          <LearningOverview v-if="tab === 'learn'" :w="w" :self-workspace="self" :flow="flow" @navigate="goTab" @explain="explainNext" />
+          <LearningOverview v-if="tab === 'learn'" :w="w" :review="review" :self-workspace="self" :flow="flow" @navigate="goTab" @explain="explainNext" />
           <CourseBuilderView v-else-if="['builder','publish'].includes(tab)" :workspace="builder" :overview="tab==='builder'" @navigate="goTab" />
           <KnowledgeArchitecture v-else-if="tab==='architecture'" :workspace="architecture" @navigate="goTab" />
           <LearningInsights v-else-if="tab==='insights'" :self-workspace="self" :guide-workspace="guides" :goals="goalsText" @navigate="goTab" />
@@ -122,6 +137,7 @@ onUnmounted(() => window.removeEventListener('beforeunload', protectDraft))
           <NotesPanel v-else-if="tab === 'notes'" :workspace="n" :knowledge="w.knowledge" />
           <ResourcesView v-else :bank="bank" :documents="documents" :architecture="architecture" @navigate="goTab" @edit-note="editStudyNote"><section class="panel materials-panel"><div class="panel-heading"><div><p class="eyebrow">COURSE NOTES</p><h2>从课程资料中寻找依据</h2></div><span class="badge">5 个知识点</span></div><form class="search-form" @submit.prevent="search"><label class="sr-only" for="material-query">检索课程资料</label><input id="material-query" v-model="query" maxlength="1000" required placeholder="例如：为什么学习率过大会发散？" /><button class="button primary" :disabled="Boolean(w.searchBusy || !w.health?.retrieval_available)">{{ w.searchBusy ? '正在检索…' : '检索资料' }}<Icon name="arrow" :size="17" /></button></form><p class="small muted">从本地课程说明中检索，不调用模型生成。资料待审阅，检索结果的关联仍需核对。</p><div v-if="w.sources.length" class="source-list"><article v-for="source in w.sources" :key="source.citation_id" class="source-card"><div><span class="badge badge-blue">{{ source.title }}</span><span class="small muted">[{{ source.citation_id }}]</span></div><h3>{{ source.section }}</h3><MarkdownRenderer :source="source.content" /><small class="muted">{{ source.source }} · {{ source.review_status === 'pending' ? '待内容审阅' : '已审阅' }}</small></article></div><div v-else class="empty-state"><Icon name="book" :size="36" /><h3>{{ searched ? '没有找到足够相关的课程片段。' : '先从一个具体问题开始。' }}</h3><p>{{ searched ? '试试课程中的术语，或换一种表述。' : '目前覆盖线性回归、梯度下降、逻辑回归、正则化与模型评估。' }}</p></div></section></ResourcesView>
         </template>
+        <TeachingMaterialReview v-if="w.active && tab==='materials' && (props.client || defaultApi).teachingLinks" :workspace="links" :documents="documents" :student="w.student" />
         <footer class="workspace-footer"><span><span class="tiny-dot" />{{ w.reviewNotice }}</span><span>EduAgent · 让学习有迹可循</span></footer>
       </main>
     </div>

@@ -6,7 +6,7 @@ an HTTP timeout. Notes and immutable historical excerpts stay local unless the
 specific request authorizes the selected note excerpts.
 """
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from hashlib import sha256
 import json
 from uuid import UUID, uuid4
@@ -29,6 +29,7 @@ class RequestContext:
     sources: tuple[tuple[str, str, str], ...]
     allow_personal_external: bool
     state_revision: int
+    allow_teacher_external: bool = field(default=False,kw_only=True)
 
     def refs(self):
         return [dict(zip(('source_type', 'source_id', 'source_version'), ref)) for ref in self.sources]
@@ -57,6 +58,11 @@ class WorkbenchService:
                                       (student, 'machine_learning', ref['source_id'])).fetchone()
                 status = ('deleted' if row is None or row['deleted_at'] else
                           'modified' if note_version(row) != ref['source_version'] else 'current')
+            elif ref['source_type'] == 'teaching_material':
+                try:
+                    item=self.knowledge.teachers.source(student,ref['source_id'])
+                    status='current' if item['source_version']==ref['source_version'] and item['index_status']=='ready' else 'modified'
+                except ValueError:status='deleted'
             else:
                 courses = self.knowledge.courses
                 document = courses.documents.get(ref['source_id']) if courses else None
@@ -108,6 +114,9 @@ class WorkbenchService:
     def preview(self, student, ref):
         with self.repository.transaction():
             self.knowledge.student(student, 'machine_learning')
+            if ref['source_type']=='teaching_material':
+                source=self.knowledge.teachers.validate(student,ref)
+                return {**ref,'title':source['title'],'raw_md':'\n\n'.join(r['excerpt_md'] for r in source['links'])}
             if ref['source_type'] == 'personal_note':
                 note = self.knowledge.personal.note(student, ref['source_id'], 'machine_learning')
                 if note_version(note) != ref['source_version']:
@@ -156,7 +165,7 @@ class WorkbenchService:
         snapshot = self.learning.snapshot(student)
         context = RequestContext(student, body['course_id'], request_id,
             tuple((s['source_type'], s['source_id'], s['source_version']) for s in body['sources']),
-            body['allow_personal_external'], snapshot.revision)
+            body['allow_personal_external'], snapshot.revision, allow_teacher_external=body.get('allow_teacher_external',False))
         learning_state = {'goals': list(snapshot.goals), 'revision': snapshot.revision,
                           'mastery': [asdict(item) for item in snapshot.mastery]}
         # Capture titles only for the already selected sources; never enumerate
@@ -169,6 +178,7 @@ class WorkbenchService:
                 raise SourceChanged('学习状态已变化，请重试')
             titles = {('personal_note', n['id']): n['title'] for n, _ in selected_notes}
             titles.update({('course_material', key): self.knowledge.courses.documents[key]['title'] for key in selected_courses})
+            titles.update({('teaching_material',s['source_id']):self.knowledge.teachers.validate(student,s)['title'] for s in context.refs() if s['source_type']=='teaching_material'})
             initial = {'question': body['question'], 'answer': '', 'citations': [], 'reason': None,
                        'model': None, 'provider': 'DeepSeek' if body['mode'] == 'model' else None,
                        'finish_reason': None, 'max_output_tokens': self.settings.max_tokens if self.settings else None,
@@ -187,6 +197,7 @@ class WorkbenchService:
             self.db.execute('INSERT INTO workbench_runs VALUES (?,?,?,?,?,?,?,?,?,?,?)',
                 (request_id, student, context.course_id, digest, encode(body), encode(context_json), encode(initial), 'running', 0, timestamp, timestamp))
         reason = ('local_requested' if body['mode'] == 'local' else
+                  'teacher_consent_required' if any(s[0]=='teaching_material' for s in context.sources) and not context.allow_teacher_external else
                   'personal_consent_required' if selected_notes and not context.allow_personal_external else
                   'model_disabled' if not self.settings or not self.settings.enabled else None)
         status, output = 'local', {}

@@ -54,6 +54,10 @@ class ResourcesService:
             key=resource_id(student,item['original_source_type'],item['original_source_id']); meta=overrides.get(key)
             item.update(resource_id=key,course_id=COURSE,revision=meta['revision'] if meta else 0,links=json.loads(meta['links_json']) if meta else [])
             if meta:item['resource_type']=meta['resource_type']
+            if item['original_source_type']=='document':
+                from eduagent.services.teaching_sources import TeachingSources
+                try:item['rag_available']=TeachingSources(self.repo).source(student,key)['index_status']=='ready'
+                except ValueError:pass
         return output
 
     def row(self,student,key):

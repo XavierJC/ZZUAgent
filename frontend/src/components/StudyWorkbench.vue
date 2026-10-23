@@ -12,7 +12,7 @@ import '../study-guidance.css'
 const props = defineProps({ workspace: { type: Object, required: true }, snapshot: Object, goalNames: String, currentTopic: String, selfWorkspace: Object, guideWorkspace: Object, documentWorkspace: Object, architectureWorkspace: Object, bankWorkspace: Object })
 const emit = defineEmits(['navigate', 'edit-note'])
 const indexNames = { ready: '已就绪', empty: '无可检索正文', pending: '等待索引', building: '正在索引', failed: '索引失败', disabled: '索引停用' }
-const reasons = { local_requested: '本轮仅本地检索，未调用模型。', personal_consent_required: '本轮未同意个人笔记外发，已仅在本地检索。',
+const reasons = { teacher_consent_required: '本轮未同意教师课件片段外发，仅本地检索。', local_requested: '本轮仅本地检索，未调用模型。', personal_consent_required: '本轮未同意个人笔记外发，已仅在本地检索。',
   model_disabled: '模型未启用，已提供本地检索结果。', insufficient_evidence: '所选资料依据不足，本轮未调用模型。',
   tool_scope_rejected: '模型工具请求超出本轮范围，已拒绝并返回本地片段。', unverified_model_answer: '模型回答格式或引用未通过校验，已返回可用的本地结果。',
   model_call_limit: '已达到模型调用预算，返回本地片段。', model_timeout: '模型超时，可能已执行；不会自动重发。', network_error: '模型网络异常，执行情况待确认；不会自动重发。',
@@ -51,7 +51,7 @@ onMounted(() => { props.selfWorkspace?.load(); props.guideWorkspace?.load() })
         <h2 id="wb-sources-title">资料来源</h2><p class="small muted">打开用于查看；勾选才会参与下一轮检索。个人笔记默认不选。</p>
         <p v-if="workspace.busy === 'load'" role="status">正在恢复资料与历史…</p>
         <ul class="wb-source-list"><li v-for="source in workspace.sources" :key="sourceKey(source)">
-          <label class="wb-source-choice"><input type="checkbox" :checked="isSelected(source)" :disabled="!['ready','empty'].includes(source.index_status)" :aria-label="`选择来源：${source.title}`" @change="workspace.toggle(source, $event.target.checked)" /><span><strong>{{ source.title }}</strong><small>{{ source.source_type === 'personal_note' ? '个人笔记 · 未核验' : '课程资料' }} · {{ indexNames[source.index_status] }}</small><small class="wb-version" :title="source.source_version">版本 {{ source.source_revision ? `r${source.source_revision} · ` : '' }}当前来源</small></span></label>
+          <label class="wb-source-choice"><input type="checkbox" :checked="isSelected(source)" :disabled="!['ready','empty'].includes(source.index_status)" :aria-label="`选择来源：${source.title}`" @change="workspace.toggle(source, $event.target.checked)" /><span><strong>{{ source.title }}</strong><small>{{ source.source_type === 'personal_note' ? '个人笔记 · 未核验' : source.source_type==='teaching_material'?'教师课件 · 已确认片段':'课程资料' }} · {{ indexNames[source.index_status] }}</small><small class="wb-version" :title="source.source_version">版本 {{ source.source_revision ? `r${source.source_revision} · ` : '' }}当前来源</small></span></label>
           <button class="wb-text-button" :aria-label="`打开资料：${source.title}`" @click="workspace.open(source)">打开资料</button>
         </li></ul>
         <p v-if="!workspace.sources.length && !workspace.busy" class="small muted">当前没有可用资料。</p>
@@ -69,9 +69,10 @@ onMounted(() => { props.selfWorkspace?.load(); props.guideWorkspace?.load() })
             <label><input v-model="workspace.consent" type="checkbox" />我同意仅本轮发送上述笔记的相关片段</label><p class="small">未同意时只做本地检索；下轮需要重新同意。课程资料和问题在使用模型时也将发送至该服务。</p>
           </div>
           <p v-else-if="workspace.mode === 'model'" class="small muted">本轮问题和选中课程资料的相关片段将发送至 {{ workspace.capabilities?.provider }} / {{ workspace.capabilities?.model }}。</p>
+          <div v-if="workspace.mode==='model' && workspace.teachers?.length" class="wb-consent"><strong>本轮教师课件外发说明</strong><p>仅将问题及下列所选课件中实际检索到的已确认片段发送至 {{ workspace.capabilities?.provider }} / {{ workspace.capabilities?.model }}，不发送整份课件。此授权与页面识别、个人笔记及学习指南分开。</p><ul><li v-for="s in workspace.teachers" :key="s.source_id">{{ s.title }}</li></ul><label><input v-model="workspace.teacherConsent" type="checkbox" />我有权外发，并同意仅本轮发送上述课件的相关片段</label><p>未同意只做本地检索，下轮重新确认。</p></div>
           <p v-if="workspace.mode === 'model'" class="small muted">先检索所选资料，再由大模型结合资料和自身知识综合生成回答；未找到片段或资料只覆盖部分问题时，也可继续解释。资料引用与模型补充会明确区分。</p>
           <p v-if="workspace.mode === 'model' && workspace.capabilities?.max_output_tokens" class="small muted">每次模型输出上限 {{ workspace.capabilities.max_output_tokens }} token，本轮最多 {{ workspace.capabilities.max_model_calls }} 次模型调用；失败不会自动重发。</p>
-          <button class="button primary" :disabled="Boolean(workspace.busy || workspace.pendingId || !workspace.chosen.length || !workspace.query.trim())">{{ workspace.busy === 'ask' ? '正在处理本轮请求…' : workspace.mode === 'local' || (workspace.personal.length && !workspace.consent) ? '本地检索' : '发送本轮问题' }}</button>
+          <button class="button primary" :disabled="Boolean(workspace.busy || workspace.pendingId || !workspace.chosen.length || !workspace.query.trim())">{{ workspace.busy === 'ask' ? '正在处理本轮请求…' : workspace.mode === 'local' || (workspace.personal.length && !workspace.consent) || (workspace.teachers?.length && !workspace.teacherConsent) ? '本地检索' : '发送本轮问题' }}</button>
         </form>
         <div v-if="workspace.pendingId" class="wb-pending" role="status"><p>原请求 {{ workspace.pendingId }} 仍需核对，刷新仅查询记录。</p><button class="button secondary" :disabled="Boolean(workspace.busy)" @click="workspace.load()">查询原请求状态</button><button class="wb-text-button" :disabled="Boolean(workspace.busy)" @click="workspace.releaseUncertain()">结束本轮等待（新请求可能另计费）</button></div>
         <article v-if="workspace.current" class="wb-answer" aria-label="已保存的本轮回答">
@@ -84,7 +85,7 @@ onMounted(() => { props.selfWorkspace?.load(); props.guideWorkspace?.load() })
           <details><summary>本轮实际选中来源及版本</summary><ul><li v-for="source in workspace.current.selected_sources" :key="sourceKey(source)" class="wb-version">{{ source.title }} · {{ source.source_type === 'personal_note' ? '个人笔记' : '课程资料' }} · {{ source.source_version }}</li></ul></details>
           <p v-if="workspace.current.source_statuses.some(s => s.current_status !== 'current')" class="wb-run-notice">部分来源后来已修改、软删除或不可用；以下引用保留当时快照，不代表当前版本。</p>
           <MarkdownRenderer :source="workspace.current.answer" :citation-ids="workspace.current.citations.map(c => c.citation_id)" @citation="openInline" />
-          <div class="wb-citations" aria-label="本轮实际引用"><button v-for="item in workspace.current.citations" :key="item.citation_id" class="wb-citation" @click="workspace.citation(item)"><strong>[{{ item.citation_id }}] {{ item.title }}</strong><span>{{ item.source_type === 'personal_note' ? '个人笔记 · 未核验' : '课程资料' }} · 行 {{ item.start_line }}–{{ item.end_line }}</span></button></div>
+          <div class="wb-citations" aria-label="本轮实际引用"><button v-for="item in workspace.current.citations" :key="item.citation_id" class="wb-citation" @click="workspace.citation(item)"><strong>[{{ item.citation_id }}] {{ item.title }}</strong><span>{{ item.source_type === 'personal_note' ? '个人笔记 · 未核验' : item.source_type==='teaching_material'?'教师课件':'课程资料' }} · {{ item.page_number ? `原PDF第${item.page_number}页` : `行${item.start_line}–${item.end_line}` }}</span></button></div>
           <button v-if="workspace.current.answer && ['complete','local','stale'].includes(workspace.current.status)" class="button secondary" :disabled="Boolean(workspace.busy)" @click="saveAndEdit">{{ workspace.busy === 'save' ? '正在保存…' : workspace.current.saved_note_id ? '打开另存笔记' : '另存为可编辑笔记' }}</button>
         </article>
         <section class="wb-history" aria-labelledby="wb-history-title"><h3 id="wb-history-title">问答历史</h3><p class="small muted">查看已保存记录，不重新调用模型。最近20轮；完整记录保存在本机。</p><button v-for="run in workspace.runs" :key="run.request_id" class="wb-history-item" :aria-pressed="workspace.current?.request_id === run.request_id" @click="workspace.view(run)">{{ run.question }}<small>{{ date(run.created_at) }} · {{ run.status }}</small></button></section>

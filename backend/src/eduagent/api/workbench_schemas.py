@@ -13,6 +13,7 @@ class WorkbenchQuestion(RequestBody):
     course_id: Course = 'machine_learning'
     mode: Literal['local', 'model'] = 'local'
     allow_personal_external: bool = False
+    allow_teacher_external: bool = False
 
 
 class CapturedSource(SourceRef):
@@ -30,6 +31,7 @@ class RunContext(BaseModel):
     sources: list[SourceRef]
     allow_personal_external: bool
     state_revision: int
+    allow_teacher_external: bool = False
 
 
 class ToolUse(BaseModel):

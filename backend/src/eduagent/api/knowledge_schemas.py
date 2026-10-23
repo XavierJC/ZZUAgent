@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field, StringConstraints
 
 from eduagent.api.schemas import RequestBody
 
-SourceType = Literal['course_material', 'personal_note']
+SourceType = Literal['course_material', 'personal_note', 'teaching_material']
 IndexStatus = Literal['disabled', 'pending', 'building', 'ready', 'empty', 'failed']
 Course = Literal['machine_learning']
 
@@ -41,6 +41,9 @@ class IndexState(BaseModel):
 
 
 class SourceSummary(SourceRef):
+    document_id: str | None = None
+    version_id: str | None = None
+    run_id: str | None = None
     source_revision: int | None
     content_hash: str
     title: str
@@ -57,6 +60,14 @@ class SourceList(BaseModel):
 
 
 class KnowledgeCitation(BaseModel):
+    document_id: str | None = None
+    version_id: str | None = None
+    page_number: int | None = None
+    concept_id: str | None = None
+    architecture_id: str | None = None
+    architecture_version: int | None = None
+    excerpt_origin: str | None = None
+    original_text_snapshot: str | None = None
     source_type: SourceType
     source_id: str
     source_version: str

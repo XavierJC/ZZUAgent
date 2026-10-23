@@ -1,0 +1,78 @@
+{
+  "verified_at": "2026-10-23T13:44:31.973837+00:00",
+  "backend": {
+    "passed": 583,
+    "failed": 0
+  },
+  "frontend": {
+    "passed": 163,
+    "files": 14,
+    "failed": 0
+  },
+  "build": {
+    "passed": true,
+    "main_js_kb": 753.11,
+    "gzip_kb": 252.58,
+    "warning": "bundle exceeds 500kB"
+  },
+  "http": [
+    {
+      "file": "data/evaluation/pilot-architectures-http-v1.json",
+      "groups": 17,
+      "simulated_calls": 0,
+      "passed": true
+    },
+    {
+      "file": "data/evaluation/pilot-bank-http-v1.json",
+      "groups": 21,
+      "simulated_calls": 2,
+      "passed": true
+    },
+    {
+      "file": "data/evaluation/pilot-chat-http-v1.json",
+      "groups": 14,
+      "simulated_calls": 15,
+      "passed": true
+    },
+    {
+      "file": "data/evaluation/pilot-documents-http-v1.json",
+      "groups": 15,
+      "simulated_calls": 3,
+      "passed": true
+    },
+    {
+      "file": "data/evaluation/pilot-extraction-http-v1.json",
+      "groups": 13,
+      "simulated_calls": 4,
+      "passed": true
+    },
+    {
+      "file": "data/evaluation/pilot-guidance-http-v1.json",
+      "groups": 18,
+      "simulated_calls": 9,
+      "passed": true
+    },
+    {
+      "file": "data/evaluation/pilot-http-v1.json",
+      "groups": 13,
+      "simulated_calls": 1,
+      "passed": true
+    },
+    {
+      "file": "data/evaluation/pilot-phase5-http-v1.json",
+      "groups": 19,
+      "simulated_calls": 2,
+      "passed": true
+    }
+  ],
+  "http_groups": 130,
+  "http_mock_calls": 36,
+  "real_vision_calls": 1,
+  "real_vision_status": "uncertain",
+  "real_vision_error": "network_error",
+  "actual_fee": "unknown",
+  "real_chat_calls": 0,
+  "owner_content_review": "pending",
+  "browser_manual": "not_performed; no bypass of earlier localhost denial",
+  "teaching_effect": "not_verified"
+}

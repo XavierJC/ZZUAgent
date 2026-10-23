@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-23T13:35:40.466851+00:00",
+  "schema": 12,
+  "tables": 45,
+  "api_paths": 86,
+  "counts": {
+    "students": 13,
+    "personal_questions": 27,
+    "notes": 5,
+    "course_documents": 5,
+    "document_parse_runs": 8,
+    "teaching_material_links": 5,
+    "course_releases": 1,
+    "attempts": 27
+  },
+  "old_43_table_rows_preserved": true,
+  "original_files_and_evaluations_unchanged": true,
+  "protected_learning_sources": [
+    "backend/src/eduagent/services/learning.py",
+    "backend/src/eduagent/agent/policy.py",
+    "backend/src/eduagent/domain/bkt.py",
+    "backend/src/eduagent/domain/catalog.py"
+  ],
+  "pilot_learning_revision": 0,
+  "pilot_concept_published": false,
+  "pilot_teacher_fragments": "5 candidate; excluded from RAG until owner review",
+  "pilot_questions": "3 draft with unknown answers; not formal BKT",
+  "paid_vision_requests": 1,
+  "paid_vision_status": "uncertain",
+  "paid_vision_error": "network_error",
+  "reported_usage": {
+    "completion_tokens": 0,
+    "prompt_tokens": 0
+  },
+  "billing_status": "unknown; zero reported tokens does not prove zero charge",
+  "real_chat_calls": 0,
+  "assets": [
+    "/assets/index-DRW3c_LT.js",
+    "/assets/index-DGsuFkDC.css"
+  ],
+  "browser_manual": "not_performed; prior localhost browser denial not bypassed",
+  "integrity": "ok",
+  "foreign_key_errors": 0
+}

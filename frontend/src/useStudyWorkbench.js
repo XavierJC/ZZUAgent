@@ -5,12 +5,13 @@ export const sourceKey = (s) => `${s.source_type}:${s.source_id}`
 const usable = (s) => ['ready', 'empty'].includes(s.index_status)
 
 export function useStudyWorkbench(client, student, storage = globalThis.localStorage, lesson = null) {
-  const sources = ref([]), selected = ref([]), query = ref(''), mode = ref('local'), consent = ref(false)
+  const sources = ref([]), selected = ref([]), query = ref(''), mode = ref('local'), consent = ref(false), teacherConsent=ref(false)
   const runs = ref([]), current = ref(null), busy = ref(''), error = ref(''), notice = ref(''), pendingId = ref(null)
   const capabilities = ref(null), drawer = ref(null), panel = ref('chat'), initialized = ref(false)
   let epoch = 0, restoring = false
   const chosen = computed(() => sources.value.filter(s => selected.value.some(r => sourceKey(r) === sourceKey(s) && r.source_version === s.source_version)))
   const personal = computed(() => chosen.value.filter(s => s.source_type === 'personal_note'))
+  const teachers = computed(() => chosen.value.filter(s => s.source_type === 'teaching_material'))
   function persist() {
     if (!student.value || restoring || !initialized.value) return true
     try {
@@ -19,12 +20,12 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
       return true
     } catch { error.value = '无法保留本轮请求编号，请检查浏览器存储；暂不发送模型请求。'; return false }
   }
-  watch([selected, query], () => { consent.value = false; persist() }, { deep: true, flush: 'sync' })
-  watch(mode, () => { consent.value = false })
+  watch([selected, query], () => { consent.value = false; teacherConsent.value=false; persist() }, { deep: true, flush: 'sync' })
+  watch(mode, () => { consent.value = false;teacherConsent.value=false })
   watch(student, () => {
     epoch++; initialized.value = false; sources.value = []; selected.value = []; query.value = ''
     runs.value = []; current.value = null; pendingId.value = null; drawer.value = null
-    error.value = ''; notice.value = ''; busy.value = ''; consent.value = false; mode.value = 'local'
+    error.value = ''; notice.value = ''; busy.value = ''; consent.value = false;teacherConsent.value=false; mode.value = 'local'
   }, { flush: 'sync' })
 
   async function load() {
@@ -41,7 +42,7 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
         try { saved = JSON.parse(storage.getItem(`eduagent.workbench.v1.${owner}`) || 'null') } catch { notice.value = '本机工作台状态无法读取，服务器历史仍可查看。' }
         restoring = true
         query.value = typeof saved?.query === 'string' ? saved.query.slice(0, 1000) : ''
-        selected.value = Array.isArray(saved?.selected) ? saved.selected.filter(s => s && ['course_material', 'personal_note'].includes(s.source_type)
+        selected.value = Array.isArray(saved?.selected) ? saved.selected.filter(s => s && ['course_material', 'personal_note','teaching_material'].includes(s.source_type)
           && typeof s.source_id === 'string' && typeof s.source_version === 'string').slice(0, 55)
           : catalog.items.filter(s => s.source_type === 'course_material' && usable(s)).map(reference)
         pendingId.value = saved?.pending_request_id || null
@@ -78,15 +79,16 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     selected.value = selected.value.filter(r => sourceKey(r) !== sourceKey(source))
     if (checked && usable(source)) selected.value.push(reference(source))
   }
-  function view(run) { current.value = run; consent.value = false; panel.value = 'chat'; persist() }
+  function view(run) { current.value = run; consent.value = false;teacherConsent.value=false; panel.value = 'chat'; persist() }
   async function ask() {
     if (busy.value || pendingId.value || !query.value.trim() || !chosen.value.length) return
     const owner = student.value, token = epoch
     const request = { request_id: crypto.randomUUID(), question: query.value.trim(), sources: chosen.value.map(reference),
-      course_id: 'machine_learning', mode: mode.value, allow_personal_external: mode.value === 'model' && personal.value.length > 0 && consent.value }
+      course_id: 'machine_learning', mode: mode.value, allow_personal_external: mode.value === 'model' && personal.value.length > 0 && consent.value,
+      ...(teachers.value.length?{allow_teacher_external:mode.value==='model' && teacherConsent.value}:{}) }
     pendingId.value = request.request_id
     if (!persist()) { pendingId.value = null; return }
-    busy.value = 'ask'; error.value = ''; notice.value = ''; consent.value = false
+    busy.value = 'ask'; error.value = ''; notice.value = ''; consent.value = false;teacherConsent.value=false
     try {
       const session=lesson?.session?.()
       const result = await (session && client.teachingExplain ? client.teachingExplain(owner,session.id,request) : client.workbenchAsk(owner, request))
@@ -118,7 +120,7 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
   }
   function citation(item) {
     const state = current.value?.source_statuses.find(s => sourceKey(s) === sourceKey(item))
-    drawer.value = { ...item, current_status: state?.current_status || 'unavailable', preview: false }
+    drawer.value = { ...item, ...(item.source_type==='teaching_material' ? {original_page_url:`/api/v1/students/${encodeURIComponent(student.value)}/documents/${item.document_id}/preview?version_id=${item.version_id}&page=${item.page_number}`} : {}), current_status: state?.current_status || 'unavailable', preview: false }
   }
   async function save() {
     if (busy.value || !current.value) return null
@@ -136,6 +138,6 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     } catch (e) { if (token === epoch) error.value = `${e.message} 再次保存会复用同一笔记。`; return null }
     finally { if (token === epoch) busy.value = '' }
   }
-  return { sources, selected, query, mode, consent, chosen, personal, runs, current, busy, error, notice, pendingId,
+  return { sources, selected, query, mode, consent, teacherConsent,teachers,chosen, personal, runs, current, busy, error, notice, pendingId,
     capabilities, drawer, panel, initialized, load, toggle, ask, view, open, citation, save, releaseUncertain }
 }

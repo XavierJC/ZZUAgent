@@ -1,0 +1,63 @@
+{
+  "course_file": "机器学习-第2讲-模型评估与选择.pdf",
+  "file_hash": "af553d6548689ad6ac73c27e9b3bc64ec0cd85bb42f60f7cf6242619cf3ac0a0",
+  "pages_total": 72,
+  "selected_pages": [
+    {
+      "page": 11,
+      "local_text_chars": 11,
+      "pdf_image_inspected": true,
+      "owner_review": "pending",
+      "transcription": "agent_visual_transcription_candidate"
+    },
+    {
+      "page": 12,
+      "local_text_chars": 11,
+      "pdf_image_inspected": true,
+      "owner_review": "pending",
+      "transcription": "agent_visual_transcription_candidate"
+    },
+    {
+      "page": 20,
+      "local_text_chars": 578,
+      "pdf_image_inspected": true,
+      "owner_review": "pending",
+      "transcription": "native_text_candidate"
+    },
+    {
+      "page": 32,
+      "local_text_chars": 27,
+      "pdf_image_inspected": true,
+      "owner_review": "pending",
+      "transcription": "agent_visual_transcription_candidate"
+    },
+    {
+      "page": 35,
+      "local_text_chars": 27,
+      "pdf_image_inspected": true,
+      "owner_review": "pending",
+      "transcription": "agent_visual_transcription_candidate"
+    }
+  ],
+  "exercise_file": "机器学习测试题3.pdf",
+  "exercise_page": 1,
+  "selected_question_numbers": [
+    1,
+    2,
+    3
+  ],
+  "questions_status": "draft",
+  "answers": "unknown; original page has no answer key",
+  "existing_extraction_reused": true,
+  "new_question_recognition_calls": 0,
+  "real_vision_calls": 1,
+  "real_vision_status": "uncertain",
+  "real_vision_error": "network_error",
+  "real_chat_calls": 0,
+  "limitations": [
+    "No DeepSeek recognition output obtained; quality not verified for provider.",
+    "Page 12 wording about validation estimates is retained from the source and requires content review.",
+    "Page 32 and 35 confusion-matrix axes differ; do not transpose silently.",
+    "No owner content confirmation or real teaching-effect experiment."
+  ]
+}

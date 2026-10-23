@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-23T14:03:01.127081+00:00",
+  "schema": 12,
+  "tables": 45,
+  "all_existing_tables_unchanged": true,
+  "backup": "data\\local\\review-continuation-dc3dafcd\\before.sqlite3",
+  "backup_sha256": "6667a6862bbe1849983e8f48b9a3ddddc5ca0cd29f065a3f5b7b60977499d20f",
+  "assets_served": "/assets/index-CwI5HGSI.js",
+  "existing_learners_checked": 7,
+  "real_model_calls": 0,
+  "simulated_model_calls": 0,
+  "production_writes": 0,
+  "browser_manual": "not_performed",
+  "migration": "none"
+}

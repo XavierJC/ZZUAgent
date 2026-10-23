@@ -13,8 +13,9 @@ from eduagent.storage.personal_bank_schema import BANK, BANK_TABLES
 from eduagent.storage.extraction_schema import EXTRACTION, EXTRACTION_TABLES
 
 from eduagent.storage.course_release_schema import RELEASES, RELEASE_TABLES
+from eduagent.storage.teaching_source_schema import TEACHER, TEACHER_TABLES
 
-SCHEMA_VERSION = 11
+SCHEMA_VERSION = 12
 FACT_TABLES = ("metadata", "students", "mastery", "decisions", "attempts", "tutor_runs")
 NOTE_TABLES = ("notes", "note_knowledge_points", "note_index_state")
 WORKBENCH_TABLES = ('workbench_runs', 'workbench_note_origins')
@@ -144,7 +145,7 @@ def preserved_snapshot(connection: sqlite3.Connection, columns: dict | None = No
     if columns is None:
         names = table_names(connection)
         columns = {name: [row[1] for row in connection.execute(f'PRAGMA table_info("{name}")')]
-                   for name in FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES if name in names}
+                   for name in FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES if name in names}
     result = {}
     for name, fields in columns.items():
         projection = ','.join('"' + field.replace('"', '""') + '"' for field in fields)
@@ -173,13 +174,13 @@ def backup_database(connection: sqlite3.Connection, path: str | Path, version: i
 
 def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
     version = connection.execute("PRAGMA user_version").fetchone()[0]
-    if version not in range(12):
+    if version not in range(13):
         raise ValueError(f"不支持的数据库版本: {version}")
     tables = table_names(connection)
-    if version == 11:
-        if not set(FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES) <= tables:
-            raise ValueError("schema 11 数据表不完整，拒绝自动重建")
-        return {"from_version": 11, "to_version": 11, "backup": None, "changed": False}
+    if version == 12:
+        if not set(FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES) <= tables:
+            raise ValueError("schema 12 数据表不完整，拒绝自动重建")
+        return {"from_version": 12, "to_version": 12, "backup": None, "changed": False}
     if version == 0 and tables:
         raise ValueError("未版本化的非空数据库不能自动迁移")
     required = set(FACT_TABLES[:5] if version == 1 else FACT_TABLES + (NOTE_TABLES if version >= 3 else ()) + (('note_chunks',) if version >= 4 else ()) + (WORKBENCH_TABLES if version >= 5 else ()) + (STUDY_TABLES if version >= 6 else ()) + (DOCUMENT_TABLES if version >= 7 else ()))
@@ -187,6 +188,8 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
         raise ValueError("历史数据库结构不完整，拒绝迁移")
     if version >= 10 and not set(EXTRACTION_TABLES) <= tables:
         raise ValueError('schema10提取表不完整，拒绝迁移')
+    if version >= 11 and not set(RELEASE_TABLES) <= tables:
+        raise ValueError('schema11课程发布表不完整，拒绝迁移')
     if version >= 9 and not set(BANK_TABLES) <= tables:
         raise ValueError('schema9题库表不完整，拒绝迁移')
     if version >= 8 and not set(ARCHITECTURE_TABLES) <= tables:
@@ -241,7 +244,9 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
             connection.execute(statement)
         for statement in EXTRACTION if version < 10 else ():
             connection.execute(statement)
-        for statement in RELEASES:
+        for statement in RELEASES if version < 11 else ():
+            connection.execute(statement)
+        for statement in TEACHER:
             connection.execute(statement)
         after = preserved_snapshot(connection, columns)[0]
         if any(after.get(name) != value for name, value in before.items()):
@@ -250,14 +255,14 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
             raise ValueError("外键校验失败，迁移已回滚")
         if connection.execute('PRAGMA integrity_check').fetchone()[0] != 'ok':
             raise ValueError('迁移后完整性检查失败，迁移已回滚')
-        connection.execute("PRAGMA user_version=11")
+        connection.execute("PRAGMA user_version=12")
         connection.execute("COMMIT")
     except BaseException:
         connection.execute("ROLLBACK")
         raise
     finally:
         connection.execute('PRAGMA foreign_keys=ON')
-    return {"from_version": version, "to_version": 11, "backup": str(backup) if backup else None,
+    return {"from_version": version, "to_version": 12, "backup": str(backup) if backup else None,
             "changed": True, "learning_facts_verified": True, "original_tables_verified": True, "facts": before}
 
 

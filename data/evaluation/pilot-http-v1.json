@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-23T13:32:21.920488+00:00",
+  "groups": 13,
+  "checks": [
+    {
+      "name": "real_unreviewed_pages_excluded_from_sources",
+      "passed": true
+    },
+    {
+      "name": "scripted_confirmation_maps_five_pages_to_one_existing_concept_without_bkt",
+      "passed": true
+    },
+    {
+      "name": "selected_teacher_tfidf_citation_matches_saved_excerpt_and_actual_pdf_page",
+      "passed": true
+    },
+    {
+      "name": "other_student_and_empty_source_requests_do_not_expand_scope",
+      "passed": true
+    },
+    {
+      "name": "release_scope_binds_real_teacher_version_goal_and_read_only_state",
+      "passed": true
+    },
+    {
+      "name": "actual_formal_diagnosis_scores_and_updates_original_bkt_once",
+      "passed": true
+    },
+    {
+      "name": "local_explanation_and_independent_teacher_consent_zero_transmission",
+      "passed": true
+    },
+    {
+      "name": "mock_teacher_explanation_uses_real_citations_and_history_without_repeat",
+      "passed": true
+    },
+    {
+      "name": "real_question_scripted_ordinary_review_and_practice_do_not_touch_formal_bkt",
+      "passed": true
+    },
+    {
+      "name": "existing_formal_retest_updates_evidence_and_reports_bank_exhaustion",
+      "passed": true
+    },
+    {
+      "name": "different_objective_evidence_changes_next_action",
+      "passed": true
+    },
+    {
+      "name": "restart_restores_reviewed_index_history_and_state_without_model_replay",
+      "passed": true
+    },
+    {
+      "name": "review_change_invalidates_current_source_release_but_preserves_historical_citation",
+      "passed": true
+    }
+  ],
+  "directory": "D:\\ZZUAgent\\data\\local\\pilot-http-2676657c",
+  "schema": 12,
+  "tables": 45,
+  "server_starts": 2,
+  "simulated_model_calls": 1,
+  "real_chat_calls": 0,
+  "production_learning_writes": 0,
+  "approval_semantics": "Scripted review in isolated copy only; main data still candidate and not owner reviewed.",
+  "browser_manual": "not_performed"
+}

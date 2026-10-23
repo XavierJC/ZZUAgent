@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-23T13:27:08.423938+00:00",
+  "groups": 13,
+  "checks": [
+    {
+      "name": "no_consent_zero_model_transmission",
+      "passed": true
+    },
+    {
+      "name": "immutable_identity_rejects_control_fields",
+      "passed": true
+    },
+    {
+      "name": "durable_task_idempotency_no_second_call",
+      "passed": true
+    },
+    {
+      "name": "task_scope_isolated",
+      "passed": true
+    },
+    {
+      "name": "semantic_to_reviewed_subjective_question",
+      "passed": true
+    },
+    {
+      "name": "text_draft_restore_idempotency_conflict",
+      "passed": true
+    },
+    {
+      "name": "subjective_response_never_scores_or_enters_objective_wrong_answers",
+      "passed": true
+    },
+    {
+      "name": "proposal_preview_keep_original_then_explicit_revision_accept",
+      "passed": true
+    },
+    {
+      "name": "write_during_network_succeeds_and_stale_source_never_publishes",
+      "passed": true
+    },
+    {
+      "name": "model_timeout_uncertain_no_automatic_retry",
+      "passed": true
+    },
+    {
+      "name": "offline_rules_independent_of_model",
+      "passed": true
+    },
+    {
+      "name": "formal_learning_facts_unchanged",
+      "passed": true
+    },
+    {
+      "name": "restart_restores_tasks_attempts_no_model_reissue",
+      "passed": true
+    }
+  ],
+  "server_starts": 2,
+  "simulated_model_calls": 4,
+  "real_model_calls": 0,
+  "production_data_touched": false,
+  "directory": "D:\\ZZUAgent\\data\\local\\extraction-v2-http-6498e4ee"
+}

@@ -3,8 +3,8 @@ import { useId } from 'vue'
 import { actionLabels, percent } from '../useWorkspace.js'
 import Icon from './Icon.vue'
 import MarkdownRenderer from './MarkdownRenderer.vue'
-defineProps({ decision: Object, selected: String, feedback: Object, pending: Object, busy: String, topic: String })
-defineEmits(['select', 'submit', 'next'])
+defineProps({ decision: Object, selected: String, feedback: Object, pending: Object, busy: String, topic: String, canReview: Boolean })
+defineEmits(['select', 'submit', 'next', 'review', 'explain', 'navigate'])
 const difficulties = { easy: '基础', medium: '进阶', hard: '挑战' }
 const questionId = `question-stem-${useId()}`
 </script>
@@ -32,8 +32,11 @@ const questionId = `question-stem-${useId()}`
     </template>
     <div v-else-if="!feedback && decision" class="empty-state">
       <div class="empty-icon"><Icon :name="decision.action === 'finish' ? 'check' : 'book'" :size="30" /></div>
-      <h3>{{ actionLabels[decision.action] }}</h3><p>{{ decision.reason }}</p>
-      <p v-if="decision.stop_reason === 'insufficient_questions'" class="small muted">当前演示题量有限，可先向助教提问并回顾已有资料。</p>
+      <h3>{{ decision.stop_reason === 'insufficient_questions' ? '正式新题已做完，可以继续复习' : actionLabels[decision.action] }}</h3><p>{{ decision.reason }}</p>
+      <template v-if="decision.stop_reason === 'insufficient_questions'">
+        <p class="small muted">新题不足不代表已经掌握。可以复习已做题、查看讲解或做普通练习；这些活动不会重复计算 BKT。正式复测需要补充并审核新题。</p>
+        <div class="phase5-actions"><button v-if="canReview" class="button primary" :disabled="Boolean(busy)" @click="$emit('review')">复习已做题（不更新掌握度）</button><button class="button secondary" @click="$emit('explain')">请助教讲解薄弱点</button><button class="button secondary" @click="$emit('navigate','practice')">进入普通练习</button></div>
+      </template>
     </div>
     <p v-else-if="!feedback" class="muted">正在读取你的下一步学习安排…</p>
     <div v-if="feedback" class="feedback" :class="feedback.correct ? 'feedback-correct' : 'feedback-wrong'" role="status" aria-live="polite">

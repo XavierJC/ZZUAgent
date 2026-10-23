@@ -26,6 +26,8 @@ class WorkbenchAgent:
         self.settings, self.learning_state = settings, learning_state
 
     def run(self, question, evidence, *, guide_context=None, lesson_context=None):
+        if any(ref[0]=='teaching_material' for ref in self.context.sources) and not getattr(self.context,'allow_teacher_external',False):
+            return {'reason':'teacher_consent_required'}
         # Defense in depth even if called outside WorkbenchService.ask.
         if any(ref[0] == 'personal_note' for ref in self.context.sources) and not self.context.allow_personal_external:
             return {'reason': 'personal_consent_required'}

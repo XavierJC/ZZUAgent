@@ -83,6 +83,10 @@ def course_workspace_router(factory,settings,courses,client_factory=None):
     @router.get(prefix+'/teaching-history')
     def history(student_id:Identifier):
         with factory() as learning:return teaching(learning).history(student_id)
+    @router.get(prefix+'/review-exercises')
+    def review(student_id:Identifier):
+        from eduagent.services.review import review_exercises
+        with factory() as learning:return review_exercises(learning,student_id)
     @router.get(prefix+'/teaching-explanations')
     def explanation_contexts(student_id:Identifier):
         with factory() as learning:return teaching(learning).explanation_contexts(student_id)

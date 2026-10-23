@@ -105,6 +105,7 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
     @contextmanager
     def learning_service() -> Iterator[LearningService]:
         with SQLiteRepository(settings.db_path, allow_upgrade=False) as repository:
+            repository.document_root=settings.document_dir
             yield LearningService(loaded_catalog(), repository)
 
     @contextmanager
@@ -145,6 +146,8 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
     app.include_router(architectures_router(learning_service))
     app.include_router(personal_bank_router(learning_service,settings.data_dir/'materials',extraction_service))
     app.include_router(course_workspace_router(learning_service,settings,lambda:course_sources,teaching_client_factory))
+    from eduagent.api.teaching_materials import teaching_materials_router
+    app.include_router(teaching_materials_router(learning_service))
 
     @app.exception_handler(ArchitectureError)
     async def architecture_error(request: Request, exc: ArchitectureError):

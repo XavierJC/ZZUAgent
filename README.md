@@ -10,6 +10,12 @@
 
 ## 当前状态
 
+已修复“两题后暂停、无法继续作答”的入口：刷新后点击 **复习已做题（不更新掌握度）**，可循环复习并恢复本机进度。正式题不足仍需审核补充，原掌握度/正式记录保持；本机复习不计入BKT。587后端、172前端、9组隔离HTTP及构建通过；schema12/45表不变，真实模型0次。[使用与验证](docs/PRACTICE_CONTINUATION_GUIDE.md)。
+
+最新完成[真实课程单知识点试点](docs/REAL_COURSE_PILOT_GUIDE.md)：课件片段审核、教师RAG、页码原图引用及课程发布/教学整合。**真实内容仍待负责人确认**，恢复`pilot-model-evaluation`可查看5页候选和3道草稿；原正式题库/BKT保持。当前schema12/45表，583后端、163前端、130组隔离HTTP及构建通过；HTTP最终36次模拟。真实视觉请求1次遇网络错误/执行不明，没有成功识别结果，真实聊天0；浏览器人工与教学效果待验收。[本轮完整报告](docs/REAL_COURSE_PILOT_REPORT.md)。
+
+以下Phase5结果为此前交付记录，当前schema和验证以以上试点为准。
+
 已完成并部署 **Phase5双工作区与教学闭环整合**。学生端以“下一步学习任务”为中心；课程构建端独立准备资料、知识体系、习题及发布版本。
 
 - 学生端：我的学习、学情与目标、AI伴学、学习记录；笔记、学习资料和普通练习作为辅助入口。课程构建：课程概览、课程资料、知识体系、习题管理、课程审核与发布。
@@ -73,7 +79,7 @@ python -m eduagent --student learner-01 --status
 .\.venv\Scripts\python.exe -m pytest backend/tests -c backend/pyproject.toml -q
 ```
 
-默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。当前schema11，旧库须停写、备份并显式迁移，普通API启动拒绝不兼容版本，见[本轮迁移与回滚](docs/PHASE5_GUIDE.md)。现用库已完成升级，勿重复执行schema10迁移脚本。题目不足会明确停止，不重复答题凑掌握度。
+默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。当前schema12，普通API拒绝不兼容版本，[试点迁移与回滚](docs/REAL_COURSE_PILOT_GUIDE.md)已验证备份和恢复副本。现用库已升级，勿重复执行旧schema迁移脚本。题目不足明确停止，不重复答题凑掌握度。
 
 若仅测试无需 HTTP/Agent 的离线核心，可运行 `python -m pytest backend/tests/test_bkt.py backend/tests/test_catalog.py backend/tests/test_learning.py backend/tests/test_cli.py -c backend/pyproject.toml -q`（65 项）。详细机制见 [第一阶段说明](docs/PHASE1_GUIDE.md)。
 

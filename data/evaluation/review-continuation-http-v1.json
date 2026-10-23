@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "groups": 9,
+  "checks": [
+    {
+      "name": "reproduced_two_question_exhaustion_without_resetting_student",
+      "passed": true
+    },
+    {
+      "name": "legacy_learner_has_actual_review_questions_even_when_personal_bank_empty",
+      "passed": true
+    },
+    {
+      "name": "other_and_unknown_students_cannot_obtain_old_answers",
+      "passed": true
+    },
+    {
+      "name": "original_question_feedback_and_pending_review_labels_retained",
+      "passed": true
+    },
+    {
+      "name": "review_read_refresh_and_rejected_writes_leave_all_45_tables_unchanged",
+      "passed": true
+    },
+    {
+      "name": "release_bound_exhaustion_supports_same_review_without_scope_leak",
+      "passed": true
+    },
+    {
+      "name": "formal_scores_mastery_releases_sessions_and_question_bank_preserved",
+      "passed": true
+    },
+    {
+      "name": "service_restart_restores_original_review_snapshots_without_new_assignments",
+      "passed": true
+    },
+    {
+      "name": "zero_model_calls_and_no_external_resource_transmission",
+      "passed": true
+    }
+  ],
+  "verified_at": "2026-10-23T14:01:14.388349+00:00",
+  "schema": 12,
+  "tables": 45,
+  "server_starts": 2,
+  "production_writes": 0,
+  "real_model_calls": 0,
+  "simulated_model_calls": 0,
+  "review_submission": "client_only_self_check_tested_in_frontend_suite",
+  "browser_manual": "not_performed",
+  "directory": "D:\\ZZUAgent\\data\\local\\review-http-14867261"
+}

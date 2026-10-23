@@ -140,14 +140,14 @@ def test_schema10_failure_backup_and_recovery(tmp_path,catalog,monkeypatch):
     path=tmp_path/'old.sqlite3'
     with SQLiteRepository(path) as repo:
         LearningService(catalog,repo).register('a')
-        for table in reversed(migrations.RELEASE_TABLES):repo.connection.execute('DROP TABLE '+table)
+        for table in reversed(migrations.RELEASE_TABLES + migrations.TEACHER_TABLES):repo.connection.execute('DROP TABLE '+table)
         repo.connection.execute('pragma user_version=10');before,columns=migrations.preserved_snapshot(repo.connection)
     ddl=migrations.RELEASES;monkeypatch.setattr(migrations,'RELEASES',(*ddl[:1],'INVALID SQL'))
     with pytest.raises(sqlite3.Error):SQLiteRepository(path)
     with sqlite3.connect(path) as db:assert db.execute('pragma user_version').fetchone()[0]==10 and migrations.preserved_snapshot(db)[0]==before
     monkeypatch.setattr(migrations,'RELEASES',ddl)
     with SQLiteRepository(path) as repo:
-        assert repo.migration_report['from_version']==10 and len(migrations.table_names(repo.connection))==43
+        assert repo.migration_report['from_version']==10 and len(migrations.table_names(repo.connection))==45
         assert migrations.preserved_snapshot(repo.connection,columns)[0]==before
         with sqlite3.connect(repo.migration_report['backup']) as old:assert migrations.preserved_snapshot(old)[0]==before
 

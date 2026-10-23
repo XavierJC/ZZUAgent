@@ -16,6 +16,8 @@ class CourseReleases:
     def __init__(self,learning,data_dir):
         self.learning,self.repo=learning,learning.repository;self.db=self.repo.connection
         self.data_dir=Path(data_dir);self.resources=ResourcesService(learning,self.data_dir/'materials')
+        from eduagent.services.teaching_sources import TeachingSources
+        self.teachers=TeachingSources(self.repo)
 
     def operation(self,student,body,name,callback):
         uuid_text(body['request_id']);checksum=digest([name,body])
@@ -53,9 +55,14 @@ class CourseReleases:
                 sources.append(source)
             else:
                 item=self.resources.row(student,ref['source_id'])
-                if item['original_source_type']!='document' or item['status']!='active' or item['source_version']!=ref['source_version'] or item['parse_status'] not in ('ready','partial','empty'):
+                teacher=None
+                try:teacher=self.teachers.validate(student,ref)
+                except ValueError:pass
+                if teacher and any(r['architecture_id']!=payload.get('architecture_id') or r['architecture_version']!=payload.get('architecture_version') for r in teacher['links']):
+                    fail('课件片段关联的已确认知识体系版本须与课程发布选择一致','source_changed',409)
+                if item['original_source_type']!='document' or item['status']!='active' or (item['source_version']!=ref['source_version'] and teacher is None) or item['parse_status'] not in ('ready','partial','empty'):
                     fail('只能引用当前学习标识已保存的有效课件版本','source_changed',409)
-                sources.append(dict(source_type='teaching_material',source_id=item['resource_id'],document_id=item['original_source_id'],source_version=item['source_version'],content_hash=item['content_hash'],parse_id=item['parse_id'],title=item['title'],rag_available=False))
+                sources.append(dict(source_type='teaching_material',source_id=item['resource_id'],document_id=item['original_source_id'],source_version=ref['source_version'],document_version=item['source_version'],content_hash=item['content_hash'],parse_id=item['parse_id'],title=item['title'],rag_available=teacher is not None,segment_versions=[dict(id=r['id'],revision=r['revision'],architecture_id=r['architecture_id'],architecture_version=r['architecture_version']) for r in teacher['links']] if teacher else []))
         graph=None
         if payload.get('architecture_id'):
             row=self.db.execute('SELECT v.* FROM knowledge_versions v JOIN knowledge_architectures a ON a.id=v.architecture_id WHERE a.id=? AND a.student_id=? AND a.course_id=? AND v.version=?',(payload['architecture_id'],student,COURSE,payload['architecture_version'])).fetchone()
@@ -65,7 +72,7 @@ class CourseReleases:
             knowledge=[asdict(k) for k in self.learning.catalog.knowledge.values()],questions=[asdict(q) for q in self.learning.catalog.questions.values()],
             sources=sources,retrieval_scope=[{k:s[k] for k in ('source_type','source_id','source_version')} for s in sources if s['rag_available']],
             architecture=graph,goals=list(self.learning.catalog.knowledge),reviewer=payload.get('reviewer',''),reviewed_question_ids=payload['reviewed_question_ids'],
-            bkt_calibration='not_statistically_calibrated',formal_admission='existing_runtime_bank_only',teacher_rag='not_implemented')
+            bkt_calibration='not_statistically_calibrated',formal_admission='existing_runtime_bank_only',teacher_rag='reviewed_segments_only' if any(s['source_type']=='teaching_material' and s['rag_available'] for s in sources) else 'not_implemented')
 
     def ensure_demo(self):
         with self.repo.transaction():
@@ -94,7 +101,11 @@ class CourseReleases:
             if s['source_type']=='course_material':
                 item=current.get(s['source_id']);status='missing' if not item else 'current' if item['source_version']==s['source_version'] else 'modified'
             else:
-                try:item=self.resources.row(row['owner_id'],s['source_id']);status='deleted' if item['status']!='active' else 'modified' if item['source_version']!=s['source_version'] else 'current'
+                try:
+                    if s['rag_available']:
+                        item=self.teachers.validate(row['owner_id'],s);status='current'
+                    else:
+                        item=self.resources.row(row['owner_id'],s['source_id']);status='deleted' if item['status']!='active' else 'modified' if item['source_version']!=s['source_version'] else 'current'
                 except ValueError:status='missing'
             states.append(dict(source_type=s['source_type'],source_id=s['source_id'],title=s['title'],source_version=s['source_version'],current_status=status,rag_available=s['rag_available']))
             if status!='current':issues.append('source_'+status)
@@ -193,9 +204,15 @@ class CourseReleases:
     def builder(self,student):
         with self.repo.transaction():
             self.learning._student(student)
+            documents=[r for r in self.resources.items(student) if r['original_source_type']=='document' and r['status']=='active']
+            for d in documents:
+                try:
+                    s=self.teachers.source(student,d['resource_id']);d['rag_source_version']=s['source_version'] if s['index_status']=='ready' else None
+                    d['rag_available']=s['index_status']=='ready'
+                except ValueError:d['rag_source_version']=None
             candidates_path=self.data_dir/'candidates/questions-v2.json';candidates=json.loads(candidates_path.read_text(encoding='utf-8'))['questions'] if candidates_path.exists() else []
             shared=set(self.learning.catalog.questions)&{q['id'] for q in candidates}
             return dict(drafts=[dict(id=r['id'],revision=r['revision'],payload=json.loads(r['payload_json']),updated_at=r['updated_at']) for r in self.db.execute('SELECT * FROM course_release_drafts WHERE student_id=? ORDER BY updated_at DESC,id',(student,))],
                 releases=self.list(student)['items'],course_sources=self.course_sources(),architectures=self.resources.concepts(student),
-                documents=[r for r in self.resources.items(student) if r['original_source_type']=='document' and r['status']=='active'],
+                documents=documents,
                 formal_questions=[asdict(q) for q in self.learning.catalog.questions.values()],candidate_count=len(candidates),shared_formal_count=len(shared),additional_candidate_count=len(candidates)-len(shared))

@@ -29,12 +29,14 @@ def documents_router(service_factory, settings):
     def capabilities(student_id: Identifier):
         with service_factory() as service:
             service.student(student_id)
+            from eduagent.services.teaching_sources import TeachingSources
+            connected=any(s['index_status']=='ready' for s in TeachingSources(service.repository).sources(student_id))
         return dict(formats={'md': True, 'txt': True, 'pdf': find_spec('pypdf') is not None,
                              'pptx': find_spec('pptx') is not None, 'png': True, 'jpg': True, 'jpeg': True, 'webp': True},
                     vision_enabled=settings.document_vision_enabled and bool(settings.agent.api_key), vision_provider='DeepSeek',
                     vision_model=VISION_MODEL, vision_max_pages=VISION_MAX_PAGES, vision_max_output_tokens=VISION_MAX_TOKENS,
                     max_file_bytes=MAX_FILE, max_text_file_bytes=MAX_TEXT_FILE, max_pages=200,
-                    retrieval_connected=False, identity_mode='local_demo_scope')
+                    retrieval_connected=connected, identity_mode='local_demo_scope')
 
     @router.get('', response_model=DocumentList)
     def listing(student_id: Identifier, limit: Annotated[int, Query(ge=1, le=25)] = 25, offset: Annotated[int, Query(ge=0)] = 0):
