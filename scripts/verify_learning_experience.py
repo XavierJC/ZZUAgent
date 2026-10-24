@@ -29,7 +29,7 @@ def serve(folder, port):
     server.run()
 
 
-def verify():
+def verify(output=None):
     from eduagent.storage.migrations import fact_snapshot, preserved_snapshot
     sys.path.insert(0,str(Path('backend/tests').resolve()))
     from document_fixtures import pdf_bytes
@@ -106,12 +106,12 @@ def verify():
         assert snapshot()==original;check('formal_learning_bkt_scoring_and_assessment_facts_unchanged')
         report=dict(passed=True,groups=len(checks),checks=checks,real_model_calls=0,simulated_model_calls=0,
                     schema=13,tables=45,production_writes=0,server_starts=starts,directory=str(folder),verified_at=datetime.now(timezone.utc).isoformat())
-        Path('data/evaluation/learning-experience-page-http-v1.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+        Path(output or 'data/evaluation/learning-experience-page-http-v1.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
         print(json.dumps(dict(passed=True,groups=len(checks),model_calls=0)))
     finally:stop()
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--serve',type=Path);parser.add_argument('--port',type=int);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--serve',type=Path);parser.add_argument('--port',type=int);parser.add_argument('--output',type=Path);args=parser.parse_args()
     if args.serve:serve(args.serve,args.port)
-    else:verify()
+    else:verify(args.output)

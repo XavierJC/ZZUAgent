@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "groups": 14,
+  "checks": [
+    {
+      "name": "no_model_key_local_reading_enabled",
+      "passed": true
+    },
+    {
+      "name": "local_three_page_pdf_parse_with_blank_page",
+      "passed": true
+    },
+    {
+      "name": "exact_page_text_and_coverage",
+      "passed": true
+    },
+    {
+      "name": "blank_page_is_explicit_and_not_fabricated",
+      "passed": true
+    },
+    {
+      "name": "legacy_open_request_stays_compatible",
+      "passed": true
+    },
+    {
+      "name": "invalid_page_types_and_control_fields_rejected",
+      "passed": true
+    },
+    {
+      "name": "missing_page_and_other_student_cannot_read",
+      "passed": true
+    },
+    {
+      "name": "reading_preserves_all_tables_and_allocates_no_exercises",
+      "passed": true
+    },
+    {
+      "name": "selected_source_search_locates_real_page",
+      "passed": true
+    },
+    {
+      "name": "local_answer_and_replay_have_zero_model_calls",
+      "passed": true
+    },
+    {
+      "name": "restart_restores_page_reader_and_history_without_writes",
+      "passed": true
+    },
+    {
+      "name": "stale_preview_rejected_history_snapshot_preserved",
+      "passed": true
+    },
+    {
+      "name": "deleted_source_immediately_unreadable",
+      "passed": true
+    },
+    {
+      "name": "formal_learning_bkt_scoring_and_assessment_facts_unchanged",
+      "passed": true
+    }
+  ],
+  "real_model_calls": 0,
+  "simulated_model_calls": 0,
+  "schema": 13,
+  "tables": 45,
+  "production_writes": 0,
+  "server_starts": 2,
+  "directory": "D:\\ZZUAgent\\data\\local\\experience-http-cca99369",
+  "verified_at": "2026-10-24T12:47:20.525593+00:00"
+}

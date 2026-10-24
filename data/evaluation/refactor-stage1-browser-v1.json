@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "kind": "assistant_operated_real_browser",
+  "synthetic": true,
+  "production_writes": 0,
+  "real_model_calls": 0,
+  "simulated_model_calls": 0,
+  "groups": 14,
+  "checks": [
+    "three_primary_entries_and_separate_course_management",
+    "local_selected_source_answer_and_page_citation_snapshot",
+    "question_draft_and_selection_restore_across_pages_and_browser_back",
+    "progress_shows_pending_diagnosis_without_formal_evidence",
+    "ordinary_choice_reference_feedback_without_formal_score",
+    "continuous_practice_opens_short_answer",
+    "text_response_restore_across_page_unmount_and_browser_refresh",
+    "independent_resource_catalogue_and_original_version_link",
+    "resource_association_save_and_course_resource_deep_link",
+    "resource_to_import_prefills_source_without_sending_recognition",
+    "narrow_screen_source_tabs_escape_and_focus_return",
+    "notes_draft_dialog_cancel_keep_return_and_control_s_save",
+    "responsive_1280_1440_900_390_and_no_document_overflow",
+    "final_build_verified_and_browser_console_has_no_errors"
+  ],
+  "viewport_checks": [
+    {
+      "width": 1280,
+      "scroll_width": 1265
+    },
+    {
+      "width": 1440,
+      "scroll_width": 1425
+    },
+    {
+      "width": 900,
+      "scroll_width": 885
+    },
+    {
+      "width": 390,
+      "scroll_width": 375
+    }
+  ],
+  "fixture": {
+    "folder": "D:\\ZZUAgent\\data\\local\\experience-browser-2014b3d5",
+    "student": "experience-browser",
+    "document_id": "0f8c0ff0-2e45-4757-8026-fcb22e962ea8",
+    "synthetic": true,
+    "model_enabled": false,
+    "production_writes": 0
+  },
+  "counts": {
+    "attempts": 0,
+    "decisions": 0,
+    "tutor_runs": 0,
+    "self_assessment_entries": 0,
+    "personal_practice_sessions": 2,
+    "personal_practice_attempts": 1,
+    "notes": 1,
+    "workbench_runs": 1
+  },
+  "student_revision": 0,
+  "backend_model_calls": 0,
+  "owner_content_review": "not_performed",
+  "teaching_effect": "not_evaluated",
+  "screenshots": [
+    "data/evaluation/refactor-stage1-screenshots/desktop-study.jpg",
+    "data/evaluation/refactor-stage1-screenshots/mobile-study.jpg"
+  ],
+  "notes": [
+    "An old local ordinary-practice pointer from a previous synthetic database was unavailable on initial entry. Explicit selection opened a valid current practice; no old answer was applied.",
+    "Browser automation initially targeted a nonexistent exact heading and a non-focusable dialog container; real observed controls were used to complete the checks."
+  ],
+  "verified_at": "2026-10-24T13:09:56.085100+00:00",
+  "production_ui_read_only_checked": true,
+  "production_entry": "http://127.0.0.1:8000/?build=CtJnKjKI#/study",
+  "production_viewport": 1280,
+  "temporary_viewport_reset": true,
+  "isolated_tab_closed": true
+}

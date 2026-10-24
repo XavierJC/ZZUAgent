@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { effectScope, reactive, ref } from 'vue'
-import { flushPromises, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { settleCoursePage as flushPromises } from './course-page-testing.js'
 import StudyWorkbench from '../components/StudyWorkbench.vue'
 import SourceDrawer from '../components/SourceDrawer.vue'
 import PracticeHub from '../views/PracticeHub.vue'

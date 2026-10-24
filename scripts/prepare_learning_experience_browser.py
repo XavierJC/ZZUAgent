@@ -1,5 +1,6 @@
 """Create disposable browser acceptance data; never seed the production database."""
 import json
+import argparse
 import shutil
 import sys
 from pathlib import Path
@@ -12,7 +13,7 @@ from eduagent.services.personal_bank import PersonalBankService
 from eduagent.services.question_intake import auto_entry
 
 
-def main():
+def main(output=None):
     sys.path.insert(0,str(Path('backend/tests').resolve()))
     from test_documents import upload,tick
     from document_fixtures import pdf_bytes
@@ -30,8 +31,9 @@ def main():
         second=dict(question_type='short_answer',stem='解释学习率 $\\eta$ 对更新步长的影响。',answer_text='学习率控制每一步的大小；过大可能振荡，过小可能缓慢。')
         for value in (first,second):auto_entry(bank,'experience-browser',value,{},None,'source_provided')
     result=dict(folder=str(folder),student='experience-browser',document_id=doc['id'],synthetic=True,model_enabled=False,production_writes=0)
-    Path('data/local/learning-experience-browser.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+    Path(output or 'data/local/learning-experience-browser.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps(result))
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path);main(parser.parse_args().output)

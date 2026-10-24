@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { flushPromises, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { settleCoursePage as flushPromises } from './course-page-testing.js'
 import App from '../App.vue'
 import { client, memoryStore } from './fixtures.js'
 import { notesApi, notesStore, note } from './notes-fixtures.js'

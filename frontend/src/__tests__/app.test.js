@@ -1,5 +1,6 @@
 import { describe, it, expect, afterEach, beforeEach } from 'vitest'
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { settleCoursePage as flushPromises } from './course-page-testing.js'
 import App from '../App.vue'
 import TutorPanel from '../components/TutorPanel.vue'
 import QuestionPanel from '../components/QuestionPanel.vue'
@@ -29,7 +30,7 @@ describe('Vue learning interface', () => {
     expect(wrapper.get('.feedback').text()).toContain('答对了')
     expect(wrapper.get('.feedback').text()).toContain('52.6%')
     const historyTab = wrapper.findAll('button').find(button => button.text().includes('查看正式学习记录'))
-    await historyTab.trigger('click')
+    await historyTab.trigger('click'); await flushPromises()
     expect(wrapper.get('.history-list').text()).toContain('lr_01')
     expect(api.tutor).not.toHaveBeenCalled()
   })
@@ -69,7 +70,7 @@ describe('Vue learning interface', () => {
     wrapper = mount(App, { props: { client: api, store: memoryStore({ student_id: 'learner-test' }) } })
     await flushPromises()
     await wrapper.findAll('button').find(button => button.text() === '课程构建').trigger('click'); await flushPromises()
-    await wrapper.findAll('nav button').find(button => button.text().includes('课程资料')).trigger('click')
+    await wrapper.findAll('nav button').find(button => button.text().includes('课程资料')).trigger('click'); await flushPromises()
     await wrapper.findAll('button').find(button => button.text() === '课程片段检索').trigger('click')
     expect(api.search).not.toHaveBeenCalled()
     await wrapper.get('#material-query').setValue('MSE 定义')
@@ -125,10 +126,10 @@ describe('Vue learning interface', () => {
     expect(wrapper.get('.answer-text h2').text()).toBe('更新方向')
     expect(wrapper.find('.answer-text .katex').exists()).toBe(true)
     expect(wrapper.find('.citation .katex').exists()).toBe(true)
-    await wrapper.findAll('button').find(button => button.text().includes('查看正式学习记录')).trigger('click')
+    await wrapper.findAll('button').find(button => button.text().includes('查看正式学习记录')).trigger('click'); await flushPromises()
     expect(wrapper.find('.history-detail .katex').exists()).toBe(true)
     await wrapper.findAll('button').find(button => button.text() === '课程构建').trigger('click'); await flushPromises()
-    await wrapper.findAll('nav button').find(button => button.text().includes('课程资料')).trigger('click')
+    await wrapper.findAll('nav button').find(button => button.text().includes('课程资料')).trigger('click'); await flushPromises()
     await wrapper.findAll('button').find(button => button.text() === '课程片段检索').trigger('click')
     await wrapper.get('#material-query').setValue('平方损失')
     await wrapper.get('.search-form').trigger('submit'); await flushPromises()

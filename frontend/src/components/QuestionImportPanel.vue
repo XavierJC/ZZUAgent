@@ -1,13 +1,13 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref, useId } from 'vue'
-const props=defineProps({workspace:Object,documents:Object})
+const props=defineProps({workspace:Object,documents:Object,initialResource:{type:String,default:''}})
 const emit=defineEmits(['ready'])
-const id=useId(), entry=ref('file'), resourceId=ref(''), pages=ref(''), consent=ref(false), working=ref(false), error=ref(''), images=ref(true)
+const id=useId(), entry=ref(props.initialResource?'existing':'file'), resourceId=ref(props.initialResource), pages=ref(''), consent=ref(false), working=ref(false), error=ref(''), images=ref(true)
 const stage=ref('')
 let alive=true, ownerAtMount, timer
 const available=computed(()=>props.workspace.resources.filter(r=>r.status==='active' && r.original_source_type==='document'))
 async function refresh(){if(working.value || props.workspace.busy)return;try{await props.workspace.loadTasks();await props.workspace.refreshList()}catch(e){error.value=e.message}}
-onMounted(async()=>{ownerAtMount=props.workspace.owner;if(!props.documents?.supported)entry.value='text';await props.workspace.load();if(props.documents?.supported)await props.documents.load();await refresh();if(alive)timer=setInterval(()=>{if(props.workspace.tasks.some(t=>t.status==='running'))refresh()},1500)})
+onMounted(async()=>{ownerAtMount=props.workspace.owner;if(!props.documents?.supported && !props.initialResource)entry.value='text';await props.workspace.load();if(props.documents?.supported)await props.documents.load();await refresh();if(alive)timer=setInterval(()=>{if(props.workspace.tasks.some(t=>t.status==='running'))refresh()},1500)})
 onUnmounted(()=>{alive=false;clearInterval(timer)})
 function choose(event){const d=props.documents;d.file=event.target.files?.[0] || null;if(d.file)d.title=d.file.name.replace(/\.[^.]+$/,'').slice(0,120);consent.value=false}
 async function submit(){

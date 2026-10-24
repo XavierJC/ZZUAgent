@@ -1,0 +1,350 @@
+[
+  {
+    "path": "AGENTS.md",
+    "change": "modified"
+  },
+  {
+    "path": "README.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/CURRENT_STATUS.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/DEVELOPMENT_PLAN.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/PROJECT_CONTEXT.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/REFACTOR_STAGE1_GUIDE.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/REFACTOR_STAGE1_REPORT.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/history/README.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/history/pre-refactor-stage1/AGENTS.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/history/pre-refactor-stage1/DEVELOPMENT_PLAN.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/history/pre-refactor-stage1/PROJECT_CONTEXT.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/history/pre-refactor-stage1/README.md",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/App.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/app.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/course-page-testing.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/__tests__/learning-experience.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/learning-simplification.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/notes-ui.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/phase5.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/refactor-stage1.test.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/__tests__/review-practice.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/study-guidance.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/workbench.test.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/api.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/api/notes.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/api/resources.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/api/workbench.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/app/CoursePage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/CourseShell.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/CourseWelcome.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/courseSpace.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/featureDefinitions.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/featureRegistry.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/navigation.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/usePageRoute.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/components/QuestionImportPanel.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/features/authoring/ArchitecturePage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/authoring/BuilderPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/authoring/api.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/authoring/useCourseBuilder.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/authoring/useKnowledgeArchitecture.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/chat/StudyPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/chat/api.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/chat/useStudyWorkbench.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/FormalLearningPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/HistoryPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/InsightsPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/api.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/useReviewPractice.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/useSelfAssessments.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/useStudyGuidance.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/useTeachingWorkspace.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/learning/useWorkspace.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/CourseMaterialSearch.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/MaterialsPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/ReadMaterialsPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/ResourceLibrary.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/api.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/resource-library.css",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/useCourseDocuments.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/useResourceLibrary.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/materials/useTeachingLinks.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notes/NotesPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notes/api.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notes/useNotesWorkspace.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/PracticePage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/QuestionBankPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/api.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/usePersonalBank.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/shared/http.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/useCourseBuilder.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useCourseDocuments.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useKnowledgeArchitecture.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useNotesWorkspace.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/usePageRoute.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/usePersonalBank.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useReviewPractice.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useSelfAssessments.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useStudyGuidance.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useStudyWorkbench.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useTeachingLinks.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useTeachingWorkspace.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/useWorkspace.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/views/PracticeHub.vue",
+    "change": "modified"
+  },
+  {
+    "path": "scripts/prepare_learning_experience_browser.py",
+    "change": "modified"
+  },
+  {
+    "path": "scripts/verify_learning_experience.py",
+    "change": "modified"
+  },
+  {
+    "path": "scripts/verify_refactor_stage1_deployment.py",
+    "change": "added"
+  }
+]

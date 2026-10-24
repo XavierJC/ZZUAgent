@@ -1,0 +1,7 @@
+.resource-library .pb-item { display:flex;flex-direction:column;gap:6px;width:100%;padding:14px;margin-top:10px;border:1px solid #e2e9f5;border-radius:12px;background:#fff;text-align:left;color:var(--ink,#23334e);overflow-wrap:anywhere }
+.resource-library .pb-item[aria-pressed=true] { border-color:#5579f5;background:#f0f4ff }
+.resource-library .pb-item small { color:#7888a5 }
+.resource-library article { min-width:0;overflow-wrap:anywhere;margin-top:18px }
+.resource-library select { max-width:100% }
+.resource-library details label { display:block;margin:10px 0 }
+.resource-library .pb-check { display:flex;gap:8px;align-items:center }

@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "schema": 13,
+  "tables": 45,
+  "all_original_table_summaries_unchanged": true,
+  "backup_verified": true,
+  "archive_matches_originals": true,
+  "integrity": true,
+  "foreign_keys": true,
+  "migration_required": false,
+  "production_writes": 0,
+  "real_model_calls": 0,
+  "entry_assets": [
+    "/assets/index-CtJnKjKI.js",
+    "/assets/index-DFlIdtmI.css"
+  ],
+  "lazy_page_chunks": 11,
+  "entry_js_bytes": 179081,
+  "backend_source_and_tests_unchanged": true,
+  "files": 87,
+  "backup": "D:\\ZZUAgent\\data\\local\\refactor-stage1-20261024-202146",
+  "verified_at": "2026-10-24T13:15:38.196822+00:00"
+}

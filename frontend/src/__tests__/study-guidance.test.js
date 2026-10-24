@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { ref, reactive, computed, nextTick } from 'vue'
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { settleCoursePage as flushPromises } from './course-page-testing.js'
 import { useSelfAssessments } from '../useSelfAssessments.js'
 import { useStudyGuidance } from '../useStudyGuidance.js'
 import SelfAssessmentPanel from '../components/SelfAssessmentPanel.vue'
