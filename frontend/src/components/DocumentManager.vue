@@ -32,7 +32,7 @@ function choose(event) {
 
 <template>
   <section class="document-manager" aria-labelledby="documents-title">
-    <header class="panel doc-header"><div><h2 id="documents-title">课程课件解析</h2><p class="small muted">原件与提取文本分别保存在本机。当前仅解析和管理，尚未接入问答检索；知识树和映射在后续阶段实现。</p></div><button class="button secondary" :disabled="Boolean(workspace.busy)" @click="workspace.load()">刷新资料与任务</button></header>
+    <header class="panel doc-header"><div><h2 id="documents-title">课程课件解析</h2><p class="small muted">原件与提取文本分别保存在本机。可读解析内容可直接问答；知识树和审核关联可在管理区进一步整理。</p></div><button class="button secondary" :disabled="Boolean(workspace.busy)" @click="workspace.load()">刷新资料与任务</button></header>
     <p v-if="workspace.error" class="alert alert-error" role="alert">{{ workspace.error }}</p>
     <p v-if="workspace.notice" class="alert alert-info" role="status">{{ workspace.notice }}</p>
     <div v-if="workspace.pending" class="panel" role="status"><p>操作 {{ workspace.pending.request_id }} 待核对，刷新只查询回执。</p><button class="button secondary" @click="workspace.load()">查询原操作</button><button class="wb-text-button" @click="workspace.releasePending()">结束等待（新视觉请求可能再次计费）</button></div>

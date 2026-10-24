@@ -7,24 +7,24 @@ const usable = (s) => ['ready', 'empty'].includes(s.index_status)
 export function useStudyWorkbench(client, student, storage = globalThis.localStorage, lesson = null) {
   const sources = ref([]), selected = ref([]), query = ref(''), mode = ref('local'), consent = ref(false), teacherConsent=ref(false)
   const runs = ref([]), current = ref(null), busy = ref(''), error = ref(''), notice = ref(''), pendingId = ref(null)
-  const capabilities = ref(null), drawer = ref(null), panel = ref('chat'), initialized = ref(false)
-  let epoch = 0, restoring = false
+  const capabilities = ref(null), drawer = ref(null), panel = ref('chat'), initialized = ref(false), suggestion = ref(''), opening = ref(false)
+  let epoch = 0, restoring = false, previewEpoch = 0
   const chosen = computed(() => sources.value.filter(s => selected.value.some(r => sourceKey(r) === sourceKey(s) && r.source_version === s.source_version)))
   const personal = computed(() => chosen.value.filter(s => s.source_type === 'personal_note'))
-  const teachers = computed(() => chosen.value.filter(s => s.source_type === 'teaching_material'))
+  const teachers = computed(() => chosen.value.filter(s => ['teaching_material','uploaded_document'].includes(s.source_type)))
   function persist() {
     if (!student.value || restoring || !initialized.value) return true
     try {
       storage.setItem(`eduagent.workbench.v1.${student.value}`, JSON.stringify({ selected: selected.value, query: query.value,
-        last_request_id: current.value?.request_id || null, pending_request_id: pendingId.value }))
+        preferred_mode: mode.value, last_request_id: current.value?.request_id || null, pending_request_id: pendingId.value }))
       return true
     } catch { error.value = '无法保留本轮请求编号，请检查浏览器存储；暂不发送模型请求。'; return false }
   }
   watch([selected, query], () => { consent.value = false; teacherConsent.value=false; persist() }, { deep: true, flush: 'sync' })
-  watch(mode, () => { consent.value = false;teacherConsent.value=false })
+  watch(mode, () => { consent.value = false;teacherConsent.value=false; persist() })
   watch(student, () => {
-    epoch++; initialized.value = false; sources.value = []; selected.value = []; query.value = ''
-    runs.value = []; current.value = null; pendingId.value = null; drawer.value = null
+    epoch++; previewEpoch++; opening.value=false; initialized.value = false; sources.value = []; selected.value = []; query.value = ''
+    runs.value = []; current.value = null; pendingId.value = null; drawer.value = null; suggestion.value = ''; panel.value = 'chat'
     error.value = ''; notice.value = ''; busy.value = ''; consent.value = false;teacherConsent.value=false; mode.value = 'local'
   }, { flush: 'sync' })
 
@@ -36,17 +36,18 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
       const [catalog, history, config] = await Promise.all([client.knowledgeSources(owner), client.workbenchRuns(owner), client.workbenchCapabilities(owner)])
       if (token !== epoch) return
       const scope = lesson?.scope?.()
-      sources.value = scope ? catalog.items.filter(s=>s.source_type==='personal_note' || scope.some(r=>sourceKey(r)===sourceKey(s) && r.source_version===s.source_version)) : catalog.items; runs.value = history; capabilities.value = config
+      sources.value = catalog.items; runs.value = history; capabilities.value = config
       let saved = null
       if (!initialized.value) {
         try { saved = JSON.parse(storage.getItem(`eduagent.workbench.v1.${owner}`) || 'null') } catch { notice.value = '本机工作台状态无法读取，服务器历史仍可查看。' }
         restoring = true
         query.value = typeof saved?.query === 'string' ? saved.query.slice(0, 1000) : ''
-        selected.value = Array.isArray(saved?.selected) ? saved.selected.filter(s => s && ['course_material', 'personal_note','teaching_material'].includes(s.source_type)
+        selected.value = Array.isArray(saved?.selected) ? saved.selected.filter(s => s && ['course_material', 'personal_note','teaching_material','uploaded_document'].includes(s.source_type)
           && typeof s.source_id === 'string' && typeof s.source_version === 'string').slice(0, 55)
-          : catalog.items.filter(s => s.source_type === 'course_material' && usable(s)).map(reference)
+          : catalog.items.filter(s => ['course_material','uploaded_document'].includes(s.source_type) && s.index_status==='ready').slice(0,55).map(reference)
         pendingId.value = saved?.pending_request_id || null
         current.value = history.find(r => r.request_id === saved?.last_request_id) || history[0] || null
+        mode.value = saved?.preferred_mode === 'local' ? 'local' : config.model_enabled ? 'model' : 'local'
         initialized.value = true; restoring = false
       }
       const previous = selected.value
@@ -79,6 +80,13 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     selected.value = selected.value.filter(r => sourceKey(r) !== sourceKey(source))
     if (checked && usable(source)) selected.value.push(reference(source))
   }
+  function prepare(question) {
+    if (typeof question !== 'string' || !question.trim()) return
+    const value = question.trim().slice(0, 1000)
+    panel.value = 'chat'
+    if (query.value.trim() && query.value !== value) suggestion.value = value
+    else { query.value = value; suggestion.value = '' }
+  }
   function view(run) { current.value = run; consent.value = false;teacherConsent.value=false; panel.value = 'chat'; persist() }
   async function ask() {
     if (busy.value || pendingId.value || !query.value.trim() || !chosen.value.length) return
@@ -91,7 +99,7 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     busy.value = 'ask'; error.value = ''; notice.value = ''; consent.value = false;teacherConsent.value=false
     try {
       const session=lesson?.session?.()
-      const result = await (session && client.teachingExplain ? client.teachingExplain(owner,session.id,request) : client.workbenchAsk(owner, request))
+      const result = await (session && client.teachingExplain && chosen.value.every(s=>s.source_type==='personal_note' || lesson.scope?.()?.some(r=>sourceKey(r)===sourceKey(s) && r.source_version===s.source_version)) ? client.teachingExplain(owner,session.id,request) : client.workbenchAsk(owner, request))
       if (token !== epoch) return
       current.value = result; runs.value = [result, ...runs.value.filter(r => r.request_id !== result.request_id)].slice(0, 20)
       if (result.status !== 'uncertain') pendingId.value = null
@@ -110,17 +118,28 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     notice.value = '已结束本轮等待。原请求仍保留在历史中；新问题会创建独立请求，可能产生新的模型费用。'
     persist()
   }
-  async function open(source) {
-    const token = epoch, owner = student.value
+  async function open(source, page = undefined) {
+    const token = epoch, owner = student.value, previewToken = ++previewEpoch
+    opening.value=true
     error.value = ''
     try {
-      const result = await client.openSource(owner, reference(source))
-      if (token === epoch) drawer.value = { ...result, current_status: 'current', preview: true }
-    } catch (e) { if (token === epoch) error.value = e.message }
+      const result = await client.openSource(owner, {...reference(source), ...(source.source_type==='uploaded_document' ? {page:page ?? 1} : {})})
+      if (token === epoch && previewToken === previewEpoch) drawer.value = { ...result, ...(result.source_type==='uploaded_document' ? {
+        original_file_url:`/api/v1/students/${encodeURIComponent(owner)}/documents/${encodeURIComponent(result.document_id)}/original?version_id=${encodeURIComponent(result.version_id)}`,
+        ...(result.file_format==='pdf' && result.page_number ? {original_page_url:`/api/v1/students/${encodeURIComponent(owner)}/documents/${encodeURIComponent(result.document_id)}/preview?version_id=${encodeURIComponent(result.version_id)}&page=${result.page_number}`} : {})
+      } : {}), current_status: 'current', preview: true }
+    } catch (e) { if (token === epoch && previewToken === previewEpoch) error.value = e.message }
+    finally { if(token===epoch && previewToken===previewEpoch)opening.value=false }
   }
+  function closePreview() { previewEpoch++; opening.value=false; drawer.value=null }
   function citation(item) {
+    previewEpoch++; opening.value=false
     const state = current.value?.source_statuses.find(s => sourceKey(s) === sourceKey(item))
-    drawer.value = { ...item, ...(item.source_type==='teaching_material' ? {original_page_url:`/api/v1/students/${encodeURIComponent(student.value)}/documents/${item.document_id}/preview?version_id=${item.version_id}&page=${item.page_number}`} : {}), current_status: state?.current_status || 'unavailable', preview: false }
+    const base=`/api/v1/students/${encodeURIComponent(student.value)}/documents/${encodeURIComponent(item.document_id)}`
+    drawer.value = { ...item, ...(['teaching_material','uploaded_document'].includes(item.source_type) ? {
+      original_file_url:`${base}/original?version_id=${encodeURIComponent(item.version_id)}`,
+      ...(item.source_type==='teaching_material' || ['pdf','png','jpg','jpeg','webp'].includes(item.file_format) ? {original_page_url:`${base}/preview?version_id=${encodeURIComponent(item.version_id)}&page=${item.page_number}`} : {})
+    } : {}), current_status: state?.current_status || 'unavailable', preview: false }
   }
   async function save() {
     if (busy.value || !current.value) return null
@@ -139,5 +158,5 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     finally { if (token === epoch) busy.value = '' }
   }
   return { sources, selected, query, mode, consent, teacherConsent,teachers,chosen, personal, runs, current, busy, error, notice, pendingId,
-    capabilities, drawer, panel, initialized, load, toggle, ask, view, open, citation, save, releaseUncertain }
+    capabilities, drawer, panel, initialized, suggestion, opening, prepare, closePreview, load, toggle, ask, view, open, citation, save, releaseUncertain }
 }

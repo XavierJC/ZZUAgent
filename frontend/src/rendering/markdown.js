@@ -46,7 +46,7 @@ const SANITIZE_OPTIONS = {
   ADD_TAGS: ['semantics', 'annotation'],
 }
 
-export function renderMarkdown(source, { inline = false, citationIds = [] } = {}) {
+export function renderMarkdown(source, { inline = false, citationIds = [], numberCitations = false } = {}) {
   const text = typeof source === 'string' ? source : ''
   const notices = new Set()
   if (new TextEncoder().encode(text).length > RENDER_LIMITS.documentBytes) {
@@ -67,7 +67,7 @@ export function renderMarkdown(source, { inline = false, citationIds = [] } = {}
   const allowedCitations = new Set(citationIds.filter(id => typeof id === 'string' && /^[a-zA-Z0-9_-]+:\d+$/.test(id)))
   if (allowedCitations.size) {
     md.renderer.rules.text = (tokens, index) => escapeHtml(tokens[index].content).replace(/\[([a-zA-Z0-9_-]+:\d+)\]/g,
-      (text, id) => allowedCitations.has(id) ? `<a href="#eduagent-citation/${encodeURIComponent(id)}" class="workbench-inline-citation" aria-label="查看引用 ${escapeHtml(id)}">${text}</a>` : text)
+      (text, id) => allowedCitations.has(id) ? `<a href="#eduagent-citation/${encodeURIComponent(id)}" class="workbench-inline-citation" aria-label="查看引用 ${numberCitations ? [...allowedCitations].indexOf(id)+1 : escapeHtml(id)}">${numberCitations ? '['+([...allowedCitations].indexOf(id)+1)+']' : text}</a>` : text)
   }
   md.renderer.rules.image = (tokens, index) => escapeHtml(tokens[index].content || '图片')
   md.renderer.rules.link_open = (tokens, index, options, env, renderer) => {

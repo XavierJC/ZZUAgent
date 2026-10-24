@@ -10,6 +10,14 @@
 
 ## 当前状态
 
+最新完成 **学习体验整合**：问答区突出，原文和学习建议按需展开；上传资料支持逐页查看与缺失提示；练习可按来源/知识关联查找并专注作答，进度直接衔接下一步。[使用指南](docs/LEARNING_EXPERIENCE_GUIDE.md) · [验收与文件清单](docs/LEARNING_EXPERIENCE_REPORT.md)。
+
+本轮615后端、195前端、29组隔离HTTP及构建通过；已实际检查桌面/窄屏、引用、键盘、普通作答和刷新恢复。schema13/45表内容保持，真实模型0。解析精度与真实教学效果未验证，原BKT及评分保持。下面为此前阶段记录。
+
+最新完成 **学习主流程收敛**：主入口为“资料学习、练习、学习进度”，管理工具默认收起。上传可读资料后可直接提问并点击编号引用查看原文；导入习题可自动整理进入普通练习，缺项留待处理，不再要求每题都人工勾选。AI整理与参考答案保持未核验标记，正式BKT/评分规则不变。[使用说明](docs/LEARNING_SIMPLIFICATION_GUIDE.md) · [实际验收](docs/LEARNING_SIMPLIFICATION_REPORT.md)。
+
+当前schema13/45表，12→13备份/摘要/回退验证通过；604后端、185前端、34组隔离HTTP及构建通过，真实模型0次。长文件识别仍每轮最多3相邻页，真实课件有未识别内容和漏检，浏览器人工验收待完成。此前各阶段数字为历史记录。
+
 已修复“两题后暂停、无法继续作答”的入口：刷新后点击 **复习已做题（不更新掌握度）**，可循环复习并恢复本机进度。正式题不足仍需审核补充，原掌握度/正式记录保持；本机复习不计入BKT。587后端、172前端、9组隔离HTTP及构建通过；schema12/45表不变，真实模型0次。[使用与验证](docs/PRACTICE_CONTINUATION_GUIDE.md)。
 
 最新完成[真实课程单知识点试点](docs/REAL_COURSE_PILOT_GUIDE.md)：课件片段审核、教师RAG、页码原图引用及课程发布/教学整合。**真实内容仍待负责人确认**，恢复`pilot-model-evaluation`可查看5页候选和3道草稿；原正式题库/BKT保持。当前schema12/45表，583后端、163前端、130组隔离HTTP及构建通过；HTTP最终36次模拟。真实视觉请求1次遇网络错误/执行不明，没有成功识别结果，真实聊天0；浏览器人工与教学效果待验收。[本轮完整报告](docs/REAL_COURSE_PILOT_REPORT.md)。
@@ -79,7 +87,7 @@ python -m eduagent --student learner-01 --status
 .\.venv\Scripts\python.exe -m pytest backend/tests -c backend/pyproject.toml -q
 ```
 
-默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。当前schema12，普通API拒绝不兼容版本，[试点迁移与回滚](docs/REAL_COURSE_PILOT_GUIDE.md)已验证备份和恢复副本。现用库已升级，勿重复执行旧schema迁移脚本。题目不足明确停止，不重复答题凑掌握度。
+默认数据库为`data/local/eduagent.sqlite3`，已忽略。改变学习目标用新标识；改变题库/BKT/策略配置用新`--db`路径，不静默改写历史。当前schema13，普通API拒绝不兼容版本，[本轮迁移与回退](docs/LEARNING_SIMPLIFICATION_GUIDE.md)已验证备份和恢复副本。现用库已升级，勿重复执行旧schema迁移脚本。题目不足明确停止，不重复答题凑掌握度。
 
 若仅测试无需 HTTP/Agent 的离线核心，可运行 `python -m pytest backend/tests/test_bkt.py backend/tests/test_catalog.py backend/tests/test_learning.py backend/tests/test_cli.py -c backend/pyproject.toml -q`（65 项）。详细机制见 [第一阶段说明](docs/PHASE1_GUIDE.md)。
 

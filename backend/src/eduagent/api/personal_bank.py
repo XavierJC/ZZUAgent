@@ -19,6 +19,7 @@ class ResourceEdit(Command):
 
 
 class Extraction(Command):
+    auto_import:bool=False
     resource_id:UUIDText|None=None
     source_version:Annotated[str,Field(max_length=160)]|None=None
     run_id:UUIDText|None=None
@@ -79,6 +80,9 @@ class StartPractice(Command):
     concept_id:UUIDText|None=None
     acknowledge_source_change:bool=False
 
+class OrganizeQuestions(Command):
+    question_ids:Annotated[list[UUIDText],Field(min_length=1,max_length=50)]|None=None
+
 
 class SubmitPractice(Command):
     selected_answer:Annotated[str,Field(min_length=1,max_length=16000)]
@@ -116,6 +120,10 @@ def personal_bank_router(learning_factory,materials,extraction_service=None):
     @router.post('/personal-bank/questions')
     def create(student_id:Identifier,body:SaveQuestion):
         with learning_factory() as learning:return service(learning).save(student_id,body.model_dump())
+    @router.post('/personal-bank/organize')
+    def organize(student_id:Identifier,body:OrganizeQuestions):
+        from eduagent.services.question_intake import organize
+        with learning_factory() as learning:return organize(service(learning),student_id,body.model_dump())
     @router.post('/personal-bank/restructure')
     def restructure(student_id:Identifier,body:Restructure):
         with learning_factory() as learning:return service(learning).restructure(student_id,body.model_dump())

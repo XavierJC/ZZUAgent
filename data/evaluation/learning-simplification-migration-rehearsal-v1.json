@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-24T01:28:59.390872+00:00",
+  "from_version": 12,
+  "to_version": 13,
+  "tables": 45,
+  "all_45_tables_preserved": true,
+  "backup_verified": true,
+  "integrity_and_foreign_keys": true,
+  "failed_migration_rolled_back": true,
+  "retained_upgrade_with_new_data": "data\\local\\learning-simplification-0d9bec9e\\migration-rehearsal\\retained-upgraded-with-new-data.sqlite3",
+  "restored_v12_copy": "data\\local\\learning-simplification-0d9bec9e\\migration-rehearsal\\restored-v12.sqlite3",
+  "old_v12_accepts_restored": true,
+  "old_v12_rejects_13": true,
+  "production_writes": 0,
+  "directory": "data\\local\\learning-simplification-0d9bec9e\\migration-rehearsal"
+}

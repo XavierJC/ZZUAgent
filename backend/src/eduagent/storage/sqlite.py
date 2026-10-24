@@ -8,7 +8,7 @@ import sqlite3
 from typing import Iterator
 
 from eduagent.domain.models import Mastery, Recommendation, SubmissionResult
-from eduagent.storage.migrations import migrate
+from eduagent.storage.migrations import migrate, SCHEMA_VERSION
 
 
 def encode(value: object) -> str:
@@ -23,8 +23,8 @@ class SQLiteRepository:
         self.connection.row_factory = sqlite3.Row
         self.connection.execute("PRAGMA foreign_keys = ON")
         try:
-            if not allow_upgrade and self.connection.execute('PRAGMA user_version').fetchone()[0] not in (0, 12):
-                raise ValueError('数据库需要显式迁移到schema12；请先停写并运行迁移入口')
+            if not allow_upgrade and self.connection.execute('PRAGMA user_version').fetchone()[0] not in (0, SCHEMA_VERSION):
+                raise ValueError('数据库需要显式迁移到schema13；请先停写并运行迁移入口')
             self.migration_report = migrate(self.connection, path)
         except BaseException:
             self.close()

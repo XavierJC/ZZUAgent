@@ -9,6 +9,7 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
   const resources = ref([]), knowledge = ref([]), questions = ref([]), current = ref(null), editor = ref(empty()), baseline = ref('')
   const resource = ref(null), sourceUnits = ref([]), resourceDetail = ref(null), sessions = ref([]), session = ref(null), selected = ref('')
   const proposalOriginal = ref(null)
+  const autoImport = ref(false)
   const parseRuns = ref([]), tasks = ref([]), extractionCapabilities = ref(null), extractionMode = ref('model'), extractionConsent = ref(false), includeImages = ref(false), needsReview = ref(false)
   const busy = ref(''), error = ref(''), notice = ref(''), pending = ref(null), visible = ref(false), section = ref('resources')
   const paste = ref(''), runId = ref(''), ordinals = ref(''), filter = ref({ q: '', status: '', question_type: '', resource_id: '', chapter_id: '', concept_id: '' })
@@ -32,7 +33,7 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
   watch([runId, ordinals, includeImages, paste], () => { extractionConsent.value = false }, { flush: 'sync' })
   watch(editor, () => { reviewed.value = false; confirmAnswer.value = false }, { deep: true, flush: 'sync' })
   watch(student, () => {
-    epoch++; restored = false; resources.value = []; questions.value = []; knowledge.value = []; current.value = null
+    epoch++; autoImport.value=false; restored = false; resources.value = []; questions.value = []; knowledge.value = []; current.value = null
     editor.value = empty(); baseline.value = JSON.stringify(editor.value); resource.value = null; session.value = null; sessions.value = []
     sourceUnits.value = []; parseRuns.value = []; drafts.value = {}; pending.value = null; busy.value = ''; error.value = ''; notice.value = ''; paste.value = ''; selected.value = ''; tasks.value = []; extractionConsent.value = false; extractionCapabilities.value = null; needsReview.value = false; conflict.value = false; savedSelection = null
   }, { flush: 'sync' })
@@ -150,11 +151,11 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
     if (extractionMode.value === 'model') return semanticExtract(false)
     if (!resource.value) return
     const pages = ordinals.value.trim() ? ordinals.value.split(/[,，\s]+/).map(Number) : null
-    return write('personal-bank/extractions', 'POST', { resource_id: resource.value.resource_id, source_version: resource.value.source_version, run_id: runId.value || null, ordinals: pages }, async (r, token) => { section.value = 'bank'; await open(r.question_ids[0], token); notice.value = `已提取${r.question_ids.length}份待审核草稿，尚未进入练习。` })
+    return write('personal-bank/extractions', 'POST', { resource_id: resource.value.resource_id, source_version: resource.value.source_version, run_id: runId.value || null, ordinals: pages, ...(autoImport.value ? {auto_import:true}: {}) }, async (r, token) => { section.value = 'bank'; await open(r.question_ids[0], token); notice.value = autoImport.value ? `已整理：${r.intake?.ready || 0}题可练，${r.intake?.needs_attention || 0}题待处理，${r.intake?.duplicate || 0}题重复。` : `已提取${r.question_ids.length}份待审核草稿，尚未进入练习。` })
   }
   function extractText() {
     if (extractionMode.value === 'model') return semanticExtract(true)
-    return write('personal-bank/extractions', 'POST', { text: paste.value }, async (r, token) => { paste.value = ''; section.value = 'bank'; await open(r.question_ids[0], token) })
+    return write('personal-bank/extractions', 'POST', { text: paste.value, ...(autoImport.value ? {auto_import:true}: {}) }, async (r, token) => { paste.value = ''; section.value = 'bank'; await open(r.question_ids[0], token) })
   }
   function archive() {
     return write(`personal-bank/questions/${current.value.id}`, 'DELETE', { expected_revision: current.value.revision }, async (r, token) => { await open(r.question_id, token, true); notice.value = '已归档，历史快照和作答仍保留。' })
@@ -189,7 +190,7 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
     const selectedPages=ordinals.value.trim() ? ordinals.value.split(/[,，\s]+/).map(Number) : null
     const body=pasted ? { text:paste.value } : { resource_id:resource.value.resource_id,source_version:resource.value.source_version,run_id:runId.value || null,ordinals:selectedPages }
     extractionConsent.value=false
-    return write('personal-bank/extraction-tasks','POST',{...body,consent:true,include_images:includeImages.value,...(target ? {target_question_id:target.id,target_revision:target.revision}: {})},async () => {
+    return write('personal-bank/extraction-tasks','POST',{...body,consent:true,include_images:includeImages.value,...(autoImport.value && !target ? {auto_import:true}: {}),...(target ? {target_question_id:target.id,target_revision:target.revision}: {})},async () => {
       extractionConsent.value=false; notice.value='已登记提取任务，可在我的题库查看进度。刷新不会重发模型请求。'; await loadTasks(); section.value='bank'
     })
   }
@@ -211,7 +212,7 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
     if (!proposal || !original || dirty.value) { error.value='请先保存修正稿并对照原题。';return }
     return write(`personal-bank/questions/${original.id}/accept-proposal`,'POST',{expected_revision:original.revision,proposal_id:proposal.id,proposal_revision:proposal.revision},async (r,token)=>{await open(r.question_id,token,true);notice.value='已接受修正为原题的新草稿版本；旧版本仍保留，需重新人工审核。'})
   }
-  return { proposalOriginal, acceptProposal, tasks, extractionCapabilities, extractionMode, extractionConsent, includeImages, needsReview, loadTasks, semanticExtract, reextract, saveResponseDraft, owner, conflict, parseRuns, resources, knowledge, questions, current, editor, resource, sourceUnits, resourceDetail, sessions, session, selected, busy, error, notice, pending, visible, section, paste, runId, ordinals, filter, drafts, dirty, reviewed, confirmAnswer, acknowledge, revisions,
+  return { autoImport, organize: () => write('personal-bank/organize','POST',{},async r => {notice.value=`已整理${r.processed}题：${r.ready}题可练，${r.needs_attention}题待处理。`}), refreshList: () => guard(token => list(token, student.value)), proposalOriginal, acceptProposal, tasks, extractionCapabilities, extractionMode, extractionConsent, includeImages, needsReview, loadTasks, semanticExtract, reextract, saveResponseDraft, owner, conflict, parseRuns, resources, knowledge, questions, current, editor, resource, sourceUnits, resourceDetail, sessions, session, selected, busy, error, notice, pending, visible, section, paste, runId, ordinals, filter, drafts, dirty, reviewed, confirmAnswer, acknowledge, revisions,
     load, persist, guard, open: key => guard(token => open(key, token)), selectResource: item => guard(token => selectResource(item, token)), newQuestion, save, extractResource, extractText, archive, restructure, start, submit, viewSession, keepConflictCopy, restoreCopy, releasePending,
     saveLinks: body => write(`course-resources/${resource.value.resource_id}`, 'PUT', body, async (r, token) => { await selectResource(resource.value, token) }),
     history: () => guard(async token => { const r = await request(`personal-bank/questions/${current.value.id}/revisions`); if (token === epoch) revisions.value = r.items }),

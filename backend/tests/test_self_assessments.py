@@ -132,7 +132,7 @@ def test_schema5_backup_failure_and_ddl_rollback_preserve_twelve_tables(tmp_path
     monkeypatch.setattr(migrations, 'STUDY', original)
     with SQLiteRepository(path) as repo:
         report = repo.migration_report
-        assert report['from_version'] == 5 and report['to_version'] == 12
+        assert report['from_version'] == 5 and report['to_version'] == 13
         assert migrations.preserved_snapshot(repo.connection, columns)[0] == before
     with sqlite3.connect(report['backup']) as db:
         assert db.execute('PRAGMA user_version').fetchone()[0] == 5

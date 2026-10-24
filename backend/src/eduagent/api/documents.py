@@ -30,7 +30,8 @@ def documents_router(service_factory, settings):
         with service_factory() as service:
             service.student(student_id)
             from eduagent.services.teaching_sources import TeachingSources
-            connected=any(s['index_status']=='ready' for s in TeachingSources(service.repository).sources(student_id))
+            from eduagent.services.document_sources import DocumentSources
+            connected=any(s['index_status']=='ready' for s in TeachingSources(service.repository).sources(student_id)+DocumentSources(service.repository).sources(student_id))
         return dict(formats={'md': True, 'txt': True, 'pdf': find_spec('pypdf') is not None,
                              'pptx': find_spec('pptx') is not None, 'png': True, 'jpg': True, 'jpeg': True, 'webp': True},
                     vision_enabled=settings.document_vision_enabled and bool(settings.agent.api_key), vision_provider='DeepSeek',

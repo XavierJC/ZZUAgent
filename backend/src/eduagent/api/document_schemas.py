@@ -95,7 +95,7 @@ class CourseDocument(BaseModel):
     source_type: Literal['teaching_material']
     review_status: Literal['imported_unverified']
     local_rights_confirmed: bool
-    index_status: Literal['not_implemented','pending','ready']
+    index_status: Literal['not_implemented','pending','ready','empty','failed']
     version: DocumentVersion
     parse: DocumentRun
 

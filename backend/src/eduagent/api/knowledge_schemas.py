@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field, StringConstraints
 
 from eduagent.api.schemas import RequestBody
 
-SourceType = Literal['course_material', 'personal_note', 'teaching_material']
+SourceType = Literal['course_material', 'personal_note', 'teaching_material', 'uploaded_document']
 IndexStatus = Literal['disabled', 'pending', 'building', 'ready', 'empty', 'failed']
 Course = Literal['machine_learning']
 
@@ -41,6 +41,9 @@ class IndexState(BaseModel):
 
 
 class SourceSummary(SourceRef):
+    file_format: str | None = None
+    readable_units: int | None = None
+    total_units: int | None = None
     document_id: str | None = None
     version_id: str | None = None
     run_id: str | None = None
@@ -48,7 +51,7 @@ class SourceSummary(SourceRef):
     content_hash: str
     title: str
     knowledge_point_ids: list[str]
-    review_status: Literal['pending', 'human_verified', 'personal_unverified']
+    review_status: Literal['pending', 'human_verified', 'personal_unverified', 'document_unverified']
     index_status: IndexStatus
     error_code: str | None
 
@@ -60,6 +63,7 @@ class SourceList(BaseModel):
 
 
 class KnowledgeCitation(BaseModel):
+    file_format: str | None = None
     document_id: str | None = None
     version_id: str | None = None
     page_number: int | None = None
@@ -79,7 +83,7 @@ class KnowledgeCitation(BaseModel):
     title: str
     section: str
     knowledge_point_ids: list[str]
-    review_status: Literal['pending', 'human_verified', 'personal_unverified']
+    review_status: Literal['pending', 'human_verified', 'personal_unverified', 'document_unverified']
     raw_md: str
     content_text: str
     start_offset: int

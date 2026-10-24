@@ -1,0 +1,53 @@
+{
+  "browser": "Codex in-app browser",
+  "performed_by": "assistant_with_cua",
+  "synthetic_test_data": true,
+  "model_enabled": false,
+  "real_model_calls": 0,
+  "production_learning_writes": 0,
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "scroll_width": 1425
+    },
+    {
+      "width": 900,
+      "height": 900,
+      "scroll_width": 885
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scroll_width": 375
+    }
+  ],
+  "checks": [
+    "desktop_inline_citation_and_original_snapshot",
+    "escape_and_focus_restore",
+    "source_page_switch_and_blank_page_notice",
+    "selected_source_local_search",
+    "ordinary_choice_reference_comparison_without_objective_score",
+    "practice_reload_recovers_saved_result",
+    "next_practice_switches_to_text_response",
+    "text_response_draft_save_and_restore",
+    "ordinary_practice_does_not_add_formal_attempts",
+    "saved_learning_focus_prepares_question_without_call",
+    "empty_topic_scope_does_not_expand_question_list",
+    "narrow_screen_source_chat_tabs",
+    "narrow_original_close_restores_source_tab_and_opener"
+  ],
+  "initial_failures": [
+    {
+      "issue": "Local acceptance fixture lacked optional concepts; next-question selection raised KeyError",
+      "resolution": "Canonical defaults on new intake and compatible read of older payloads; validated by two backend tests and browser continuation"
+    }
+  ],
+  "screenshots": [
+    "data/evaluation/learning-experience-screenshots/desktop-citation.jpg",
+    "data/evaluation/learning-experience-screenshots/mobile-chat.jpg"
+  ],
+  "human_content_review": "not_performed",
+  "teaching_effect": "not_validated",
+  "verified_at": "2026-10-24T07:25:38.804833+00:00"
+}

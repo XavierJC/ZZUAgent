@@ -131,7 +131,7 @@ export function useCourseDocuments(client, student, storage = globalThis.localSt
     return write('upload', () => client.uploadDocument(owner, selected, { request_id: id, title: title.value.trim(),
       source_note: sourceNote.value, local_rights_confirmed: true, course_id: 'machine_learning', material_role: 'teaching_slides' }), id,
       async result => { file.value = null; title.value = ''; sourceNote.value = ''; rights.value = false
-        notice.value = '原件已保存，本地解析已排队；资料尚未接入问答检索。'; await refreshAfter(result.id) })
+        notice.value = '原件已保存，正在本地解析；可读内容就绪后即可问答，上传不会外发。'; await refreshAfter(result.id) })
   }
   async function updateVersion(selected) {
     if (!selected || !current.value) return
@@ -173,7 +173,7 @@ export function useCourseDocuments(client, student, storage = globalThis.localSt
     pending.value = null; notice.value = '已结束等待，原记录仍保留；新视觉请求可能再次计费。'; persist()
   }
   const download = computed(() => current.value ? client.documentDownloadUrl(student.value, current.value.id, current.value.version.id) : '')
-  return { items, current, runs, units, run, total, offset, busy, error, notice, capabilities, visible, pending, file, title,
+  return { supported: typeof client.documents === 'function', items, current, runs, units, run, total, offset, busy, error, notice, capabilities, visible, pending, file, title,
     sourceNote, rights, pages, consent, editTitle, editSource, activeJobs, download, load, select, selectRun, page,
     upload, updateVersion, saveMetadata, remove, retry, vision, releasePending }
 }

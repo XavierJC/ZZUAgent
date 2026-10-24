@@ -157,7 +157,7 @@ def test_new_table_migrates_v1_without_losing_history(catalog, tmp_path):
         repository.connection.execute("DROP TABLE tutor_runs")
         repository.connection.execute("PRAGMA user_version=1")
     with SQLiteRepository(path) as repository:
-        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 12
+        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 13
         restored = LearningService(catalog, repository)
         assert restored.snapshot("existing-student") == expected
         assert repository.attempt("historical-answer") == receipt

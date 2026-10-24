@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-24T01:51:55.250878+00:00",
+  "schema": 13,
+  "tables": 45,
+  "all_45_table_rows_unchanged": true,
+  "formal_catalog_unchanged": true,
+  "asset": "/assets/index-C-cRp_Kk.js",
+  "raw_source_readable_units": 11,
+  "raw_source_total_units": 72,
+  "actual_local_citation_pages": [
+    26,
+    25,
+    20
+  ],
+  "original_preview_version_matches": true,
+  "real_model_calls": 0,
+  "production_business_writes": 0,
+  "browser_manual": "not_performed",
+  "retained_upgraded_database": "data\\local\\learning-simplification-0d9bec9e\\retained-production-v13.sqlite3"
+}

@@ -67,7 +67,7 @@ describe('Phase5 real workspace service boundaries',()=>{
   it('splits workspace navigation and retains all auxiliary learning entries',async()=>{
     const api=fixture();const wrapper=mount(App,{props:{client:api,store:memoryStore({student_id:'learner-test'})}});wrappers.push(wrapper);await flushPromises()
     const names=wrapper.findAll('nav button').map(b=>b.text())
-    expect(names).toEqual(expect.arrayContaining(['我的学习','学情与目标','AI伴学','学习记录','我的笔记','学习资料','普通练习与错题']))
+    expect(names).toEqual(expect.arrayContaining(['资料学习','练习','学习进度','学习记录','我的笔记','原文资料','正式学习与复习']))
     expect(names).not.toContain('习题管理')
     await wrapper.findAll('.workspace-switch button').find(b=>b.text()==='课程构建').trigger('click');await flushPromises()
     expect(wrapper.findAll('nav button').map(b=>b.text())).toEqual(['课程概览','课程资料','知识体系','习题管理','课程审核与发布'])
@@ -80,7 +80,8 @@ describe('Phase5 real workspace service boundaries',()=>{
     expect(wrapper.get('.workspace-switch [aria-pressed=true]').text()).toBe('课程构建')
     expect(location.hash).toContain('old-stable-id')
   })
-  it('completes onboarding into a bound diagnosis without using the legacy next endpoint',async()=>{
+  it('completes an explicit formal-learning deep link into a bound diagnosis without the legacy next endpoint',async()=>{
+    history.replaceState(null,'','/#/learn')
     const api=fixture();const wrapper=mount(App,{props:{client:api,store:memoryStore()}});wrappers.push(wrapper);await flushPromises()
     await wrapper.get('#learner-id').setValue('learner-test')
     await wrapper.get('.start-form').trigger('submit');await flushPromises()

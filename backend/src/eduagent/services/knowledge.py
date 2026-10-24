@@ -88,6 +88,8 @@ class KnowledgeService:
         self.courses, self.enabled = course_sources, enabled
         from eduagent.services.teaching_sources import TeachingSources
         self.teachers = TeachingSources(repository)
+        from eduagent.services.document_sources import DocumentSources
+        self.documents = DocumentSources(repository)
 
     def student(self, student_id, course_id):
         identifier(student_id, '学生标识')
@@ -113,6 +115,7 @@ class KnowledgeService:
                     review_status='personal_unverified', index_status=state['status'] if state else 'pending',
                     error_code=state['error_code'] if state else None))
             items.extend(self.teachers.sources(student_id))
+            items.extend(self.documents.sources(student_id))
             return {'course_id': course_id, 'retrieval_enabled': self.enabled, 'items': items}
 
     def _validate(self, student_id, source_refs, course_id):
@@ -148,6 +151,8 @@ class KnowledgeService:
                 courses.append(key)
             elif kind == 'teaching_material':
                 self.teachers.validate(student_id, ref)
+            elif kind == 'uploaded_document':
+                self.documents.validate(student_id, ref)
             else:
                 raise ValueError('来源类型无效')
         return notes, courses
@@ -192,10 +197,12 @@ class KnowledgeService:
         course_results = self.courses.search(query, courses, knowledge_id, 5) if courses else []
         teacher_refs = [s for s in sources if s['source_type']=='teaching_material']
         teacher_results = self.teachers.search(student_id, teacher_refs, query, knowledge_id) if teacher_refs else []
-        result = course_results + personal_results + teacher_results
-        mixed = sum(bool(x) for x in (courses,notes,teacher_refs)) > 1
+        document_refs = [s for s in sources if s['source_type']=='uploaded_document']
+        document_results = self.documents.search(student_id, document_refs, query, knowledge_id) if document_refs else []
+        result = course_results + personal_results + teacher_results + document_results
+        mixed = sum(bool(x) for x in (courses,notes,teacher_refs,document_refs)) > 1
         if mixed:
-            for branch in (course_results, personal_results, teacher_results):
+            for branch in (course_results, personal_results, teacher_results, document_results):
                 for rank, item in enumerate(branch, 1):
                     item['fusion_score'] = 1 / (60 + rank)
             result.sort(key=lambda p: (-p['fusion_score'], p['source_type'], p['citation_id']))

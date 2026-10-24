@@ -55,8 +55,8 @@ class ResourcesService:
             item.update(resource_id=key,course_id=COURSE,revision=meta['revision'] if meta else 0,links=json.loads(meta['links_json']) if meta else [])
             if meta:item['resource_type']=meta['resource_type']
             if item['original_source_type']=='document':
-                from eduagent.services.teaching_sources import TeachingSources
-                try:item['rag_available']=TeachingSources(self.repo).source(student,key)['index_status']=='ready'
+                from eduagent.services.document_sources import DocumentSources
+                try:item['rag_available']=DocumentSources(self.repo).source(student,item['original_source_id'])['index_status']=='ready'
                 except ValueError:pass
         return output
 

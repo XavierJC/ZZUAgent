@@ -34,7 +34,7 @@ def test_schema3_backup_preserves_all_nine_tables(tmp_path, catalog):
     assert len(before) == 9
     with SQLiteRepository(path) as repository:
         report = repository.migration_report
-        assert report['from_version'] == 3 and report['to_version'] == 12
+        assert report['from_version'] == 3 and report['to_version'] == 13
         assert report['facts'] == before and report['original_tables_verified']
         assert migrations.preserved_snapshot(repository.connection, columns)[0] == before
         assert not repository.connection.execute('PRAGMA foreign_key_check').fetchall()

@@ -68,6 +68,8 @@ class PersonalBankService:
         return key
 
     def extract(self,student,body):
+        if not body.get('auto_import'):
+            body={k:v for k,v in body.items() if k!='auto_import'}
         def apply():
             key=body.get('resource_id')
             if key:
@@ -95,14 +97,17 @@ class PersonalBankService:
                 source['origin_mode']=self.db.execute('SELECT mode FROM document_parse_runs WHERE id=?',(run,)).fetchone()[0]
             batch=str(uuid4());stamp=now()
             self.db.execute('INSERT INTO question_extractions VALUES (?,?,?,?,?,?,?,?,?)',(batch,student,COURSE,key,item['source_version'],encode(source),encode(warnings),RULE_VERSION,stamp))
-            ids=[]; knowledge=self.resources.concepts(student)
+            ids=[]; knowledge=self.resources.concepts(student);intake=dict(ready=0,needs_attention=0,duplicate=0)
             for entry in items:
                 evidence=dict(source,evidence=entry['evidence'],warnings=entry['warnings'],original_answer_text=entry.get('original_answer_text'))
                 candidates=[dict(architecture_id=g['architecture_id'],concept_id=c['id'],name=c['name'],review_status='candidate',method='literal_name_v1')
                     for g in knowledge for c in g['concepts'] if len(c['name'])>=2 and c['name'] in entry['payload']['stem']][:12]
                 evidence['candidate_concepts']=candidates
-                ids.append(self._insert_question(student,entry['payload'],evidence,batch,entry['answer_origin']))
-            return dict(extraction_id=batch,resource_id=key,question_ids=ids,warnings=warnings)
+                if body.get('auto_import'):
+                    from eduagent.services.question_intake import auto_entry
+                    qid,state=auto_entry(self,student,entry['payload'],evidence,batch,entry['answer_origin'],entry['warnings']);intake[state]+=1;ids.append(qid)
+                else:ids.append(self._insert_question(student,entry['payload'],evidence,batch,entry['answer_origin']))
+            return dict(extraction_id=batch,resource_id=key,question_ids=list(dict.fromkeys(ids)),warnings=warnings,intake=intake)
         return self._write(student,body,'extract',apply)
 
     def row(self,student,key):
@@ -248,17 +253,27 @@ class PersonalBankService:
             key=body.get('question_id')
             if not key:
                 rows=self.db.execute("SELECT * FROM personal_questions WHERE student_id=? AND course_id=? AND status='practice' ORDER BY updated_at,id",(student,COURSE)).fetchall()
-                candidates=[dict(r) for r in rows if not body.get('concept_id') or any(c['concept_id']==body['concept_id'] for c in json.loads(r['payload_json'])['concepts'])]
-                if not candidates:fail('所选范围没有已审核普通练习题','no_personal_practice',409)
-                # Least-practised first; deterministic and independent of formal allocation.
-                row=min(candidates,key=lambda r:self.db.execute('SELECT count(*) FROM personal_practice_sessions WHERE question_id=? AND student_id=?',(r['id'],student)).fetchone()[0])
+                candidates=[dict(r) for r in rows if (not body.get('concept_id') or any(c['concept_id']==body['concept_id'] for c in json.loads(r['payload_json']).get('concepts',[]))) and (body.get('acknowledge_source_change') or self.resources.source_status(student,json.loads(r['source_json'])) in ('current','manual'))]
+                if not candidates:fail('所选范围暂时没有可练习的当前题目，请导入习题或处理待整理项','no_personal_practice',409)
+                graphs=self.resources.concepts(student);states=self.learning.status(student)
+                def priority(r):
+                    stats=self.db.execute('SELECT count(*),sum(a.correct=0) FROM personal_practice_sessions s LEFT JOIN personal_practice_attempts a ON a.session_id=s.id WHERE s.question_id=? AND s.student_id=?',(r['id'],student)).fetchone()
+                    # Existing confirmed concept links may read objective evidence;
+                    # new unclassified concepts never acquire invented BKT values.
+                    refs=json.loads(r['payload_json']).get('concepts',[]); related=set()
+                    for g in graphs:
+                        for c in g['concepts']:
+                            if any(v['architecture_id']==g['architecture_id'] and v['concept_id']==c['id'] for v in refs): related.update(c.get('formal_knowledge_ids',[]))
+                    weak=min((states[k].probability for k in related if k in states and states[k].attempts),default=1.)
+                    return (weak,-(stats[1] or 0),stats[0],r['id'])
+                row=min(candidates,key=priority)
             else:row=self.row(student,key)
             if row['status']!='practice':fail('该题尚未进入普通练习','question_not_reviewed',409)
             value=self.view(student,row)
             if value['source_status'] not in ('current','manual') and not body.get('acknowledge_source_change'):
                 fail('来源变化，需明确选择使用已审核题目快照','source_changed',409)
             session=str(uuid4())
-            snapshot=dict(value['payload'],answer_confirmed=value['review'].get('answer_confirmed',False),answer_provenance=value['answer_provenance'])
+            snapshot=dict(value['payload'],answer_confirmed=value['review'].get('answer_confirmed',False),answer_provenance=value['answer_provenance'],automation=value['review'].get('automation'))
             self.db.execute('INSERT INTO personal_practice_sessions VALUES (?,?,?,?,?,?,?,?,?)',
                 (session,student,COURSE,row['id'],row['revision'],encode(snapshot),row['source_json'],'open',now()))
             return dict(session_id=session)
@@ -302,6 +317,9 @@ class PersonalBankService:
                 correct_answer=value.get('answer') if gradable else None,reference_answer=value.get('answer_text') or value.get('answer_keys') or value.get('answer'),needs_review=bool(body.get('needs_review',False)),
                 grading_basis='human_confirmed_snapshot' if gradable else 'ungraded_text_response' if grading_mode(value)!='objective' else 'ungraded_no_confirmed_answer',
                 explanation=value.get('explanation',''),question_revision=row['question_revision'],bkt_updated=False,created_at=now())
+            if value.get('automation') and not gradable:
+                result.update(reference_match=answer==value['answer'] if grading_mode(value)=='objective' and value.get('answer') else None,
+                              reference_origin=value.get('answer_provenance','unknown'),content_verified=False)
             self.db.execute('INSERT INTO personal_practice_attempts VALUES (?,?,?,?,?,?,?)',(key,student,COURSE,answer,None if correct is None else int(correct),encode(result),now()))
             self.db.execute("UPDATE personal_practice_sessions SET status='answered' WHERE id=? AND student_id=?",(key,student))
             return dict(session_id=key,result=result)

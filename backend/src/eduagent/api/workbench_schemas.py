@@ -78,9 +78,25 @@ class WorkbenchRun(BaseModel):
     updated_at: str
 
 
+class SourceOpen(SourceRef):
+    page: Annotated[int, Field(strict=True, ge=1, le=200)] | None = None
+
+
+class PreviewPage(BaseModel):
+    ordinal: int
+    readable: bool
+    warnings: list[str]
+
+
 class SourcePreview(SourceRef):
+    document_id: str | None = None
+    version_id: str | None = None
+    file_format: str | None = None
     title: str
     raw_md: str
+    page_number: int | None = None
+    pages: list[PreviewPage] = Field(default_factory=list)
+    truncated: bool = False
 
 
 class SavedAnswer(BaseModel):

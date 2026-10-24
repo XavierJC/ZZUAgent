@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "groups": 15,
+  "checks": [
+    {
+      "name": "uploaded_original_parsed_and_ready_without_knowledge_tree_or_release",
+      "passed": true
+    },
+    {
+      "name": "source_directory_reports_unverified_document_and_parse_readiness",
+      "passed": true
+    },
+    {
+      "name": "local_retrieval_has_actual_document_page_and_raw_excerpt",
+      "passed": true
+    },
+    {
+      "name": "empty_source_and_cross_student_scope_cannot_expand_retrieval",
+      "passed": true
+    },
+    {
+      "name": "no_upload_external_consent_means_zero_provider_transmission",
+      "passed": true
+    },
+    {
+      "name": "consented_answer_uses_real_obtained_citation_and_replays_without_call",
+      "passed": true
+    },
+    {
+      "name": "agent_cannot_change_student_or_selected_source_capability",
+      "passed": true
+    },
+    {
+      "name": "synthetic_ai_extracts_two_practice_questions_and_quarantines_missing_content",
+      "passed": true
+    },
+    {
+      "name": "same_request_is_idempotent_and_distinct_repeated_import_deduplicates",
+      "passed": true
+    },
+    {
+      "name": "practice_feedback_is_explicitly_unverified_and_not_a_formal_score",
+      "passed": true
+    },
+    {
+      "name": "incomplete_questions_and_other_student_questions_are_not_practice_candidates",
+      "passed": true
+    },
+    {
+      "name": "all_original_formal_facts_mastery_goals_decisions_and_history_unchanged",
+      "passed": true
+    },
+    {
+      "name": "source_update_invalidates_new_use_but_keeps_historical_snapshot",
+      "passed": true
+    },
+    {
+      "name": "deleted_document_immediately_unavailable_to_current_retrieval",
+      "passed": true
+    },
+    {
+      "name": "restart_recovers_questions_responses_and_history_without_model_resubmission",
+      "passed": true
+    }
+  ],
+  "schema": 13,
+  "tables": 45,
+  "simulated_model_calls": 4,
+  "real_model_calls": 0,
+  "production_writes": 0,
+  "server_starts": 2,
+  "directory": "D:\\ZZUAgent\\data\\local\\simplification-http-f49f333f",
+  "browser_manual": "not_performed",
+  "verified_at": "2026-10-24T01:46:28.993557+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "from_version": 12,
+  "to_version": 13,
+  "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v12-ad326e48f82b.sqlite3",
+  "backup_sha256": "81e4ba545d6f8b0abe1f4713c1551962728d72fda48095f3daf48503cb1335ad",
+  "tables": 45,
+  "all_rows_unchanged": true,
+  "foreign_keys": true,
+  "integrity": true,
+  "formal_catalog_unchanged": true,
+  "verified_at": "2026-10-24T01:35:34.343515+00:00"
+}

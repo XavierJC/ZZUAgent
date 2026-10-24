@@ -111,7 +111,7 @@ def verify(output):
         http(ownpath+'/next',cmd(expected_learning_revision=2),expected=409);assert http(prefix+'/teaching-history')['items']==prior_events;check('source_update_invalidates_current_use_keeps_history_snapshot')
         final=facts();stop();start();assert http(path)['snapshot']['revision']==2 and http(prefix+'/teaching-history')['items']==prior_events and calls()==2
         assert http('/api/v1/courses/published')['items'][0]['content_hash']==original_hash and facts()==final;check('restart_restores_release_session_and_facts_no_auto_republish_or_model')
-        report=dict(passed=True,verified_at=datetime.now(timezone.utc).isoformat(),groups=len(checks),checks=checks,server_starts=starts,schema=12,tables=45,simulated_model_calls=calls(),real_model_calls=0,production_writes=0,directory=str(folder),browser_manual='not_performed')
+        report=dict(passed=True,verified_at=datetime.now(timezone.utc).isoformat(),groups=len(checks),checks=checks,server_starts=starts,schema=13,tables=45,simulated_model_calls=calls(),real_model_calls=0,production_writes=0,directory=str(folder),browser_manual='not_performed')
         output.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8');print(json.dumps(dict(passed=True,groups=len(checks),mock_calls=calls(),real_calls=0,report=str(output))))
     finally:stop()
 

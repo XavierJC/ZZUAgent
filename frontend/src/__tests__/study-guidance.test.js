@@ -150,10 +150,10 @@ describe('Studio integration', () => {
     client.next = learningApi().next
     wrapper = mount(App, { props: { client, store: memoryStore({ student_id: 'learner-test' }) } }); await flushPromises()
     const assignments = client.next.mock.calls.length
-    await wrapper.findAll('nav button').find(b => b.text() === 'AI伴学').trigger('click'); await flushPromises()
+    await wrapper.findAll('nav button').find(b => b.text() === '学习进度').trigger('click'); await flushPromises()
     await wrapper.get('#self-level-gradient_descent').setValue(2)
     await wrapper.get('.self-panel form').trigger('submit'); await flushPromises()
-    await wrapper.findAll('button').find(b => b.text() === '只读刷新学情与自评').trigger('click'); await flushPromises()
+    await wrapper.findAll('button').find(b => b.text() === '刷新学习进度').trigger('click'); await flushPromises()
     expect(client.next).toHaveBeenCalledTimes(assignments)
     expect(client.saveSelfAssessments).toHaveBeenCalledTimes(1)
     expect(client.generateStudyGuide).not.toHaveBeenCalled()

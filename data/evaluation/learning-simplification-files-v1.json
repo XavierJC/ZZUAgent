@@ -1,0 +1,333 @@
+{
+  "verified_at": "2026-10-24T01:51:55.983471+00:00",
+  "source_file_count": 64,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "sha256": "5d025ec223130b8845ed4da0c6c3fc32a53012bc5d59f78c2a66ba629b458b27"
+    },
+    {
+      "path": "README.md",
+      "status": "modified",
+      "sha256": "ac0657d477085998db3113770bb83bd7ff1ac33055ffcdfc0972bf71204f8679"
+    },
+    {
+      "path": "backend/src/eduagent/agent/workbench.py",
+      "status": "modified",
+      "sha256": "8d36fe1426d60b828ecaf4df6d1408bd4b7fe52e811b4db74acb3cda6ebe234c"
+    },
+    {
+      "path": "backend/src/eduagent/api/documents.py",
+      "status": "modified",
+      "sha256": "14d4a3740df5629b2643ecc09680f4ab13568118a21b41d8f6e505335db7597a"
+    },
+    {
+      "path": "backend/src/eduagent/api/document_schemas.py",
+      "status": "modified",
+      "sha256": "894c1f4b51657960513cd11512a99beda510b25dcb2d48e423d4455fadc2d8d1"
+    },
+    {
+      "path": "backend/src/eduagent/api/knowledge_schemas.py",
+      "status": "modified",
+      "sha256": "03a830971887d47858e02a47c01325a37ab3cd0bdf675fbb0f0f8c71790147fd"
+    },
+    {
+      "path": "backend/src/eduagent/api/personal_bank.py",
+      "status": "modified",
+      "sha256": "16f84c4b9a659379a211b107fac1ab0d582e930c12ab256aefd3682bcbd53994"
+    },
+    {
+      "path": "backend/src/eduagent/api/workbench_schemas.py",
+      "status": "modified",
+      "sha256": "2796e97590df3791ece75de8aa755fe6ebfdc9d8aa8d2eec49bc68d320ce2fdf"
+    },
+    {
+      "path": "backend/src/eduagent/services/documents.py",
+      "status": "modified",
+      "sha256": "7bd5ff83e2f3771577c4d1b2bc567aab0a26facf0ecf94cc8b9aacf1bb35a715"
+    },
+    {
+      "path": "backend/src/eduagent/services/document_sources.py",
+      "status": "added",
+      "sha256": "1e8e79712dead586ecd219969a354529014320e56767343c7349e07d6dbd9571"
+    },
+    {
+      "path": "backend/src/eduagent/services/knowledge.py",
+      "status": "modified",
+      "sha256": "83d14a4d3021a4b985dadca53c0799463b0fa1a3432fb39c054aacf140a2eeb4"
+    },
+    {
+      "path": "backend/src/eduagent/services/personal_bank.py",
+      "status": "modified",
+      "sha256": "a05ea574768a724d6b2abeb00aee9b1a951e7ef2fc534761e5fea3a3cbfddcbd"
+    },
+    {
+      "path": "backend/src/eduagent/services/question_extraction.py",
+      "status": "modified",
+      "sha256": "6054ede537ebd6c39a7afdc35d04be1605bf68cfa12d0ee17750c6dc46eb4832"
+    },
+    {
+      "path": "backend/src/eduagent/services/question_intake.py",
+      "status": "added",
+      "sha256": "61a21d51fff4c7b644aea823e8f99cf50fee042e6730235dffb88ef0894f94af"
+    },
+    {
+      "path": "backend/src/eduagent/services/resources.py",
+      "status": "modified",
+      "sha256": "3226640d8313a481d5e5ea58f963865ddf5249b36d6ef24d538c6f2eb88cd25e"
+    },
+    {
+      "path": "backend/src/eduagent/services/study_guides.py",
+      "status": "modified",
+      "sha256": "e38eae930b4c7df6fff4ca9c2a6823c5f80ff9908a2fa97992cc39d4fabce5d6"
+    },
+    {
+      "path": "backend/src/eduagent/services/workbench.py",
+      "status": "modified",
+      "sha256": "78115b52dc1926cb57111d2d484ac38e3f2dd05763a2194652f8d5b0e9c1f5d1"
+    },
+    {
+      "path": "backend/src/eduagent/storage/migrations.py",
+      "status": "modified",
+      "sha256": "70c871ea229d16b7d3dd5124de144406fc00b2109b7898f7ea7b826d21026577"
+    },
+    {
+      "path": "backend/src/eduagent/storage/sqlite.py",
+      "status": "modified",
+      "sha256": "9ed73f9466248fc49a58707b4ccd37349601758f8b1054ad86090803a8d04187"
+    },
+    {
+      "path": "backend/tests/test_architectures.py",
+      "status": "modified",
+      "sha256": "642e14d81febae8916a5698c758d6aad75afd3096a5d12127886d15cce4700f3"
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "status": "modified",
+      "sha256": "bffd63b3d92c916d39a5a805fe9ca50bb850fa0be20ecb133055b5d252dc87c4"
+    },
+    {
+      "path": "backend/tests/test_learning_simplification.py",
+      "status": "added",
+      "sha256": "5391641aa6d0c7df2090556c86695e3a6d7939b13486a1e04a2659a5821df2ae"
+    },
+    {
+      "path": "backend/tests/test_migrations.py",
+      "status": "modified",
+      "sha256": "cbebb0dbb572e2e72d5355864ae741080497386ce89bfdc178f6e686d6c7e1ab"
+    },
+    {
+      "path": "backend/tests/test_personal_bank.py",
+      "status": "modified",
+      "sha256": "94786e54092da85754e5876b033c27edcef0f6cea2bf01ec3a9619d3e70a745b"
+    },
+    {
+      "path": "backend/tests/test_personal_migration.py",
+      "status": "modified",
+      "sha256": "9df36a0b24994731d13cffb95338dc015867ed8af9939d9a680c32639fd9f65c"
+    },
+    {
+      "path": "backend/tests/test_self_assessments.py",
+      "status": "modified",
+      "sha256": "d8ac2d904f73dbb3465b921ec36819e37126f1ab449853213987c6b11e591b20"
+    },
+    {
+      "path": "backend/tests/test_tutor.py",
+      "status": "modified",
+      "sha256": "86d59e5d49b15b3b85f797c1546cc8159c0f4bf283190e1301a352626dbecd37"
+    },
+    {
+      "path": "backend/tests/test_web.py",
+      "status": "modified",
+      "sha256": "833894150f360dae9f2fb3eafc077cf103548d12b69ebedc9451309859475f96"
+    },
+    {
+      "path": "backend/tests/test_workbench.py",
+      "status": "modified",
+      "sha256": "b8a2ee1769ef6caea5e404f3b5c6ee83601ec2c83f527838754903a187982b14"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "status": "modified",
+      "sha256": "256301f2424d35cd032d775f0f084482cd30d2750a7e35f32afeaa3ed2dc8695"
+    },
+    {
+      "path": "frontend/src/phase5.css",
+      "status": "modified",
+      "sha256": "adc9a661ca3e7af566fcfa13e55a4fbcc75f650a0e2729252663b0036787c5fa"
+    },
+    {
+      "path": "frontend/src/useCourseDocuments.js",
+      "status": "modified",
+      "sha256": "bdb070ce10c3459a9a44c5d19ae8604a72123775858b919d86fea8976b864853"
+    },
+    {
+      "path": "frontend/src/usePageRoute.js",
+      "status": "modified",
+      "sha256": "d07412f8224c1c1a75ec3dbe304b10126933013047e4e66e13e894fe2d1810bd"
+    },
+    {
+      "path": "frontend/src/usePersonalBank.js",
+      "status": "modified",
+      "sha256": "d505b49b5b09f36ef8a97ebd53bb6bdc9db83a216ce07452c464509b0f599515"
+    },
+    {
+      "path": "frontend/src/useStudyWorkbench.js",
+      "status": "modified",
+      "sha256": "6769beb40ebec689aa45da81bc2814b7dc52468d4e7a8c9a1408990cbc989672"
+    },
+    {
+      "path": "frontend/src/components/DocumentManager.vue",
+      "status": "modified",
+      "sha256": "a66843ab4da7b9ead0a6cf10b052298f018a48a24696f1af8e213aa0e41881c7"
+    },
+    {
+      "path": "frontend/src/components/DocumentPageRecognition.vue",
+      "status": "added",
+      "sha256": "d26455e0926629cb0972d7087c713d4808bdb36b28035d0515d1f419ffa1e7b5"
+    },
+    {
+      "path": "frontend/src/components/MarkdownRenderer.vue",
+      "status": "modified",
+      "sha256": "4ac0f2ef09c0639a2fa0232e9475dd265b1f451ad3ca2ce15a4005a9cda88f5f"
+    },
+    {
+      "path": "frontend/src/components/PersonalBankWorkspace.vue",
+      "status": "modified",
+      "sha256": "3d14e6935ad7a39b5f5e13ff3249419d16cac98f4b9a0b2f30770071a754c369"
+    },
+    {
+      "path": "frontend/src/components/QuestionImportPanel.vue",
+      "status": "added",
+      "sha256": "e941178d66fdf0ced606833d68b2c89686bf7d7f50ff6b1bd3bbe50d1e873909"
+    },
+    {
+      "path": "frontend/src/components/QuickDocumentUpload.vue",
+      "status": "added",
+      "sha256": "cb7cc899b6a70454c3e6b55b546ef9837f47e7458b5277e3f50044ef52f4e6e4"
+    },
+    {
+      "path": "frontend/src/components/SourceDrawer.vue",
+      "status": "modified",
+      "sha256": "30b8e209d0a60e7e04bd9fd31e14415017fe50bf778e24463c2caaecfd3245ca"
+    },
+    {
+      "path": "frontend/src/components/StudyGuidePanel.vue",
+      "status": "modified",
+      "sha256": "ad5312e39ae697b89f33ac7b30007cb9e65cbe5e6470b68d059c5adb7eaf3b36"
+    },
+    {
+      "path": "frontend/src/components/StudyWorkbench.vue",
+      "status": "modified",
+      "sha256": "80342d85981f0bdb7f9edc642ae546baf1213264550f2b2b4e0d91ec6c2344d7"
+    },
+    {
+      "path": "frontend/src/rendering/markdown.js",
+      "status": "modified",
+      "sha256": "8ef22f9a6919f022ae0afc9935412bd884c38485ca3d35444d3fa41a60c1a55e"
+    },
+    {
+      "path": "frontend/src/views/LearningInsights.vue",
+      "status": "modified",
+      "sha256": "969fdcfc2276ef7bf5e9f8927a63aae3b5a65bfcb7704601ea3c9a74e0c54192"
+    },
+    {
+      "path": "frontend/src/views/LearningResources.vue",
+      "status": "modified",
+      "sha256": "c5de5e10f054a206507b2e70efcc2ed3c4d3f1ceadf9773cd69eb323fd3e0697"
+    },
+    {
+      "path": "frontend/src/views/PracticeHub.vue",
+      "status": "added",
+      "sha256": "c67136e4f7471514430f9095aa1786387c7b78d98f4d0d8dc34a3c3d91f53849"
+    },
+    {
+      "path": "frontend/src/__tests__/app.test.js",
+      "status": "modified",
+      "sha256": "9f662a459df52d72c32ce2672ab4beb1323fcd2c7b67d4a15e24a8ebb00f4052"
+    },
+    {
+      "path": "frontend/src/__tests__/documents.test.js",
+      "status": "modified",
+      "sha256": "cda3f9890556f461eb2cc6d153e11c4d390ab6874447dc63ff74c492497e1f54"
+    },
+    {
+      "path": "frontend/src/__tests__/learning-simplification.test.js",
+      "status": "added",
+      "sha256": "cc933771106d410f3f08b053cd85a7a22b7759c20bb8bf66faf706afa71078f2"
+    },
+    {
+      "path": "frontend/src/__tests__/notes-ui.test.js",
+      "status": "modified",
+      "sha256": "e9d4403f62435b0741ec46ce930ac1ce4b0272752b7f7d18353eefd363a1f4d3"
+    },
+    {
+      "path": "frontend/src/__tests__/phase5.test.js",
+      "status": "modified",
+      "sha256": "69437b4e7ea45ffa6492666ac094dab2739ac7fc2812af42e54f1281e3410164"
+    },
+    {
+      "path": "frontend/src/__tests__/review-practice.test.js",
+      "status": "modified",
+      "sha256": "825f5a106351c2062c2ddc2bf746958c147f8a20e1d6525a664e0e829dfc0cca"
+    },
+    {
+      "path": "frontend/src/__tests__/study-guidance.test.js",
+      "status": "modified",
+      "sha256": "02dbbb44946737dbabfa95e8f6d5a0b99c8be268ef85054a3a4686c5549f88f1"
+    },
+    {
+      "path": "frontend/src/__tests__/workbench.test.js",
+      "status": "modified",
+      "sha256": "97e69abe8d6367c97c9384bd7f7adcf4d2d6ec102f52654c70fa0a0750f29ee5"
+    },
+    {
+      "path": "scripts/evaluate_uploaded_course_reading.py",
+      "status": "added",
+      "sha256": "bc6d4dc0f8e18dc858ef26e38f9bf018e4c076e8dd9c12e288c2c540697cc864"
+    },
+    {
+      "path": "scripts/verify_learning_simplification.py",
+      "status": "added",
+      "sha256": "b4e64d35b2d05f6a36075093ce35151f532b5173434d3f5bf43607d3e8e602a0"
+    },
+    {
+      "path": "scripts/verify_learning_simplification_migration.py",
+      "status": "added",
+      "sha256": "7000a5f42e09a8cebf941175983414a1b272854311f70dc444d2fc74f9deaf87"
+    },
+    {
+      "path": "scripts/verify_phase5.py",
+      "status": "modified",
+      "sha256": "ff1c1d024ad4d27560e43612b8eca34d2e93287a67d347a113961be395f783ef"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "status": "modified",
+      "sha256": "dd16046b000fbe75e9f3edeffc0a581df70fae48ddb9294cf9ee1b3d9ce3a5d2"
+    },
+    {
+      "path": "docs/LEARNING_SIMPLIFICATION_GUIDE.md",
+      "status": "added",
+      "sha256": "604222f5a079985f6c644b6cff6f9e99effb08ca29cf4b60abd225bea8bb6611"
+    },
+    {
+      "path": "docs/LEARNING_SIMPLIFICATION_REPORT.md",
+      "status": "added",
+      "sha256": "5c1d3b831240fe369ecb09edd6cb9463c78662e6bc7d70549fd6367b06bf288f"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "status": "modified",
+      "sha256": "bc9189bbd3749238774778591809e40267419e7e7d376d416ddab027d8d11720"
+    }
+  ],
+  "derived_files": [
+    "frontend/dist/index.html",
+    "frontend/dist/assets/index-C-cRp_Kk.js",
+    "frontend/dist/assets/index-Bv6UmK8P.css"
+  ],
+  "database": "schema12->13; all 45 table row digests unchanged",
+  "new_dependencies": 0
+}

@@ -84,7 +84,7 @@ def test_parse_original_positions_and_readonly_get_recover(documents):
     run = tick(documents)
     restored = documents.get('doc-a', doc['id'])
     units = documents.units('doc-a', doc['id'])
-    assert restored['parse']['status'] == 'ready' and restored['index_status'] == 'not_implemented'
+    assert restored['parse']['status'] == 'ready' and restored['index_status'] == 'empty'
     assert units['items'][0]['text'].startswith('# PCA')
     assert units['items'][0]['location']['start_line'] == 1
     for _ in range(3):
@@ -252,7 +252,7 @@ def test_schema6_explicit_upgrade_and_backup_preserve_all_fifteen_tables(tmp_pat
     monkeypatch.setattr(migrations, 'DOCUMENTS', original)
     with SQLiteRepository(path) as repo:
         report = repo.migration_report
-        assert report['to_version'] == 12 and migrations.preserved_snapshot(repo.connection, columns)[0] == before
+        assert report['to_version'] == 13 and migrations.preserved_snapshot(repo.connection, columns)[0] == before
         assert repo.connection.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
         assert not repo.connection.execute('PRAGMA foreign_key_check').fetchall()
     with sqlite3.connect(report['backup']) as backup:

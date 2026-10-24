@@ -137,7 +137,7 @@ class StudyGuideService:
             context_json = {**asdict(context), 'sources': context.refs()}
             self.receipts.claim(student, request_id, digest, body, context_json, snapshot, result, now())
         reason = ('rules_requested' if body['mode'] == 'rules' else
-                  'teacher_consent_required' if any(ref[0]=='teaching_material' for ref in context.sources) else
+                  'teacher_consent_required' if any(ref[0] in ('teaching_material','uploaded_document') for ref in context.sources) else
                   'personal_consent_required' if any(ref[0] == 'personal_note' for ref in context.sources) and not context.allow_personal_external else
                   'model_disabled' if not self.settings or not self.settings.enabled else
                   'insufficient_evidence' if not evidence else None)

@@ -5,9 +5,9 @@ import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/github-dark.css'
 import '../rendering/markdown.css'
 
-const props = defineProps({ source: { type: String, default: '' }, inline: Boolean, citationIds: { type: Array, default: () => [] } })
+const props = defineProps({ source: { type: String, default: '' }, inline: Boolean, citationIds: { type: Array, default: () => [] }, numberCitations: Boolean })
 const emit = defineEmits(['citation'])
-const rendered = computed(() => renderMarkdown(props.source, { inline: props.inline, citationIds: props.citationIds }))
+const rendered = computed(() => renderMarkdown(props.source, { inline: props.inline, citationIds: props.citationIds, numberCitations: props.numberCitations }))
 function openCitation(event) {
   const anchor = event.target.closest?.('a')
   const href = anchor?.getAttribute('href') || ''

@@ -1,0 +1,110 @@
+{
+  "verified_at": "2026-10-24T01:36:58.926368+00:00",
+  "course_document_title": "机器学习-第2讲-模型评估与选择",
+  "source_type": "uploaded_document",
+  "review_status": "document_unverified",
+  "readable_units": 11,
+  "total_units": 72,
+  "cases": [
+    {
+      "query": "偏差和方差有什么区别",
+      "expected_pages": [
+        20
+      ],
+      "returned_pages": [
+        20,
+        25,
+        26
+      ],
+      "passed": true,
+      "model_calls": 0
+    },
+    {
+      "query": "训练误差低而验证误差高说明什么",
+      "expected_pages": [
+        20
+      ],
+      "returned_pages": [
+        20
+      ],
+      "passed": true,
+      "model_calls": 0
+    },
+    {
+      "query": "增加训练数据主要降低偏差还是方差",
+      "expected_pages": [
+        20
+      ],
+      "returned_pages": [
+        20,
+        25,
+        26
+      ],
+      "passed": true,
+      "model_calls": 0
+    },
+    {
+      "query": "正则化对偏差和方差有什么影响",
+      "expected_pages": [
+        20
+      ],
+      "returned_pages": [
+        20,
+        25,
+        26
+      ],
+      "passed": true,
+      "model_calls": 0
+    },
+    {
+      "query": "解释泛化误差的偏差方差分解",
+      "expected_pages": [
+        20
+      ],
+      "returned_pages": [
+        20,
+        25,
+        26
+      ],
+      "passed": true,
+      "model_calls": 0
+    },
+    {
+      "query": "什么是查准率和查全率",
+      "expected_pages": [
+        11,
+        12
+      ],
+      "returned_pages": [
+        32,
+        34,
+        35
+      ],
+      "passed": false,
+      "model_calls": 0
+    },
+    {
+      "query": "暗物质的宇宙学证据有哪些",
+      "expected_pages": [],
+      "returned_pages": [],
+      "passed": true,
+      "model_calls": 0
+    },
+    {
+      "query": "今天北京的天气怎么样",
+      "expected_pages": [],
+      "returned_pages": [],
+      "passed": true,
+      "model_calls": 0
+    }
+  ],
+  "positive_hits": 5,
+  "positive_total": 6,
+  "outside_false_positives": 0,
+  "outside_total": 2,
+  "real_model_calls": 0,
+  "production_writes": 0,
+  "method": "fixed local lexical retrieval/coverage audit; no teaching-effect claim",
+  "original_course_55_and_outside_15": "unchanged; reported separately",
+  "directory": "data\\local\\real-reading-c544732b"
+}

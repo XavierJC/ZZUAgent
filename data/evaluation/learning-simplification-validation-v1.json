@@ -1,0 +1,19 @@
+{
+  "verified_at": "2026-10-24T01:51:55.984945+00:00",
+  "backend_full_passed": 604,
+  "backend_final_targeted_passed": 17,
+  "frontend_full_passed": 185,
+  "build_passed": true,
+  "http_groups": 34,
+  "http_simulated_model_calls": 6,
+  "real_model_calls": 0,
+  "browser_manual": "not_performed",
+  "teaching_effects": "not_evaluated",
+  "schema": 13,
+  "tables": 45,
+  "original_rows_unchanged": true,
+  "uploaded_real_course_positive_hits": 5,
+  "uploaded_real_course_positive_total": 6,
+  "uploaded_real_course_outside_false_positives": 0,
+  "uploaded_real_course_outside_total": 2
+}

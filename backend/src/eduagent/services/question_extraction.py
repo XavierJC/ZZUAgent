@@ -40,6 +40,8 @@ class QuestionExtractionService:
             return dict(items=[self.view(dict(r)) for r in self.db.execute('SELECT * FROM question_extraction_tasks WHERE student_id=? AND course_id=? ORDER BY created_at DESC,request_id LIMIT 50',(student,COURSE))])
 
     def create(self,student,body):
+        if not body.get('auto_import'):
+            body={k:v for k,v in body.items() if k!='auto_import'}
         uuid_text(body['request_id']);checksum=sha256(encode(body).encode()).hexdigest()
         with self.repo.transaction():
             self.bank.learning._student(student)
@@ -126,11 +128,17 @@ class QuestionExtractionService:
                 self._valid(row,context)
                 batch=str(uuid4());stamp=now();source=context['source']
                 self.db.execute('INSERT INTO question_extractions VALUES (?,?,?,?,?,?,?,?,?)',(batch,student,COURSE,source['resource_id'],source['source_version'],encode(source),encode(output['warnings']),semantic.VERSION,stamp))
-                ids=[]
+                ids=[];intake=dict(ready=0,needs_attention=0,duplicate=0)
                 for entry in output['entries']:
                     evidence=dict(source,evidence=entry['evidence'],warnings=entry['warnings'],model_quotes=entry['quotes'],extraction_request_id=key,proposal_for=context.get('target'))
-                    ids.append(self.bank._insert_question(student,entry['payload'],evidence,batch,entry['answer_origin']))
-                result=dict(question_ids=ids,extraction_id=batch,warnings=output['warnings'],usage=output['usage'],message='仅保存新的待审核草稿；没有覆盖原题。')
+                    if json.loads(row['request_json']).get('auto_import') and not context.get('target'):
+                        from eduagent.services.question_intake import auto_entry
+                        origin='source_extracted_by_ai' if entry['answer_origin']!='unknown' else 'unknown'
+                        qid,state=auto_entry(self.bank,student,entry['payload'],evidence,batch,origin,[*entry['warnings'],*output['warnings']])
+                        intake[state]+=1;ids.append(qid)
+                    else:ids.append(self.bank._insert_question(student,entry['payload'],evidence,batch,entry['answer_origin']))
+                result=dict(question_ids=list(dict.fromkeys(ids)),extraction_id=batch,warnings=output['warnings'],usage=output['usage'],intake=intake,
+                            message='识别完整的题已进入普通练习；异常保留待处理。未人工核验，不更新BKT。' if any(intake.values()) else '仅保存新的待审核草稿；没有覆盖原题。')
                 self.db.execute("UPDATE question_extraction_tasks SET status='complete',result_json=?,updated_at=? WHERE request_id=?",(encode(result),stamp,key))
         except Exception as e:
             code=getattr(e,'code',None) or (str(e) if isinstance(e,ValueError) and len(str(e))<100 else 'extraction_failed')

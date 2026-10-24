@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from 'vitest'
+import { describe, it, expect, afterEach, beforeEach } from 'vitest'
 import { mount, flushPromises } from '@vue/test-utils'
 import App from '../App.vue'
 import TutorPanel from '../components/TutorPanel.vue'
@@ -6,6 +6,7 @@ import QuestionPanel from '../components/QuestionPanel.vue'
 import { client, memoryStore, state, assignment, receipt, savedReply } from './fixtures.js'
 
 let wrapper
+beforeEach(() => history.replaceState(null,'','/#/learn'))
 afterEach(() => wrapper?.unmount())
 
 describe('Vue learning interface', () => {

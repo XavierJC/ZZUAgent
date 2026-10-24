@@ -4,7 +4,7 @@ const pages = new Set(['learn', 'study', 'materials', 'bank', 'notes', 'history'
 export function usePageRoute(before = () => true) {
   function read() {
     const [page, query = ''] = location.hash.replace(/^#\/?/, '').split('?')
-    return { page: pages.has(page) ? page : 'learn', params: Object.fromEntries(new URLSearchParams(query)) }
+    return { page: pages.has(page) ? page : 'study', params: Object.fromEntries(new URLSearchParams(query)) }
   }
   const route = ref(read())
   function go(page, params = {}, replace = false) {

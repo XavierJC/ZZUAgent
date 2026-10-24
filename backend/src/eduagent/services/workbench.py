@@ -58,9 +58,10 @@ class WorkbenchService:
                                       (student, 'machine_learning', ref['source_id'])).fetchone()
                 status = ('deleted' if row is None or row['deleted_at'] else
                           'modified' if note_version(row) != ref['source_version'] else 'current')
-            elif ref['source_type'] == 'teaching_material':
+            elif ref['source_type'] in ('teaching_material','uploaded_document'):
                 try:
-                    item=self.knowledge.teachers.source(student,ref['source_id'])
+                    provider=self.knowledge.documents if ref['source_type']=='uploaded_document' else self.knowledge.teachers
+                    item=provider.source(student,ref['source_id'])
                     status='current' if item['source_version']==ref['source_version'] and item['index_status']=='ready' else 'modified'
                 except ValueError:status='deleted'
             else:
@@ -111,9 +112,29 @@ class WorkbenchService:
                                    (student, limit)).fetchall()
             return [self._view(row) for row in rows]
 
-    def preview(self, student, ref):
+    def preview(self, student, ref, page=None):
         with self.repository.transaction():
             self.knowledge.student(student, 'machine_learning')
+            if page is not None and (type(page) is not int or not 1 <= page <= 200):
+                raise ValueError('页码必须是1～200的整数')
+            if ref['source_type']=='uploaded_document':
+                source=self.knowledge.documents.validate(student,ref,require_ready=False)
+                if page is not None:
+                    units=source['preview_units']
+                    unit=next((u for u in units if u['ordinal']==page), None)
+                    if unit is None:
+                        raise NoteNotFound('当前资料没有该解析页面，请刷新资料后选择')
+                    readable={u['id'] for u in source['units']}
+                    return {**ref,'title':source['title'],'document_id':source['document_id'],'version_id':source['version_id'],
+                            'file_format':source['file_format'],'page_number':page,
+                            'pages':[dict(ordinal=u['ordinal'],readable=u['id'] in readable,
+                                          warnings=json.loads(u['warnings_json'])) for u in units],
+                            'raw_md':unit['content_md'][:60000], 'truncated':len(unit['content_md'])>60000}
+                text='\n\n'.join(f"## 第{u['ordinal']}页/幻灯片\n\n{u['content_md']}" for u in source['units'])
+                return {**ref,'title':source['title'],'document_id':source['document_id'],'version_id':source['version_id'],
+                        'file_format':source['file_format'],'raw_md':(text[:60000]+('\n\n（预览较长，请通过问答引用定位具体页。）' if len(text)>60000 else '')) or '尚未提取到可读正文，可打开原文件或识别选定页面。'}
+            if page is not None:
+                raise ValueError('该来源不支持按页面预览')
             if ref['source_type']=='teaching_material':
                 source=self.knowledge.teachers.validate(student,ref)
                 return {**ref,'title':source['title'],'raw_md':'\n\n'.join(r['excerpt_md'] for r in source['links'])}
@@ -179,6 +200,7 @@ class WorkbenchService:
             titles = {('personal_note', n['id']): n['title'] for n, _ in selected_notes}
             titles.update({('course_material', key): self.knowledge.courses.documents[key]['title'] for key in selected_courses})
             titles.update({('teaching_material',s['source_id']):self.knowledge.teachers.validate(student,s)['title'] for s in context.refs() if s['source_type']=='teaching_material'})
+            titles.update({('uploaded_document',s['source_id']):self.knowledge.documents.validate(student,s)['title'] for s in context.refs() if s['source_type']=='uploaded_document'})
             initial = {'question': body['question'], 'answer': '', 'citations': [], 'reason': None,
                        'model': None, 'provider': 'DeepSeek' if body['mode'] == 'model' else None,
                        'finish_reason': None, 'max_output_tokens': self.settings.max_tokens if self.settings else None,
@@ -197,7 +219,7 @@ class WorkbenchService:
             self.db.execute('INSERT INTO workbench_runs VALUES (?,?,?,?,?,?,?,?,?,?,?)',
                 (request_id, student, context.course_id, digest, encode(body), encode(context_json), encode(initial), 'running', 0, timestamp, timestamp))
         reason = ('local_requested' if body['mode'] == 'local' else
-                  'teacher_consent_required' if any(s[0]=='teaching_material' for s in context.sources) and not context.allow_teacher_external else
+                  'teacher_consent_required' if any(s[0] in ('teaching_material','uploaded_document') for s in context.sources) and not context.allow_teacher_external else
                   'personal_consent_required' if selected_notes and not context.allow_personal_external else
                   'model_disabled' if not self.settings or not self.settings.enabled else None)
         status, output = 'local', {}

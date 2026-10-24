@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "schema": 13,
+  "tables": 45,
+  "all_45_table_summaries_unchanged": true,
+  "backup": "D:\\ZZUAgent\\data\\local\\learning-experience-20261024-101218\\before.sqlite3",
+  "code_backup": "D:\\ZZUAgent\\data\\local\\learning-experience-20261024-101218\\code-before.zip",
+  "integrity": true,
+  "foreign_keys": true,
+  "migration_required": false,
+  "assets": [
+    "/assets/index-Cxcd0p6d.js",
+    "/assets/index-E7EB_RH-.css"
+  ],
+  "index_sha256": "b9912e507129658643cad7e1db3bb212637704db1b6c6d153811e225f33726a0",
+  "current_page_preview_verified": true,
+  "production_writes": 0,
+  "real_model_calls": 0,
+  "verified_at": "2026-10-24T07:30:29.209642+00:00"
+}

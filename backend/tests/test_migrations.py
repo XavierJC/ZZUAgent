@@ -29,10 +29,10 @@ def test_migration_backs_up_and_preserves_all_legacy_facts(tmp_path, catalog, ve
     expected = legacy_database(path, catalog, version)
     with SQLiteRepository(path) as repository:
         report = repository.migration_report
-        assert report["from_version"] == version and report["to_version"] == 12
+        assert report["from_version"] == version and report["to_version"] == 13
         assert report["learning_facts_verified"]
         assert all(migrations.fact_snapshot(repository.connection)[key] == value for key, value in expected.items())
-        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 12
+        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 13
         assert LearningService(catalog, repository).snapshot("existing").revision == 1
         backup_path = report["backup"]
     with sqlite3.connect(backup_path) as backup:

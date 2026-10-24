@@ -394,7 +394,7 @@ def test_schema4_backup_preserves_ten_tables_and_ddl_failure_rolls_back(tmp_path
     monkeypatch.setattr(migrations, 'WORKBENCH', original)
     with SQLiteRepository(path) as repo:
         report = repo.migration_report
-        assert report['from_version'] == 4 and report['to_version'] == 12
+        assert report['from_version'] == 4 and report['to_version'] == 13
         assert migrations.preserved_snapshot(repo.connection, columns)[0] == before
     with sqlite3.connect(report['backup']) as db:
         assert db.execute('PRAGMA user_version').fetchone()[0] == 4

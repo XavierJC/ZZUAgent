@@ -2,7 +2,7 @@
 import MarkdownRenderer from './MarkdownRenderer.vue'
 import SourceDrawer from './SourceDrawer.vue'
 const props = defineProps({ workspace: Object, selfWorkspace: Object, capabilities: Object })
-const labels = { rules_requested: '本轮为本地规则指南，没有调用模型。', personal_consent_required: '本轮未同意个人笔记外发，仅保留规则指南和本地参考。',
+const labels = { teacher_consent_required: '本轮指南未单独授权上传资料外发，仅提供本地规则和引用。', rules_requested: '本轮为本地规则指南，没有调用模型。', personal_consent_required: '本轮未同意个人笔记外发，仅保留规则指南和本地参考。',
   model_disabled: '模型未启用，规则指南仍可使用。', insufficient_evidence: '所选资料依据不足，保留规则指南，不编造引用。',
   model_timeout: '模型超时，执行情况待确认，不自动重发。', network_error: '模型网络异常，执行情况待确认，不自动重发。',
   execution_unconfirmed: '原请求执行情况待确认，只读取保存记录。', tool_scope_rejected: '模型越权工具请求已拒绝，保留程序规则。',

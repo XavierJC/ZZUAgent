@@ -5,7 +5,7 @@ from dataclasses import replace
 from fastapi import APIRouter, Query
 from eduagent.api.schemas import Identifier
 from eduagent.api.knowledge_schemas import SourceRef
-from eduagent.api.workbench_schemas import WorkbenchQuestion, WorkbenchRun, SourcePreview, SavedAnswer, WorkbenchCapabilities
+from eduagent.api.workbench_schemas import WorkbenchQuestion, WorkbenchRun, SourceOpen, SourcePreview, SavedAnswer, WorkbenchCapabilities
 from eduagent.services.workbench import WorkbenchService
 
 
@@ -44,9 +44,9 @@ def workbench_router(learning_service, courses, enabled, settings):
             return service(learning).get(student_id, request_id)
 
     @router.post('/sources/open', response_model=SourcePreview)
-    def preview(student_id: Identifier, body: SourceRef):
+    def preview(student_id: Identifier, body: SourceOpen):
         with learning_service() as learning:
-            return service(learning).preview(student_id, body.model_dump())
+            return service(learning).preview(student_id, body.model_dump(exclude={'page'}), body.page)
 
     @router.post('/runs/{request_id}/note', response_model=SavedAnswer)
     def save(student_id: Identifier, request_id: str):

@@ -121,7 +121,7 @@ describe('document presentation and HTTP adapter', () => {
     for (const id of ['doc-file', 'doc-title', 'doc-source', 'doc-edit-title', 'doc-pages', 'doc-run']) {
       expect(wrapper.find(`label[for="${id}"]`).exists()).toBe(true)
     }
-    expect(wrapper.text()).toContain('尚未接入问答检索')
+    expect(wrapper.text()).toContain('可读解析内容可直接问答')
     const submit = wrapper.findAll('button').find(b => b.text().includes('上传并本地解析'))
     expect(submit.attributes('disabled')).toBeDefined()
   })
