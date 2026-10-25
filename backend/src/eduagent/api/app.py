@@ -217,14 +217,16 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
             response.headers.update(exc.headers)
         return response
 
-    @app.get("/health", response_model=HealthResponse, tags=["服务"])
+    @app.get("/health", response_model=HealthResponse, response_model_exclude_none=True, tags=["服务"])
     def health():
-        data = loaded_catalog()
-        return HealthResponse(
-            version=__version__, question_count=len(data.questions),
-            pending_review_count=sum(q.review_status == "pending" for q in data.questions.values()),
-            agent_enabled=settings.agent.enabled, retrieval_available=course_index is not None,
-        )
+        with learning_service() as service:
+            data = service.catalog
+            return HealthResponse(
+                version=__version__, question_count=len(data.questions),
+                pending_review_count=sum(q.review_status == "pending" for q in data.questions.values()),
+                ai_checked_count=sum(q.review_status == "ai_checked" for q in data.questions.values()) or None,
+                agent_enabled=settings.agent.enabled, retrieval_available=course_index is not None,
+            )
 
     @app.get("/api/v1/knowledge-points", response_model=list[KnowledgePointResponse], tags=["课程"])
     def knowledge_points():

@@ -1,0 +1,79 @@
+{
+  "checks": [
+    {
+      "name": "shared_bank_40_ai_checked",
+      "passed": true
+    },
+    {
+      "name": "refresh_does_not_score",
+      "passed": true
+    },
+    {
+      "name": "answer_hidden_0",
+      "passed": true
+    },
+    {
+      "name": "score_and_idempotency_0",
+      "passed": true
+    },
+    {
+      "name": "answer_hidden_1",
+      "passed": true
+    },
+    {
+      "name": "score_and_idempotency_1",
+      "passed": true
+    },
+    {
+      "name": "answer_hidden_2",
+      "passed": true
+    },
+    {
+      "name": "score_and_idempotency_2",
+      "passed": true
+    },
+    {
+      "name": "answer_hidden_3",
+      "passed": true
+    },
+    {
+      "name": "score_and_idempotency_3",
+      "passed": true
+    },
+    {
+      "name": "answer_hidden_4",
+      "passed": true
+    },
+    {
+      "name": "score_and_idempotency_4",
+      "passed": true
+    },
+    {
+      "name": "exhaustion_resolved_without_repetition",
+      "passed": true
+    },
+    {
+      "name": "five_real_submissions_update_revision_once",
+      "passed": true
+    },
+    {
+      "name": "finish_after_recovery",
+      "passed": true
+    },
+    {
+      "name": "owner_scope_count_15",
+      "passed": true
+    },
+    {
+      "name": "owner_scope_count_16",
+      "passed": true
+    }
+  ],
+  "passed": 17,
+  "real_http": true,
+  "paid_model_calls": 0,
+  "simulated_provider_calls": 0,
+  "isolated_database": true,
+  "shared_questions": 40,
+  "private_admissions": 3
+}

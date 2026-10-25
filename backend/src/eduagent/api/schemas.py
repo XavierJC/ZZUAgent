@@ -62,7 +62,7 @@ class PublicQuestion(BaseModel):
     stem: str
     options: dict[str, str]
     source: str
-    review_status: Literal["pending", "human_verified"]
+    review_status: Literal["pending", "human_verified", "ai_checked"]
 
 
 class DecisionResponse(BaseModel):
@@ -109,6 +109,7 @@ class HealthResponse(BaseModel):
     mode: Literal["offline_rules"] = "offline_rules"
     question_count: int
     pending_review_count: int
+    ai_checked_count: int | None = None
     agent_enabled: bool = False
     retrieval_available: bool = False
 

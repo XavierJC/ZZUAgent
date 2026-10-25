@@ -1,0 +1,171 @@
+{
+  "passed": true,
+  "schema": 14,
+  "tables": 50,
+  "all_50_table_digests_unchanged": true,
+  "protected_files_unchanged": 185,
+  "backend_sources_and_tests_unchanged": true,
+  "no_added_dependencies": true,
+  "backup": "D:\\ZZUAgent\\data\\local\\human-workflow-20261025-211109",
+  "changed_files": [
+    {
+      "path": "AGENTS.md",
+      "change": "modified"
+    },
+    {
+      "path": "README.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/CURRENT_STATUS.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/HUMAN_WORKFLOW_GUIDE.md",
+      "change": "added"
+    },
+    {
+      "path": "docs/HUMAN_WORKFLOW_REPORT.md",
+      "change": "added"
+    },
+    {
+      "path": "docs/OPEN_SOURCE_UI_REFERENCES.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/REFACTOR_STAGE1_GUIDE.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/REFACTOR_STAGE1_REPORT.md",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/human-workflow.test.js",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/app/AppSidebar.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/app/CourseShell.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/app/CourseWelcome.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/app/courseSpace.js",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/components/QuestionImportPanel.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/components/QuestionPanel.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/components/QuickDocumentUpload.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/learning/FormalLearningPage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/learning/useWorkspace.js",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/LearningHome.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebookChat.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebookPage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebookSources.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebooksPage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/useNotebooks.js",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/ExerciseCard.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/ExerciseDesk.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/PracticeFeedback.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/PracticeModes.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/features/practice/PracticePage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/shared/human-workflow.css",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/views/LearningInsights.vue",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/verify_human_workflow_deployment.py",
+      "change": "added"
+    }
+  ],
+  "entry_assets": [
+    "/assets/index-CCrLrJ5Q.js",
+    "/assets/runtime-core.esm-bundler-CU-ppsIZ.js",
+    "/assets/index-CrKZ_3cY.css"
+  ],
+  "page_chunks_verified": 13,
+  "health": {
+    "status": "ok",
+    "version": "0.4.1",
+    "mode": "offline_rules",
+    "question_count": 40,
+    "pending_review_count": 0,
+    "ai_checked_count": 40,
+    "agent_enabled": true,
+    "retrieval_available": true
+  },
+  "browser_synthetic_student_revision": 1,
+  "real_model_calls": 0,
+  "verified_at": "2026-10-25T14:05:51.571777+00:00"
+}

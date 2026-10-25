@@ -20,7 +20,7 @@ function select(key, checked) {
   <article v-if="question" class="exercise-card">
     <header><span class="exercise-type">{{questionTypes[question.question_type]}}</span><span>{{w.session.source.title || '我的题目'}} · 第{{w.session.question_revision}}版</span></header>
     <div class="exercise-stem"><QuestionContent :value="question" /></div>
-    <p v-if="question.automation" class="exercise-verification">AI整理 · 答案尚未人工核验，本轮只提供参考对照。</p>
+    <p v-if="question.automation" class="exercise-verification">自动整理 · 答案尚未人工核验，本轮只提供参考对照。</p>
     <form @submit.prevent="!readonly && w.submit()"><fieldset :disabled="Boolean(readonly || w.busy || w.pending || w.session.result)"><legend class="sr-only">{{choice?'选择答案':'文字作答'}}</legend>
       <div v-if="choice" class="exercise-options"><label v-for="option in question.options" :key="option.key" :class="{selected:selectedKeys.includes(option.key)}"><input :type="multiple?'checkbox':'radio'" :name="multiple?'ordinary-multiple':'ordinary-answer'" :checked="multiple?selectedKeys.includes(option.key):w.selected===option.key" :value="option.key" @change="select(option.key,$event.target.checked)" /><span class="exercise-option-key">{{option.key==='true'?'✓':option.key==='false'?'×':option.key}}</span><MarkdownRenderer :source="option.text" /></label></div>
       <div v-else class="exercise-writing"><label for="exercise-response">写下你的思路</label><textarea id="exercise-response" v-model="w.selected" rows="8" maxlength="16000" placeholder="支持 Markdown 和 LaTeX。你的思考过程也值得记录。" @keydown.ctrl.s.prevent="w.saveResponseDraft()" /><label class="exercise-review-check"><input v-model="w.needsReview" type="checkbox" />标记为需要复习（主观标记）</label><p>文字作答独立保存，不进行自动主观评分。</p></div>

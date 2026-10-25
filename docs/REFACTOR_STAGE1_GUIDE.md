@@ -1,5 +1,9 @@
 # 重构第一阶段：课程空间与模块边界
 
+> 后续失败资料删除入口使用见[SOURCE_DELETE_REPORT](SOURCE_DELETE_REPORT.md)；本指南原模块约束保持。
+
+> 2026-10-25后续人性化流程简化已交付，入口与使用见[最新指南](HUMAN_WORKFLOW_GUIDE.md)，原模块约束继续保留。
+
 > 2026-10-25后续UI/UX交付已统一这些模块的视觉和导航；新版使用、截图与限制见[UI/UX报告](UI_UX_REFACTOR_REPORT.md)和[设计系统](FRONTEND_DESIGN_SYSTEM.md)。本指南原模块/API约束继续保留。
 
 > 历史阶段指南。用户随后批准的笔记本与习题产品重建已交付，当前入口、schema及使用方式见[CURRENT_STATUS](CURRENT_STATUS.md)和[Notebook指南](NOTEBOOK_REBUILD_GUIDE.md)。以下保留原阶段契约，不代表当前版本编号。

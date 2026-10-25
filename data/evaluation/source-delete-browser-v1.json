@@ -1,0 +1,35 @@
+{
+  "environment": "isolated synthetic database on 127.0.0.1:8139",
+  "realModelCalls": 0,
+  "flows": [
+    "failed upload has enabled delete with disabled add",
+    "one inline confirmation",
+    "cancel retains row",
+    "confirm removes row and displays deletion notice",
+    "other ready uploads remain"
+  ],
+  "desktop": {
+    "deletedNotice": true,
+    "documentWidth": 1280,
+    "noMatchingContent": true,
+    "width": 1280
+  },
+  "mobile": {
+    "deleteButtons": [
+      {
+        "enabled": true,
+        "left": 310.8333435058594,
+        "right": 334.8333435058594
+      },
+      {
+        "enabled": true,
+        "left": 310.8333435058594,
+        "right": 334.8333435058594
+      }
+    ],
+    "dialogScrollWidth": 358,
+    "dialogWidth": 358,
+    "documentWidth": 390,
+    "width": 390
+  }
+}

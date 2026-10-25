@@ -1,0 +1,67 @@
+{
+  "environment": "isolated synthetic local database on 127.0.0.1:8139",
+  "realModelCalls": 0,
+  "checks": [
+    {
+      "documentWidth": 1265,
+      "feedbackVisible": true,
+      "h1Count": 1,
+      "height": 720,
+      "page": "diagnosis",
+      "settingsOpen": false,
+      "width": 1280
+    },
+    {
+      "documentWidth": 375,
+      "h1Count": 1,
+      "page": "ordinary-practice-mobile",
+      "width": 390
+    },
+    {
+      "documentWidth": 375,
+      "h1Count": 1,
+      "height": 844,
+      "page": "home-mobile",
+      "width": 390
+    },
+    {
+      "documentWidth": 375,
+      "height": 844,
+      "page": "study-mobile",
+      "width": 390
+    },
+    {
+      "documentWidth": 375,
+      "h1Count": 1,
+      "height": 844,
+      "page": "diagnosis-mobile",
+      "settingsOpen": false,
+      "width": 390
+    },
+    {
+      "documentWidth": 375,
+      "formalAttemptsText": true,
+      "height": 844,
+      "page": "progress-mobile",
+      "width": 390
+    }
+  ],
+  "observedFlows": [
+    "generated nickname and optional goals",
+    "blank title creates learning theme",
+    "successful upload attaches and selects only new non-note source",
+    "local question and citation",
+    "one explicit diagnostic begin binds and allocates",
+    "read-only refresh retains selected answer",
+    "formal submit updates once",
+    "local paste import then direct practice",
+    "ordinary answer records reference comparison without objective grading",
+    "mobile main navigation and mode switch"
+  ],
+  "limitations": [
+    "no real provider requests",
+    "no real student teaching-effect validation",
+    "no physical mobile device or screen-reader validation",
+    "production rebuild while old page open required reload"
+  ]
+}

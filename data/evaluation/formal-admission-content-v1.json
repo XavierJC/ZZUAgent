@@ -1,0 +1,13 @@
+{
+  "total_personal_questions": 27,
+  "admitted_personal": 3,
+  "not_admitted": 24,
+  "missing_reference_answer": 22,
+  "outside_formal_scope_with_answer": 1,
+  "ambiguous_reference_with_answer": 1,
+  "shared_formal": 40,
+  "additional_shared": 30,
+  "formal_knowledge_points": 5,
+  "human_review_performed": false,
+  "paid_provider_calls": 0
+}

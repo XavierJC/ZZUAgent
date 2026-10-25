@@ -148,9 +148,18 @@ export function useCourseDocuments(client, student, storage = globalThis.localSt
       async result => { notice.value = '资料信息已保存。'; await refreshAfter(result.id) })
   }
   async function remove() {
-    const owner = student.value, doc = current.value, id = crypto.randomUUID()
-    return write('delete', () => client.deleteDocument(owner, doc.id, { request_id: id, expected_revision: doc.revision }), id,
-      async () => { current.value = null; units.value = []; runs.value = []; run.value = null
+    if (!current.value) return false
+    return removeById(current.value.id, current.value.revision)
+  }
+  async function removeById(documentId, expectedRevision) {
+    if (!documentId) return false
+    const owner = student.value, token = epoch, id = crypto.randomUUID()
+    return write('delete', async () => {
+      const revision = expectedRevision ?? (await client.document(owner, documentId)).revision
+      if (token !== epoch) return null
+      return client.deleteDocument(owner, documentId, { request_id: id, expected_revision: revision })
+    }, id, async () => {
+        if (current.value?.id === documentId) { current.value = null; units.value = []; runs.value = []; run.value = null }
         await refreshAfter(); notice.value = '资料已软删除；本机原件、历史版本及备份不会被物理清除。' })
   }
   async function retry() {
@@ -175,5 +184,5 @@ export function useCourseDocuments(client, student, storage = globalThis.localSt
   const download = computed(() => current.value ? client.documentDownloadUrl(student.value, current.value.id, current.value.version.id) : '')
   return { supported: typeof client.documents === 'function', items, current, runs, units, run, total, offset, busy, error, notice, capabilities, visible, pending, file, title,
     sourceNote, rights, pages, consent, editTitle, editSource, activeJobs, download, load, select, selectRun, page,
-    upload, updateVersion, saveMetadata, remove, retry, vision, releasePending }
+    upload, updateVersion, saveMetadata, remove, removeById, retry, vision, releasePending }
 }

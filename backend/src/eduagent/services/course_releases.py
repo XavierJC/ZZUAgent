@@ -35,6 +35,9 @@ class CourseReleases:
         return dict(catalog_fingerprint=self.learning.catalog.fingerprint,bank_version=self.learning.catalog.bank_version,
             knowledge_version=self.learning.catalog.knowledge_version,parameters=asdict(self.learning.parameters),policy=asdict(self.learning.policy),scoring='exact-option-key-v1')
 
+    def configuration_compatible(self, configuration):
+        return self.learning.formal_admission.compatible_release(configuration, self.configuration())
+
     def course_sources(self):
         root=(self.data_dir/'materials').resolve();manifest=json.loads((root/'manifest.json').read_text(encoding='utf-8'));out=[]
         for d in manifest['documents']:
@@ -93,7 +96,7 @@ class CourseReleases:
     def validity(self,row):
         snapshot=json.loads(row['snapshot_json']);issues=[];states=[]
         if digest(snapshot)!=row['content_hash']:issues.append('release_snapshot_corrupt')
-        if snapshot['configuration']!=self.configuration():issues.append('runtime_configuration_changed')
+        if not self.configuration_compatible(snapshot['configuration']):issues.append('runtime_configuration_changed')
         try:current={s['source_id']:s for s in self.course_sources()}
         except (OSError,UnicodeError,ValueError):current={};issues.append('source_catalog_unavailable')
         for s in snapshot['sources']:
@@ -121,6 +124,10 @@ class CourseReleases:
             sources=snapshot['sources'],retrieval_scope=snapshot['retrieval_scope'],architecture=snapshot['architecture'],
             review_warning=snapshot.get('review_warning','内容负责人已确认本版本答案；BKT参数未经过统计标定。'),configuration=snapshot['configuration'],**validity)
         if builder:out['review_questions']=snapshot['questions']
+        if self.learning.formal_admission.record:
+            out['runtime_assessment']=dict(shared_count=len(self.learning.catalog.questions),review_method='ai_checked',
+                historical_release_preserved=True,bank_version=self.learning.catalog.bank_version)
+            out['review_warning']='原课程发布快照及其审核状态保留；当前诊断使用AI检查准入的扩充题库，BKT参数未统计标定。'
         return out
 
     def list(self,student):
@@ -176,7 +183,7 @@ class CourseReleases:
             row=self.draft_row(student,key);payload=json.loads(row['payload_json']);snapshot=self._snapshot(student,payload);blocked=[]
             if not snapshot['architecture']:blocked.append('缺少已确认的课程知识体系版本')
             missing=set(self.learning.catalog.questions)-set(payload['reviewed_question_ids'])
-            if missing:blocked.append('尚未逐题确认原10道演示题的题干、答案和解析')
+            if missing:blocked.append('尚未逐题确认当前运行题库的题干、答案和解析；AI检查不等于人工确认')
             if not payload['reviewer'].strip():blocked.append('缺少本机内容审核人说明')
             counts={k:sum(q['knowledge_id']==k for q in snapshot['questions']) for k in self.learning.catalog.knowledge}
             if any(n==0 for n in counts.values()):blocked.append('正式知识点缺少诊断题')

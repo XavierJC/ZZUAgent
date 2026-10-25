@@ -1,0 +1,12 @@
+{
+  "isolated_database": true,
+  "synthetic_student": true,
+  "visible_shared_count": 40,
+  "submitted_answers": 1,
+  "revision_after_reload": 1,
+  "mastery_before": 0.2,
+  "mastery_after": 0.5263157894736842,
+  "available_remaining": 7,
+  "paid_model_calls": 0,
+  "screenshot": "formal-admission-browser.png"
+}

@@ -1,18 +1,18 @@
 <script setup>
 import { onMounted, onUnmounted, ref, useId } from 'vue'
-const props=defineProps({workspace:Object})
+const props=defineProps({workspace:Object, expandedByDefault:Boolean})
 const emit=defineEmits(['ready'])
-const id=useId(), expanded=ref(false), input=ref(null)
+const id=useId(), expanded=ref(props.expandedByDefault), input=ref(null)
 let timer, pendingDoc=null, alive=true
 function choose(event){const w=props.workspace;w.file=event.target.files?.[0] || null;if(w.file)w.title=w.file.name.replace(/\.[^.]+$/,'').slice(0,120)}
-function ready(){const item=props.workspace.items.find(d=>d.id===pendingDoc);if(item && !['pending','processing'].includes(item.parse.status)){pendingDoc=null;emit('ready',item.id)}}
+function ready(){if(!alive)return;const item=props.workspace.items.find(d=>d.id===pendingDoc);if(item && !['pending','processing'].includes(item.parse.status)){pendingDoc=null;if(['ready','partial'].includes(item.parse.status)){expanded.value=false;emit('ready',item.id)}else props.workspace.notice='文件已保存，但暂时没有可用正文。可以查看原件，或选择需要AI识别的页面。'}}
 async function upload(){if(await props.workspace.upload()){pendingDoc=props.workspace.current?.id;if(input.value)input.value.value='';ready()}}
 onMounted(async()=>{await props.workspace.load();if(alive)timer=setInterval(async()=>{if(props.workspace.activeJobs && !props.workspace.busy){await props.workspace.load();if(alive)ready()}},1500)})
 onUnmounted(()=>{alive=false;clearInterval(timer)})
 </script>
 <template>
   <div class="quick-upload">
-    <button class="button primary" :aria-expanded="expanded" @click="expanded=!expanded">添加学习资料</button>
+    <button v-if="!expandedByDefault" class="button primary" :aria-expanded="expanded" @click="expanded=!expanded">添加学习资料</button>
     <form v-if="expanded" @submit.prevent="upload">
       <label :for="`${id}-file`">选择 PDF、PPTX、Markdown 或 TXT</label><input :id="`${id}-file`" ref="input" type="file" accept=".pdf,.pptx,.md,.txt" :disabled="Boolean(workspace.busy || workspace.pending)" @change="choose" />
       <p v-if="workspace.file" class="small">{{workspace.file.name}}</p>

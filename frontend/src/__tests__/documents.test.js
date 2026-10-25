@@ -110,6 +110,32 @@ describe('course document state and external transmission', () => {
     expect(api.deleteDocument.mock.calls[0][2].expected_revision).toBe(1); expect(w.current).toBeNull()
     expect(w.notice).toContain('不会被物理清除')
   })
+  it('deletes a failed document by ID without changing another document or upload draft', async () => {
+    const { w, api, store } = setup(); await w.load(); await w.select('doc1')
+    w.title = '未上传的草稿'; w.file = new File(['draft'], 'draft.md')
+    api.deleteDocument.mockImplementationOnce(async (owner, id, body) => {
+      expect(owner).toBe('a'); expect(id).toBe('failed-doc'); expect(body.expected_revision).toBe(7)
+      expect(JSON.parse(store.getItem('eduagent.documents.v1.a')).pending.request_id).toBe(body.request_id)
+      return { deleted: true }
+    })
+    expect(await w.removeById('failed-doc', 7)).toBe(true)
+    expect(w.current.id).toBe('doc1'); expect(w.title).toBe('未上传的草稿'); expect(w.file.name).toBe('draft.md')
+    expect(api.parseDocument).not.toHaveBeenCalled(); expect(api.visionDocument).not.toHaveBeenCalled()
+  })
+  it('does not issue a deletion when identity changes during revision lookup', async () => {
+    const { w, api, student } = setup(); let resolve
+    api.document.mockReturnValueOnce(new Promise(r => { resolve = r }))
+    const removing = w.removeById('failed-doc'); student.value = 'b'; resolve(doc({ id: 'failed-doc' }))
+    expect(await removing).toBe(false); expect(api.deleteDocument).not.toHaveBeenCalled(); expect(w.current).toBeNull()
+  })
+  it('keeps an uncertain deletion and queries its receipt without another DELETE', async () => {
+    const { w, api } = setup(); await w.load()
+    api.deleteDocument.mockRejectedValueOnce(new ApiError('回执丢失', { uncertain: true }))
+    expect(await w.removeById('failed-doc', 1)).toBe(false); expect(w.pending.operation).toBe('delete')
+    await w.removeById('failed-doc', 1); expect(api.deleteDocument).toHaveBeenCalledTimes(1)
+    api.documentReceipt.mockResolvedValueOnce({ result: { id: 'failed-doc', deleted: true } })
+    await w.load(); expect(w.pending).toBeNull(); expect(api.deleteDocument).toHaveBeenCalledTimes(1)
+  })
 })
 
 describe('document presentation and HTTP adapter', () => {

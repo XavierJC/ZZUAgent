@@ -1,5 +1,9 @@
 # 重构第一阶段验收报告
 
+> 后续失败资料删除入口及实际删除验证另见[SOURCE_DELETE_REPORT](SOURCE_DELETE_REPORT.md)，本页仍保留原阶段证据。
+
+> 2026-10-25后续人性化流程简化另见[本轮报告](HUMAN_WORKFLOW_REPORT.md)。本页保留旧阶段证据，不能将旧测试数字当作最新结果。
+
 > 2026-10-25新增前端UI/UX全面优化已交付，另见[本轮报告](UI_UX_REFACTOR_REPORT.md)。本页以下保留旧阶段数字与失败证据；最新结果只读CURRENT_STATUS。
 
 > 本报告保留2026-10-24纯前端重构的原验证结果。后续笔记本产品重建另见[报告](NOTEBOOK_REBUILD_REPORT.md)；2026-10-25收尾只补文档与只读核验，未据此扩展新后端范围。

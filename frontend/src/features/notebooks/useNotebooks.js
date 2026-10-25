@@ -91,14 +91,17 @@ export function useNotebooks(client, student, storage = localStorage) {
 
   async function execute(kind, id, body) {
     if (pending.value || busy.value) { error.value = '请等待当前操作或先核对原回执。'; return null }
-    const token = epoch, owner = student.value
+    const token = epoch, owner = student.value, viewSerial = serial
     pending.value = { kind, id, body }; if (!persist()) { pending.value = null; return null }
     busy.value = 'save'; error.value = ''
     try {
       const result = await (kind === 'create' ? client.createNotebook(owner, body) : kind === 'sources' ? client.notebookSources(owner, id, body) : client.updateNotebook(owner, id, body))
       if (token !== epoch) return null
       pending.value = null; if(kind==='create')creationDraft.value={title:'',description:''}; persist(); busy.value = ''
-      await load(); await open(id)
+      await load()
+      // A late save may finish after the user opens another theme. Update the
+      // list, but never pull the reader back into the old theme.
+      if(token===epoch && viewSerial===serial)await open(id)
       return result
     } catch (e) { if (token === epoch) { error.value = e.message; if (!e.uncertain) pending.value = null; persist() }; return null }
     finally { if (token === epoch) busy.value = '' }

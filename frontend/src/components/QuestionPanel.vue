@@ -34,7 +34,7 @@ const questionId = `question-stem-${useId()}`
       <div class="empty-icon"><Icon :name="decision.action === 'finish' ? 'check' : 'book'" :size="30" /></div>
       <h3>{{ decision.stop_reason === 'insufficient_questions' ? '正式新题已做完，可以继续复习' : actionLabels[decision.action] }}</h3><p>{{ decision.reason }}</p>
       <template v-if="decision.stop_reason === 'insufficient_questions'">
-        <p class="small muted">新题不足不代表已经掌握。可以复习已做题、查看讲解或做普通练习；这些活动不会重复计算 BKT。正式复测需要补充并审核新题。</p>
+        <p class="small muted">新题不足不代表已经掌握。可以复习已做题、查看讲解或做普通练习；这些活动不会重复计入掌握度。有新题加入后，还可以继续测一下。</p>
         <div class="phase5-actions"><button v-if="canReview" class="button primary" :disabled="Boolean(busy)" @click="$emit('review')">复习已做题（不更新掌握度）</button><button class="button secondary" @click="$emit('explain')">请助教讲解薄弱点</button><button class="button secondary" @click="$emit('navigate','practice')">进入普通练习</button></div>
       </template>
     </div>

@@ -49,7 +49,7 @@ class TeachingService:
         learner=self.learning._student(student);overview=GuidanceService(self.learning)._snapshot(student)
         decision=self.repo.decision_at(student,learner['revision'])
         next_task=self.learning.policy.decide(decision_id='read-only-preview',student_id=student,revision=learner['revision'],
-            goals=tuple(json.loads(learner['goals_json'])),states=self.learning.status(student),answered=self.repo.answered_questions(student),catalog=self.learning.catalog)
+            goals=tuple(json.loads(learner['goals_json'])),states=self.learning.status(student),answered=self.repo.answered_questions(student),catalog=self.learning.catalog_for(student))
         public=asdict(next_task);public.pop('question',None);public.pop('decision_id',None)
         # A preview is advice, never an assigned question or fabricated decision.
         if public['evidence'].get('attempts')==0:public['evidence'].pop('mastery',None)
@@ -64,7 +64,7 @@ class TeachingService:
         return dict(session={k:session[k] for k in ('id','release_id','stage','started_revision','created_at','updated_at')},release=self.releases.view(release),
             snapshot=asdict(self.learning.snapshot(student)),guidance=overview,next_task=public,
             decision=asdict(decision) if decision else None,decision_origin=origin,last_feedback=last[0] if last else None,
-            history=items,explanations=explanations,has_objective_evidence=any(i['objective']['has_evidence'] for i in overview['items']),
+            history=items,explanations=explanations,assessment_bank=self.learning.formal_admission.assessment_info(student),has_objective_evidence=any(i['objective']['has_evidence'] for i in overview['items']),
             pending_diagnosis=[i['knowledge_id'] for i in overview['items'] if i['in_goal_path'] and not i['objective']['has_evidence']],
             history_compatibility='Old attempts and allocations without provenance remain legacy_unbound; no release is assigned retrospectively.')
 
@@ -75,7 +75,8 @@ class TeachingService:
         with self.repo.transaction():
             self.learning._student(student)
             row=self.db.execute('SELECT * FROM teaching_sessions WHERE student_id=? ORDER BY created_at DESC,id DESC LIMIT 1',(student,)).fetchone()
-            return self._state(student,dict(row)) if row else dict(session=None,release=None,history=self.history(student)['items'])
+            return self._state(student,dict(row)) if row else dict(session=None,release=None,history=self.history(student)['items'],
+                assessment_bank=self.learning.formal_admission.assessment_info(student))
 
     def current_decision(self,student):
         with self.repo.transaction():
@@ -100,12 +101,12 @@ class TeachingService:
     def submit(self,student,key,body):
         def apply():
             session=self.session_row(student,key);release=self.releases.row(student,session['release_id'])
-            if json.loads(release['snapshot_json'])['configuration']!=self.releases.configuration():fail('评分配置已变化，不能按当前配置覆盖原分配','release_unavailable',409)
+            if not self.releases.configuration_compatible(json.loads(release['snapshot_json'])['configuration']):fail('评分配置已变化，不能按当前配置覆盖原分配','release_unavailable',409)
             link=self.db.execute('SELECT * FROM teaching_decisions WHERE decision_id=? AND session_id=? AND student_id=?',(body['decision_id'],key,student)).fetchone()
             if not link:fail('请先明确开始本学习会话的诊断或复测','decision_not_in_session',409)
             if self.repo.attempt(body['request_id']):fail('该事件已有旧记录，不能补认课程版本','event_already_recorded',409)
             result=self.learning.submit(student,body['decision_id'],body['answer'],body['request_id'])
-            question=self.learning.catalog.questions[result.question_id]
+            question=self.learning.catalog_for(student).questions[result.question_id]
             self.db.execute('INSERT INTO teaching_events VALUES (?,?,?,?,?,?,?)',(result.event_id,key,student,release['id'],link['origin'],encode(asdict(question)),now()))
             self.db.execute("UPDATE teaching_sessions SET stage='analysis',updated_at=? WHERE id=?",(now(),key))
             return dict(session_id=key,result=asdict(result),release_id=release['id'])

@@ -1,0 +1,20 @@
+{
+  "schema": 14,
+  "tables": 50,
+  "unchanged_original_tables": 49,
+  "changed_tables": [
+    "metadata"
+  ],
+  "original_attempts_preserved": 29,
+  "existing_files_unchanged": true,
+  "protected_file_count": 180,
+  "health_shared_questions": 40,
+  "private_admissions": 3,
+  "owner_scoped_count": 43,
+  "old_configuration_rejected": true,
+  "rollback_independent_copy": true,
+  "rollback_old_attempts": 29,
+  "upgraded_trial_attempts_retained": 34,
+  "paid_model_calls": 0,
+  "new_dependencies": 0
+}

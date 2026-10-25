@@ -26,7 +26,7 @@ const heading = computed(() => headings[space.tab] || headings.study)
     <div v-if="space.w.busy==='boot'" class="loading-state" role="status">正在准备你的学习空间…</div>
     <CourseWelcome v-else-if="!space.w.active" :space="space" />
     <template v-else>
-      <section v-if="!space.modern || !['notebooks','notebook','practice'].includes(space.tab)" class="page-heading" :class="{'learning-page-heading':['study','practice','insights'].includes(space.tab)}">
+      <section v-if="!space.modern || !['notebooks','notebook','practice','learn'].includes(space.tab)" class="page-heading" :class="{'learning-page-heading':['study','practice','insights'].includes(space.tab)}">
         <div><p class="eyebrow">{{space.isBuilder?'课程内容维护':'COURSE LEARNING SPACE'}}</p><h1>{{heading[0]}}</h1><p>{{heading[1]}}</p></div>
         <span class="course-badge"><Icon name="book" :size="17" />{{space.course.title}}</span>
       </section>

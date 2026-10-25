@@ -20,11 +20,11 @@ export function useCourseSpace(props) {
   const { route, go } = usePageRoute(() => registry.persist() && (!flow.pending || flow.persist()), modern ? 'notebooks' : 'study')
   const tab = computed(() => route.value.page)
   const isBuilder = computed(() => builderTabs.some(item => item.id === tab.value))
-  const pageTitle = computed(() => tab.value === 'notebooks' ? '学习笔记本' : tab.value === 'notebook' ? registry.peek('notebooks')?.current?.detail.title || '学习笔记本' : [...studentTabs, ...builderTabs, ...auxiliaryTabs].find(i => i.id === tab.value)?.name)
+  const pageTitle = computed(() => tab.value === 'notebooks' ? '学习' : tab.value === 'learn' && modern ? '练习 · 测一下' : tab.value === 'notebook' ? registry.peek('notebooks')?.current?.detail.title || '学习笔记本' : [...studentTabs, ...builderTabs, ...auxiliaryTabs].find(i => i.id === tab.value)?.name)
   const goalsText = computed(() => w.snapshot?.goals.map(w.topicName).join('、'))
   const course = computed(() => ({ id: 'machine_learning', title: '机器学习',
     subtitle: flow.data?.release ? `学习版本：${flow.data.release.title}` : '资料 · 问答 · 练习 · 学习进度' }))
-  const formMode = ref('new'), learnerId = ref(`learner-${crypto.randomUUID().slice(0, 8)}`), goals = ref(['logistic_regression'])
+  const formMode = ref('new'), learnerId = ref(`learner-${crypto.randomUUID().slice(0, 8)}`), goals = ref(modern ? [] : ['logistic_regression'])
   const routeError = ref('')
   let routeEpoch = 0
 
@@ -40,7 +40,8 @@ export function useCourseSpace(props) {
   }
   async function start() {
     const chosen = flow.selectedRelease, formal = tab.value === 'learn'
-    await w.start(learnerId.value, goals.value, formMode.value === 'restore', flow.enabled || !formal)
+    const selectedGoals = goals.value.length ? goals.value : w.knowledge.map(p=>p.id)
+    await w.start(learnerId.value, selectedGoals, formMode.value === 'restore', flow.enabled || !formal)
     if (w.active && flow.enabled) {
       await flow.load()
       if ((!modern || formal) && formMode.value !== 'restore' && flow.releases.some(r => r.id === chosen)) {

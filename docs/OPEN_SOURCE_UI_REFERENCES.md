@@ -24,6 +24,8 @@
 
 ## 适配边界
 
+2026-10-25人性化流程简化再次阅读上述固定版本Open Notebook的`SourcesColumn.tsx`、Exameow的`QuestionCard.vue`和DeepTutor的`AppShell.tsx`。在现有Vue内独立实现单项直接加入资料、正常路径减少设置、练习方式切换及低频管理折叠，未复制第三方代码或新增运行依赖。结果见[报告](HUMAN_WORKFLOW_REPORT.md)。
+
 没有照搬整体页面、品牌或专有素材。没有迁移到 React/Next.js，没有引入多智能体、图数据库、外部解析服务或新模型供应商。参考项目的功能展示不证明 EduAgent 已具备同样的解析能力或教学效果。
 
 EduAgent 沿用来源选择与版本检查、逐轮私人外发同意、原 BKT 与正式评分。尤其未采用参考项目的“未诊断即显示掌握百分比”、模型判分或自动生成测评行为。

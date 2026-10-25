@@ -16,7 +16,9 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
   const topicName = (id) => knowledge.value.find((item) => item.id === id)?.name || id || '学习规划'
   const activeTopic = computed(() => topicName(feedback.value?.knowledge_id || decision.value?.knowledge_id))
   const active = computed(() => Boolean(snapshot.value))
-  const reviewNotice = computed(() => health.value?.pending_review_count
+  const reviewNotice = computed(() => health.value?.ai_checked_count
+    ? `${health.value.question_count} 道课程诊断题已接入，AI检查不等于人工审核；掌握度为模型估计。`
+    : health.value?.pending_review_count
     ? `${health.value.question_count} 道演示题仍待内容审阅，掌握度为模型估计。` : '掌握度为模型估计，仅供学习参考。')
   function remember() { return store.write({ student_id: student.value, pending: pending.value }) }
   function message(exception) { error.value = exception.message || '操作未完成，请稍后重试。' }
@@ -70,11 +72,12 @@ export function useWorkspace(api = defaultApi, store = browserStore()) {
   }
   async function refresh() {
     await lock('refresh', async () => {
+      const draftDecision = decision.value?.decision_id, draftAnswer = selected.value
       health.value = await api.health()
       if (!student.value) return
       await readState()
       decision.value = await readDecision()
-      if (!pending.value) { feedback.value = null; selected.value = '' }
+      if (!pending.value) { feedback.value = null; selected.value = decision.value?.decision_id===draftDecision ? draftAnswer : '' }
     })
   }
   async function submit() {

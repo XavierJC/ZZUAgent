@@ -6,13 +6,15 @@
 
 ## 当前状态
 
-已交付前端UI/UX全面优化。[唯一当前状态](docs/CURRENT_STATUS.md) · [新版界面、截图与验收](docs/UI_UX_REFACTOR_REPORT.md) · [设计系统](docs/FRONTEND_DESIGN_SYSTEM.md) · [笔记本指南与API](docs/NOTEBOOK_REBUILD_GUIDE.md)。
+已交付人性化学习流程简化，并保留此前UI与正式题准入。[唯一当前状态](docs/CURRENT_STATUS.md) · [简化流程指南](docs/HUMAN_WORKFLOW_GUIDE.md) · [本轮验收与截图](docs/HUMAN_WORKFLOW_REPORT.md) · [题目准入与验收](docs/FORMAL_ADMISSION_REPORT.md) · [设计系统](docs/FRONTEND_DESIGN_SYSTEM.md) · [笔记本指南与API](docs/NOTEBOOK_REBUILD_GUIDE.md)。
 
-默认主页显示真实学习目标、待诊断状态和继续学习，再按主题组织笔记本；笔记本内有问答、练习、笔记三个任务，原文按需对照。题库与学习进度保留主入口，手机菜单可访问全部辅助工具。管理采用资料、知识、习题和发布的准备流程。五个项目的参考与代码归属见[开源参考](docs/OPEN_SOURCE_UI_REFERENCES.md)。
+主导航为学习、练习、进度。点击开始即可使用默认昵称，新主题可以不填名称；成功上传资料直接加入当前主题，习题整理后可直接开始自由练习。选择“测一下”后明确开始即可进入诊断，正常学习无需先管理或发布课程。低频设置默认收起，手机菜单与旧链接保留全部能力。五个项目的参考与代码归属见[开源参考](docs/OPEN_SOURCE_UI_REFERENCES.md)。
 
-最新测试、四种尺寸的浏览器检查及数据摘要结果见CURRENT_STATUS。本轮只改前端和验收文档，没有变更后端业务或schema，没有新增依赖或真实付费模型调用。上轮Notebook迁移记录保留于原报告；内容人工审核与真实教学效果仍待验证。
+上传资料包括解析失败的文件，均可在主题资料窗口右侧直接删除；本行确认后移出可用资料，历史和原件保留。见[删除入口修复](docs/SOURCE_DELETE_REPORT.md)。
 
-现有能力包括来源受控RAG、Markdown/LaTeX笔记、资料解析与页码引用、原题整理和普通练习、正式BKT闭环、自评与学习指南。正式仍原5知识点/10道演示题，40候选未自动启用；普通练习不更新BKT。仅本机演示，学习标识不是身份认证。
+最新测试、浏览器检查及数据摘要结果见CURRENT_STATUS。本轮流程简化只改前端、文档及核验脚本，后端、schema和依赖不变，真实模型调用0；复用现有AI能力，禁用模型时本地降级。此前题目准入及Notebook交付证据保留于原报告；AI检查、内容人工审核与真实教学效果分别报告。
+
+现有能力包括来源受控RAG、Markdown/LaTeX笔记、资料解析与页码引用、原题整理和普通练习、正式BKT闭环、自评与学习指南。最新已按用户授权扩充原5知识点的正式诊断题库，共享题与个人题范围见[当前状态](docs/CURRENT_STATUS.md)和[准入指南](docs/FORMAL_ADMISSION_GUIDE.md)。AI检查与人工确认分开记录；普通练习不更新BKT。仅本机演示，学习标识不是身份认证。
 
 ## 启动
 

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-25T14:30:55.911597+00:00",
+  "schema": 14,
+  "tables": 50,
+  "changed_tables": [
+    "course_documents",
+    "document_operations"
+  ],
+  "other_48_tables_unchanged": true,
+  "protected_files_unchanged": 187,
+  "backend_unchanged": true,
+  "dependencies_unchanged": true,
+  "entry_assets": [
+    "/assets/index-BIOKs-xS.js",
+    "/assets/runtime-core.esm-bundler-CU-ppsIZ.js",
+    "/assets/index-BgPNDZ7s.css"
+  ],
+  "page_chunks_verified": 13,
+  "changed_files": [
+    "AGENTS.md",
+    "README.md",
+    "docs/CURRENT_STATUS.md",
+    "docs/DEVELOPMENT_PLAN.md",
+    "docs/HUMAN_WORKFLOW_GUIDE.md",
+    "docs/HUMAN_WORKFLOW_REPORT.md",
+    "docs/PDF_ENCODING_COMPATIBILITY_PROPOSAL.md",
+    "docs/PROJECT_CONTEXT.md",
+    "docs/REFACTOR_STAGE1_GUIDE.md",
+    "docs/REFACTOR_STAGE1_REPORT.md",
+    "docs/SOURCE_DELETE_REPORT.md",
+    "frontend/src/__tests__/documents.test.js",
+    "frontend/src/__tests__/human-workflow.test.js",
+    "frontend/src/__tests__/source-deletion.test.js",
+    "frontend/src/features/materials/useCourseDocuments.js",
+    "frontend/src/features/notebooks/NotebookPage.vue",
+    "frontend/src/features/notebooks/NotebookSourceRow.vue",
+    "frontend/src/shared/human-workflow.css"
+  ],
+  "real_model_calls": 0
+}

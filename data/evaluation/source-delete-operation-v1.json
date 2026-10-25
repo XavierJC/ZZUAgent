@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "schema": 14,
+  "tables": 50,
+  "only_requested_document_soft_deleted": true,
+  "changed_tables": [
+    "course_documents",
+    "document_operations"
+  ],
+  "other_48_table_digests_unchanged": true,
+  "original_file_preserved": true,
+  "existing_evidence_files_unchanged": 187,
+  "backend_sources_and_tests_unchanged": true,
+  "added_dependencies": 0,
+  "model_calls": 0,
+  "existing_document_list_no_longer_contains_requested_file": true,
+  "backup": "D:\\ZZUAgent\\data\\local\\source-delete-20261025-222024"
+}

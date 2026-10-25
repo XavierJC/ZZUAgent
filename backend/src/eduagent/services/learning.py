@@ -46,11 +46,18 @@ class LearningService:
         self.repository = repository
         self.parameters = parameters or BKTParameters()
         self.policy = policy or RulePolicy()
-        repository.bind_configuration({
+        configuration = {
             "catalog_fingerprint": catalog.fingerprint,
             "knowledge_version": catalog.knowledge_version, "bank_version": catalog.bank_version,
             "parameters": asdict(self.parameters), "policy": asdict(self.policy),
-        })
+        }
+        from eduagent.services.formal_admission import FormalAdmission
+        self.formal_admission = FormalAdmission(catalog, repository, configuration)
+        self.catalog = self.formal_admission.catalog
+        repository.bind_configuration(self.formal_admission.configuration)
+
+    def catalog_for(self, student_id):
+        return self.formal_admission.for_student(student_id)
 
     def register(self, student_id: str, goals: tuple[str, ...] | None = None) -> None:
         identifier(student_id, "学生标识")
@@ -85,13 +92,30 @@ class LearningService:
         with self.repository.transaction():
             student = self._student(student_id)
             existing = self.repository.decision_at(student_id, student["revision"])
-            if existing:
+            if existing and not (existing.stop_reason == 'insufficient_questions' and self.formal_admission.record
+                                 and self.catalog_for(student_id).select(existing.knowledge_id, exclude=self.repository.answered_questions(student_id))):
                 return existing
             decision = self.policy.decide(
                 decision_id=str(uuid4()), student_id=student_id, revision=student["revision"],
                 goals=tuple(json.loads(student["goals_json"])), states=self.status(student_id),
-                answered=self.repository.answered_questions(student_id), catalog=self.catalog,
+                answered=self.repository.answered_questions(student_id), catalog=self.catalog_for(student_id),
             )
+            if self.formal_admission.record:
+                decision = replace(decision, evidence=dict(decision.evidence, bank_version=self.catalog.bank_version,
+                    admission_version='ai-admission-v1'))
+            if existing:
+                # Only an explicit next command resumes a previously exhausted
+                # bank. Preserve the old terminal snapshot before replacing the
+                # ungraded decision at this revision. Reads never do this.
+                self.repository.connection.execute('INSERT INTO metadata VALUES (?,?)',
+                    ('formal-resumed:'+existing.decision_id, json.dumps(asdict(existing), ensure_ascii=False)))
+                # Keep any teaching-session link to the original terminal ID.
+                decision = replace(decision, decision_id=existing.decision_id)
+                self.repository.connection.execute('UPDATE decisions SET payload_json=? WHERE id=?',
+                    (json.dumps(asdict(decision), ensure_ascii=False), existing.decision_id))
+                self.repository.connection.execute('UPDATE teaching_decisions SET question_json=? WHERE decision_id=?',
+                    (json.dumps(decision.question, ensure_ascii=False), existing.decision_id))
+                return decision
             self.repository.save_decision(decision, now())
             return decision
 
@@ -125,7 +149,11 @@ class LearningService:
                 raise SubmissionConflict("题目分配已过期或已经提交，不能再次更新")
             if decision.question is None:
                 raise SubmissionConflict("该决策没有可提交的题目")
-            question = self.catalog.questions[decision.question["id"]]
+            question = self.catalog_for(student_id).questions.get(decision.question["id"])
+            if question is None:
+                raise SubmissionConflict('题目来源或版本已变化，不能按当前题库评分')
+            if any(decision.question.get(k) != question.public_view().get(k) for k in ('id','version','knowledge_id','stem','options')):
+                raise SubmissionConflict('题目版本与原分配不一致')
             correct = question.grade(selected)
             state = self.status(student_id)[question.knowledge_id]
             update = update_bkt(state.probability, correct, self.parameters)
@@ -135,7 +163,7 @@ class LearningService:
                 knowledge_id=question.knowledge_id, selected_answer=selected,
                 correct_answer=question.answer, correct=correct, explanation=question.explanation,
                 prior=update.prior, posterior=update.posterior, next_mastery=update.next_mastery,
-                bank_version=self.catalog.bank_version, parameter_version=self.parameters.version,
+                bank_version=decision.evidence.get('bank_version', self.formal_admission.base.bank_version), parameter_version=self.parameters.version,
                 parameters=asdict(self.parameters), created_at=now(),
             )
             self.repository.record_attempt(result, state.attempts)

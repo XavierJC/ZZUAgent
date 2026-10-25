@@ -15,6 +15,7 @@ defineEmits(['navigate','explain'])
               <h2>当前课程与下一步</h2><p v-if="flow.error" class="alert alert-error" role="alert">{{ flow.error }}</p><p v-if="flow.notice" role="status">{{ flow.notice }}</p>
               <label for="learning-release">已发布课程版本</label><select id="learning-release" v-model="flow.selectedRelease"><option v-for="r in flow.releases" :key="r.id" :value="r.id" :disabled="!r.usable">{{ r.title }} · v{{ r.release_version }} · {{ r.kind==='demo'?'工程演示':'已审核内容' }}</option></select>
               <p v-if="flow.data?.release">{{ flow.data.release.review_warning }}</p>
+              <p v-if="flow.data?.assessment_bank?.ai_checked_count">当前可诊断 {{ flow.data.assessment_bank.question_count }} 题（课程题 {{ flow.data.assessment_bank.shared_count }}，本学习标识个人题 {{ flow.data.assessment_bank.personal_count }}）。已做 AI 检查；提交正式作答才更新掌握度，普通练习不更新。</p>
               <button class="button secondary" :disabled="Boolean(flow.busy || flow.pending || w.pending || flow.data?.decision?.question)" @click="flow.begin()">{{ flow.session ? '明确开始所选版本的新会话' : '进入课程并绑定学习目标' }}</button>
               <template v-if="flow.session"><p>目标：{{ w.snapshot.goals.map(w.topicName).join('、') }}</p><p>当前步骤：{{ {goals:'目标已保存，等待诊断',diagnosis:'正式诊断',analysis:'评分后学情分析',explanation:'资料讲解',verification:'正式复测'}[flow.session.stage] }}</p><p v-if="!flow.data.has_objective_evidence">待诊断：尚无客观答题证据。BKT先验不代表薄弱点结论。</p><p>{{ flow.data.next_task.reason }}</p>
                 <p v-if="flow.data.decision_origin?.origin==='legacy_unbound'" class="small muted">当前分配来自旧流程，原发布版本未记录，不补认新版本。</p>

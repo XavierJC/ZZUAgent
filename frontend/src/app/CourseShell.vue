@@ -6,6 +6,7 @@ import ProductDialog from '../shared/ProductDialog.vue'
 import Icon from '../components/Icon.vue'
 import '../product.css'
 import '../shared/academic.css'
+import '../shared/human-workflow.css'
 const props = defineProps({ space: Object })
 const menuOpen = ref(false), collapsed = ref(false), main = ref(null)
 watch(() => props.space.tab, () => { menuOpen.value = false })

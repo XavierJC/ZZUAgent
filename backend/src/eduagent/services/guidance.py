@@ -23,7 +23,7 @@ class GuidanceService:
         learner = self.learning._student(student)
         import json
         goals = json.loads(learner['goals_json'])
-        catalog = self.learning.catalog
+        catalog = self.learning.catalog_for(student)
         ordered = list(catalog.expand_goals(goals))
         states = self.learning.status(student)
         latest = self.reports.latest(student, course_id)
@@ -40,7 +40,7 @@ class GuidanceService:
                 objective=dict(has_evidence=state.attempts > 0, probability=state.probability if state.attempts else None,
                     prior_probability=self.learning.parameters.initial, attempts=state.attempts, last_correct=state.last_correct,
                     meets_progress_condition=state.attempts > 0 and state.probability >= self.learning.policy.threshold and state.last_correct is True),
-                available_questions=len(catalog.select(key, exclude=answered)),
+                available_questions=len(catalog.select(key, exclude=answered, count=len(catalog.questions))),
                 round_limit_reached=learner['revision'] >= self.learning.policy.max_rounds))
         recommendations = analyze(items, ordered, goals)
         result = dict(course_id=course_id, learning_revision=learner['revision'], assessment_revision=self.reports.revision(student, course_id),
