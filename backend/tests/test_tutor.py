@@ -149,15 +149,15 @@ def test_new_table_migrates_v1_without_losing_history(catalog, tmp_path):
         receipt = service.submit("existing-student", decision.decision_id, "B", "historical-answer")
         expected = service.snapshot("existing-student")
         # Strip later extensions from this temporary fixture to reproduce v1.
-        from eduagent.storage.migrations import DOCUMENT_TABLES, ARCHITECTURE_TABLES, BANK_TABLES, EXTRACTION_TABLES, RELEASE_TABLES, TEACHER_TABLES
-        for table in reversed(DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES):
+        from eduagent.storage.migrations import DOCUMENT_TABLES, ARCHITECTURE_TABLES, BANK_TABLES, EXTRACTION_TABLES, RELEASE_TABLES, TEACHER_TABLES, NOTEBOOK_TABLES
+        for table in reversed(DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES + NOTEBOOK_TABLES):
             repository.connection.execute(f'DROP TABLE {table}')
         for table in ("study_guide_runs", "self_assessment_entries", "self_assessment_batches", "workbench_note_origins", "workbench_runs", "note_chunks", "note_index_state", "note_knowledge_points", "notes"):
             repository.connection.execute(f"DROP TABLE {table}")
         repository.connection.execute("DROP TABLE tutor_runs")
         repository.connection.execute("PRAGMA user_version=1")
     with SQLiteRepository(path) as repository:
-        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 13
+        assert repository.connection.execute("PRAGMA user_version").fetchone()[0] == 14
         restored = LearningService(catalog, repository)
         assert restored.snapshot("existing-student") == expected
         assert repository.attempt("historical-answer") == receipt

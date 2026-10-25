@@ -13,6 +13,7 @@ frontend/dist-phase4b2/
 .env.*
 !.env.example
 data/local/
+data/reference-code/
 *.sqlite3
 *.sqlite3-journal
 *.sqlite3-wal

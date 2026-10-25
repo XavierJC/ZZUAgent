@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "scope": "isolated synthetic browser data",
+  "verified_at": "2026-10-25T01:30:43.907845+00:00",
+  "checks": [
+    "Default desktop home and existing notebook cards restore after process restart",
+    "Notebook question and citation history restore without sending a new request",
+    "Private note remains unchecked; course source selection retained",
+    "Console inspection returned no error or warning entries",
+    "Desktop home screenshot recorded at 1280px; no horizontal overflow"
+  ],
+  "viewport": 1280,
+  "real_model_calls": 0,
+  "production_test_writes": 0,
+  "earlier_responsive_widths": [
+    1600,
+    1280,
+    900,
+    390
+  ],
+  "screenshots": [
+    "notebook-rebuild-home.png",
+    "notebook-rebuild-workspace.png",
+    "notebook-rebuild-practice.png",
+    "notebook-rebuild-narrow.png"
+  ]
+}

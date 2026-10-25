@@ -5,6 +5,7 @@ import { authoringApi } from './features/authoring/api.js'
 import { practiceApi } from './features/practice/api.js'
 import { workbenchApi } from './features/chat/api.js'
 import { notesApi } from './features/notes/api.js'
+import { notebooksApi } from './features/notebooks/api.js'
 export { ApiError } from './shared/http.js'
 
 // Preserve the public client contract; each feature owns its endpoints.
@@ -15,6 +16,7 @@ export function createApi(fetcher = (...args) => fetch(...args)) {
     ...learningApi(request, studentPath), ...materialsApi(request, studentPath),
     ...authoringApi(request, studentPath), ...practiceApi(request, studentPath),
     ...workbenchApi(request, studentPath), ...notesApi(request, studentPath),
+    ...notebooksApi(request, studentPath),
   }
 }
 export const api = createApi()

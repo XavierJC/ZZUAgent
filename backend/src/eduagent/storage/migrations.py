@@ -14,8 +14,9 @@ from eduagent.storage.extraction_schema import EXTRACTION, EXTRACTION_TABLES
 
 from eduagent.storage.course_release_schema import RELEASES, RELEASE_TABLES
 from eduagent.storage.teaching_source_schema import TEACHER, TEACHER_TABLES
+from eduagent.storage.notebook_schema import NOTEBOOKS, NOTEBOOK_TABLES
 
-SCHEMA_VERSION = 13
+SCHEMA_VERSION = 14
 FACT_TABLES = ("metadata", "students", "mastery", "decisions", "attempts", "tutor_runs")
 NOTE_TABLES = ("notes", "note_knowledge_points", "note_index_state")
 WORKBENCH_TABLES = ('workbench_runs', 'workbench_note_origins')
@@ -145,7 +146,7 @@ def preserved_snapshot(connection: sqlite3.Connection, columns: dict | None = No
     if columns is None:
         names = table_names(connection)
         columns = {name: [row[1] for row in connection.execute(f'PRAGMA table_info("{name}")')]
-                   for name in FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES if name in names}
+                   for name in FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES + NOTEBOOK_TABLES if name in names}
     result = {}
     for name, fields in columns.items():
         projection = ','.join('"' + field.replace('"', '""') + '"' for field in fields)
@@ -178,8 +179,8 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
         raise ValueError(f"不支持的数据库版本: {version}")
     tables = table_names(connection)
     if version == SCHEMA_VERSION:
-        if not set(FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES) <= tables:
-            raise ValueError("schema 13 数据表不完整，拒绝自动重建")
+        if not set(FACT_TABLES + NOTE_TABLES + ('note_chunks',) + WORKBENCH_TABLES + STUDY_TABLES + DOCUMENT_TABLES + ARCHITECTURE_TABLES + BANK_TABLES + EXTRACTION_TABLES + RELEASE_TABLES + TEACHER_TABLES + NOTEBOOK_TABLES) <= tables:
+            raise ValueError("schema 14 数据表不完整，拒绝自动重建")
         return {"from_version": SCHEMA_VERSION, "to_version": SCHEMA_VERSION, "backup": None, "changed": False}
     if version == 0 and tables:
         raise ValueError("未版本化的非空数据库不能自动迁移")
@@ -250,6 +251,8 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
             connection.execute(statement)
         for statement in TEACHER if version < 12 else ():
             connection.execute(statement)
+        for statement in NOTEBOOKS if version < 14 else ():
+            connection.execute(statement)
         after = preserved_snapshot(connection, columns)[0]
         if any(after.get(name) != value for name, value in before.items()):
             raise ValueError("原学习事实校验失败，迁移已回滚")
@@ -260,7 +263,7 @@ def migrate(connection: sqlite3.Connection, path: str | Path) -> dict:
         # Contract-only v13: existing JSON stores may now hold unverified
         # uploaded_document sources and automatic ordinary-practice provenance.
         # Old v12 code must refuse this database rather than misread receipts.
-        connection.execute("PRAGMA user_version=13")
+        connection.execute("PRAGMA user_version=14")
         connection.execute("COMMIT")
     except BaseException:
         connection.execute("ROLLBACK")

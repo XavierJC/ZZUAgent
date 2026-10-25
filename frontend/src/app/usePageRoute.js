@@ -1,10 +1,10 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const pages = new Set(['learn', 'study', 'materials', 'bank', 'notes', 'history', 'insights', 'builder', 'architecture', 'publish', 'resources', 'practice'])
-export function usePageRoute(before = () => true) {
+const pages = new Set(['notebooks', 'notebook', 'learn', 'study', 'materials', 'bank', 'notes', 'history', 'insights', 'builder', 'architecture', 'publish', 'resources', 'practice'])
+export function usePageRoute(before = () => true, home = 'study') {
   function read() {
     const [page, query = ''] = location.hash.replace(/^#\/?/, '').split('?')
-    return { page: pages.has(page) ? page : 'study', params: Object.fromEntries(new URLSearchParams(query)) }
+    return { page: pages.has(page) ? page : home, params: Object.fromEntries(new URLSearchParams(query)) }
   }
   const route = ref(read())
   function go(page, params = {}, replace = false) {

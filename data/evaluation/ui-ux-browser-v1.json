@@ -1,0 +1,352 @@
+{
+  "date": "2026-10-25",
+  "time_zone": "Asia/Shanghai",
+  "actor": "assistant_browser",
+  "fixture": "data/local/ui-browser-v1",
+  "provider_enabled": false,
+  "real_model_calls": 0,
+  "layout_combinations": 36,
+  "viewports": [
+    {
+      "page": "home",
+      "requested": 1600,
+      "clientWidth": 1585,
+      "height": 1000,
+      "scrollWidth": 1585,
+      "width": 1600
+    },
+    {
+      "page": "chat",
+      "requested": 1600,
+      "clientWidth": 1585,
+      "height": 1000,
+      "scrollWidth": 1585,
+      "width": 1600
+    },
+    {
+      "page": "practice",
+      "requested": 1600,
+      "clientWidth": 1585,
+      "height": 1000,
+      "scrollWidth": 1585,
+      "width": 1600
+    },
+    {
+      "page": "notes",
+      "requested": 1600,
+      "clientWidth": 1585,
+      "height": 1000,
+      "scrollWidth": 1585,
+      "width": 1600
+    },
+    {
+      "page": "insights",
+      "requested": 1600,
+      "clientWidth": 1585,
+      "height": 1000,
+      "scrollWidth": 1585,
+      "width": 1600
+    },
+    {
+      "page": "materials",
+      "requested": 1600,
+      "clientWidth": 1585,
+      "height": 1000,
+      "scrollWidth": 1585,
+      "width": 1600
+    },
+    {
+      "page": "bank",
+      "requested": 1600,
+      "clientWidth": 1585,
+      "height": 1000,
+      "scrollWidth": 1585,
+      "width": 1600
+    },
+    {
+      "page": "architecture",
+      "requested": 1600,
+      "clientWidth": 1600,
+      "height": 1000,
+      "scrollWidth": 1600,
+      "width": 1600
+    },
+    {
+      "page": "publish",
+      "requested": 1600,
+      "clientWidth": 1600,
+      "height": 1000,
+      "scrollWidth": 1600,
+      "width": 1600
+    },
+    {
+      "page": "home",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "chat",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "practice",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "notes",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "insights",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "materials",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "bank",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "architecture",
+      "requested": 1280,
+      "clientWidth": 1280,
+      "height": 900,
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    {
+      "page": "publish",
+      "requested": 1280,
+      "clientWidth": 1265,
+      "height": 900,
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "page": "home",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "chat",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "practice",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "notes",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "insights",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "materials",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "bank",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "architecture",
+      "requested": 768,
+      "clientWidth": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "width": 768
+    },
+    {
+      "page": "publish",
+      "requested": 768,
+      "clientWidth": 753,
+      "height": 1024,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "page": "home",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "chat",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "practice",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "notes",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "insights",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "materials",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "bank",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "architecture",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    },
+    {
+      "page": "publish",
+      "requested": 375,
+      "clientWidth": 360,
+      "height": 812,
+      "scrollWidth": 360,
+      "width": 375
+    }
+  ],
+  "checks": {
+    "stable_question_deep_link": true,
+    "ordinary_answer_counted_once": true,
+    "unsent_response_restored_after_question_switch_and_reload": true,
+    "pdf_local_citation_page": 3,
+    "pdf_original_version_and_page_fragment": true,
+    "pdf_original_image_loaded": true,
+    "notebook_task_restored_after_reload": true,
+    "note_formula_table_code_preview": true,
+    "note_draft_retained_and_saved": true,
+    "modal_keyboard_and_focus_return": true,
+    "mobile_all_learning_tools_reachable": true,
+    "desktop_sidebar_collapses": true,
+    "phone_creation_dialog_focus_and_escape": true,
+    "phone_creation_dialog_within_viewport": true,
+    "creation_focus_prefers_title_input": true
+  },
+  "limitations": [
+    "Synthetic content only",
+    "No real-device or screen-reader audit",
+    "No paid-model behavior or content review",
+    "Old tab needed reload after rebuilt chunk names changed"
+  ],
+  "overlay_checks": [
+    {
+      "dialogLeft": 16,
+      "dialogRight": 359.3333435058594,
+      "dialogWidth": 343.3333435058594,
+      "focused": "notebook-title",
+      "viewport": 375
+    },
+    {
+      "dialogLeft": 129,
+      "dialogRight": 639,
+      "dialogWidth": 510,
+      "focused": "notebook-title",
+      "viewport": 768
+    },
+    {
+      "dialogLeft": 385,
+      "dialogRight": 895,
+      "dialogWidth": 510,
+      "focused": "notebook-title",
+      "viewport": 1280
+    },
+    {
+      "dialogLeft": 545,
+      "dialogRight": 1055,
+      "dialogWidth": 510,
+      "focused": "notebook-title",
+      "viewport": 1600
+    }
+  ]
+}

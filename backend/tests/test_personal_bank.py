@@ -189,7 +189,7 @@ def test_schema8_migration_rollback_and_all_27_tables(tmp_path,catalog,monkeypat
     path=tmp_path/'old.sqlite3'
     with SQLiteRepository(path) as repo:
         LearningService(catalog,repo).register('old')
-        for table in reversed(migrations.BANK_TABLES + migrations.EXTRACTION_TABLES + migrations.RELEASE_TABLES + migrations.TEACHER_TABLES):repo.connection.execute('DROP TABLE '+table)
+        for table in reversed(migrations.BANK_TABLES + migrations.EXTRACTION_TABLES + migrations.RELEASE_TABLES + migrations.TEACHER_TABLES + migrations.NOTEBOOK_TABLES):repo.connection.execute('DROP TABLE '+table)
         repo.connection.execute('PRAGMA user_version=8');before,columns=migrations.preserved_snapshot(repo.connection)
     ddl=migrations.BANK;monkeypatch.setattr(migrations,'BANK',(*ddl[:1],'INVALID SQL'))
     with pytest.raises(sqlite3.Error):SQLiteRepository(path)
@@ -197,7 +197,7 @@ def test_schema8_migration_rollback_and_all_27_tables(tmp_path,catalog,monkeypat
         assert db.execute('pragma user_version').fetchone()[0]==8 and migrations.preserved_snapshot(db)[0]==before
     monkeypatch.setattr(migrations,'BANK',ddl)
     with SQLiteRepository(path) as repo:
-        assert repo.migration_report['to_version']==13 and len(before)==27
+        assert repo.migration_report['to_version']==14 and len(before)==27
         assert migrations.preserved_snapshot(repo.connection,columns)[0]==before
         assert repo.connection.execute('pragma foreign_keys').fetchone()[0]==1
         assert not repo.connection.execute('pragma foreign_key_check').fetchall()

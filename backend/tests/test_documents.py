@@ -238,7 +238,7 @@ def test_schema6_explicit_upgrade_and_backup_preserve_all_fifteen_tables(tmp_pat
     path = tmp_path / 'v6.sqlite3'
     with SQLiteRepository(path) as repo:
         LearningService(catalog, repo).register('old')
-        for table in reversed(migrations.DOCUMENT_TABLES + migrations.ARCHITECTURE_TABLES + migrations.BANK_TABLES + migrations.EXTRACTION_TABLES + migrations.RELEASE_TABLES + migrations.TEACHER_TABLES): repo.connection.execute('DROP TABLE '+table)
+        for table in reversed(migrations.DOCUMENT_TABLES + migrations.ARCHITECTURE_TABLES + migrations.BANK_TABLES + migrations.EXTRACTION_TABLES + migrations.RELEASE_TABLES + migrations.TEACHER_TABLES + migrations.NOTEBOOK_TABLES): repo.connection.execute('DROP TABLE '+table)
         repo.connection.execute('PRAGMA user_version=6')
         before, columns = migrations.preserved_snapshot(repo.connection)
     assert len(before) == 15
@@ -252,7 +252,7 @@ def test_schema6_explicit_upgrade_and_backup_preserve_all_fifteen_tables(tmp_pat
     monkeypatch.setattr(migrations, 'DOCUMENTS', original)
     with SQLiteRepository(path) as repo:
         report = repo.migration_report
-        assert report['to_version'] == 13 and migrations.preserved_snapshot(repo.connection, columns)[0] == before
+        assert report['to_version'] == 14 and migrations.preserved_snapshot(repo.connection, columns)[0] == before
         assert repo.connection.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
         assert not repo.connection.execute('PRAGMA foreign_key_check').fetchall()
     with sqlite3.connect(report['backup']) as backup:

@@ -4,6 +4,7 @@ import { useStudyWorkbench } from '../features/chat/useStudyWorkbench.js'
 import { useCourseDocuments } from '../features/materials/useCourseDocuments.js'
 import { useTeachingLinks } from '../features/materials/useTeachingLinks.js'
 import { useResourceLibrary } from '../features/materials/useResourceLibrary.js'
+import { useNotebooks } from '../features/notebooks/useNotebooks.js'
 import { usePersonalBank } from '../features/practice/usePersonalBank.js'
 import { useSelfAssessments } from '../features/learning/useSelfAssessments.js'
 import { useStudyGuidance } from '../features/learning/useStudyGuidance.js'
@@ -13,6 +14,10 @@ import { useKnowledgeArchitecture } from '../features/authoring/useKnowledgeArch
 
 const pendingDraft = s => Boolean(s.dirty || s.pending)
 export const featureDefinitions = {
+  notebooks: {
+    create: c => useNotebooks(c.client, c.student),
+    needsSave: s => s.hasUnsaved, hasUnsaved: s => s.hasUnsaved,
+  },
   notes: {
     create: c => useNotesWorkspace(c.client, c.student, c.notesStore),
     needsSave: pendingDraft, hasUnsaved: pendingDraft,
@@ -69,6 +74,8 @@ export const featureDefinitions = {
 // Reading and guide generation use different capabilities. Entering progress
 // does not create a chat or fetch private note bodies and chat history.
 export const pageFeatures = {
+  notebooks: ['notebooks'],
+  notebook: ['notebooks', 'documents'],
   study: ['chat', 'documents', 'assessment'],
   practice: ['practice', 'documents'],
   insights: ['assessment', 'guides'],

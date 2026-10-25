@@ -113,8 +113,8 @@ export function useNotesWorkspace(api, student, store = noteStore()) {
     draft.value = { id: crypto.randomUUID(), title: '未命名笔记', content_md: '', knowledge_point_ids: [], revision: 0 }
     baseline.value = null; pending.value = null; conflict.value = false; error.value = ''; notice.value = ''; persist()
   }
-  const newNote = () => navigate(newDirect)
-  const open = (id) => navigate(() => openDirect(id))
+  const newNote = (after) => navigate(() => { newDirect(); if(typeof after==='function')after(draft.value) })
+  const open = (id, after) => navigate(async () => { await openDirect(id); if(draft.value?.id===id && typeof after==='function')after(draft.value) })
   function finishSaved(note, operation) {
     const unchanged = same(draft.value, operation.snapshot)
     baseline.value = clone(note); pending.value = null; conflict.value = false

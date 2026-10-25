@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "schema": 14,
+  "tables": 50,
+  "original_45_table_digests_unchanged": true,
+  "original_resource_and_evaluation_fingerprints_preserved": 141,
+  "integrity": true,
+  "foreign_keys": true,
+  "entry_assets": [
+    "/assets/index-CUCDdOGL.js",
+    "/assets/index-Cgd6sprv.css"
+  ],
+  "entry_js_bytes": 193511,
+  "changed_files": 68,
+  "no_deleted_source_files": true,
+  "real_model_calls": 0,
+  "backup": "D:\\ZZUAgent\\data\\local\\notebook-rebuild-20261024-213652",
+  "verified_at": "2026-10-25T01:30:21.101343+00:00"
+}

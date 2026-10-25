@@ -6,6 +6,8 @@ const errorComponent = { render: () => h('section', { role: 'alert', class: 'ale
 const page = loader => defineAsyncComponent({ loader, loadingComponent, errorComponent, delay: 0, timeout: 20000 })
 // A page chunk loads only when visited. No model or mutation is retried by a loader.
 const pages = {
+  notebooks: page(() => import('../features/notebooks/NotebooksPage.vue')),
+  notebook: page(() => import('../features/notebooks/NotebookPage.vue')),
   study: page(() => import('../features/chat/StudyPage.vue')),
   practice: page(() => import('../features/practice/PracticePage.vue')),
   insights: page(() => import('../features/learning/InsightsPage.vue')),

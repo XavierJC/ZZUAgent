@@ -1,0 +1,290 @@
+[
+  {
+    "page": "home",
+    "requested": 1600,
+    "clientWidth": 1585,
+    "height": 1000,
+    "scrollWidth": 1585,
+    "width": 1600
+  },
+  {
+    "page": "chat",
+    "requested": 1600,
+    "clientWidth": 1585,
+    "height": 1000,
+    "scrollWidth": 1585,
+    "width": 1600
+  },
+  {
+    "page": "practice",
+    "requested": 1600,
+    "clientWidth": 1585,
+    "height": 1000,
+    "scrollWidth": 1585,
+    "width": 1600
+  },
+  {
+    "page": "notes",
+    "requested": 1600,
+    "clientWidth": 1585,
+    "height": 1000,
+    "scrollWidth": 1585,
+    "width": 1600
+  },
+  {
+    "page": "insights",
+    "requested": 1600,
+    "clientWidth": 1585,
+    "height": 1000,
+    "scrollWidth": 1585,
+    "width": 1600
+  },
+  {
+    "page": "materials",
+    "requested": 1600,
+    "clientWidth": 1585,
+    "height": 1000,
+    "scrollWidth": 1585,
+    "width": 1600
+  },
+  {
+    "page": "bank",
+    "requested": 1600,
+    "clientWidth": 1585,
+    "height": 1000,
+    "scrollWidth": 1585,
+    "width": 1600
+  },
+  {
+    "page": "architecture",
+    "requested": 1600,
+    "clientWidth": 1600,
+    "height": 1000,
+    "scrollWidth": 1600,
+    "width": 1600
+  },
+  {
+    "page": "publish",
+    "requested": 1600,
+    "clientWidth": 1600,
+    "height": 1000,
+    "scrollWidth": 1600,
+    "width": 1600
+  },
+  {
+    "page": "home",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "chat",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "practice",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "notes",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "insights",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "materials",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "bank",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "architecture",
+    "requested": 1280,
+    "clientWidth": 1280,
+    "height": 900,
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "page": "publish",
+    "requested": 1280,
+    "clientWidth": 1265,
+    "height": 900,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "page": "home",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "chat",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "practice",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "notes",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "insights",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "materials",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "bank",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "architecture",
+    "requested": 768,
+    "clientWidth": 768,
+    "height": 1024,
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "page": "publish",
+    "requested": 768,
+    "clientWidth": 753,
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "home",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "chat",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "practice",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "notes",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "insights",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "materials",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "bank",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "architecture",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "page": "publish",
+    "requested": 375,
+    "clientWidth": 360,
+    "height": 812,
+    "scrollWidth": 360,
+    "width": 375
+  }
+]

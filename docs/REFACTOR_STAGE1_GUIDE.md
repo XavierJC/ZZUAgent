@@ -1,5 +1,9 @@
 # 重构第一阶段：课程空间与模块边界
 
+> 2026-10-25后续UI/UX交付已统一这些模块的视觉和导航；新版使用、截图与限制见[UI/UX报告](UI_UX_REFACTOR_REPORT.md)和[设计系统](FRONTEND_DESIGN_SYSTEM.md)。本指南原模块/API约束继续保留。
+
+> 历史阶段指南。用户随后批准的笔记本与习题产品重建已交付，当前入口、schema及使用方式见[CURRENT_STATUS](CURRENT_STATUS.md)和[Notebook指南](NOTEBOOK_REBUILD_GUIDE.md)。以下保留原阶段契约，不代表当前版本编号。
+
 交付日期：2026-10-24（Asia/Shanghai）。[当前状态](CURRENT_STATUS.md) · [验收报告](REFACTOR_STAGE1_REPORT.md)。
 
 ## 使用

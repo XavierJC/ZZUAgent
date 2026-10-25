@@ -18,6 +18,7 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
   const conflict = ref(false)
   const owner = computed(() => student.value)
   let epoch = 0, restored = false, savedSelection = null, draftRevision = null
+  let loading = null
   const cacheKey = () => `eduagent.personal-bank.v1.${student.value}`
   const request = (path, method = 'GET', body, owner = student.value) => client.bank(owner, path, method, body)
   function persist() {
@@ -25,7 +26,7 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
     if (dirty.value) drafts.value[current.value?.id || 'new'] = { payload: copy(editor.value), revision: conflict.value ? draftRevision : current.value?.revision || null, baseline: baseline.value }
     else delete drafts.value[current.value?.id || 'new']
     try {
-      storage.setItem(cacheKey(), JSON.stringify({ drafts: drafts.value, current: current.value?.id, resource: resource.value?.resource_id, session: session.value?.id, selected: selected.value, pending: pending.value, paste: paste.value, section: section.value }))
+      storage.setItem(cacheKey(), JSON.stringify({ drafts: drafts.value, current: current.value?.id, resource: resource.value?.resource_id, session: session.value?.id, selected: selected.value, needsReview:needsReview.value, pending: pending.value, paste: paste.value, section: section.value }))
       return true
     } catch { error.value = '无法保留本机草稿和请求编号，请清理存储空间后重试。'; return false }
   }
@@ -33,7 +34,7 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
   watch([runId, ordinals, includeImages, paste], () => { extractionConsent.value = false }, { flush: 'sync' })
   watch(editor, () => { reviewed.value = false; confirmAnswer.value = false }, { deep: true, flush: 'sync' })
   watch(student, () => {
-    epoch++; autoImport.value=false; restored = false; resources.value = []; questions.value = []; knowledge.value = []; current.value = null
+    epoch++; loading=null; autoImport.value=false; restored = false; resources.value = []; questions.value = []; knowledge.value = []; current.value = null
     editor.value = empty(); baseline.value = JSON.stringify(editor.value); resource.value = null; session.value = null; sessions.value = []
     sourceUnits.value = []; parseRuns.value = []; drafts.value = {}; pending.value = null; busy.value = ''; error.value = ''; notice.value = ''; paste.value = ''; selected.value = ''; tasks.value = []; extractionConsent.value = false; extractionCapabilities.value = null; needsReview.value = false; conflict.value = false; savedSelection = null
   }, { flush: 'sync' })
@@ -45,7 +46,17 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
     if (token !== epoch) return
     resources.value = catalogue.items; knowledge.value = catalogue.knowledge; questions.value = bank.items; sessions.value = history.items
   }
-  async function load() {
+  function load() {
+    // Route restoration and page mounting must await the same read. Returning
+    // early while a read is busy can drop a stable question deep link.
+    if (loading?.epoch === epoch) return loading.promise
+    if (!student.value || busy.value) return Promise.resolve()
+    const record = { epoch, promise:null }
+    loading = record
+    record.promise = loadReads().finally(() => { if (loading === record) loading=null })
+    return record.promise
+  }
+  async function loadReads() {
     if (!student.value || busy.value) return
     const token = epoch, owner = student.value; busy.value = 'load'; error.value = ''
     try {
@@ -77,8 +88,9 @@ export function usePersonalBank(client, student, storage = globalThis.localStora
       if (item) await selectResource(item, token)
       const sid = savedSelection?.session || session.value?.id
       if (sid) {
+        const local = savedSelection?.session===sid ? savedSelection : session.value?.id===sid ? {selected:selected.value,needsReview:needsReview.value} : null
         const value = await request(`personal-bank/practice/${sid}`, 'GET', undefined, owner)
-        if (token === epoch) { session.value = value; selected.value = savedSelection?.selected || value.result?.selected_answer || value.draft?.response_text || ''; needsReview.value = value.draft?.needs_review || false }
+        if (token === epoch) { session.value = value; selected.value = value.result?.selected_answer ?? local?.selected ?? value.draft?.response_text ?? ''; needsReview.value = local?.needsReview ?? value.draft?.needs_review ?? false }
       }
       savedSelection = null; persist()
     } catch (e) { if (token === epoch) error.value = e.message }

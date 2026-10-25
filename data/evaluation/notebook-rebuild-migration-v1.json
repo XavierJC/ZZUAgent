@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "from_version": 13,
+  "to_version": 14,
+  "tables_before": 45,
+  "tables_after": 50,
+  "original_table_digests_preserved": true,
+  "backup_verified": true,
+  "integrity_and_foreign_keys": true,
+  "precommit_failure_rollback": true,
+  "old13_accepts_restored": true,
+  "old13_rejects14": true,
+  "rollback_retains_new_data": "D:\\ZZUAgent\\data\\local\\notebook-rebuild-20261024-213652\\migration-0bfb4900\\retained-schema14-with-new-data.sqlite3",
+  "rollback_copy": "D:\\ZZUAgent\\data\\local\\notebook-rebuild-20261024-213652\\migration-0bfb4900\\restored-schema13-copy.sqlite3",
+  "production_writes": 0,
+  "directory": "D:\\ZZUAgent\\data\\local\\notebook-rebuild-20261024-213652\\migration-0bfb4900",
+  "verified_at": "2026-10-24T14:43:12.536953+00:00"
+}

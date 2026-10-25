@@ -1,0 +1,274 @@
+[
+  {
+    "path": "README.md",
+    "change": "modified"
+  },
+  {
+    "path": "backend/src/eduagent/api/app.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/src/eduagent/api/notebooks.py",
+    "change": "added"
+  },
+  {
+    "path": "backend/src/eduagent/services/study_workspace/__init__.py",
+    "change": "added"
+  },
+  {
+    "path": "backend/src/eduagent/services/study_workspace/context.py",
+    "change": "added"
+  },
+  {
+    "path": "backend/src/eduagent/services/study_workspace/notebooks.py",
+    "change": "added"
+  },
+  {
+    "path": "backend/src/eduagent/storage/migrations.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/src/eduagent/storage/notebook_schema.py",
+    "change": "added"
+  },
+  {
+    "path": "backend/src/eduagent/storage/notebooks.py",
+    "change": "added"
+  },
+  {
+    "path": "backend/src/eduagent/storage/sqlite.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_architectures.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_learning_simplification.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_migrations.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_notebooks.py",
+    "change": "added"
+  },
+  {
+    "path": "backend/tests/test_personal_bank.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_personal_migration.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_phase5.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_self_assessments.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_semantic_extraction.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_tutor.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_web.py",
+    "change": "modified"
+  },
+  {
+    "path": "backend/tests/test_workbench.py",
+    "change": "modified"
+  },
+  {
+    "path": "docs/CURRENT_STATUS.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/DEVELOPMENT_PLAN.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/NOTEBOOK_REBUILD_DESIGN.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/NOTEBOOK_REBUILD_GUIDE.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/NOTEBOOK_REBUILD_PROGRESS.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/NOTEBOOK_REBUILD_REPORT.md",
+    "change": "added"
+  },
+  {
+    "path": "docs/PROJECT_CONTEXT.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/REFACTOR_STAGE1_GUIDE.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/REFACTOR_STAGE1_REPORT.md",
+    "change": "modified"
+  },
+  {
+    "path": "docs/THIRD_PARTY_REFERENCES.md",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/App.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/__tests__/notebooks.test.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/api.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/app/CoursePage.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/app/CourseShell.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/app/CourseWelcome.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/app/LegacyShell.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/LegacyWelcome.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/app/courseSpace.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/app/featureDefinitions.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/app/usePageRoute.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/components/Icon.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/components/SourceDrawer.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/features/chat/useStudyWorkbench.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/features/notebooks/NotebookChat.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notebooks/NotebookNotes.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notebooks/NotebookPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notebooks/NotebookSources.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notebooks/NotebooksPage.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notebooks/api.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notebooks/notebook.css",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notebooks/useNotebooks.js",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/notes/useNotesWorkspace.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/features/practice/ExerciseCard.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/ExerciseDesk.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/PracticeFeedback.vue",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/PracticePage.vue",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/features/practice/practice-desk.css",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/features/practice/usePersonalBank.js",
+    "change": "modified"
+  },
+  {
+    "path": "frontend/src/product.css",
+    "change": "added"
+  },
+  {
+    "path": "frontend/src/shared/ProductDialog.vue",
+    "change": "added"
+  },
+  {
+    "path": "scripts/deploy_notebook_database.py",
+    "change": "added"
+  },
+  {
+    "path": "scripts/verify_notebook_deployment.py",
+    "change": "added"
+  },
+  {
+    "path": "scripts/verify_notebook_migration.py",
+    "change": "added"
+  },
+  {
+    "path": "scripts/verify_notebooks.py",
+    "change": "added"
+  }
+]

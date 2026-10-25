@@ -2,15 +2,15 @@
 
 面向高校《机器学习》课程的个性化学习辅助系统，采用BKT知识追踪和受控Agent，服务于郑州大学AI智能体创新应用大赛A2任务。
 
-**读课程资料 → 提问并查看出处 → 练习 → 查看学习进度与下一步建议。**
+**建立学习笔记本 → 添加资料 → 提问并查看出处 → 练习与记录理解。**
 
 ## 当前状态
 
-已交付课程学习空间与前端模块重构第一阶段。[唯一当前状态](docs/CURRENT_STATUS.md) · [重构指南](docs/REFACTOR_STAGE1_GUIDE.md) · [实际验收](docs/REFACTOR_STAGE1_REPORT.md)。
+已交付前端UI/UX全面优化。[唯一当前状态](docs/CURRENT_STATUS.md) · [新版界面、截图与验收](docs/UI_UX_REFACTOR_REPORT.md) · [设计系统](docs/FRONTEND_DESIGN_SYSTEM.md) · [笔记本指南与API](docs/NOTEBOOK_REBUILD_GUIDE.md)。
 
-学生主入口为资料学习、练习、学习进度；笔记与正式学习保留辅助入口，课程构建独立。页面按需加载，模块草稿跨页保留，资料目录独立于题库。
+默认主页显示真实学习目标、待诊断状态和继续学习，再按主题组织笔记本；笔记本内有问答、练习、笔记三个任务，原文按需对照。题库与学习进度保留主入口，手机菜单可访问全部辅助工具。管理采用资料、知识、习题和发布的准备流程。五个项目的参考与代码归属见[开源参考](docs/OPEN_SOURCE_UI_REFERENCES.md)。
 
-本轮615项后端、210项前端、29组隔离HTTP和构建通过，助手完成14组浏览器检查；schema13/45表摘要保持，真实模型0次。入口JS约179kB，大型渲染依赖单独加载；内容精度和真实教学效果仍待验证。
+最新测试、四种尺寸的浏览器检查及数据摘要结果见CURRENT_STATUS。本轮只改前端和验收文档，没有变更后端业务或schema，没有新增依赖或真实付费模型调用。上轮Notebook迁移记录保留于原报告；内容人工审核与真实教学效果仍待验证。
 
 现有能力包括来源受控RAG、Markdown/LaTeX笔记、资料解析与页码引用、原题整理和普通练习、正式BKT闭环、自评与学习指南。正式仍原5知识点/10道演示题，40候选未自动启用；普通练习不更新BKT。仅本机演示，学习标识不是身份认证。
 
@@ -22,7 +22,7 @@
 .\.venv\Scripts\python.exe -m uvicorn eduagent.api.app:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
-打开[课程学习空间](http://127.0.0.1:8000/#/study)，选择新建或恢复学习标识。服务终端需保持运行；若连接被拒绝，先检查服务是否仍在运行。
+打开[学习笔记本](http://127.0.0.1:8000/#/notebooks)，新建或恢复学习标识，再创建学习主题。已有资料可从“添加或管理资料”选择，不需重复上传。服务终端需保持运行；若连接被拒绝，先检查服务是否仍在运行。
 
 修改前端后重新构建：
 
@@ -52,7 +52,7 @@ Set-Location ..
 ## 代码结构
 
 - frontend/src/app：课程布局、路由、模块生命周期与导航协调。
-- frontend/src/features：materials、chat、practice、notes、learning、authoring。
+- frontend/src/features：notebooks、materials、chat、practice、notes、learning、authoring。
 - frontend/src/shared：通用请求能力；现有Markdown与基础组件继续复用。
 - backend/src/eduagent：API、domain、services、storage、documents、retrieval、agent。
 - docs/CURRENT_STATUS.md：当前实际能力；docs/history：旧阶段原件和报告索引。

@@ -12,14 +12,15 @@ export const useCurrentCourseSpace = () => inject(courseSpaceKey)
 
 export function useCourseSpace(props) {
   const client = props.client || defaultApi
+  const modern = typeof client.notebooks === 'function'
   const w = reactive(useWorkspace(client, props.store))
   const flow = reactive(useTeachingWorkspace(client, w))
   const student = computed(() => w.student)
   const registry = createFeatureRegistry({ client, w, flow, student, notesStore: props.notesStore }, featureDefinitions)
-  const { route, go } = usePageRoute(() => registry.persist() && (!flow.pending || flow.persist()))
+  const { route, go } = usePageRoute(() => registry.persist() && (!flow.pending || flow.persist()), modern ? 'notebooks' : 'study')
   const tab = computed(() => route.value.page)
   const isBuilder = computed(() => builderTabs.some(item => item.id === tab.value))
-  const pageTitle = computed(() => [...studentTabs, ...builderTabs, ...auxiliaryTabs].find(i => i.id === tab.value)?.name)
+  const pageTitle = computed(() => tab.value === 'notebooks' ? '学习笔记本' : tab.value === 'notebook' ? registry.peek('notebooks')?.current?.detail.title || '学习笔记本' : [...studentTabs, ...builderTabs, ...auxiliaryTabs].find(i => i.id === tab.value)?.name)
   const goalsText = computed(() => w.snapshot?.goals.map(w.topicName).join('、'))
   const course = computed(() => ({ id: 'machine_learning', title: '机器学习',
     subtitle: flow.data?.release ? `学习版本：${flow.data.release.title}` : '资料 · 问答 · 练习 · 学习进度' }))
@@ -33,7 +34,7 @@ export function useCourseSpace(props) {
     return notes ? notes.navigate(() => go(page, params)) : go(page, params)
   }
   function leaveStudent() {
-    const leave = () => { if (go('study')) w.leave() }
+    const leave = () => { if (go(modern ? 'notebooks' : 'study')) w.leave() }
     const notes = registry.peek('notes')
     return notes ? notes.navigate(leave) : leave()
   }
@@ -42,13 +43,13 @@ export function useCourseSpace(props) {
     await w.start(learnerId.value, goals.value, formMode.value === 'restore', flow.enabled || !formal)
     if (w.active && flow.enabled) {
       await flow.load()
-      if (formMode.value !== 'restore' && flow.releases.some(r => r.id === chosen)) {
+      if ((!modern || formal) && formMode.value !== 'restore' && flow.releases.some(r => r.id === chosen)) {
         flow.selectedRelease = chosen
         await flow.begin()
         if (formal && flow.session) await flow.allocate()
       }
     }
-    if (w.active && !formal) go('study')
+    if (w.active && !formal) go(modern ? 'notebooks' : 'study')
   }
   async function restoreRoute() {
     const serial = ++routeEpoch, owner = w.student, page = tab.value, params = route.value.params
@@ -89,6 +90,12 @@ export function useCourseSpace(props) {
   async function refreshCurrent() {
     const page = tab.value
     if (!w.active) return w.boot()
+    if (page === 'notebooks') return registry.use('notebooks').load()
+    if (page === 'notebook') {
+      const books = registry.use('notebooks')
+      const entry = await books.open(route.value.params.book)
+      return entry?.chat.load()
+    }
     if (['builder', 'publish'].includes(page)) return registry.use('builder').load()
     if (page === 'architecture') return registry.use('architecture').load()
     if (page === 'insights') return Promise.all([registry.use('assessment').load(), registry.use('guides').load()])
@@ -122,7 +129,7 @@ export function useCourseSpace(props) {
   onMounted(flow.publicCourses)
   onMounted(() => window.addEventListener('beforeunload', protectDraft))
   onUnmounted(() => { routeEpoch++; window.removeEventListener('beforeunload', protectDraft); registry.dispose() })
-  return reactive({ client, w, flow, registry, features: registry.states, course, route, tab, isBuilder, pageTitle, goalsText,
+  return reactive({ client, modern, w, flow, registry, features: registry.states, course, route, tab, isBuilder, pageTitle, goalsText,
     replaceRoute: (page, params) => go(page, params, true),
     formMode, learnerId, goals, routeError, start, navigate, leaveStudent, refreshCurrent, explainNext })
 }

@@ -28,6 +28,7 @@ from eduagent.api.notes import notes_router
 from eduagent.api.body_limit import NotesBodyLimit
 from eduagent.api.knowledge import knowledge_router
 from eduagent.api.workbench import workbench_router
+from eduagent.api.notebooks import notebooks_router
 from eduagent.api.self_assessments import self_assessments_router
 from eduagent.api.study_guides import study_guides_router
 from eduagent.api.documents import documents_router
@@ -140,6 +141,7 @@ def create_app(settings: APISettings | None = None, *, document_runner=None, doc
     app.include_router(notes_router(learning_service))
     app.include_router(knowledge_router(learning_service, lambda: course_sources, settings.retrieval_enabled))
     app.include_router(workbench_router(learning_service, lambda: course_sources, settings.retrieval_enabled, settings.agent))
+    app.include_router(notebooks_router(learning_service, settings, lambda: course_sources, teaching_client_factory))
     app.include_router(self_assessments_router(learning_service))
     app.include_router(study_guides_router(learning_service, lambda: course_sources, settings.retrieval_enabled, settings.agent))
     app.include_router(documents_router(document_service, settings))

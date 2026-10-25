@@ -158,5 +158,5 @@ export function useStudyWorkbench(client, student, storage = globalThis.localSto
     finally { if (token === epoch) busy.value = '' }
   }
   return { sources, selected, query, mode, consent, teacherConsent,teachers,chosen, personal, runs, current, busy, error, notice, pendingId,
-    capabilities, drawer, panel, initialized, suggestion, opening, prepare, closePreview, load, toggle, ask, view, open, citation, save, releaseUncertain }
+    capabilities, drawer, panel, initialized, suggestion, opening, prepare, closePreview, load, toggle, ask, view, open, citation, save, persist, releaseUncertain }
 }

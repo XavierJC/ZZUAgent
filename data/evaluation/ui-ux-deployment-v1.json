@@ -1,0 +1,236 @@
+{
+  "passed": true,
+  "schema": 14,
+  "tables": 50,
+  "all_50_table_digests_unchanged": true,
+  "protected_files_unchanged": 151,
+  "backend_sources_and_tests_unchanged": true,
+  "no_added_dependencies": true,
+  "backup": "D:\\ZZUAgent\\data\\local\\ui-refactor-20261025-095938",
+  "changed_files": [
+    {
+      "path": ".gitignore",
+      "change": "modified"
+    },
+    {
+      "path": "README.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/CURRENT_STATUS.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/DEVELOPMENT_PLAN.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/FRONTEND_DESIGN_SYSTEM.md",
+      "change": "added"
+    },
+    {
+      "path": "docs/OPEN_SOURCE_UI_REFERENCES.md",
+      "change": "added"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/REFACTOR_STAGE1_GUIDE.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/REFACTOR_STAGE1_REPORT.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/UI_UX_REFACTOR_REPORT.md",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/notebooks.test.js",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/__tests__/ui-ux.test.js",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/app/AppSidebar.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/app/AuthoringSteps.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/app/CourseShell.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/architecture.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/components/Icon.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/components/PersonalBankWorkspace.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/components/SourceDrawer.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/documents.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/learning/InsightsPage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/materials/resource-library.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/LearningHome.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebookChat.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebookPage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebookSources.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/NotebooksPage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/notebooks/notebook.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/ExerciseDesk.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/QuestionBankPage.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/practice-desk.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/features/practice/usePersonalBank.js",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/notes.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/personal-bank.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/phase5.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/product.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/rendering/markdown.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/shared/EmptyState.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/shared/KnowledgeStatus.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/shared/LearningProgress.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/shared/PageHeader.vue",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/shared/ProductDialog.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/shared/academic.css",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/shared/design-tokens.css",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/shared/useOverlayFocus.js",
+      "change": "added"
+    },
+    {
+      "path": "frontend/src/study-guidance.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/views/LearningInsights.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/views/QuestionBankView.vue",
+      "change": "modified"
+    },
+    {
+      "path": "frontend/src/workbench.css",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/ui_browser_fixture.py",
+      "change": "added"
+    },
+    {
+      "path": "scripts/verify_notebooks.py",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/verify_ui_deployment.py",
+      "change": "added"
+    }
+  ],
+  "entry_assets": [
+    "/assets/index-JDUwY5UX.js",
+    "/assets/runtime-core.esm-bundler-CU-ppsIZ.js",
+    "/assets/index-BaB0XKiD.css"
+  ],
+  "page_chunks_verified": 13,
+  "real_model_calls": 0,
+  "verified_at": "2026-10-25T02:30:21.109725+00:00"
+}

@@ -12,4 +12,4 @@ onMounted(async () => {
   }
 })
 </script>
-<template><LearningInsights :self-workspace="space.features.assessment" :guide-workspace="space.features.guides" :capabilities="capabilities" :goals="space.goalsText" @navigate="space.navigate" /></template>
+<template><LearningInsights :self-workspace="space.features.assessment" :guide-workspace="space.features.guides" :capabilities="capabilities" :goals="space.goalsText" :points="space.w.knowledge" :current="space.flow.data?.next_task?.knowledge_id || space.w.decision?.knowledge_id || space.features.assessment.overview?.recommendations?.[0]?.knowledge_id" @navigate="space.navigate" /></template>

@@ -163,9 +163,11 @@ def test_existing_drafts_explicit_organize_is_idempotent_and_scoped(bank):
 
 def test_contract13_migration_keeps_all_45_tables_and_backup(tmp_path):
     path=tmp_path/'v12.sqlite3'
-    with SQLiteRepository(path) as r:r.connection.execute('PRAGMA user_version=12');before,columns=migrations.preserved_snapshot(r.connection)
+    with SQLiteRepository(path) as r:
+        for table in reversed(migrations.NOTEBOOK_TABLES):r.connection.execute('DROP TABLE '+table)
+        r.connection.execute('PRAGMA user_version=12');before,columns=migrations.preserved_snapshot(r.connection)
     with pytest.raises(ValueError):SQLiteRepository(path,allow_upgrade=False)
     with SQLiteRepository(path) as r:
-        report=r.migration_report;assert report['from_version']==12 and report['to_version']==13
-        assert migrations.preserved_snapshot(r.connection,columns)[0]==before and len(migrations.table_names(r.connection))==45
+        report=r.migration_report;assert report['from_version']==12 and report['to_version']==14
+        assert migrations.preserved_snapshot(r.connection,columns)[0]==before and len(migrations.table_names(r.connection))==50
         with sqlite3.connect(report['backup']) as db:assert db.execute('PRAGMA user_version').fetchone()[0]==12

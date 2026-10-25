@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "groups": 23,
+  "checks": [
+    {
+      "name": "persistent_creation_and_exactly_once_receipt",
+      "passed": true
+    },
+    {
+      "name": "student_scope_and_receipt_isolation",
+      "passed": true
+    },
+    {
+      "name": "unknown_control_fields_and_blank_title_rejected",
+      "passed": true
+    },
+    {
+      "name": "explicit_source_membership_saved",
+      "passed": true
+    },
+    {
+      "name": "empty_and_unselected_sources_never_expand_or_call_model",
+      "passed": true
+    },
+    {
+      "name": "mock_model_uses_only_notebook_selected_evidence",
+      "passed": true
+    },
+    {
+      "name": "duplicate_question_no_second_provider_execution",
+      "passed": true
+    },
+    {
+      "name": "conversation_history_does_not_cross_notebooks",
+      "passed": true
+    },
+    {
+      "name": "source_preview_enforces_same_membership",
+      "passed": true
+    },
+    {
+      "name": "uploaded_pdf_membership_preserves_page_location_and_missing_coverage",
+      "passed": true
+    },
+    {
+      "name": "notebook_uploaded_pdf_rag_cites_only_selected_real_page",
+      "passed": true
+    },
+    {
+      "name": "document_change_and_delete_invalidate_current_scope_keep_history_snapshot",
+      "passed": true
+    },
+    {
+      "name": "answer_saved_once_as_editable_linked_markdown_note",
+      "passed": true
+    },
+    {
+      "name": "private_note_without_turn_permission_has_zero_model_transmission",
+      "passed": true
+    },
+    {
+      "name": "explicit_private_permission_scoped_to_selected_note",
+      "passed": true
+    },
+    {
+      "name": "source_update_blocks_old_current_results_but_retains_snapshot",
+      "passed": true
+    },
+    {
+      "name": "foreign_note_cannot_be_linked",
+      "passed": true
+    },
+    {
+      "name": "questions_are_scoped_and_not_inferred_from_display_names",
+      "passed": true
+    },
+    {
+      "name": "ordinary_session_cannot_be_adopted_by_another_notebook",
+      "passed": true
+    },
+    {
+      "name": "confirmed_ordinary_scoring_without_bkt_update",
+      "passed": true
+    },
+    {
+      "name": "archive_is_read_only_and_keeps_history",
+      "passed": true
+    },
+    {
+      "name": "restart_and_refresh_restore_without_writes_or_model_replay",
+      "passed": true
+    },
+    {
+      "name": "all_formal_learning_bkt_scoring_and_student_revision_unchanged",
+      "passed": true
+    }
+  ],
+  "simulated_model_calls": 2,
+  "real_model_calls": 0,
+  "production_writes": 0,
+  "schema": 14,
+  "tables": 50,
+  "server_starts": 2,
+  "directory": "D:\\ZZUAgent\\data\\local\\notebook-http-f21c8888",
+  "verified_at": "2026-10-25T02:11:41.172122+00:00"
+}

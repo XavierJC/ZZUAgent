@@ -1,0 +1,214 @@
+{
+  "passed": true,
+  "from_version": 13,
+  "to_version": 14,
+  "tables_before": 45,
+  "tables_after": 50,
+  "backup": "D:\\ZZUAgent\\data\\local\\eduagent.before-v13-0fc9ae3d034e.sqlite3",
+  "original_45_table_summaries_unchanged": true,
+  "all_table_summaries": {
+    "metadata": {
+      "rows": 1,
+      "sha256": "09772bc6ddac5d0c00bd425ec5cd6f2ab3800be4f14db65577c6dd90d4f0fb5b"
+    },
+    "students": {
+      "rows": 13,
+      "sha256": "05dd75f248d15b7200f1c2fcb28f376539e231af20a3fb915ea7e5aa6e79c2a1"
+    },
+    "mastery": {
+      "rows": 14,
+      "sha256": "5337c1f100784eba816984f4be4910db1d93e096dc0d1ee2c6d60ff3d159599a"
+    },
+    "decisions": {
+      "rows": 37,
+      "sha256": "8f5c7624781388629963f3cbd26d51a428ec0c2aa0f1704616a28cf52f5d7d98"
+    },
+    "attempts": {
+      "rows": 27,
+      "sha256": "3589bee3e6da21bb93765f61bba05ba32b9d84b94fe36c7458d52d9ed91ee83c"
+    },
+    "tutor_runs": {
+      "rows": 7,
+      "sha256": "d2d3c86a875e8fb9c060d2066a19100fc8367ccd96a98ebb4d160c118e63c7a6"
+    },
+    "notes": {
+      "rows": 5,
+      "sha256": "af06524039dfa2c499ac5747cfaa4c3ecfc738a469081f548f8678f7dd51e77f"
+    },
+    "note_knowledge_points": {
+      "rows": 6,
+      "sha256": "35f3af4344526457cd5dcebc86578be91678ea40bac1379ca06139733eedfd56"
+    },
+    "note_index_state": {
+      "rows": 5,
+      "sha256": "cae40e82473eaa9e25dd8055d1ec69c0206328c45bb40e13bc740bb208120e2a"
+    },
+    "note_chunks": {
+      "rows": 11,
+      "sha256": "c6969184ddf849730aaa1b3303a806d61b9fd6a42cc56aa8b47fa9ec1c6e63dc"
+    },
+    "workbench_runs": {
+      "rows": 24,
+      "sha256": "08d8cb233b972caac618ceb6aa97d44fd9712c8c8ea7b317ea65120fbcbf38b4"
+    },
+    "workbench_note_origins": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "self_assessment_batches": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "self_assessment_entries": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "study_guide_runs": {
+      "rows": 1,
+      "sha256": "9758a70cdd1ca5b6a5a4c40f1f85ef035ff6a8cfa7e4f977146fbb24efc46236"
+    },
+    "courses": {
+      "rows": 1,
+      "sha256": "3488ed80335f9507f60cb6a1532668cdfdeadcc28ba3ffe22cacb15dfec71ac2"
+    },
+    "course_documents": {
+      "rows": 5,
+      "sha256": "c5dba2bf23f91eaa8938ef20d8fbae9c01a6662c0ad2ebd42cc2e879f6ce392f"
+    },
+    "document_versions": {
+      "rows": 5,
+      "sha256": "c1912a93fb94f3a00e41716c2d20159859fdd0fa60d327062eee72d70ba4010f"
+    },
+    "document_parse_runs": {
+      "rows": 8,
+      "sha256": "2b0f2c3972f352d189ac6d70e9b2ed5b1209cff04c2c5471b412b291a1a6fb77"
+    },
+    "document_units": {
+      "rows": 156,
+      "sha256": "6aef1c307969338b4473e311990ef3dd782c01f21fa75aa230b20c096c33f072"
+    },
+    "document_operations": {
+      "rows": 9,
+      "sha256": "2cf2bba4ccb360e81ca611596cda6eb5ba145a86bc19cd89e20ed256144bd7a3"
+    },
+    "knowledge_architectures": {
+      "rows": 1,
+      "sha256": "f2dc7b9624ad565f8072809760a3b57072e16095c4b6a161980328770cfc5f4b"
+    },
+    "knowledge_entities": {
+      "rows": 2,
+      "sha256": "83ae3fc688a3f3400ec11514ac3947ddff16ef1e6dbb1c1baa5a78e500654664"
+    },
+    "knowledge_drafts": {
+      "rows": 1,
+      "sha256": "18f3a222782cb5ba779ce9dcfcc7d1909aa3ddc523ddf5619d9b7c3e80e49b27"
+    },
+    "knowledge_versions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_candidate_batches": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_operations": {
+      "rows": 2,
+      "sha256": "5668bbf4c8212e4d0830d6a33a456a2c322d7d04567c31189cf158422ec5dac3"
+    },
+    "course_resources": {
+      "rows": 3,
+      "sha256": "a02439c6ee43334d93188ae822c771d52322b2ca4cb56b1787af332c61da65f9"
+    },
+    "question_extractions": {
+      "rows": 2,
+      "sha256": "ad6187f8a3689909b361f405a84177688e5204936c8ec64a7851c4e4e3a70c5d"
+    },
+    "personal_questions": {
+      "rows": 27,
+      "sha256": "c558db40f085e8ead6e4badabbc14142b3c5e0c265bef9307fd152092eea1289"
+    },
+    "personal_question_revisions": {
+      "rows": 29,
+      "sha256": "b7365f681e7f41a1193e5690b2c469d150f22b3f2933532e24266ea42838764d"
+    },
+    "personal_practice_sessions": {
+      "rows": 8,
+      "sha256": "67fa54b76ba56cb8f563e00a715efb41af27029fef7d4a8d7bace24ccc85a390"
+    },
+    "personal_practice_attempts": {
+      "rows": 6,
+      "sha256": "eb63bc1961bc8b3bbb13cd5a81420cbd1ae1208acb93c1a5e44c63adf0dde345"
+    },
+    "personal_bank_operations": {
+      "rows": 18,
+      "sha256": "7be98274968610cce0aa8d5c43e6fdbd9e8835054bbbe23ea7261c375225ed44"
+    },
+    "question_extraction_tasks": {
+      "rows": 1,
+      "sha256": "eb514b89aea60c13d9c54448d599f45dcac610cef4cd4b4cfa73cc12b4d06957"
+    },
+    "personal_practice_drafts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "course_release_drafts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "course_releases": {
+      "rows": 1,
+      "sha256": "0280b3bf1184c8b396942ad70313db07c94d6abb9d4416bc7b1ef82d8f714520"
+    },
+    "teaching_sessions": {
+      "rows": 2,
+      "sha256": "0ac7a111f968ee384fefca35813b25f53c74a3b1f746db6d8a7d65849b43cd22"
+    },
+    "teaching_decisions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "teaching_events": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "teaching_explanations": {
+      "rows": 3,
+      "sha256": "9397a7539953805992964f4d3fe5056bc600305aadf72b7f001e80d659a84501"
+    },
+    "course_workflow_operations": {
+      "rows": 2,
+      "sha256": "f71330976acfea7978735b8b3a676d8a7be652b59574ed42af9206d7119c9057"
+    },
+    "teaching_material_links": {
+      "rows": 5,
+      "sha256": "4735272b70d12bc5fa6be2e21bce6c34684129fd6241442585dd88041609a0d2"
+    },
+    "teaching_material_operations": {
+      "rows": 5,
+      "sha256": "ccaeeb7762af45469a36aca6b68268013a8a766c33e2d183a519a211f0137c33"
+    },
+    "notebooks": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notebook_sources": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notebook_operations": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notebook_runs": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notebook_practice": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "integrity": true,
+  "foreign_keys": true,
+  "migrated_at": "2026-10-24T14:49:19.804591+00:00"
+}
