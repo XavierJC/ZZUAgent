@@ -1,5 +1,7 @@
 # 重构第一阶段验收报告
 
+> 2026-10-26PDF局部容错与单份真实课件恢复另见[报告](PDF_PARTIAL_RECOVERY_REPORT.md)；以下保留原阶段验证，最新数字只以CURRENT_STATUS为准。
+
 > 后续失败资料删除入口及实际删除验证另见[SOURCE_DELETE_REPORT](SOURCE_DELETE_REPORT.md)，本页仍保留原阶段证据。
 
 > 2026-10-25后续人性化流程简化另见[本轮报告](HUMAN_WORKFLOW_REPORT.md)。本页保留旧阶段证据，不能将旧测试数字当作最新结果。

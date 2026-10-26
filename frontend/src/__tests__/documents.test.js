@@ -139,6 +139,15 @@ describe('course document state and external transmission', () => {
 })
 
 describe('document presentation and HTTP adapter', () => {
+  it('explains a skipped PDF page without treating the whole file as failed or calling vision', async () => {
+    const { w, api } = setup()
+    api.documentUnits.mockResolvedValue({run:job(),items:[{...unit(),text:'',content_md:'',interpretation_md:'',warnings:['pdf_page_text_extraction_failed','text_encoding_needs_review']}],total:1})
+    const wrapper=mount(DocumentManager,{props:{workspace:w}});wrappers.push(wrapper);await flushPromises();await w.select('doc1');await flushPromises()
+    expect(wrapper.text()).toContain('本页文字解析失败，已跳过')
+    expect(wrapper.text()).toContain('部分提取 · 需核对')
+    expect(wrapper.text()).toContain('以 � 标记缺失位置')
+    expect(api.visionDocument).not.toHaveBeenCalled();expect(api.parseDocument).not.toHaveBeenCalled()
+  })
   it('renders page position, safe Markdown, formulas and warnings with labelled inputs', async () => {
     const { w } = setup(); await w.load(); await w.select('doc1')
     const wrapper = mount(DocumentManager, { props: { workspace: w } }); wrappers.push(wrapper); await flushPromises()

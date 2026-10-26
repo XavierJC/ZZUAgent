@@ -138,6 +138,34 @@ def test_failures_keep_original_and_manual_retry_can_succeed(documents):
     assert documents.get('doc-a', doc['id'])['parse']['status'] == 'ready'
 
 
+def test_partial_pdf_keeps_readable_units_and_never_retrieves_failed_page(documents, monkeypatch):
+    from pypdf._page import PageObject
+    from eduagent.services.document_sources import DocumentSources
+    original_extract = PageObject.extract_text
+    def extract_page(page, *args, **kwargs):
+        text = original_extract(page, *args, **kwargs)
+        if 'SYNTHETIC_BROKEN' in text: raise ValueError('synthetic page failure')
+        return text
+    monkeypatch.setattr(PageObject, 'extract_text', extract_page)
+    before = old_facts(documents)
+    raw = pdf_bytes(('Gradient descent moves weights along the negative gradient.', 'SYNTHETIC_BROKEN', 'Learning rate controls the gradient descent step size.'))
+    doc, _ = upload(documents, raw, 'partial.pdf')
+    tick(documents)
+    stored = documents.get('doc-a', doc['id'])
+    assert stored['parse']['status'] == 'partial' and stored['parse']['unit_count'] == 3
+    units = documents.units('doc-a', doc['id'])['items']
+    assert units[1]['text'] == '' and 'pdf_page_text_extraction_failed' in units[1]['warnings']
+    sources = DocumentSources(documents.repository)
+    sources.directory = documents.files.root
+    source = sources.source('doc-a', doc['id'])
+    assert source['index_status'] == 'ready' and source['readable_units'] == 2 and source['total_units'] == 3
+    ref = {key: source[key] for key in ('source_type', 'source_id', 'source_version')}
+    matches = sources.search('doc-a', [ref], 'gradient descent')
+    assert matches and all(row['page_number'] in (1, 3) for row in matches)
+    assert documents.original('doc-a', doc['id'])[0].read_bytes() == raw
+    assert old_facts(documents) == before
+
+
 def test_restart_recovers_local_once_and_original_tamper_fails(documents):
     doc, _ = upload(documents)
     documents.claim(); documents.recover()

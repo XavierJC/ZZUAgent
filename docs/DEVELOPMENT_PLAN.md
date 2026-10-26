@@ -1,8 +1,16 @@
 # EduAgent 开发计划
 
-更新日期：2026-10-25（Asia/Shanghai）。实际版本与最新结果只维护于[CURRENT_STATUS](CURRENT_STATUS.md)。[旧计划原文](history/pre-refactor-stage1/DEVELOPMENT_PLAN.md)及[历史报告](history/README.md)保留全部阶段记录和失败证据。
+更新日期：2026-10-26（Asia/Shanghai）。实际版本与最新结果只维护于[CURRENT_STATUS](CURRENT_STATUS.md)。[旧计划原文](history/pre-refactor-stage1/DEVELOPMENT_PLAN.md)及[历史报告](history/README.md)保留全部阶段记录和失败证据。
 
-## 最新授权：失败资料可直接删除
+## 最新授权：解析错误部分跳过，保留可解析内容
+
+用户2026-10-26明确授权PDF局部容错。本轮已完成：原件/实库备份，PDF字符兼容与单页异常隔离，中文质量提示，自动化回归，真实课件受限worker验证及当前未删除课件的一次原接口重试。详见[报告](PDF_PARTIAL_RECOVERY_REPORT.md)，最新数字以CURRENT_STATUS为准。
+
+已验收：可读页正文保存、物理页号保持、失败页空正文不进入检索，原件/旧失败历史保留，无模型调用；目标以外的学习/题库/Notebook事实保持。保留缺失字符及图像/公式待核对提示。
+
+未包含：批量重试已删除或其他失败文件、OCR引擎替换、新服务、检索算法升级、真实收费模型或人工内容核验。本轮完成即停止，后续按实际内容反馈另行确认。
+
+## 上轮授权：失败资料可直接删除
 
 用户指出失败资料在资料窗口不能删除。本轮已补齐删除/取消、失效关联取消选择、回执恢复和手机布局，复用既有DELETE接口；已删除指明的课件，原件及历史保留。255项前端、构建与隔离浏览器通过，数据保护与使用见[SOURCE_DELETE_REPORT](SOURCE_DELETE_REPORT.md)。未修改后端或schema；PDF编码修复仍为待确认提案，不自动实施。本轮完成后停止。
 

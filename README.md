@@ -6,13 +6,15 @@
 
 ## 当前状态
 
-已交付人性化学习流程简化，并保留此前UI与正式题准入。[唯一当前状态](docs/CURRENT_STATUS.md) · [简化流程指南](docs/HUMAN_WORKFLOW_GUIDE.md) · [本轮验收与截图](docs/HUMAN_WORKFLOW_REPORT.md) · [题目准入与验收](docs/FORMAL_ADMISSION_REPORT.md) · [设计系统](docs/FRONTEND_DESIGN_SYSTEM.md) · [笔记本指南与API](docs/NOTEBOOK_REBUILD_GUIDE.md)。
+已交付PDF局部容错与当前决策树课件恢复，并保留此前学习流程、UI与正式题准入。[唯一当前状态](docs/CURRENT_STATUS.md) · [PDF恢复与验证](docs/PDF_PARTIAL_RECOVERY_REPORT.md) · [简化流程指南](docs/HUMAN_WORKFLOW_GUIDE.md) · [题目准入与验收](docs/FORMAL_ADMISSION_REPORT.md) · [设计系统](docs/FRONTEND_DESIGN_SYSTEM.md) · [笔记本指南与API](docs/NOTEBOOK_REBUILD_GUIDE.md)。
 
 主导航为学习、练习、进度。点击开始即可使用默认昵称，新主题可以不填名称；成功上传资料直接加入当前主题，习题整理后可直接开始自由练习。选择“测一下”后明确开始即可进入诊断，正常学习无需先管理或发布课程。低频设置默认收起，手机菜单与旧链接保留全部能力。五个项目的参考与代码归属见[开源参考](docs/OPEN_SOURCE_UI_REFERENCES.md)。
 
 上传资料包括解析失败的文件，均可在主题资料窗口右侧直接删除；本行确认后移出可用资料，历史和原件保留。见[删除入口修复](docs/SOURCE_DELETE_REPORT.md)。
 
-最新测试、浏览器检查及数据摘要结果见CURRENT_STATUS。本轮流程简化只改前端、文档及核验脚本，后端、schema和依赖不变，真实模型调用0；复用现有AI能力，禁用模型时本地降级。此前题目准入及Notebook交付证据保留于原报告；AI检查、内容人工审核与真实教学效果分别报告。
+PDF局部解析失败现在保留其余可读页面，原页码不变；缺失字符与失败页明确提示，不用缺失正文支持回答。当前决策树课件已本地恢复，可从资料窗口加入主题，无需重新上传；图像和复杂公式仍需对照原件。
+
+最新测试、验证范围及数据摘要见CURRENT_STATUS。本轮PDF恢复仅修改必要解析器、测试、质量提示和文档，无schema或依赖变化，真实模型调用0。此前流程简化、题目准入及Notebook交付证据保留；AI检查、内容人工审核与真实教学效果分别报告。
 
 现有能力包括来源受控RAG、Markdown/LaTeX笔记、资料解析与页码引用、原题整理和普通练习、正式BKT闭环、自评与学习指南。最新已按用户授权扩充原5知识点的正式诊断题库，共享题与个人题范围见[当前状态](docs/CURRENT_STATUS.md)和[准入指南](docs/FORMAL_ADMISSION_GUIDE.md)。AI检查与人工确认分开记录；普通练习不更新BKT。仅本机演示，学习标识不是身份认证。
 

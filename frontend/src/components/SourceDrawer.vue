@@ -2,6 +2,7 @@
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 import { useOverlayFocus } from '../shared/useOverlayFocus.js'
 import MarkdownRenderer from './MarkdownRenderer.vue'
+import { documentWarning } from '../shared/documentWarnings.js'
 import { sourcePosition } from '../features/learning/journey.js'
 const props = defineProps({ source: Object, embedded: Boolean, loading: Boolean })
 const emit = defineEmits(['close','page'])
@@ -38,7 +39,7 @@ const statuses = { current: '当前版本', modified: '来源已修改 · 以下
       <p class="badge">{{ source.source_type === 'personal_note' ? '个人笔记 · 非权威资料' : source.source_type==='uploaded_document'?'上传资料 · 未经人工核验':source.source_type==='teaching_material'?'教师课件 · 已确认片段':'课程资料 · 审阅状态以来源为准' }}</p>
       <p role="status">{{ statuses[source.current_status] }}</p>
       <p class="small muted">{{ source.preview ? '当前资料原文' : sourcePosition(source) + ' · 回答引用原文' }}</p>
-      <div v-if="source.preview && source.pages?.length" class="source-page-picker"><label for="source-preview-page">{{source.file_format==='pptx'?'幻灯片':'页码 / 文本单位'}}</label><select id="source-preview-page" :value="source.page_number" :disabled="loading" @change="emit('page',Number($event.target.value))"><option v-for="p in source.pages" :key="p.ordinal" :value="p.ordinal">{{p.ordinal}} · {{p.readable?'可检索正文':'待识别或核对'}}</option></select><p v-if="loading" role="status">正在读取本地页面…</p><p v-if="page && !page.readable" class="wb-run-notice" role="status">本页尚无足够可检索正文，不能用来支持回答。可查看原页，并从资料旁选择识别缺失页面。</p><details v-if="page?.warnings.length"><summary>本页解析提示</summary><ul><li v-for="warning in page.warnings" :key="warning">{{warning}}</li></ul></details></div>
+      <div v-if="source.preview && source.pages?.length" class="source-page-picker"><label for="source-preview-page">{{source.file_format==='pptx'?'幻灯片':'页码 / 文本单位'}}</label><select id="source-preview-page" :value="source.page_number" :disabled="loading" @change="emit('page',Number($event.target.value))"><option v-for="p in source.pages" :key="p.ordinal" :value="p.ordinal">{{p.ordinal}} · {{p.readable?'可检索正文':'待识别或核对'}}</option></select><p v-if="loading" role="status">正在读取本地页面…</p><p v-if="page && !page.readable" class="wb-run-notice" role="status">本页尚无足够可检索正文，不能用来支持回答。可查看原页，并从资料旁选择识别缺失页面。</p><details v-if="page?.warnings.length"><summary>本页解析提示</summary><ul><li v-for="warning in page.warnings" :key="warning">{{documentWarning(warning)}}</li></ul></details></div>
       <p v-if="!source.preview" class="small muted">这是回答生成时的片段快照，不能直接作为当前检索来源。</p>
       <MarkdownRenderer :source="source.raw_md" />
       <p v-if="source.truncated" role="status">本页文本较长，预览仅显示前60000字符；请打开原文件查看全文。</p>

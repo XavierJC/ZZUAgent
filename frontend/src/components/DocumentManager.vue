@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import MarkdownRenderer from './MarkdownRenderer.vue'
+import { pdfWarnings } from '../shared/documentWarnings.js'
 import '../documents.css'
 const props = defineProps({ workspace: Object })
 const deleting = ref(false), input = ref(null)
@@ -11,7 +12,7 @@ const warnings = { pdf_layout_and_math_unverified: 'PDF版面及复杂公式尚�
   possible_scan_or_image_content: '疑似扫描页或图片页', text_encoding_needs_review: '字符编码需要核对',
   pptx_reading_order_and_math_unverified: '幻灯片阅读顺序和公式需核对', equation_needs_review: '公式原始结构已保留，需人工核对',
   image_or_complex_object_not_extracted: '图片、图表或复杂对象未作视觉识别', hidden_slide_not_for_retrieval: '隐藏幻灯片，未用于检索',
-  speaker_notes_not_extracted: '演讲者备注未提取', model_extraction_unverified: '模型提取结果，尚未核验', model_extraction_requires_review: '视觉识别结果需对照原件' }
+  speaker_notes_not_extracted: '演讲者备注未提取', model_extraction_unverified: '模型提取结果，尚未核验', model_extraction_requires_review: '视觉识别结果需对照原件', ...pdfWarnings }
 const errors = { parse_timeout: '本地解析超时', parser_unavailable: '解析依赖或资源限制不可用', parse_resource_limit: '达到资源限额或进程异常退出',
   original_unavailable: '原件缺失或指纹变化', parse_failed: '本地解析失败', invalid_document: '文件损坏或格式不匹配', encrypted_document: '不支持加密文件',
   derived_unavailable: '派生文件缺失或损坏，请显式重新本地解析', parse_memory_limit: '达到解析内存限额',

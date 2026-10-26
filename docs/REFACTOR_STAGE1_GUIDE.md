@@ -1,5 +1,7 @@
 # 重构第一阶段：课程空间与模块边界
 
+> 2026-10-26用户授权的PDF局部容错和当前课件恢复已完成，使用与限制见[报告](PDF_PARTIAL_RECOVERY_REPORT.md)；原模块/草稿/来源约束保持。
+
 > 后续失败资料删除入口使用见[SOURCE_DELETE_REPORT](SOURCE_DELETE_REPORT.md)；本指南原模块约束保持。
 
 > 2026-10-25后续人性化流程简化已交付，入口与使用见[最新指南](HUMAN_WORKFLOW_GUIDE.md)，原模块约束继续保留。

@@ -13,7 +13,7 @@ def pdf_bytes(texts=('PCA reduces feature dimensions.',), image=False, encrypted
         # distributing a third-party font. This is not a visual-accuracy fixture.
         letters = list(dict.fromkeys(text))
         codes = {c: i + 1 for i, c in enumerate(letters)}
-        pairs = '\n'.join(f'<{codes[c]:04x}> <{c.encode("utf-16-be").hex()}>' for c in letters)
+        pairs = '\n'.join(f'<{codes[c]:04x}> <{c.encode("utf-16-be", errors="surrogatepass").hex()}>' for c in letters)
         cmap = DecodedStreamObject()
         cmap.set_data(('begincmap\n1 begincodespacerange\n<0000> <ffff>\nendcodespacerange\n'
                        + str(len(letters)) + ' beginbfchar\n' + pairs + '\nendbfchar\nendcmap').encode())
